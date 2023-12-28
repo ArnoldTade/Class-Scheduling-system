@@ -1,0 +1,5 @@
+py -m pip install django
+pip install djangorestframework
+pip install pymysql
+pip install mysql-connector-python
+pip install django-bootstrap-v5

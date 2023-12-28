@@ -1,0 +1,437 @@
+:root {
+    --white-color: #ffe2e9;
+    --light-color: #e89bb0;
+    --purple-color: #f8fcff;
+    --brown-color: #8a5765;
+    --grey-color: #397bab;
+    --dark-color: #352b3b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #d6eeff;
+
+}
+
+i {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+/* NAVBAR */
+/* NAVBAR */
+/* NAVBAR */
+.logo img {
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+
+.logo img:hover {
+
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+}
+
+.navbar-toggler {
+    margin-left: 20px;
+
+    background-color: #e5e2ff;
+
+}
+
+.navbar-toggler:hover {
+    margin-left: 20px;
+    border-color: var(--light-color);
+    background-color: white;
+}
+
+
+.offcanvas-header {
+    background: linear-gradient(90deg, #aeddff 10%, var(--grey-color) 55%);
+    color: #ffffff;
+    border-top-right-radius: 1rem;
+}
+
+.offcanvas-body {
+    color: var(--brown-color);
+}
+
+.offcanvas-body .bi {
+    color: #397bab;
+    font-size: 20px;
+}
+
+
+.offcanvas-header img {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    cursor: pointer;
+    position: relative;
+    left: 45%;
+    transition: 0.3s;
+}
+
+.offcanvas-header img:hover {
+    border-radius: 50%;
+    transition: 0.3s;
+    transform: scale(1.2)
+}
+
+.navbar-nav a {
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.navbar-nav a:after {
+    background: none repeat scroll 0 0 transparent;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: rgb(32, 184, 255);
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+
+
+}
+
+
+
+.navbar-nav a:hover:after {
+    width: 70%;
+    left: 25px;
+
+}
+
+@media screen and (max-height: 300px) {
+    ul {
+        margin-top: 40px;
+    }
+}
+
+/* END NAVBAR */
+/* END NAVBAR */
+/* END NAVBAR */
+
+
+/* DASHBOARD PAGE */
+/* DASHBOARD PAGE */
+
+/* DASHBOARD BOX */
+/* DASHBOARD BOX */
+.section_summary .container .content .bi {
+    font-size: 75px;
+    margin-bottom: -35px;
+    margin-top: -20px;
+}
+
+.section_summary {
+    /* background-color: var(--purple-color); */
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 1rem;
+
+}
+
+section.section_summary .section_contents {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+section.section_summary .section_contents .content {
+    box-shadow: 0px 0px 22px -8px #141414;
+    max-width: 100%;
+    padding: 30px 20px;
+    margin: 30px 30px 30px 0;
+    color: #f1f1f1;
+    cursor: pointer;
+
+
+}
+
+section.section_summary .section_contents .content .content_count {
+    font-size: 40px;
+    font-weight: bold;
+    align-items: center;
+}
+
+
+
+section.section_summary .section_contents .content_instructor {
+    background-color: #16a9ff;
+}
+
+section.section_summary .section_contents .content_room {
+    background-color: #26a69a;
+
+}
+
+section.section_summary .section_contents .content_conflict {
+    background-color: rgb(180, 64, 99);
+}
+
+/* HOVER EFFECT */
+section.section_summary .section_contents .content:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease-in-out;
+    border-color: #55ccbc;
+    box-shadow: 0 0 25px #026992;
+
+
+}
+
+/*END HOVER EFFECT */
+
+/* END DASHBOARD BOX */
+section.section_summary .section_contents .content {
+    border-radius: 0.2rem;
+}
+
+.order-card {
+    color: #fff;
+}
+
+
+.f-left {
+    float: left;
+}
+
+.content_title {
+    margin-top: 9px;
+    font-size: 20px;
+    float: right;
+}
+
+
+
+
+
+/*DASHBOARD SCHEDULE */
+/*DASHBOARD SCHEDULE */
+.section-calendar {
+    background-color: var(--purple-color);
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 0.5rem;
+    height: 510px;
+    width: 985px;
+    float: right;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 22px -8px #141414;
+}
+
+.section-calendar .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content-calendar {
+    background-color: whitesmoke;
+    height: 400px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 15px;
+    box-shadow: 0px 0px 22px -8px #141414;
+}
+
+.section-calendar h5 {
+    color: #0a6db4;
+    padding-left: 10px;
+    padding-top: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+.section-card .container {
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 0.5rem;
+    height: 400px;
+    width: 300px;
+    float: left;
+    margin-bottom: 26px;
+    padding: 7px 13px 30px 15px;
+    color: white;
+
+}
+
+.section-card img {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+    position: relative;
+    left: 15%;
+}
+
+.section-card .card {
+    height: 515px;
+    margin-left: -15px;
+    box-shadow: 0px 0px 22px -8px #141414;
+}
+
+.section-card .card .btn {
+
+    margin-bottom: 20px;
+}
+
+.section-select {
+    background-color: var(--purple-color);
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 0.5rem;
+
+    max-width: 100%;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    box-shadow: 0px 0px 22px -8px #141414;
+}
+
+.dashboard-header {
+    background-color: var(--purple-color);
+    max-width: 100%;
+    color: #0a6db4;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: -25px;
+    border-radius: 0.1rem;
+    padding: 10px 0 10px 10px;
+    box-shadow: 0px 0px 12px -8px #141414;
+}
+
+
+
+
+.fc .fc-col-header-cell-cushion {
+    color: #026992;
+    font-size: 16px;
+}
+
+/*END DASHBOARD SCHEDULE */
+/*END DASHBOARD SCHEDULE */
+
+/* END DASHBOARD PAGE */
+/* END DASHBOARD PAGE */
+
+
+/* INSTRUCTORS PAGE */
+/* INSTRUCTORS PAGE */
+.instructors-part {
+    max-width: 100%;
+
+    #btn-add{
+        margin-right: 20px;
+    }
+    .instructors-header {
+        background-color: var(--purple-color);
+        max-width: 100%;
+        color: #0a6db4;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: -25px;
+        border-radius: 0.1rem;
+        padding: 10px 0 5px 10px;
+        box-shadow: 0px 0px 12px -8px #141414;
+
+        h3 {
+            font-size: 25px;
+        }
+    }
+
+    h4 {
+        text-align: center;
+        align-items: center;
+        
+    }
+    #news-slider{
+        margin-top: 10px;
+       
+    }
+    .card{
+        align-items: center;
+    }
+    .owl-carousel{
+       
+        .post-slide{
+        
+            .post-img{
+                height: 300px;
+                width: 300px;
+                align-items: center;
+            }
+        }
+    }
+    .carousel-control-prev{
+        background-color: var(--grey-color);
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+      
+    }
+    .carousel-control-next{
+        background-color: var(--grey-color);
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        margin-left: 20px;
+    }
+    .owl-nav{
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center;
+        margin-top: -35px;
+
+        .owl-prev{
+          
+            span{
+                padding: 10px;
+                font-size: 50px;
+                margin-right: 5px;
+            }
+        }
+        .owl-next{
+          
+            span{
+                padding: 10px;
+                font-size: 50px;
+                margin-left: 5px;
+            }
+        }
+    }
+  
+    .card-info{
+        width: 540px;
+        padding: 10px;
+       left: 10%;
+      
+        .card-body{
+            text-transform: uppercase;
+        }
+    }
+  
+}
+.section-info{
+    margin-top: -90px;
+}
+
+/* END INSTRUCTORS PAGE */
+/* END INSTRUCTORS PAGE */

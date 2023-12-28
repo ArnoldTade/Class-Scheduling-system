@@ -1,0 +1,75 @@
+{% include "_header.html" %}
+{% load static %}
+<br><br><br>
+<div class ="dashboard-header"><h3><i class="bi bi-house-door-fill"></i>Welcome to Dashboard</h3></div>
+
+<section class="section_summary">
+<div class="container overflow-hidden text-center">
+    <div class="section_contents">   
+           
+        <div class="col content content_instructor">          
+            <div class="content_count"><i class="bi bi-people-fill f-left"></i>10</div>           
+            <div class="content_title">Number of Instructors</div>                             
+        </div>
+        <div class=" col content content_room">
+            <div class="content_count"><i class="bi bi-door-open-fill f-left"></i>15</div>
+            <div class="content_title">Available Rooms</div>
+        </div>
+        <div class="col content content_conflict ">
+            <div class="content_count"><i class="bi bi-exclamation-square-fill f-left"></i>52</div>
+            <div class="content_title">Number of Conflicts</div>
+        </div>  
+       
+        </div>          
+</div>
+</section>
+<section class="section-select">
+<div class="container schedule-center float-start">
+    <select class="form-select " aria-label="Default select example">
+    <option selected>Select Instructor</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+  
+</div>
+</section>
+
+<section class="section-calendar">
+    <h5><i class="bi bi-calendar-check-fill"></i>Instructor's Schedule</h5>
+    <div class="container text-center">
+        <div class="section_contents">        
+                <div class="content-calendar" id='calendar'></div>
+            </div>    
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn me-md-2 col-3 " style="background-color: #397bab; color:white;" type="button">View Schedule</button>     
+            </div> 
+    </div>
+</section>
+
+<section class="section-card">
+    <div class="container text-center">
+        <div class="section_contents">        
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">Instructor name</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                      </ul>       
+                      <a href="#" class="btn d-grid gap-2" style="background-color: #397bab; color:white;" >View</a>             
+                </div>
+             
+            </div>
+        </div>          
+    </div>
+</section>
+
+
+ 
+
+{% include "_footer.html" %}
