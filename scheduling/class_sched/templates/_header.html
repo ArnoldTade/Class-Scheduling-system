@@ -62,7 +62,10 @@
           <div class="offcanvas-body text-bg-light ">
             <ul class="navbar-nav justify-content-end ">
                 <li>
-                    <a class="nav-link active" aria-current="page" href="{% url "dashboard" %}" ><i class="bi bi-house-door-fill"></i>DASHBOARD</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "home" %}" ><i class="bi bi-house-door-fill"></i>HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "dashboard" %}" ><i class="bi bi-speedometer"></i>DASHBOARD</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "instructors" %}"><i class="bi bi-people-fill"></i>INSTRUCTORS</a>
