@@ -4,8 +4,13 @@
 </div>
 
 <section class="section_summary">
-  <div class="container overflow-hidden text-center">
+  <div class="summary-part">
     <div class="section_contents">
+      <div class="col-4 content_welcome">
+        <i class="logo-welcome"><img src="{% static 'img/logo.png' %}" /></i>
+        <div class="content_title">Welcome User</div>
+      </div>
+
       <div class="col content content_instructor">
         <div class="content_count">
           <i class="bi bi-people-fill f-left"></i>10
@@ -29,22 +34,22 @@
 </section>
 
 <section class="section-quickInfo">
-  <div class="container text-center">
-    <div class="row justify-content-start">
+  <div class="notification-part">
+    <div class="row">
       <div class="col">Upcoming classes</div>
       <div class="col">announcement and notifications</div>
-      <div class="col">Quick actions</div>
     </div>
   </div>
 </section>
 
-<h5>Instructors</h5>
 <section class="section-select">
+  <h5>Recently Added Instructors</h5>
+
   <div class="container-fluid">
     <table class="table table-hover">
       <thead class="table-dark">
         <tr>
-          <th scope="col">ID</th>
+          <th scope="col">Department</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Handle</th>
@@ -53,8 +58,14 @@
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
+          <th scope="row">CAS</th>
+          <td>
+            <img
+              src="{% static 'img/me.jpg' %}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />
+            Mark
+          </td>
           <td>Otto</td>
           <td>@mdo</td>
           <td>
@@ -64,13 +75,17 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-info">View</button>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
+          <th scope="row">CAS</th>
+          <td>
+            <img
+              src="{% static 'img/me.jpg' %}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />Jacob
+          </td>
           <td>Thornton</td>
           <td>@fat</td>
           <td>
@@ -80,14 +95,20 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-info">View</button>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@fat</td>
+          <th scope="row">CBA</th>
+          <td>
+            <img
+              src="{% static 'img/me.jpg' %}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />
+            Mark
+          </td>
+          <td>Otto</td>
+          <td>@mdo</td>
           <td>
             <div
               class="btn-group"
@@ -95,13 +116,17 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-info">View</button>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">4</th>
-          <td>Jacob</td>
+          <th scope="row">HM</th>
+          <td>
+            <img
+              src="{% static 'img/me.jpg' %}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />Jacob
+          </td>
           <td>Thornton</td>
           <td>@fat</td>
           <td>
@@ -111,14 +136,18 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-info">View</button>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </td>
         </tr>
 
         <tr>
-          <th scope="row">5</th>
-          <td>Jacob</td>
+          <th scope="row">CTED</th>
+          <td>
+            <img
+              src="{% static 'img/me.jpg' %}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />Jacob
+          </td>
           <td>Thornton</td>
           <td>@fat</td>
           <td>
@@ -128,7 +157,6 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-info">View</button>
-              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </td>
         </tr>
