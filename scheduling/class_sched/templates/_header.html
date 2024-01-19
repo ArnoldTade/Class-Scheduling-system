@@ -11,7 +11,7 @@
         <script src="{% static 'js/script.js' %}"></script>
         <!--END FULLCALENDAR-->
 
-
+       
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Class Scheduling</title>
@@ -40,15 +40,23 @@
     
     </head>
     <body>
-        <nav class="navbar fixed-top" style="background-color: #397bab;">
+        <nav class="navbar">
         
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
             <span class="navbar-toggler-icon"></span></button>
-            <h1 style="color:white">Class Scheduling System </h1>
-
-        <div class="logo"><img src="{% static 'img/logo.png' %}"></div>
+            <h2 class="app-title" style="color:white"><i class="logo"><img src="{% static 'img/logo.png' %}"></i>NORSU Class Scheduling System </h2>
+            <i class="bi bi-bell"></i>
+            <li class=" dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>My account
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i>Profile</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i>Log out</a></li>
+                </ul>
+              </li>
+              
         <div class="offcanvas offcanvas-start text-bg-light" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-          
         <div class="offcanvas-header" >            
         <div class="img-profile">
             <img src="{% static 'img/me.jpg' %}"> 
@@ -62,19 +70,19 @@
           <div class="offcanvas-body text-bg-light ">
             <ul class="navbar-nav justify-content-end ">
                 <li>
-                    <a class="nav-link active" aria-current="page" href="{% url "home" %}" ><i class="bi bi-house-door-fill"></i>HOME</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "home" %}" ><i class="bi bi-house-door"></i>HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "dashboard" %}" ><i class="bi bi-speedometer"></i>DASHBOARD</a>
+                    <a class="nav-link" href="{% url "dashboard" %}"><i class="bi bi-columns-gap"></i>DASHBOARD</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "instructors" %}"><i class="bi bi-people-fill"></i>INSTRUCTORS</a>
+                    <a class="nav-link" href="{% url "instructors" %}"><i class="bi bi-people"></i>INSTRUCTORS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "schedule" %}"><i class="bi bi-calendar-check-fill"></i>SCHEDULE  <span class="badge text-bg-danger">4</span></a>
+                    <a class="nav-link" href="{% url "schedule" %}"><i class="bi bi-calendar-check"></i>SCHEDULE  <span class="badge text-bg-danger">4</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "about" %}"><i class="bi bi-file-earmark-person-fill"></i>ABOUT</a>
+                    <a class="nav-link" href="{% url "about" %}"><i class="bi bi-file-earmark-person"></i>ABOUT</a>
                 </li>
 <hr>
             </ul>
@@ -82,3 +90,5 @@
           </div>
     </nav>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/index.global.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
