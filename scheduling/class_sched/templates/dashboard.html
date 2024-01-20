@@ -1,19 +1,19 @@
 {% include "_header.html" %} {% load static %}
 <div class="dashboard-header">
-  <h5><i class="bi bi-columns-gap"></i>Dashboard</h5>
+  <h5><i class="bi bi-columns-gap"></i>Admin Dashboard</h5>
 </div>
 
 <section class="section_summary">
-  <div class="summary-part">
+  <div class="container-fluid summary-part">
     <div class="section_contents">
-      <div class="col-4 content_welcome">
+      <!-- <div class="col-4 content_welcome">
         <i class="logo-welcome"><img src="{% static 'img/logo.png' %}" /></i>
         <div class="content_title">Welcome User</div>
       </div>
-
+    -->
       <div class="col content content_instructor">
         <div class="content_count">
-          <i class="bi bi-people-fill f-left"></i>10
+          <i class="bi bi-people-fill f-left"></i><span>10</span>
         </div>
         <div class="content_title">Number of Instructors</div>
       </div>
@@ -29,15 +29,31 @@
         </div>
         <div class="content_title">Number of Conflicts</div>
       </div>
+      <div class="col content content_room">
+        <div class="content_count">
+          <i class="bi bi-door-open-fill f-left"></i>15
+        </div>
+        <div class="content_title">Available Rooms</div>
+      </div>
     </div>
   </div>
 </section>
+<hr />
 
 <section class="section-quickInfo">
-  <div class="notification-part">
-    <div class="row">
-      <div class="col">Upcoming classes</div>
-      <div class="col">announcement and notifications</div>
+  <div class="container-fluid notification-part">
+    <div class="row justify-content-start">
+      <div class="col upcoming-class">
+        Upcoming classes
+        <div class="row quickInfo-class">Class 1 | ITS103</div>
+        <div class="row quickInfo-class">Class 2 | CSC201</div>
+        <div class="row quickInfo-class">Class 3 | GE12</div>
+      </div>
+      <div class="col">Your Schedule</div>
+    </div>
+    <div class="row justify-content-start">
+      <div class="col">Calendar</div>
+      <div class="col">Calendar</div>
     </div>
   </div>
 </section>
@@ -179,35 +195,6 @@
       >
         View Schedule
       </button>
-    </div>
-  </div>
-</section>
-
-<section class="section-card">
-  <div class="container text-center">
-    <div class="section_contents">
-      <div class="card" style="width: 18rem">
-        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Instructor name</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-          </ul>
-          <a
-            href="#"
-            class="btn d-grid gap-2"
-            style="background-color: #397bab; color: white"
-            >View</a
-          >
-        </div>
-      </div>
     </div>
   </div>
 </section>
