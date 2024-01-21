@@ -147,9 +147,7 @@ h2{
     margin-top: -20px;
    
 }
-.bi-people-fill{
-    color: #53bbe4;
-}
+
 
 
 .section_summary {
@@ -179,11 +177,6 @@ section.section_summary .section_contents {
         cursor: pointer;
         height: 100px;
         border-radius: var(--borderRadius);
-        span{
-            font-size: 40px;
-            color: #53bbe4;
-            
-        }
     }
    
 }
@@ -192,6 +185,7 @@ section.section_summary .section_contents .content .content_count {
     font-size: 20px;
     font-weight: bold;
     align-items: center;
+    
 }
 
 /*
@@ -206,26 +200,73 @@ section.section_summary .section_contents .content_welcome {
 */
 
 section.section_summary .section_contents .content_instructor {
-    background: linear-gradient(90deg, rgb(219, 253, 255) 0%, rgb(189, 229, 241) 100%);
+   /* background: linear-gradient(90deg, rgb(219, 253, 255) 0%, rgb(189, 229, 241) 100%);
+   background-color: rgba(181, 227, 241, 0.589); */
+   border-left: 5px solid;
+    border-left-color: rgb(21, 200, 255);
+    color: #026992;
+    background-color:  rgb(202, 243, 255);
+    span{
+        font-size: 40px;
+        color: #026992;
+      float: right;
+    }
+    .bi-people-fill{
+        color: #53bbe4;
+    }
+  
 }
 
 section.section_summary .section_contents .content_room {
-    background: linear-gradient(90deg, rgb(125, 216, 180) 0%, rgba(30,140,74,1) 100%);
-
+   /* background: linear-gradient(90deg, rgb(125, 216, 180) 0%, rgba(30,140,74,1) 100%); */
+    border-left: 5px solid;
+    border-left-color: rgb(78, 37, 189);
+    color: rgb(78, 37, 189);
+    background-color: rgb(225, 214, 255);
+    span{
+        color:  rgb(78, 37, 189);
+        float: right;
+    }
+    .bi-door-open-fill{
+       color: rgb(78, 37, 189);
+     
+}
 }
 
 section.section_summary .section_contents .content_conflict {
-    background: linear-gradient(90deg, rgba(218,126,126,1) 0%, rgba(140,30,60,1) 100%);
+    border-left: 5px solid;
+    border-left-color: rgb(189, 37, 126);
+    color: rgb(189, 37, 126);
+    background-color: rgba(255, 214, 238, 0.623);
+    span{
+        color: rgb(189, 37, 75);
+        float: right;
+    }
+    .bi{
+       color: rgb(189, 37, 126);
+}
+}
+
+section.section_summary .section_contents .content_other {
+    border-left: 5px solid;
+    border-left-color: rgb(189, 141, 37);
+    color: rgb(189, 141, 37);
+    background-color: rgba(241, 235, 224, 0.623);
+    span{
+        color: rgb(189, 141, 37);
+        float: right;
+    }
+    .bi{
+       color: rgb(189, 141, 37);
+}
+
 }
 
 /* HOVER EFFECT */
 section.section_summary .section_contents .content:hover {
     transform: translateY(-5px);
     transition: transform 0.2s ease-in-out;
-    border-color: #55ccbc;
-    box-shadow: 0 0 15px #026992;
-
-
+   
 }
 
 /*END HOVER EFFECT */

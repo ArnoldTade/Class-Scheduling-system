@@ -8,4 +8,5 @@ urlpatterns = [
     path("schedule/", views.schedule, name="schedule"),
     path("about/", views.about, name="about"),
     path("home/", views.home, name="home"),
+    # For user Login
 ]

@@ -42,6 +42,12 @@ INSTALLED_APPS = [
     "bootstrap5",
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+LOGIN_URL = "/login/"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
