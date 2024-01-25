@@ -13,6 +13,10 @@ def home(request):
     return render(request, "home.html")
 
 
+def profile(request):
+    return render(request, "profile.html")
+
+
 def dashboard(request):
     return render(request, "dashboard.html")
 
