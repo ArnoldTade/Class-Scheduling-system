@@ -42,10 +42,20 @@ i {
     .btn-login:hover{
         background-color: var(--light-home);
         color: var(--home-color);
-      
+    }
+    .home-nav{
+       
+    }
+    .nav-link{
+        list-style: none;
+        color: var(--light-home);
     }
  }
-
+.home-page{
+    background-color: var(--home-color);
+    max-width: 100%;
+    height: 350px;
+}
 
 
 /* HOME NAVBAR */
