@@ -25,9 +25,35 @@ i {
     margin-right: 10px;
 }
 
-/* NAVBAR */
-/* NAVBAR */
-/* NAVBAR */
+
+/* HOME NAVBAR */
+/* HOME NAVBAR */
+ #home-nav{
+    background-color: var(--home-color);
+    #home-logo{
+        color: var(--light-home);
+        margin-left: 20px;
+    }
+    .btn-login{
+        border-color: var(--light-home);
+        color: var(--light-home);
+       
+    }
+    .btn-login:hover{
+        background-color: var(--light-home);
+        color: var(--home-color);
+      
+    }
+ }
+
+
+
+/* HOME NAVBAR */
+/* HOME NAVBAR */
+
+/* DASHBOARD NAVBAR */
+/* DASHBOARD NAVBAR */
+/* DASHBOARD NAVBAR */
 .navbar{
     height: 60px;
     background-color: var(--bg-color);
