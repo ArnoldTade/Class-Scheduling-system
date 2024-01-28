@@ -11,7 +11,6 @@
 
     --home-color: #3C5B72;
     --home-color-dark: #39566D;
-
     --light-home: #F2F2F2;
 }
 
@@ -30,6 +29,7 @@ i {
 /* HOME NAVBAR */
  #home-nav{
     background-color: var(--home-color);
+    
     #home-logo{
         color: var(--light-home);
         margin-left: 20px;
@@ -37,26 +37,64 @@ i {
     .btn-login{
         border-color: var(--light-home);
         color: var(--light-home);
-       
+      
     }
     .btn-login:hover{
         background-color: var(--light-home);
         color: var(--home-color);
     }
-    .home-nav{
-       
-    }
+
     .nav-link{
         list-style: none;
         color: var(--light-home);
     }
+   
  }
+ .navbar-collapse{
+    background-color: var(--home-color);
+ }
+
 .home-page{
     background-color: var(--home-color);
-    max-width: 100%;
-    height: 350px;
-}
+    padding-bottom: 20px;
+    padding-top: 20px;
+  
+    h1{
+        color: var(--light-color);
+    }
+    p{
+        color: var(--light-color);
+    }
+    h5{
+        color: var(--light-color);
 
+    }
+    .btn-viewSchedules{
+        border-color: var(--light-home);
+        color: var(--light-home);
+        border: solid 2px;
+       
+    }
+    .btn-viewSchedules:hover{
+        background-color: var(--light-home);
+        color: var(--home-color);
+    }
+    
+    .title-part{
+        padding-left: 50px;
+        padding-top: 20px;
+       
+    }
+    .logo-part{
+        padding-right: 50px;
+    }
+   
+}
+.text-detail{
+    color: var(--home-color);
+    text-align: center;
+    padding-top: 20px;
+}
 
 /* HOME NAVBAR */
 /* HOME NAVBAR */
@@ -145,24 +183,10 @@ h2{
     text-decoration: none;
 }
 
-.navbar-nav a:after {
-    background: none repeat scroll 0 0 transparent;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: rgb(32, 184, 255);
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-}
-
-
 
 .navbar-nav a:hover:after {
     width: 70%;
     left: 25px;
-  
 }
 
 

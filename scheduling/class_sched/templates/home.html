@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     {% load static %}
     <!-- {% load bootstrap5 %} -->
@@ -18,15 +18,26 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg" id="home-nav">
       <div class="container-fluid">
-        <a class="navbar-brand" id="home-logo" href="#">e-ClasSched</a>
-
-        <ul class="nav justify-content-end" id="home-nav">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" id="home-logo" href="#">e-ClasSched</a>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="home-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
@@ -36,16 +47,45 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
-            
-            <button class="btn btn-login">
-                Login
-              </button>
-          </ul>        
-      
+          </ul>
+          <button class="btn btn-login">Login</button>
         </div>
       </div>
     </nav>
 
-    <div class="home-page"></div>
+    <section class="container-fluid">
+      <div class="row align-items-center home-page">
+        <div class="col title-part">
+          <h1 class="fs-1 text-start">
+            Scheduling Management System for Negros Oriental State University
+          </h1>
+          <br />
+          <p class="fs-5 text-start">
+            Only NORSU instructors can logged in. Students can view the
+            instructors respective schedule
+          </p>
+          <button class="btn btn-viewSchedules">
+            <i class="bi bi-calendar-range"></i>View Instructor Schedules
+          </button>
+        </div>
+
+        <div class="col logo-part">
+          <img class="img-fluid float-end" src="{% static 'img/logo.png' %} " />
+          <p class="text-xl-end">Bayawan Santa Catalina Campus</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 offset-md-3 text-center">
+          <p class="fs-3 text-detail">
+            Effortlessly organize your academic journey with our intuitive class
+            scheduling system. Take control of your time, streamline your
+            courses, and embrace a stress-free academic experience.
+          </p>
+        </div>
+      </div>
+    </section>
   </body>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </html>
