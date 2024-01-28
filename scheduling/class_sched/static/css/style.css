@@ -33,6 +33,7 @@ i {
     #home-logo{
         color: var(--light-home);
         margin-left: 20px;
+        font-weight: bold;
     }
     .btn-login{
         border-color: var(--light-home);
