@@ -29,6 +29,7 @@ i {
 
 ::-webkit-scrollbar {
     width: 5px; /* width of the scrollbar */
+    height: 5px;    
   }
   
   ::-webkit-scrollbar-track {
@@ -136,6 +137,9 @@ i {
     .col-4{
         padding: 10px;
     }
+    .btn-group{
+        margin-top: 5px;
+    }
     .btn{
         background-color: var(--home-color);
         color: var(--light-home);
@@ -157,6 +161,30 @@ i {
     .table-bg{
         background-color: var(--home-color) !important;
     }
+    .home-card{
+      margin:10px 20px 50px 20px;
+      width: 1310px;
+      overflow-x: auto;
+      white-space: nowrap;
+        .row-card{
+        display: inline-block;
+         }
+        .card{
+           margin: 10px;
+           box-shadow: var(--box-shadow-style);
+           display: inline-block;
+        }
+        img{
+            border-radius: 50%;
+            width: 50%;
+            height:50%;
+            margin: auto;
+            padding-top: 20px;
+        }
+    }
+   
+   
+   
 }
 /*SCHEDULE PAGE */
 

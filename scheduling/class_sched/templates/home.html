@@ -100,64 +100,45 @@
       <div class="container-fluid heading">
         <div class="row">
           <div class="col"><h3>Schedules</h3></div>
-          <div class="col-4">
-            <div class="dropdown">
-              <button
-                class="btn dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Department
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-
-              <button
-                class="btn dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Semester
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-
-              <button
-                class="btn dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Year
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
+          <div class="col ">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose Department
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                </ul>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose Semester
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                </ul>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose School Year
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                </ul>
+              </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container-fluid">
-        <div class="row">
+      <div class="container-fluid home-card">
+        <div class="row row-card">
           <div class="card" style="width: 18rem">
-            <img src="..." class="card-img-top" alt="..." />
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
             <div class="card-body">
               <h5 class="card-title">Name</h5>
             </div>
@@ -166,12 +147,101 @@
               <li class="list-group-item">A second item</li>
               <li class="list-group-item">A third item</li>
             </ul>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="#table-schedule" class="btn btn-primary">View</a>
           </div>
+
+          <div class="card" style="width: 18rem">
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Subjects Handled</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+
+          <div class="card" style="width: 18rem">
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Subjects Handled</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+
+          <div class="card" style="width: 18rem">
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Subjects Handled</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+
+        
+          <div class="card" style="width: 18rem">
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Subjects Handled</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+
+
+          <div class="card" style="width: 18rem">
+            <img
+              src="{% static 'img/me.jpg' %}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Subjects Handled</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+
+
         </div>
       </div>
-
-      <div class="container-fluid home-table">
+<hr>
+      <div class="container-fluid home-table" id="table-schedule">
         <div class="row">
           <div class="container-fluid">
             <table class="table table-hover table-striped">
