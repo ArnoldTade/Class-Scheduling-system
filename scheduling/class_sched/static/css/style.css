@@ -24,9 +24,31 @@ i {
     margin-right: 10px;
 }
 
+/* SCROLLBAR NAVBAR */
+/* SCROLLBAR NAVBAR */
+
+::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--home-color-dark); /* color of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* color of the scrollbar on hover */
+  }
+/* END SCROLLBAR NAVBAR */
+/* END SCROLLBAR NAVBAR */
 
 /* HOME NAVBAR */
 /* HOME NAVBAR */
+
+
  #home-nav{
     background-color: var(--home-color);
     
@@ -55,6 +77,7 @@ i {
     background-color: var(--home-color);
  }
 
+/* HOME PAGE */
 .home-page{
     background-color: var(--home-color);
     padding-bottom: 20px;
@@ -88,6 +111,10 @@ i {
     }
     .logo-part{
         padding-right: 50px;
+       img{ 
+        border: solid 10px var(--home-color-dark);
+        
+        }
     }
    
 }
@@ -96,6 +123,43 @@ i {
     text-align: center;
     padding-top: 20px;
 }
+/*END HOME PAGE */
+
+/*SCHEDULE PAGE */
+.section-schedule{
+    height: 630px;
+
+    .heading{
+       margin-bottom: -15px;
+       margin-top: -10px;
+    }
+    .col-4{
+        padding: 10px;
+    }
+    .btn{
+        background-color: var(--home-color);
+        color: var(--light-home);
+        border: solid 2px;
+    }
+    .btn:hover{
+        background-color: var(--light-home);
+        border-color: var(--home-color);
+        color: var(--home-color);
+    }
+    h3{
+        color: var(--home-color);
+        padding: 10px;
+    }
+    .home-table{
+        margin-top: 20px;
+        box-shadow: var(--box-shadow-style);
+    }
+    .table-bg{
+        background-color: var(--home-color) !important;
+    }
+}
+/*SCHEDULE PAGE */
+
 
 /* HOME NAVBAR */
 /* HOME NAVBAR */
