@@ -337,7 +337,7 @@ hr {
         width: 18rem;
         padding: 20px;
         align-items: center;
-        background-color: var(--home-color-light);
+        background: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
         border: solid 1px var(--home-color-light);
 
 

@@ -43,17 +43,30 @@
 <div class="container-fluid shadow-sm container-schedule">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">View Schedule</a>
+          <a class="nav-link active" aria-current="page" href="#section-schedules">View Schedule</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">View Calendar</a>
+          <a class="nav-link" href="#section-calendar">View Calendar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Feedback</a>
+          <a class="nav-link" href="#section-feedback">Feedback</a>
         </li>
        
       </ul>
+      
 </div>
+<section>
+    <div class="container-fluid"> 
+        <div class="visible" id="section-schedules"><h1>View Schedules</h1></div>
+    </div>
+    <div class="container-fluid">
+        <div class="invisible" id="section-calendar"><h1>View Calendar</h1></div>
+    </div>
+    <div class="container-fluid">
+        <div class="invisible" id="section-feedback"><h1>Feedback</h1></div>
+    </div>
+   
+</section>
 <!--END Profile PAGE-->
 
 {% include "_footer.html" %}
