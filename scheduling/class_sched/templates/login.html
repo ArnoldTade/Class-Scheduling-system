@@ -1,6 +1,63 @@
-<h1>Login</h1>
-<form method="POST">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Login</button>
-  <a href="{% url 'signup' %}">Dont have Account Create</a>
-</form>
+{% include "home_header.html" %} {% load static %}
+<body>
+  <!--HOME NAV-->
+ 
+  <!--END HOME NAV-->
+  <div class="container-md text-center container-login">
+    <div class="row row-login">
+      <div class="col login-intro">
+        <div class="col logo-part">
+          <img
+            class="img-fluid rounded mx-auto d-block rounded-circle"
+            src="{% static 'img/logo.png' %} "
+          />
+          <a class="navbar-brand" id="home-logo" href="{% url 'home' %}"
+            >e-ClasSched</a
+          >
+          <h1 class="fs-4 text-center">
+            Scheduling Management System for Negros Oriental State University
+          </h1>
+          <p class="text-center p-label">Bayawan Santa Catalina Campus</p>
+        </div>
+      </div>
+      <div class="col login-side">
+        <h1 id="login-text">Login</h1>
+        <form method="POST">
+          {% csrf_token %}
+          <!--{{ form.as_p }}-->
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              name="username"
+              class="form-control input-username"
+              id="floatingInput"
+              placeholder="Enter Username"
+              required
+              id="id_username"
+            />
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              name="password"
+              class="form-control input-password"
+              id="floatingPassword"
+              placeholder="Enter Password"
+              required
+              id="id_password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <div class="d-grid gap-2 btn-login">
+            <button class="btn btn-primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% include "_footer.html" %}

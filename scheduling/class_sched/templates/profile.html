@@ -1,10 +1,59 @@
-{% if request.user.is_authenticated %}
-<p>{{ request.user.username }}</p>
-<a href="{% url 'logout' %}">Logout</a>
 
-{% else %}
-<a href="{% url 'login' %}">Login</a>
-<a href="{% url 'signup' %}">Signup</a>
-{% endif %}
+{% include "home_header.html" %} {% load static %} 
 
-<h1>Welcome!</h1>
+<!--Profile PAGE-->
+<p class="fs-5 text-start user-page-title">User Profile</p>
+<hr>
+<div class="container-lg shadow-sm container-profile">
+    
+    <div class="row">
+        <div class="col-6 card-profile" style="">
+            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+              <h5 class="card-title"> {{ request.user.username }}</h5>
+              <p class="card-text">Instructor</p>
+          </div>
+        <div class="col profile-info">
+            <div class="row row-first">
+                <div class="col col-label">Gender: <span class="profile-label">Attach Helicopter</span></div>
+                <div class="col col-label">Date of Birth: <span class="profile-label">10/25/2024</span></div>
+                <div class="col col-label">Contact Number: <span class="profile-label">09356854125</span></div>
+            </div>
+            <div class="row">
+                <div class="col col-label">Address: <span class="profile-label">Bayawan</span></div>
+                <div class="col col-label">Department: <span class="profile-label">College of Arts and Sciences</span></div>
+            </div>
+            <div class="row">
+                <div class="col col-label">Handled Subjects: <span class="profile-label">ITS 102, ITS202, GE12</span></div>
+            </div>
+            <div class="row">
+                <div class="col col-label">Time Availability: <span class="profile-label">Monday, Tuesday, Wednesday</span></div>
+                <div class="d-grid gap-2 d-md-flex justify-content-end">
+                    <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+<p class="fs-5 text-start user-page-title">Schedules</p>
+<hr>
+
+<div class="container-fluid shadow-sm container-schedule">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">View Schedule</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">View Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Feedback</a>
+        </li>
+       
+      </ul>
+</div>
+<!--END Profile PAGE-->
+
+{% include "_footer.html" %}
