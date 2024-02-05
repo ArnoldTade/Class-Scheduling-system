@@ -1,7 +1,7 @@
 
 {% include "home_header.html" %} {% load static %} 
 
-<!--Profile PAGE-->
+<!--Profile PAGE-->.
 <p class="fs-5 text-start user-page-title">User Profile</p>
 <hr>
 <div class="container-lg shadow-sm container-profile">
@@ -40,33 +40,149 @@
 <p class="fs-5 text-start user-page-title">Schedules</p>
 <hr>
 
-<div class="container-fluid shadow-sm container-schedule">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link profile-tab active" aria-current="page" href="#section-schedules">View Schedule</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link profile-tab" href="#section-calendar">View Calendar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link profile-tab" href="#section-feedback">Feedback</a>
-        </li>
-       
-      </ul>
-      
-</div>
-<section>
-    <div class="container-fluid container-tab"> 
-        <div class="visible" id="section-schedules"><h1>View Schedules</h1></div>
-    </div>
-    <div class="container-fluid">
-        <div class="invisible" id="section-calendar"><h1>View Calendar</h1></div>
-    </div>
-    <div class="container-fluid">
-        <div class="invisible" id="section-feedback"><h1>Feedback</h1></div>
-    </div>
-   
-</section>
-<!--END Profile PAGE-->
 
+
+<section class="section-profile-content">
+    <nav id="navbar-example2" class="navbar sticky-top bg-body-tertiary px-3 mb-3">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">View Schedules</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading2">View Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading3">Feedback</a>
+          </li>
+        </ul>
+      </nav>
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+        <div class="container-fluid container-nav-schedule" id="scrollspyHeading1">
+            <h1>Schedules</h4>
+                <table class="table table-hover table-striped">
+                    <thead class="table-light">
+                      <tr>
+                        <th scope="col">Course</th>
+                        <th scope="col">Instructor</th>
+                        <th scope="col">Room</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Days of Week</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">CAS</th>
+                        <td>
+                          <img
+                            src="{% static 'img/me.jpg' %}"
+                            style="width: 50px; height: 50px; border-radius: 50%"
+                          />
+                          Mark
+                        </td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>T-TH</td>
+                        
+                      </tr>
+      
+                      <tr>
+                        <th scope="row">CAS</th>
+                        <td>
+                          <img
+                            src="{% static 'img/me.jpg' %}"
+                            style="width: 50px; height: 50px; border-radius: 50%"
+                          />
+                          Mark
+                        </td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>T-TH</td>
+      
+                      </tr>
+      
+                      <tr>
+                        <th scope="row">CAS</th>
+                        <td>
+                          <img
+                            src="{% static 'img/me.jpg' %}"
+                            style="width: 50px; height: 50px; border-radius: 50%"
+                          />
+                          Mark
+                        </td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>T-TH</td>
+      
+                      </tr>
+      
+                      <tr>
+                        <th scope="row">CAS</th>
+                        <td>
+                          <img
+                            src="{% static 'img/me.jpg' %}"
+                            style="width: 50px; height: 50px; border-radius: 50%"
+                          />
+                          Mark
+                        </td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>T-TH</td>
+      
+                      </tr>
+      
+                      <tr>
+                        <th scope="row">CAS</th>
+                        <td>
+                          <img
+                            src="{% static 'img/me.jpg' %}"
+                            style="width: 50px; height: 50px; border-radius: 50%"
+                          />
+                          Mark
+                        </td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>T-TH</td>
+      
+                      </tr>
+                    </tbody>
+                </table> 
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-end">
+            <button class="btn btn-default btn-edit-profile" type="button">Edit Schedule</button>
+        </div>
+        
+        <div class="container-fluid container-nav-calendar" id="scrollspyHeading2">
+            <h1 >Calendar</h1>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting.
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting</p>
+        </div>
+        <div class="container-fluid container-nav-feedback" id="scrollspyHeading3">
+            <h1 >Feedback</h1>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting.
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting
+            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
+            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
+            We keep adding some more example copy here to emphasize the scrolling and highlighting</p>
+        </div>
+    </div>
+</section>
+
+<!--END Profile PAGE-->
 {% include "_footer.html" %}
