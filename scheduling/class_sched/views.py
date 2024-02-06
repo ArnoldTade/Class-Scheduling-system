@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from .forms import SignupForm, LoginForm, SignupForm
+from .forms import *
 
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 
 # Create your views here.
@@ -15,13 +16,23 @@ from django.contrib.auth.decorators import login_required
 # signup page
 def user_signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+        userform = SignupForm(request.POST)
+        instructor_form = InstructorForm(request.POST)
+        if userform.is_valid() and instructor_form.is_valid():
+            with transaction.atomic():
+                user = userform.save()
+                instructor = instructor_form.save(commit=False)
+                instructor.user = user
+                instructor.save()
             return redirect("login")
     else:
-        form = UserCreationForm()
-    return render(request, "signup.html", {"form": form})
+        userform = SignupForm()
+        instructor_form = InstructorForm()
+    return render(
+        request,
+        "signup.html",
+        {"userform": userform, "instructor_form": instructor_form},
+    )
 
 
 # login page

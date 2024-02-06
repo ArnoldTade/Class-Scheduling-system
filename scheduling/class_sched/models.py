@@ -14,6 +14,8 @@ class Instructor(models.Model):
     address = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
     time_availability = models.CharField(max_length=100)
+    profile_pic = models.ImageField(upload_to="img/")
+    role = models.CharField(max_length=100)
 
 
 class Room(models.Model):
