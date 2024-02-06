@@ -339,17 +339,17 @@ hr {
         align-items: center;
         background: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
         border: solid 1px var(--home-color-light);
-
+        max-height: 100%;
 
         .card-img-top {
             border-radius: 50%;
-            height: 10rem;
-            width: 10rem;
+            height: 12rem;
+            width: 12rem;
             border: solid 2px var(--light-home);
-
             display: block;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 20%;
         }
 
         .card-title {
@@ -367,6 +367,7 @@ hr {
     .profile-label {
         font-weight: 400;
         margin-left: 10px;
+        max-width: 100px;
     }
 
     .profile-info {
@@ -425,7 +426,6 @@ hr {
 
 
     .container-nav-feedback {
-        box-shadow: var(--box-shadow-style);
         padding: 15px;
         max-width: 100%;
         height: 500px;

@@ -48,6 +48,9 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = "/login/"
 
+# For ROLE option
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
