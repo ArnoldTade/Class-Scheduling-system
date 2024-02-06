@@ -401,6 +401,14 @@ hr {
         background-color: var(--home-color);
     }
 
+    .nav-pills {
+        .nav-item {
+            font-weight: 500;
+            margin: 2px;
+            border-radius: 0.370rem;
+        }
+    }
+
     .container-nav-schedule {
         box-shadow: var(--box-shadow-style);
         padding: 15px;
@@ -420,7 +428,31 @@ hr {
         box-shadow: var(--box-shadow-style);
         padding: 15px;
         max-width: 100%;
-        height: 700px;
+        height: 500px;
+        display: grid;
+        place-content: center;
+
+        .container-feedback {
+            box-shadow: var(--box-shadow-style);
+            text-align: center;
+            margin: 10px 100px 10px 100px;
+            padding: 20px;
+            max-height: 100%;
+            width: 500px;
+            align-items: center;
+
+            .fs-4 {
+                color: var(--home-color);
+            }
+
+            .fs-5 {
+                margin-top: 20px;
+            }
+
+            .btn-feedback {
+                width: 300px;
+            }
+        }
     }
 }
 

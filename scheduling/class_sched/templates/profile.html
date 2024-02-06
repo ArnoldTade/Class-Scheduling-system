@@ -58,7 +58,7 @@
       </nav>
       <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
         <div class="container-fluid container-nav-schedule" id="scrollspyHeading1">
-            <h1>Schedules</h4>
+            <h1 class="text-start">Schedules</h4>
                 <table class="table table-hover table-striped">
                     <thead class="table-light">
                       <tr>
@@ -67,6 +67,8 @@
                         <th scope="col">Room</th>
                         <th scope="col">Time</th>
                         <th scope="col">Days of Week</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Year</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -82,6 +84,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>T-TH</td>
+                        <td>1st Semester</td>
+                        <td>2023-2024</td>
                         
                       </tr>
       
@@ -97,7 +101,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>T-TH</td>
-      
+                        <td>1st Semester</td>
+                        <td>2023-2024</td>
                       </tr>
       
                       <tr>
@@ -112,7 +117,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>T-TH</td>
-      
+                        <td>1st Semester</td>
+                        <td>2023-2024</td>
                       </tr>
       
                       <tr>
@@ -127,7 +133,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>T-TH</td>
-      
+                        <td>1st Semester</td>
+                        <td>2023-2024</td>
                       </tr>
       
                       <tr>
@@ -142,7 +149,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>T-TH</td>
-      
+                        <td>1st Semester</td>
+                        <td>2023-2024</td>
                       </tr>
                     </tbody>
                 </table> 
@@ -152,34 +160,40 @@
         </div>
         
         <div class="container-fluid container-nav-calendar" id="scrollspyHeading2">
-            <h1 >Calendar</h1>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting.
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting</p>
+            <h1 class="text-start">Calendar</h1>
+           
         </div>
         <div class="container-fluid container-nav-feedback" id="scrollspyHeading3">
-            <h1 >Feedback</h1>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting.
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting
-            This is some placeholder content for the scrollspy page. Note that as you scroll down the page, 
-            the appropriate navigation link is highlighted. It's repeated throughout the component example. 
-            We keep adding some more example copy here to emphasize the scrolling and highlighting</p>
+            <h1 class="text-start">Feedback</h1>
+            <div class="container-sm container-feedback">
+              <p class="fs-4 text-center">Feedback Time!</p>
+              <p class="fs-5 text-center">How satisfied were you when using the system?</p>
+              
+              <div class="scale">
+                <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off">
+                <label class="btn" for="option1"><i class="bi bi-emoji-angry"></i>Angry</label>
+                
+                <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
+                <label class="btn" for="option2"><i class="bi bi-emoji-frown"></i>Sad</label>
+                
+                <input type="radio" class="btn-check" name="options-base" id="option3" autocomplete="off" checked>
+                <label class="btn" for="option3"><i class="bi bi-emoji-neutral"></i>Neutral</label>
+                  
+                <input type="radio" class="btn-check" name="options-base" id="option4" autocomplete="off">
+                <label class="btn" for="option4"><i class="bi bi-emoji-smile"></i>satisfied</label>
+
+                <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off">
+                <label class="btn" for="option5"><i class="bi bi-emoji-laughing"></i>Very satisfied</label>
+            </div>
+
+            <p class="fs-5 text-center">Leave a comment</p>
+            <div class="mb-3">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-default btn-feedback " type="submit">Submit</button>
+            </div>
+            </div>
         </div>
     </div>
 </section>
