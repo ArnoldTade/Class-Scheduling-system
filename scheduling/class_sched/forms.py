@@ -24,7 +24,7 @@ class InstructorForm(forms.ModelForm):
             "address",
             "department",
             "time_availability",
-            "profile_pic",
+            "role",
         ]
 
 

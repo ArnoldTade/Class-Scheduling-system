@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
+from .models import *
 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -16,22 +17,27 @@ from django.db import transaction
 # signup page
 def user_signup(request):
     if request.method == "POST":
-        userform = SignupForm(request.POST)
+        userform = UserCreationForm(request.POST)
         instructor_form = InstructorForm(request.POST)
+
         if userform.is_valid() and instructor_form.is_valid():
             with transaction.atomic():
                 user = userform.save()
                 instructor = instructor_form.save(commit=False)
-                instructor.user = user
+                instructor.user_profile = user
                 instructor.save()
             return redirect("login")
     else:
-        userform = SignupForm()
+        userform = UserCreationForm()
         instructor_form = InstructorForm()
+
     return render(
         request,
         "signup.html",
-        {"userform": userform, "instructor_form": instructor_form},
+        {
+            "userform": userform,
+            "instructor_form": instructor_form,
+        },
     )
 
 
