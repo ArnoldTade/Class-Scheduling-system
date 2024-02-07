@@ -73,11 +73,25 @@
         </div>
       </div>
       
-      <div class="col-sm">Your Schedule</div>
+    <div class="col-sm">Conflicts over time</div>
     </div>
     <div class="row justify-content-start">
-      <div class="col-sm">Calendar</div>
-      <div class="col-sm">Calendar</div>
+      <div class="col-sm">Calendar
+        <div class="row">
+          <div class="col">
+          <!-- Calendar goes here-->
+          
+          </div>
+          <div class="col">
+            <div class="d-grid gap-2  mx-auto">
+              <button class="btn btn-default" type="button"><i class="bi bi-file-earmark-minus-fill"></i>Add New Subject</button>
+              <button class="btn btn-default" type="button"><i class="bi bi-person-fill-add"></i>Add New Instructor</button>
+              <button class="btn btn-default" type="button"><i class="bi bi-calendar-event-fill"></i>View All Schedules</button>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="col-sm">Number of instructors</div>
     </div>
     
   </div>
@@ -89,9 +103,9 @@
 <section class="section-select">
   <h5>Recently Added Instructors</h5>
 
-  <div class="container-fluid">
+  <div class="container-fluid table-responsive">
     <table class="table table-hover">
-      <thead class="table-dark">
+      <thead class="table-primary">
         <tr>
           <th scope="col">Department</th>
           <th scope="col">First Name</th>
@@ -102,7 +116,7 @@
       </thead>
       <tbody>
         <tr>
-          <th scope="row">CAS</th>
+          <th scope="row">College of Arts and Sciences</th>
           <td>
             <img
               src="{% static 'img/me.jpg' %}"
@@ -118,12 +132,12 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-info">View</button>
+              <button type="button" class="btn btn-default">View</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">CAS</th>
+          <th scope="row">College of Arts and Sciences</th>
           <td>
             <img
               src="{% static 'img/me.jpg' %}"
@@ -138,12 +152,12 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-info">View</button>
+              <button type="button" class="btn btn-default">View</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">CBA</th>
+          <th scope="row">College of Business Administration</th>
           <td>
             <img
               src="{% static 'img/me.jpg' %}"
@@ -159,12 +173,12 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-info">View</button>
+              <button type="button" class="btn btn-default">View</button>
             </div>
           </td>
         </tr>
         <tr>
-          <th scope="row">HM</th>
+          <th scope="row">College of Business Administration</th>
           <td>
             <img
               src="{% static 'img/me.jpg' %}"
@@ -179,13 +193,13 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-info">View</button>
+              <button type="button" class="btn btn-default">View</button>
             </div>
           </td>
         </tr>
 
         <tr>
-          <th scope="row">CTED</th>
+          <th scope="row">College of Teacher Education</th>
           <td>
             <img
               src="{% static 'img/me.jpg' %}"
@@ -200,7 +214,7 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-info">View</button>
+              <button type="button" class="btn btn-default">View</button>
             </div>
           </td>
         </tr>

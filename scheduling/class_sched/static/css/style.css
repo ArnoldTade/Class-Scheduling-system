@@ -864,7 +864,6 @@ section.section_summary .section_contents .content {
     top: 0;
     width: 100%;
     padding: 20px;
-    text-align: center;
 }
 
 
@@ -879,6 +878,12 @@ section.section_summary .section_contents .content {
     box-shadow: var(--box-shadow-style);
     overflow: auto;
     max-height: 700px;
+
+
+}
+
+thead {
+    background-color: var(--home-color) !important;
 }
 
 .dashboard-header {
