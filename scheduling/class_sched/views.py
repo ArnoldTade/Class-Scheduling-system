@@ -49,9 +49,16 @@ def user_login(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             user = authenticate(request, username=username, password=password)
-            if user:
+            if user is not None:
                 login(request, user)
-                return redirect("profile")
+                try:
+                    instructor = Instructor.objects.get(user_profile=user)
+                    if instructor.role == "Admin":
+                        return redirect("dashboard")
+                    elif instructor.role == "User":
+                        return redirect("profile")
+                except Instructor.DoesNotExist:
+                    pass
     else:
         form = LoginForm()
     return render(request, "login.html", {"form": form})
