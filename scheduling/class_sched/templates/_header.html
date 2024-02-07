@@ -9,6 +9,8 @@
         <script src="{% static 'js/index.global.min.js' %}"></script>
         <script src="{% static 'js/calendar.js' %}"></script>
         <script src="{% static 'js/script.js' %}"></script>
+
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
         <!--END FULLCALENDAR-->
 
        
@@ -39,12 +41,11 @@
     
     
     </head>
+
     <body>
-    <nav class="navbar">
-        
+    <nav class="navbar">     
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-            <span class="navbar-toggler-icon"></span></button>
-            
+            <span class="navbar-toggler-icon"></span></button> 
             <div class="d-flex">
                 <i class="bi bi-bell"></i>
               </div>
@@ -85,6 +86,10 @@
 
           </div>
     </nav>
+{% block content %}
+
+{% endblock %}
+
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/index.global.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

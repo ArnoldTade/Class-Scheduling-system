@@ -1,4 +1,6 @@
 {% include "_header.html" %} {% load static %}
+{% block content %}
+
 <div class="dashboard-header">
   <h5><i class="bi bi-columns-gap"></i>Admin Dashboard</h5>
 </div>
@@ -75,22 +77,16 @@
       
     <div class="col-sm">Conflicts over time</div>
     </div>
+    Calendar
     <div class="row justify-content-start">
-      <div class="col-sm">Calendar
+      <div class="col-sm">
         <div class="row">
           <div class="col">
           <!-- Calendar goes here-->
-          
-          </div>
-          <div class="col">
-            <div class="d-grid gap-2  mx-auto">
-              <button class="btn btn-default" type="button"><i class="bi bi-file-earmark-minus-fill"></i>Add New Subject</button>
-              <button class="btn btn-default" type="button"><i class="bi bi-person-fill-add"></i>Add New Instructor</button>
-              <button class="btn btn-default" type="button"><i class="bi bi-calendar-event-fill"></i>View All Schedules</button>
-            </div>
+            <div id='calendar'></div>
           </div>
       </div>
-      </div>
+    </div>
       <div class="col-sm">Number of instructors</div>
     </div>
     
@@ -98,14 +94,16 @@
 </section>
 <!-- END QUICK INFO SECTION (4 boxes part)-->
 
+
 <!-- RECENTLY ADDED INSTRUCTORS SECTION (table part)-->
-
+<hr>
+<h5>Recently Added Instructors</h5>
 <section class="section-select">
-  <h5>Recently Added Instructors</h5>
+ 
 
-  <div class="container-fluid table-responsive">
-    <table class="table table-hover">
-      <thead class="table-primary">
+  <div class="container-fluid table-responsive dashboard-table">
+    <table class="table table-hover table-striped">
+      <thead class="table-info">
         <tr>
           <th scope="col">Department</th>
           <th scope="col">First Name</th>
@@ -226,23 +224,31 @@
 
 <!-- FEEDBACK SECTION-->
 
-<section class="section-calendar">
-  <h5><i class="bi bi-calendar-check-fill"></i>Instructor's Schedule</h5>
-  <div class="container text-center">
-    <div class="section_contents">
-      <div class="content-calendar" id="calendar"></div>
-    </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button
-        class="btn me-md-2 col-3"
-        style="background-color: #397bab; color: white"
-        type="button"
-      >
-        View Schedule
-      </button>
-    </div>
-  </div>
+<section class="section-feedback">
+ 
 </section>
 <!-- END FEEDBACK SECTION-->
+{% endblock %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: [
+        // Your events data from the database
+        {
+          title: 'Event 1',
+          start: '2024-02-06'
+        },
+        {
+          title: 'Event 2',
+          start: '2024-02-10'
+        }
+      ]
+    });
+
+    calendar.render();
+  });
+</script>
 {% include "_footer.html" %}
