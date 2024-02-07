@@ -12,8 +12,9 @@
     --home-color: #3C5B72;
     --home-color-dark: #39566D;
     --home-color-light: #566c7d;
-
     --light-home: #F2F2F2;
+
+    --bg-linear: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
 }
 
 * {
@@ -487,8 +488,12 @@ hr {
 /* DASHBOARD NAVBAR */
 /* DASHBOARD NAVBAR */
 .navbar {
-    height: 50px;
-    background-color: var(--bg-color);
+    height: 3.5rem;
+    background-color: var(--home-color);
+
+    .nav-logout {
+        align-items: flex-end;
+    }
 }
 
 h2 {
@@ -533,7 +538,7 @@ h2 {
 
 
 .offcanvas-header {
-    background: linear-gradient(90deg, #aeddff 10%, var(--blue-color) 55%);
+    background: var(--bg-linear);
     color: #ffffff;
     border-top-right-radius: 1rem;
 }
@@ -543,7 +548,7 @@ h2 {
 }
 
 .offcanvas-body .bi {
-    color: #397bab;
+    color: var(--home-color);
     font-size: 20px;
 }
 

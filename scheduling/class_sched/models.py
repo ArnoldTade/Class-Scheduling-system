@@ -16,7 +16,9 @@ class Instructor(models.Model):
     address = models.TextField()
     department = models.CharField(max_length=100)
     time_availability = models.CharField(max_length=100)
-    role = models.CharField(max_length=100)
+    role = models.CharField(
+        max_length=100, choices=(("admin", "Admin"), ("user", "User"))
+    )
 
 
 class Room(models.Model):

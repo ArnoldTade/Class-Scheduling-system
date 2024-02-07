@@ -14,18 +14,18 @@
           </div>
         <div class="col profile-info">
             <div class="row row-first">
-                <div class="col col-label">Gender: <input class="form-control " type="text" value="Attach Helicopter" aria-label="default input example" readonly></div>
-                <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="10/25/2024" aria-label="default input example" readonly></div>
-                <div class="col col-label">Contact Number: <input class="form-control" type="text" value="09356854125" aria-label="default input example" readonly></div>
+                <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
             </div>
             <div class="row">
-                <div class="col col-label">Email: <input class="form-control" type="email" value="arnold@gmail.com" aria-label="default input example" readonly></div>
-                <div class="col col-label">Address: <input class="form-control" type="text" value="Bayawan" aria-label="default input example" readonly></div>
-                <div class="col col-label">Department: <input class="form-control" type="text" value="College of Arts and Sciences" aria-label="default input example" readonly></div>
+                <div class="col col-label">Email: <input class="form-control" type="email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Address: <input class="form-control" type="text" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Department: <input class="form-control" type="text" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
             </div>
             <div class="row">
                 <div class="col-6 col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div>
-                <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="Monday, Tuesday, Wednesday" aria-label="default input example" readonly></div>
+                <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
               </div>
            
             <div class="row">

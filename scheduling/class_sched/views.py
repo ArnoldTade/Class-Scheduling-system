@@ -82,6 +82,7 @@ def profile(request):
     return render(request, "profile.html")
 
 
+@login_required
 def dashboard(request):
     return render(request, "dashboard.html")
 
