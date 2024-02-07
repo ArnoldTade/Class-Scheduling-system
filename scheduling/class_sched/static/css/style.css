@@ -601,22 +601,13 @@ h2 {
     font-size: 55px;
     margin-bottom: -35px;
     margin-top: -20px;
-
 }
-
-
 
 .section_summary {
     /* background-color: var(--light-color); */
     margin-top: -20px;
-    margin-left: 15px;
-    margin-right: 15px;
     border-radius: 1rem;
 
-    .logo-welcome img {
-        height: 110px;
-        width: 110px;
-    }
 }
 
 
@@ -630,10 +621,14 @@ section.section_summary .section_contents {
         max-width: 100%;
         padding: 30px 20px;
         margin: 10px 10px 10px 0;
-        color: #f1f1f1;
         cursor: pointer;
         height: 100px;
         border-radius: var(--borderRadius);
+
+        h4,
+        h3 {
+            margin: auto;
+        }
     }
 
 }
@@ -659,70 +654,51 @@ section.section_summary .section_contents .content_welcome {
 section.section_summary .section_contents .content_instructor {
     /* background: linear-gradient(90deg, rgb(219, 253, 255) 0%, rgb(189, 229, 241) 100%);
    background-color: rgba(181, 227, 241, 0.589); */
-    border-left: 5px solid;
-    border-left-color: rgb(21, 200, 255);
-    color: #026992;
-    background-color: rgb(202, 243, 255);
-
-    span {
-        font-size: 40px;
-        color: #026992;
-        float: right;
-    }
+    border-left: 10px solid;
+    border-left-color: #24568B;
+    color: var(--home-color);
+    background-color: #CAF3FF;
 
     .bi-people-fill {
-        color: #53bbe4;
+        color: #24568B;
     }
 
 }
 
 section.section_summary .section_contents .content_room {
     /* background: linear-gradient(90deg, rgb(125, 216, 180) 0%, rgba(30,140,74,1) 100%); */
-    border-left: 5px solid;
-    border-left-color: rgb(78, 37, 189);
-    color: rgb(78, 37, 189);
-    background-color: rgb(225, 214, 255);
-
-    span {
-        color: rgb(78, 37, 189);
-        float: right;
-    }
+    border-left: 10px solid;
+    border-left-color: #8092A4;
+    color: #515761;
+    background-color: #DFECFD;
 
     .bi-door-open-fill {
-        color: rgb(78, 37, 189);
+        color: #626e7a;
 
     }
 }
 
 section.section_summary .section_contents .content_conflict {
-    border-left: 5px solid;
-    border-left-color: rgb(189, 37, 126);
-    color: rgb(189, 37, 126);
-    background-color: rgba(255, 214, 238, 0.623);
+    border-left: 10px solid;
+    border-left-color: #C0678D;
+    color: #BF282B;
+    background-color: #FAE2F4;
 
-    span {
-        color: rgb(189, 37, 75);
-        float: right;
-    }
 
     .bi {
-        color: rgb(189, 37, 126);
+        color: #C0678D;
     }
 }
 
 section.section_summary .section_contents .content_other {
-    border-left: 5px solid;
-    border-left-color: rgb(189, 141, 37);
-    color: rgb(189, 141, 37);
-    background-color: rgba(241, 235, 224, 0.623);
+    border-left: 10px solid;
+    border-left-color: #5498BD;
+    color: #3C5B72;
+    background-color: #E0ECF7;
 
-    span {
-        color: rgb(189, 141, 37);
-        float: right;
-    }
 
     .bi {
-        color: rgb(189, 141, 37);
+        color: #5498BD;
     }
 
 }
@@ -760,26 +736,39 @@ section.section_summary .section_contents .content {
 /*DASHBOARD QUICK INFO */
 
 .section-quickInfo {
-    .col {
+    .col-sm {
         background-color: var(--light-color);
         margin: 10px;
         padding: 10px;
         box-shadow: var(--box-shadow-style);
-        height: 200px;
-
+        max-height: 100%;
     }
+
 
     .upcoming-class {
         padding: 10px;
 
         .quickInfo-class {
-            background-color: #5896c2;
+            border-left: 10px solid #204C60;
+            background-color: #4F7692;
             padding: 10px;
             margin: 5px;
             color: white;
             border-radius: .5rem;
             cursor: pointer;
             transition: .2s;
+
+            .col {
+                margin: auto;
+            }
+
+            .time {
+                color: var(--home-color);
+                background-color: #fff;
+                border-radius: 50%;
+                font-weight: bold;
+                padding: 5px 8px 5px 8px;
+            }
         }
 
         .quickInfo-class:hover {
@@ -893,7 +882,7 @@ section.section_summary .section_contents .content {
 }
 
 .dashboard-header {
-    color: #0a6db4;
+    color: var(--home-color);
     margin: auto;
     padding: 10px 0 10px 10px;
 }

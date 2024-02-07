@@ -4,33 +4,47 @@
 </div>
 
 <section class="section_summary">
-  <div class="container-fluid summary-part">
-    <div class="section_contents">
-        <div class="col content content_instructor">
+  <div class="container-fluid text-center summary-part">
+    <div class="row section_contents">
+
+      <div class="col-sm content content_instructor">
         <div class="col"><i class="bi bi-people-fill f-left"></i></div>
         <div class="col">
           <div class="row">
-            <h4>Total Instructor</h4>
-            <h3>12</h3>
+            <h4 class="text-end">Total Instructor</h4>
+            <h3 class="text-end">12</h3>
           </div>
         </div>
       </div>
 
-        <div class="col content content_room">
+      <div class="col-sm content content_room">
           <div class="col"><i class="bi bi-door-open-fill f-left"></i></div>
           <div class="col">
             <div class="row">
-              <h5>Total Rooms</h5>
-              <h3>20</h3>
+              <h4 class="text-end">Total Rooms</h4>
+              <h3 class="text-end">20</h3>
             </div>
           </div>
       </div>
-      
-        <div class="col content content_conflict">
-        <i class="bi bi-exclamation-square-fill f-left"></i>
+
+        <div class="col-sm content content_conflict">
+          <div class="col"><i class="bi bi-exclamation-square-fill f-left"></i></div>
+          <div class="col">
+            <div class="row">
+              <h4 class="text-end">Conflicts</h4>
+              <h3 class="text-end">5</h3>
+            </div>
+          </div>
       </div>
-        <div class="col content content_other">
-        <i class="bi bi-activity f-left"></i>
+
+        <div class="col-sm content content_other">
+          <div class="col-4"><i class="bi bi-activity f-left"></i></div>
+          <div class="col">
+            <div class="row">
+              <h4 class="text-end">Conflicts</h4>
+              <h3 class="text-end">2</h3>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -40,18 +54,32 @@
 <section class="section-quickInfo">
   <div class="container-fluid notification-part">
     <div class="row justify-content-start">
-      <div class="col upcoming-class">
-        Upcoming classes
-        <div class="row quickInfo-class">Class 1 | ITS103</div>
-        <div class="row quickInfo-class">Class 2 | CSC201</div>
-        <div class="row quickInfo-class">Class 3 | GE12</div>
+      <div class="col-sm upcoming-class">
+          Upcoming classes
+        <div class="row quickInfo-class">
+          <p class="col fs-5 text-start"><span class="time">W</span> Class 1 | ITS103 </p>
+          <p class="col fs-5 text-end">09:00 am</p>
+        </div>
+        <div class="row quickInfo-class">
+          <p class="col fs-5 text-start"><span class="time">W</span> Class 1 | ITS103 </p>
+          <p class="col fs-5 text-end">09:00 am</p>
+        </div>
+        <div class="row quickInfo-class">
+          <p class="col fs-5 text-start"><span class="time">W</span> Class 1 | ITS103 </p>
+          <p class="col fs-5 text-end">09:00 am</p>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-end">
+          <button class="btn btn-default btn-see-all" type="button">See all</button>
+        </div>
       </div>
-      <div class="col">Your Schedule</div>
+      
+      <div class="col-sm">Your Schedule</div>
     </div>
     <div class="row justify-content-start">
-      <div class="col">Calendar</div>
-      <div class="col">Calendar</div>
+      <div class="col-sm">Calendar</div>
+      <div class="col-sm">Calendar</div>
     </div>
+    
   </div>
 </section>
 <!-- END QUICK INFO SECTION (4 boxes part)-->
