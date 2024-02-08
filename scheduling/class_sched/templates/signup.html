@@ -1,9 +1,47 @@
-<h1>Signup</h1>
-<form method="POST">
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+
+<div class="container-fluid">
+  <p class="fs-5 text-start">1/2</p>
+  <p class="fs-3 text-center">Register an Account</p>
+
+  <form method="POST">
   {% csrf_token %} 
+
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" placeholder="Enter Email">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Enter Username">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Enter Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+      <label for="floatingPassword">Confirm Password</label>
+    </div>
+    <select id="inputState" class="form-select">
+        <option selected>Choose Role...</option>
+        <option>User</option>
+        <option>Admin</option>
+    </select>
+
+</div>
+
+<div class="container-fluid">
+  
+</div>
   {{ userform.as_p }}
   {{ instructor_form.as_p }}
-  {{ image_upload.as_p }}
   <button type="submit">Signup</button>
   <a href="{% url 'login' %}">Already have account?</a>
-</form>
+  </form>
+
+{% endblock %}
+
+  
+{% include "_footer.html" %}
