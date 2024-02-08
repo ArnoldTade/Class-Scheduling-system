@@ -1,21 +1,27 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
+
 <div class="container text-center container-instructor-nav">
   <div class="row">
-    <div class="col-md-6 ">
+    <div class="col-sm-3">
       <p class="fs-4 text-start instructor-text">Users</p>
     </div>
-    <div class="col-5 col-md-3">
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary" type="submit">Search</button>
-      </form>
-    </div>
-    <div class="col-5 col-md-3 text-end">
-      <a href="#" class="btn btn-default" type="button"><i class="bi bi-plus-circle"></i>Add New User</a>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-8 col-sm-6">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-secondary" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="col-4 col-sm-6">
+          <a href="{% url 'signup' %}" class="btn btn-default" type="button"><i class="bi bi-plus-circle"></i>Add New User</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 <hr>
 
 <div class="row row-select">

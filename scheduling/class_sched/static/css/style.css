@@ -850,6 +850,8 @@ thead.table-head {
 
 .instructor-text {
     color: var(--home-color);
+    font-weight: 600;
+
 }
 
 .row-select {
