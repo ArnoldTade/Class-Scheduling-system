@@ -1,263 +1,144 @@
-{% include "_header.html" %} {% load static %} <br />
-
-<script src="{% static 'js/script.js' %}"></script>
-
-<div class="container instructors-part">
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+<div class="container text-center container-instructor-nav">
   <div class="row">
-    <div class="col align-self-start instructors-header">
-      <h3><i class="bi bi-people-fill"></i>Welcome to Intructors Page</h3>
+    <div class="col-md-6 ">
+      <p class="fs-4 text-start instructor-text">Users</p>
     </div>
-  </div>
-  <br /><br />
-
-
-    <!--BUTTON MODAL -->
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="button" id="btn-add" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Add New Instructor
-      </button>
+    <div class="col-5 col-md-3">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
     </div>
-<!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Instructor</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-           <!-- Modal BODY -->
-           <form class="row g-3" >
-            <div class="col-md-4">
-              <input type="text" class="form-control" placeholder="First name" aria-label="First name" required>
-        
-            </div>
-            <div class="col-md-4">
-              <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" required>
-            </div>
-            <div class="col-md-4">
-              <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" required>
-            </div>
-            <div class="col-sm-2">
-              <input type="text" class="form-control" placeholder="Suffix" aria-label="State">
-            </div>
-            <div class="col-12">
-              <input type="email" class="form-control" id="inputEmail4" placeholder="Email" aria-label="Email" required>
-            </div>
-            <div class="col-12">
-              <input type="password" class="form-control" id="inputPassword4" placeholder="Password" aria-label="password" required>
-            </div>
-
-            <div class="input-group mb-3">
-              <label class="input-group-text" for="inputGroupSelect01">Gender</label>
-              <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Others</option>
-              </select>
-            </div>
-          
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Select profile image</label>
-              <input class="form-control" type="file" id="formFile" required>
-            </div>
-
-            <div class="col-12 d-grid ">
-              <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
-          </form>
-           <!-- END Modal BODY -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
+    <div class="col-5 col-md-3 text-end">
+      <a href="#" class="btn btn-default" type="button"><i class="bi bi-plus-circle"></i>Add New User</a>
     </div>
-
-    <!--END BUTTON MODAL -->
-
-
-  <!-- Carousel -->
-  <section class="section-carousel">
-  <div class="row">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div id="news-slider" class="owl-carousel">
-                <div class="post-slide">
-                  <div class="post-img">
-                    <img src="{% static 'img/me.jpg' %}"  alt="" />
-                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                  </div>
-                  <div class="post-content">
-                    <h3 class="post-title">
-                      <a href="#">Lorem ipsum dolor sit amet.</a>
-                    </h3>
-                    <p class="post-description">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aperiam consectetur cumque dolorum, ex incidunt ipsa
-                      laudantium necessitatibus neque quae tempora......
-                    </p>
-                    <span class="post-date"
-                      ><i class="fa fa-clock-o"></i>Out 27, 2019</span
-                    >
-                    <a href="#" class="read-more">view</a>
-                  </div>
-                </div>
-    
-              
-                <div class="post-slide">
-                  <div class="post-img">
-                    <img src="{% static 'img/tade4.jpg' %}" alt="" />
-                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                  </div>
-                  <div class="post-content">
-                    <h3 class="post-title">
-                      <a href="#">Lorem ipsum dolor sit amet.</a>
-                    </h3>
-                    <p class="post-description">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aperiam consectetur cumque dolorum, ex incidunt ipsa
-                      laudantium necessitatibus neque quae tempora......
-                    </p>
-                    <span class="post-date"
-                      ><i class="fa fa-clock-o"></i>Out 27, 2019</span
-                    >
-                    <a href="#" class="read-more">view</a>
-                  </div>
-                </div>
-    
-                
-                <div class="post-slide">
-                  <div class="post-img">
-                    <img src="{% static 'img/tade3.jpg' %}" alt="" />
-                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                  </div>
-                  <div class="post-content">
-                    <h3 class="post-title">
-                      <a href="#">Lorem ipsum dolor sit amet.</a>
-                    </h3>
-                    <p class="post-description">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aperiam consectetur cumque dolorum, ex incidunt ipsa
-                      laudantium necessitatibus neque quae tempora......
-                    </p>
-                    <span class="post-date"
-                      ><i class="fa fa-clock-o"></i>Out 27, 2019</span
-                    >
-                    <a href="#" class="read-more">view</a>
-                  </div>
-                </div>
-    
-                
-                <div class="post-slide">
-                  <div class="post-img">
-                    <img src="{% static 'img/me.jpg' %}" alt="" />
-                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                  </div>
-                  <div class="post-content">
-                    <h3 class="post-title">
-                      <a href="#">Lorem ipsum dolor sit amet.</a>
-                    </h3>
-                    <p class="post-description">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aperiam consectetur cumque dolorum, ex incidunt ipsa
-                      laudantium necessitatibus neque quae tempora......
-                    </p>
-                    <span class="post-date"
-                      ><i class="fa fa-clock-o"></i>Out 27, 2019</span
-                    >
-                    <a href="#" class="read-more">view</a>
-                  </div>
-                </div>
-    
-              
-    
-                <!-- Add more post slides as needed -->
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--END Carousel -->
-
-
-
-
-
-
-    <br /><br />
-    <!-- USER PROFILE -->
-    <h4>User profile</h4>
-    <section class="section-info">
-    <div
-      class="container text-center instructors-part"
-      style="background-color: #fff"
-    >
-      <div class="row">
-        <div class="col-4">
-          <div class="card mb-3 card-info" >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{% static 'img/me.jpg' %}" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          ROW 1
-          <div class="row justify-content-evenly">
-            <div class="col-4 bg-info">INFO</div>
-            <div class="col-4 bg-info">INFO</div>
-
-            <div class="w-100"></div>
-            <div class="col-4 bg-info">INFO</div>
-            <div class="col-4 bg-info">INFO</div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          ROW 2
-          <div class="row justify-content-evenly">
-            <div class="col-4 bg-info">INFO</div>
-            <div class="col-4 bg-info">INFO</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-info">Edit</button>
-    <button type="button" class="btn btn-danger">Delete</button>
-  </div>
-  </section>
-    <!--END USER PROFILE -->
-    <br /><br />
-
-    <!-- OTHER INFO -->
-   
-  </div>
-
-  <br /><br />
-
-  
-    <!--END OTHER INFO -->
-    {% include "_footer.html" %}
   </div>
 </div>
+<hr>
 
+<div class="row row-select">
+  <div class="col">
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Select Department</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Select Semester</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Select School Year</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  
+</div>
+
+
+<div class="container-fluid container-instructor-table">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Users</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <div class="container-fluid table-responsive dashboard-table">
+        <table class="table table-hover table-striped">
+          <thead class="table-info">
+            <tr>
+              <th scope="col">Profile</th>
+              <th scope="col">Name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Birth Date</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Address</th>
+              <th scope="col">Department</th>
+              <th scope="col">Action</th>
+              <th scope="col">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <img src="{% static 'img/me.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+              <td>
+                Arnold Saldivar
+              </td>
+              <td>Male</td>
+              <td>May 24, 2001</td>
+              <td>09657850032</td>
+              <td>Bayawan</td>
+              <td>College of Arts and Sciences</td>
+              <td>
+                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
+                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+              </td>
+              <td>
+                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">
+                <img src="{% static 'img/me.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+              <td>
+                Arnold Saldivar
+              </td>
+              <td>Male</td>
+              <td>May 24, 2001</td>
+              <td>09657850032</td>
+              <td>Bayawan</td>
+              <td>College of Arts and Sciences</td>
+              <td>
+                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
+                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+              </td>
+              <td>
+                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">
+                <img src="{% static 'img/me.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+              <td>
+                Arnold Saldivar
+              </td>
+              <td>Male</td>
+              <td>May 24, 2001</td>
+              <td>09657850032</td>
+              <td>Bayawan</td>
+              <td>College of Arts and Sciences</td>
+              <td>
+                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
+                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+              </td>
+              <td>
+                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+  
+  {% include "_footer.html" %}
+ 
