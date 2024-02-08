@@ -870,6 +870,16 @@ thead.table-head {
     margin-top: 10px;
 }
 
+.container-register {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid var(--home-color);
+}
+
+.container-information {
+    border: 2px solid var(--home-color);
+    padding: 10px;
+}
 
 
 /* END INSTRUCTORS PAGE */

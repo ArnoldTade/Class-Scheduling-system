@@ -9,16 +9,14 @@ class Instructor(models.Model):
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
     suffix = models.CharField(max_length=100)
-    gender = models.CharField(max_length=1, choices=(("M", "Male"), ("F", "Female")))
+    gender = models.CharField(max_length=100)
     email = models.EmailField()
     contact = models.CharField(max_length=100)
     birthday = models.DateField()
-    address = models.TextField()
+    address = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
     time_availability = models.CharField(max_length=100)
-    role = models.CharField(
-        max_length=100, choices=(("admin", "Admin"), ("user", "User"))
-    )
+    role = models.CharField(max_length=100)
 
 
 class Room(models.Model):

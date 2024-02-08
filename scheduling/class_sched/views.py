@@ -26,7 +26,7 @@ def user_signup(request):
                 instructor = instructor_form.save(commit=False)
                 instructor.user_profile = user
                 instructor.save()
-            return redirect("login")
+            return redirect("instructors")
     else:
         userform = UserCreationForm()
         instructor_form = InstructorForm()
