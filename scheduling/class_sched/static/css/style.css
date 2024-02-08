@@ -853,6 +853,8 @@ thead.table-head {
 }
 
 .row-select {
+    max-width: 100%;
+
     .form-select {
         width: 250px;
         margin: 10px 10px 0px 10px;
@@ -862,7 +864,11 @@ thead.table-head {
 
 .container-instructor-table {
     box-shadow: var(--box-shadow-style);
+    padding: 10px;
+    margin-top: 10px;
 }
+
+
 
 /* END INSTRUCTORS PAGE */
 /* END INSTRUCTORS PAGE */
