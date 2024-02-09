@@ -1,111 +1,144 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
 
-<h4 class="text-start">Schedule</h4>
+<h4 class="text-start text-schedule">Schedule</h4>
 <hr>
-<div class="container-fluid">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">View Schedules</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Generate Schedule</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <div class="row">
-            <div class="row">
-                <div class="col-5"> 
-                    <select class="form-select schedule-department-select" aria-label="Default select example">
-                        <option selected>Select Department</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="container-fluid text-center">
-                <div class="row">
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-                    <div class="col-sm col-users-list">
-                        <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
-                        <p class="fs-5 text-center">Name</p>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-default btn-sm">View</button>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <hr>
-        </div>
+<div class="container-fluid container-schedule-page">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="bi bi-calendar-week"></i>View Schedules</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i class="bi bi-calendar3"></i>Generate Schedule</button>
+        </li>
+    </ul>
         
-        <div class="row">
-            <div class="container-fluid container-user-info">
-                <h3>User Schedule</h3>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#calendar-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Calendar View</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#loadslip-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Loadslip View</button>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="calendar-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="loadslip-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+        <!--View Schedule Tab-->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="row">
+                <!--Select Department-->
+                <div class="row">
+                    <div class="col-5"> 
+                        <select class="form-select schedule-department-select" aria-label="Default select example">
+                            <option selected>Select Department</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <!--Instructor Carousel-->
+                <div class="container-fluid text-center">
+                    <div class="row">
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
                         </div>
+
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm col-users-list">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                            <p class="fs-5 text-center">Name</p>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-default btn-sm">View</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+        <!--User Schedule Tab-->
+            <div class="row">
+                <div class="container-fluid container-user-info">
+                    <h4>User Schedule</h4>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#calendar-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Calendar View</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#loadslip-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Loadslip View</button>
+                            </li>
+                        </ul>
+                            <!--Calendar View Tab-->
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="calendar-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <div id='calendar'></div>
+                            </div>
+                            <!--Loadslip View Tab-->
+                            <div class="tab-pane fade" id="loadslip-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
+
+        <!--Generate Schedule Tab-->
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <h1>Generate Schedule</h>
+        </div>
     </div>
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      
-        <h1>Generate Schedule</h>
-       
-    </div>
-   </div>
 </div>
 {% endblock %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+  
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: [
+          // Your events data from the database
+          {
+            title: 'Event 1',
+            start: '2024-02-06'
+          },
+          {
+            title: 'Event 2',
+            start: '2024-02-10'
+          }
+        ]
+      });
+  
+      calendar.render();
+    });
+  </script>
 {% include "_footer.html" %}
+
