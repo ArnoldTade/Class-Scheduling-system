@@ -884,3 +884,28 @@ thead.table-head {
 
 /* END INSTRUCTORS PAGE */
 /* END INSTRUCTORS PAGE */
+
+/* SCHEDULE PAGE */
+.schedule-department-select {
+    margin: 10px;
+}
+
+.col-users-list {
+    padding: 10px;
+    background-color: #cadce2;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    border-radius: 0.5rem;
+}
+
+.container-user-info {
+    padding: 20px;
+
+    .nav-link {
+        color: var(--home-color);
+        font-weight: 500;
+    }
+}
+
+/* END SCHEDULE PAGE */
