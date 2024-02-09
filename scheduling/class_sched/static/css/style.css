@@ -927,9 +927,11 @@ thead.table-head {
     margin: 10px;
     border-radius: 0.5rem;
 
+
     img {
         border: 2px solid var(--light-color);
     }
 }
+
 
 /* END SCHEDULE PAGE */

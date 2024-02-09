@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <!--Instructor Carousel-->
-                <div class="container-fluid text-center">
+                <div class="container-fluid text-center ">  		
                     <div class="row">
                         <div class="col-sm col-users-list">
                             <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
@@ -79,10 +79,9 @@
                                 <button type="button" class="btn btn-default btn-sm">View</button>
                             </div>
                         </div>
-
-
-                    </div>
-                </div>
+                                    
+                    </div>   
+            </div>
                 <hr>
             </div>
 
@@ -139,6 +138,29 @@
   
       calendar.render();
     });
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        navText: [
+          "<i class='fa fa-caret-left'></i>",
+          "<i class='fa fa-caret-right'></i>"
+        ],
+        autoplay: true,
+        autoplayHoverPause: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 3
+          },
+          1000: {
+            items: 5
+          }
+        }
+      })
   </script>
 {% include "_footer.html" %}
 
