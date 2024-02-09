@@ -25,86 +25,89 @@
     
   </div>
  
-</div>
-<hr>
+  </div>
+  <hr>
 
-<div class="container-sm container-information">
-  <p class="fs-5 text-start">2/2</p>
-  <p class="fs-5 text-start">Personal Information</p>
-  <div class="row g-3">
-  
+  <div class="container-sm container-information">
+    <p class="fs-5 text-start">2/2</p>
+    <p class="fs-5 text-start">Personal Information</p>
+    <div class="row g-3">
+    
 
-    <div class="form-floating col-md-6">
-      <input type="text" class="form-control" name="firstName" required id="id_firstName" placeholder="Enter Username">
-      <label for="id_firstName">First name</label>
-    </div>
-   
-    <div class="form-floating col-md-6">
-      <input type="text" class="form-control" name="lastName" required id="id_lastName" placeholder="Enter Username">
-      <label for="id_lastName">Last name</label>
-    </div>
+      <div class="form-floating col-md-6">
+        <input type="text" class="form-control" name="firstName" required id="id_firstName" placeholder="Enter Username">
+        <label for="id_firstName">First name</label>
+      </div>
+    
+      <div class="form-floating col-md-6">
+        <input type="text" class="form-control" name="lastName" required id="id_lastName" placeholder="Enter Username">
+        <label for="id_lastName">Last name</label>
+      </div>
 
-    <div class="form-floating col-md-4">
-      <input type="text" class="form-control" name="suffix" required id="id_suffix" placeholder="Enter Suffix">
-      <label for="id_suffix">Suffix</label>
-    </div>
+      <div class="form-floating col-md-4">
+        <input type="text" class="form-control" name="suffix" required id="id_suffix" placeholder="Enter Suffix">
+        <label for="id_suffix">Suffix</label>
+      </div>
 
-    <div class="col-md-4">
-      <label for="id_gender" class="form-label">Gender</label>
-      <select id="id_gender" class="form-select" name="gender" required>
-        <option selected>Choose...</option>
-        <option>Male</option>
-        <option>Female</option>
-      </select>
-    </div>
+      <div class="col-md-4">
+        <label for="id_gender" class="form-label">Gender</label>
+        <select id="id_gender" class="form-select" name="gender" required>
+          <option selected>Choose...</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
 
-    <div class="form-floating col-md-6">
-      <input type="email" class="form-control" autocomplete="email" name="email" required id="id_email" placeholder="Enter email">
-      <label for="id_email">Email</label>
-    </div>
+      <div class="form-floating col-md-6">
+        <input type="email" class="form-control" autocomplete="email" name="email" required id="id_email" placeholder="Enter email">
+        <label for="id_email">Email</label>
+      </div>
 
-    <div class="form-floating col-md-6">
-      <input type="number" class="form-control" name="contact" required id="id_contact" placeholder="Enter Contact">
-      <label for="id_contact">Contact Number</label>
-    </div>
+      <div class="form-floating col-md-6">
+        <input type="number" class="form-control" name="contact" required id="id_contact" placeholder="Enter Contact">
+        <label for="id_contact">Contact Number</label>
+      </div>
 
-    <div class="form-floating col-md-4">
-      <input type="date" class="form-control" name="birthday" required id="id_birthday" placeholder="Enter Username">
-      <label for="id_birthday">Birthdate</label>
-    </div>
+      <div class="form-floating col-md-4">
+        <input type="date" class="form-control" name="birthday" required id="id_birthday" placeholder="Enter Username">
+        <label for="id_birthday">Birthdate</label>
+      </div>
 
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" name="address" autocomplete="address"  required id="id_address" placeholder="Enter Address">
-      <label for="id_address">Address</label>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="address" autocomplete="address"  required id="id_address" placeholder="Enter Address">
+        <label for="id_address">Address</label>
+      </div>
+      <hr>
+      <p class="fs-5 text-start">Other Information</p>
+
+      <div class="col-md-7">
+        <label for="id_department" class="form-label">Department</label>
+        <select id="id_department" class="form-select" name="department" required>
+          <option selected>Choose...</option>
+          <option>College of Arts and Sciences</option>
+          <option>College of Business Administration</option>
+        </select>
+      </div>
+    
+      <div class="form-floating col-md-5">
+        <input type="text" class="form-control" name="time_availability" required id="id_time_availability" placeholder="Enter Time Availability">
+        <label for="id_time_availability">Time Availability</label>
+      </div>
+      <div class="col-md-8">
+        <select name="role" required id="id_role"  class="form-select">
+            <option selected>Choose Role...</option>
+            <option>User</option>
+            <option>Admin</option>
+        </select>
+      </div>
     </div>
     <hr>
-    <p class="fs-5 text-start">Other Information</p>
-
-    <div class="col-md-7">
-      <label for="id_department" class="form-label">Department</label>
-      <select id="id_department" class="form-select" name="department" required>
-        <option selected>Choose...</option>
-        <option>College of Arts and Sciences</option>
-        <option>College of Business Administration</option>
-      </select>
-    </div>
-   
-    <div class="form-floating col-md-5">
-      <input type="text" class="form-control" name="time_availability" required id="id_time_availability" placeholder="Enter Time Availability">
-      <label for="id_time_availability">Time Availability</label>
-    </div>
-    <div class="col-md-8">
-      <select name="role" required id="id_role"  class="form-select">
-          <option selected>Choose Role...</option>
-          <option>User</option>
-          <option>Admin</option>
-      </select>
+    <div class="d-grid col-3 mx-auto ">
+      <button type="submit" class="btn btn-default">Submit</button>
     </div>
   </div>
-</div>
-  <button type="submit">Signup</button>
-
-  <a href="{% url 'login' %}">Already have account?</a>
+  
+ 
 </form>
 
 

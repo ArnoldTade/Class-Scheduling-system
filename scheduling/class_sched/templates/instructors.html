@@ -23,7 +23,7 @@
 </div>
 
 <hr>
-
+<!--Header-->
 <div class="row row-select">
   <div class="col">
     <select class="form-select" aria-label="Default select example">
@@ -47,6 +47,8 @@
   </div>
   
 </div>
+
+<!--User and Admin List Section-->
 
 
 <div class="container-fluid container-instructor-table">
@@ -222,6 +224,165 @@
     </div>
   </div>
 </div>
+
+<hr>  
+<!--View User Section-->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">View User</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">User Schedule</button>
+  </li>
+  
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <h4 class="text-start">User Profile</h4>
+    <div class="container-lg shadow-sm container-profile">
+      
+      <div class="row">
+          <div class="col profile-info">
+            <div class="row">
+              <div class="col text-center">
+                <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:6rem; border-radius: 50%;">
+              </div>
+              <div class="col">
+                <div class="col col-label">Name: <input class="form-control " type="text" value="{{ request.user.instructor.firstName}}, {{ request.user.instructor.lastName}}" aria-label="default input example" readonly></div>
+              </div>
+            </div>
+              <div class="row row-first">
+                  <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }}" aria-label="default input example" readonly></div>
+                  <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
+                  <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
+              </div>
+              <div class="row">
+                  <div class="col col-label">Email: <input class="form-control" type="email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
+                  <div class="col col-label">Address: <input class="form-control" type="text" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
+                  <div class="col col-label">Department: <input class="form-control" type="text" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
+              </div>
+              <div class="row">
+                  <div class="col-6 col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div>
+                  <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
+                </div>
+             
+              <div class="row">
+                  <div class="d-grid gap-2 d-md-flex justify-content-end">
+                      <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+    <div class="container-fluid container-instructor-schedule">
+      <h4 class="text-start">Schedules</h4>
+          <table class="table table-hover table-striped">
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">Course</th>
+                  <th scope="col">Instructor</th>
+                  <th scope="col">Room</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Days of Week</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">CAS</th>
+                  <td>
+                    <img
+                      src="{% static 'img/me.jpg' %}"
+                      style="width: 50px; height: 50px; border-radius: 50%"
+                    />
+                    Mark
+                  </td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>T-TH</td>
+                  <td>1st Semester</td>
+                  <td>2023-2024</td>
+                  
+                </tr>
+
+                <tr>
+                  <th scope="row">CAS</th>
+                  <td>
+                    <img
+                      src="{% static 'img/me.jpg' %}"
+                      style="width: 50px; height: 50px; border-radius: 50%"
+                    />
+                    Mark
+                  </td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>T-TH</td>
+                  <td>1st Semester</td>
+                  <td>2023-2024</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">CAS</th>
+                  <td>
+                    <img
+                      src="{% static 'img/me.jpg' %}"
+                      style="width: 50px; height: 50px; border-radius: 50%"
+                    />
+                    Mark
+                  </td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>T-TH</td>
+                  <td>1st Semester</td>
+                  <td>2023-2024</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">CAS</th>
+                  <td>
+                    <img
+                      src="{% static 'img/me.jpg' %}"
+                      style="width: 50px; height: 50px; border-radius: 50%"
+                    />
+                    Mark
+                  </td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>T-TH</td>
+                  <td>1st Semester</td>
+                  <td>2023-2024</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">CAS</th>
+                  <td>
+                    <img
+                      src="{% static 'img/me.jpg' %}"
+                      style="width: 50px; height: 50px; border-radius: 50%"
+                    />
+                    Mark
+                  </td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>T-TH</td>
+                  <td>1st Semester</td>
+                  <td>2023-2024</td>
+                </tr>
+              </tbody>
+          </table> 
+          <div class="d-grid gap-2 d-md-flex justify-content-end">
+            <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
+        </div>
+  </div>
+  </div>
+</div>
+
+
 {% endblock %}
 
   
