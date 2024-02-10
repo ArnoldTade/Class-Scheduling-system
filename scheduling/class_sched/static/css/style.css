@@ -201,61 +201,60 @@ i {
     .home-table {
         margin-top: 20px;
         box-shadow: var(--box-shadow-style);
+
     }
 
     .table-bg {
         background-color: var(--home-color) !important;
     }
 
-    .home-card {
-        margin: 10px 20px 50px 20px;
-        display: flex;
 
-        .row-card {
-            display: inline-block;
-        }
-
-        .card {
-            margin: 10px;
-            box-shadow: var(--box-shadow-style);
-            display: inline-block;
-            padding: 10px;
-            transition: .3s;
-            background-color: #ebebeb;
-        }
-
-        .card:hover {
-            background-color: var(--home-color-light);
-            color: var(--light-color);
-
-            .btn {
-                background-color: transparent;
-                border-color: var(--light-color);
-                color: var(--light-color);
-            }
-        }
-
-        img {
-            border-radius: 50%;
-            margin: auto;
-            padding: 20px;
-            align-items: center;
-        }
-
+    .row-card {
+        display: inline-block;
     }
 
-    .row-home-select {
-        max-width: 100%;
+    .card {
+        margin: 10px;
+        box-shadow: var(--box-shadow-style);
+        display: inline-block;
+        padding: 10px;
+        transition: .3s;
+        background-color: #ebebeb;
+        border: 1px solid var(--light-color);
+    }
 
-        .form-select {
-            width: 250px;
-            float: right;
-            margin: 10px 5px 10px 5px;
-            border: 1px solid var(--home-color);
+    .card:hover {
+        background-color: var(--home-color-light);
+        color: var(--light-color);
+
+        .btn {
+            background-color: transparent;
+            border-color: var(--light-color);
+            color: var(--light-color);
         }
+    }
+
+    .owl-carousel img {
+        border-radius: 50%;
+        margin: auto;
+        padding: 20px;
+        align-items: center;
     }
 
 }
+
+.row-home-select {
+    max-width: 100%;
+
+    .form-select {
+        width: 250px;
+        float: right;
+        margin: 10px 5px 10px 5px;
+        border: 1px solid var(--home-color);
+    }
+}
+
+
 
 /*LOGIN */
 .container-login {
@@ -483,10 +482,6 @@ hr {
 .owl-item.center>div {
     cursor: auto;
     margin: 0;
-}
-
-.owl-item:not(.center)>div:hover {
-    opacity: .75;
 }
 
 /*END CAROUSEL */

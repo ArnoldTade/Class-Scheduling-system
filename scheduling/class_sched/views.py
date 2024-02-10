@@ -15,6 +15,7 @@ from django.db import transaction
 
 
 # signup page
+@login_required
 def user_signup(request):
     if request.method == "POST":
         userform = UserCreationForm(request.POST)
@@ -65,6 +66,7 @@ def user_login(request):
 
 
 # logout page
+@login_required
 def user_logout(request):
     logout(request)
     return redirect("login")
@@ -87,13 +89,16 @@ def dashboard(request):
     return render(request, "dashboard.html")
 
 
+@login_required
 def instructors(request):
     return render(request, "instructors.html")
 
 
+@login_required
 def schedule(request):
     return render(request, "schedule.html")
 
 
-def about(request):
-    return render(request, "about.html")
+@login_required
+def subject(request):
+    return render(request, "subject.html")
