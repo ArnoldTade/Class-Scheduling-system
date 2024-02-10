@@ -193,8 +193,6 @@ i {
         border: solid 2px;
     }
 
-
-
     h3 {
         color: var(--home-color);
         padding: 10px;
@@ -245,6 +243,18 @@ i {
         }
 
     }
+
+    .row-home-select {
+        max-width: 100%;
+
+        .form-select {
+            width: 250px;
+            float: right;
+            margin: 10px 5px 10px 5px;
+            border: 1px solid var(--home-color);
+        }
+    }
+
 }
 
 /*LOGIN */
@@ -738,6 +748,26 @@ section.section_summary .section_contents .content {
 /*DASHBOARD QUICK INFO */
 
 .section-quickInfo {
+    .col-calendar {
+        #calendar {
+            color: var(--home-color);
+
+            .fc-daygrid-day-number {
+                color: var(--home-color-dark);
+                text-decoration: none;
+            }
+
+            .fc-col-header-cell-cushion {
+                color: var(--home-color-dark);
+                text-decoration: none;
+            }
+
+            .fc-highlight {
+                background-color: #aec1cf;
+            }
+        }
+    }
+
     .col-sm {
         background-color: var(--light-color);
         margin: 10px;

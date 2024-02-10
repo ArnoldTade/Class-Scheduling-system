@@ -43,35 +43,27 @@
     <!--SECTION SCHEDULE-->
     <section class="section-schedule" id="home-schedule">
       <div class="container-fluid heading">
-        <div class="row">
-          <div class="col"><h3>Schedules</h3></div>
-          <div class="col ">
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Choose Department
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                </ul>
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Choose Semester
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                </ul>
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Choose School Year
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                  <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                </ul>
-              </div>
-            </div>
-            </div>
+        <div class="row row-home-select">
+          <div class="col-4"><h3>Schedules</h3></div>
+          <div class="col">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Select Department</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Select Semester</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Select School Year</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
         </div>
       </div>
