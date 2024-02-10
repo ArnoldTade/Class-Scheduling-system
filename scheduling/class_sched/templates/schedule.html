@@ -1,9 +1,10 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
+ 
+
 
 <h4 class="text-start text-schedule">Schedule</h4>
 <hr>
-
 <div class="container-fluid container-schedule-page">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -30,82 +31,71 @@
                     </div>
                 </div>
                 <!--Instructor Carousel-->
-                <div class="container-fluid text-center ">  		
-                    <div class="row">
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-
-                        <div class="col-sm col-users-list">
-                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..." style="width:5rem; border-radius: 50%;">
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
                             <p class="fs-5 text-center">Name</p>
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-default btn-sm">View</button>
-                            </div>
                         </div>
-                                    
-                    </div>   
-            </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                        <div class="item">
+                            <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="...">
+                            <p class="fs-5 text-center">Name</p>
+                        </div>
+                    </div>
                 <hr>
             </div>
 
         <!--User Schedule Tab-->
-            <div class="row">
+            <div class="row row-user-info">
                 <div class="container-fluid container-user-info">
                     <h4>User Schedule</h4>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#calendar-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Calendar View</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#loadslip-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Loadslip View</button>
-                            </li>
-                        </ul>
-                            <!--Calendar View Tab-->
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="calendar-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                <div id='calendar'></div>
-                            </div>
-                            <!--Loadslip View Tab-->
-                            <div class="tab-pane fade" id="loadslip-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                            </div>
+                        <!--Calendar View Tab-->
+                        <div class="container-fluid container-schedule-calendar">
+                            <div id='calendar'></div>
                         </div>
+                        <!--Loadslip View Tab-->
+                        <div class="container-fluid container-schedule-loadslip">
+                            <h1>Loadslip</h1>
+                        </div>                       
                 </div>
             </div>
         </div>
@@ -116,51 +106,8 @@
         </div>
     </div>
 </div>
-{% endblock %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-  
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        events: [
-          // Your events data from the database
-          {
-            title: 'Event 1',
-            start: '2024-02-06'
-          },
-          {
-            title: 'Event 2',
-            start: '2024-02-10'
-          }
-        ]
-      });
-  
-      calendar.render();
-    });
 
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        navText: [
-          "<i class='fa fa-caret-left'></i>",
-          "<i class='fa fa-caret-right'></i>"
-        ],
-        autoplay: true,
-        autoplayHoverPause: true,
-        responsive: {
-          0: {
-            items: 1
-          },
-          600: {
-            items: 3
-          },
-          1000: {
-            items: 5
-          }
-        }
-      })
-  </script>
+{% endblock %}
+
 {% include "_footer.html" %}
 

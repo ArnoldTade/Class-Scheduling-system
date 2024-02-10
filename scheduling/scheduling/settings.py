@@ -138,6 +138,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
     BASE_DIR / "class_sched/static/",
+    os.path.join(BASE_DIR, "node_modules"),
 ]
 
 

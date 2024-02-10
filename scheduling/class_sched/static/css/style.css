@@ -919,19 +919,78 @@ thead.table-head {
 }
 
 
-.col-users-list {
+
+.owl-carousel {
+    display: flex;
+}
+
+.owl-carousel .item {
+    margin: 0 15px;
+    border: 2px solid var(--light-color);
+    background-color: #F2F2F2;
     padding: 10px;
-    background-color: #cadce2;
-    align-items: center;
-    text-align: center;
-    margin: 10px;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
+    justify-content: center;
+    transition: .3s;
+    box-shadow: var(--box-shadow-style);
+}
 
+.owl-carousel .item:hover {
+    border: 2px solid var(--light-home);
+    background-color: var(--home-color);
+    color: var(--light-color);
 
-    img {
-        border: 2px solid var(--light-color);
+    .btn-default {
+        background-color: var(--light-home);
+        border: 2px solid var(--home-color);
+        color: var(--home-color-dark);
     }
 }
 
+.owl-carousel .item img {
+    border-radius: 50%;
+    width: 4rem;
+    height: auto;
+    border: 2px solid var(--light-home);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.row-user-info {
+
+    .container-user-info {
+
+        .container-schedule-calendar {
+            padding: 10px;
+            box-shadow: var(--box-shadow-style);
+
+            #calendar {
+                color: var(--home-color);
+
+                .fc-daygrid-day-number {
+                    color: var(--home-color-dark);
+                    text-decoration: none;
+                }
+
+                .fc-col-header-cell-cushion {
+                    color: var(--home-color-dark);
+                    text-decoration: none;
+                }
+
+                .fc-highlight {
+                    background-color: #aec1cf;
+                }
+            }
+        }
+
+        .container-schedule-loadslip {
+            height: 500px;
+
+            margin: 10px;
+            box-shadow: var(--box-shadow-style);
+        }
+    }
+}
 
 /* END SCHEDULE PAGE */

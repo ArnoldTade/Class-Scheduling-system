@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "fullcalendar": "^6.1.10"
+    "fullcalendar": "^6.1.10",
+    "jquery": "^3.7.1"
   }
 }

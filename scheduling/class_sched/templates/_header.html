@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
+    <head>       
         {% load static %}
         <!-- {% load bootstrap5 %} --> 
 
@@ -19,27 +18,15 @@
         <title>Class Scheduling</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" href="{% static 'css/style.css' %}">--> 
+       
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
      
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">  
       
-         <!-- Owl Carousel CSS -->
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-        /> 
-
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-        <!-- Owl Carousel JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    
-    
     </head>
 
     <body>
@@ -54,10 +41,9 @@
         <div class="offcanvas-header" >            
         <div class="img-profile">
             <img src="{% static 'img/me.jpg' %}"> 
-       <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Welcome Arnold</h5> </div>
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Welcome Arnold</h5> </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-
+        </div>
           <div class="offcanvas-body text-bg-light ">
             <ul class="navbar-nav justify-content-end ">
                 <li>
@@ -78,14 +64,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "about" %}"><i class="bi bi-file-earmark-person"></i>SUBJECTS</a>
                 </li>
-<hr>
+                <hr>
                 <li class="nav-item nav-logout">
                     <a href="{% url 'logout' %}" type="button" class="btn btn-logout"><i class="bi bi-box-arrow-left"></i> Logout </a> 
                 </li>
-                </ul>
-
-          </div>
+            </ul>
+        </div>
     </nav>
+
 {% block content %}
 
 {% endblock %}
