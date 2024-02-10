@@ -193,11 +193,7 @@ i {
         border: solid 2px;
     }
 
-    .btn:hover {
-        background-color: var(--light-home);
-        border-color: var(--home-color);
-        color: var(--home-color);
-    }
+
 
     h3 {
         color: var(--home-color);
@@ -215,9 +211,7 @@ i {
 
     .home-card {
         margin: 10px 20px 50px 20px;
-        width: 1190px;
-        overflow-x: auto;
-        white-space: nowrap;
+        display: flex;
 
         .row-card {
             display: inline-block;
@@ -227,16 +221,26 @@ i {
             margin: 10px;
             box-shadow: var(--box-shadow-style);
             display: inline-block;
-            padding-bottom: 10px;
+            padding: 10px;
+            transition: .3s;
+            background-color: #ebebeb;
+        }
 
+        .card:hover {
+            background-color: var(--home-color-light);
+            color: var(--light-color);
+
+            .btn {
+                background-color: transparent;
+                border-color: var(--light-color);
+                color: var(--light-color);
+            }
         }
 
         img {
             border-radius: 50%;
-            width: 50%;
-            height: 50%;
             margin: auto;
-            padding-top: 20px;
+            padding: 20px;
             align-items: center;
         }
 

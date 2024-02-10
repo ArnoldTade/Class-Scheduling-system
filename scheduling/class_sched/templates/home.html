@@ -1,6 +1,6 @@
 {% include "home_header.html" %} {% load static %}
+{% block content %}
 
-  
     <!--SECTION HOME-->
     <section class="container-fluid schedule-section">
       <div class="row align-items-center home-page">
@@ -78,111 +78,57 @@
 
      
       <div class="container-fluid home-card">
-        <div class="row row-card">
-          
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#table-schedule" class="btn btn-primary d-block">View</a>
-          </div>
+          <div class="owl-carousel owl-theme">
 
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#" class="btn btn-primary  d-block">View</a>
-          </div>
 
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#" class="btn btn-primary  d-block">View</a>
-          </div>
 
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#" class="btn btn-primary  d-block">View</a>
-          </div>
 
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#" class="btn btn-primary  d-block">View</a>
-          </div>
 
-          <div class="card" style="width: 15rem">
-            <img
-              src="{% static 'img/me.jpg' %}"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Name</h5>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Subjects Handled</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <a href="#" class="btn btn-primary  d-block">View</a>
-          </div>
 
-        </div>
+            <div class="card" style="width: 15rem">
+              <img src="{% static 'img/me.jpg' %}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
+            </div>
+            
+          </div>
       </div>
     
 <hr>
@@ -286,5 +232,6 @@
 
 
   
+{% endblock %}
 {% include "_footer.html" %}
   
