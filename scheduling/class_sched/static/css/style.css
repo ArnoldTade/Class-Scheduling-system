@@ -255,31 +255,20 @@ i {
 }
 
 
-
 /*LOGIN */
 .container-login {
-    border: solid 3px var(--home-color);
-    margin-top: 10px;
-    border-top-right-radius: 5rem;
-    border-bottom-left-radius: 5rem;
+    margin-top: 50px;
+    max-width: 600px;
 
+    /*
     .login-intro {
-        background: var(--home-color-dark);
         padding: 3rem;
         margin: auto;
         height: 100%;
-        border-bottom-left-radius: 4rem;
-        border-top-right-radius: 4rem;
-
-    }
-
-    .navbar-brand {
-        color: var(--light-home);
-        font-weight: bold;
     }
 
     .fs-4 {
-        color: var(--light-home);
+        color: var(--light-color);
         align-items: center;
         font-size: 20px;
         margin-top: 20px;
@@ -287,11 +276,25 @@ i {
 
     .p-label {
         margin-top: 75px;
-        color: var(--light-home);
+        color: var(--light-color);
+
+    }
+*/
+    .navbar-brand {
+        color: var(--light-color);
+        font-size: 30px;
+        font-weight: 500;
+        border: 1px solid var(--home-color);
+        border-radius: 1rem;
+        margin-bottom: 15px;
+        background: var(--bg-linear);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
-    .login-side {
-        padding: 100px;
+    .col-login-side {
+        padding: 40px 100px 50px 100px;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     .btn-login {
@@ -300,32 +303,37 @@ i {
 
     .btn-primary {
         background-color: var(--home-color) !important;
-        border: solid 1px var(--home-color);
+        border: solid 1px var(--light-color);
         font-size: 20px;
+        border-radius: 1rem;
+
     }
 
     .btn-primary:hover {
-        background-color: transparent !important;
-        border: solid 2px var(--home-color);
+        background-color: var(--light-color) !important;
+        border: solid 2px var(--home-color-dark);
         font-size: 20px;
         color: var(--home-color);
 
     }
 
     #login-text {
-        color: var(--home-color);
+        color: var(--home-color-dark);
         font-weight: bold;
         margin-bottom: 50px;
     }
 
     .input-username {
-        border: solid 1px var(--home-color);
+        border: solid 2px var(--home-color);
+        border-radius: 1rem;
     }
 
     .input-password {
-        border: solid 1px var(--home-color);
-
+        border: solid 2px var(--home-color);
+        border-radius: 1rem;
     }
+
+
 }
 
 /*END LOGIN  */
@@ -897,6 +905,18 @@ thead.table-head {
     box-shadow: var(--box-shadow-style);
     padding: 10px;
     margin-top: 10px;
+
+    .nav-link {
+        color: var(--home-color);
+        font-weight: 500;
+    }
+
+    .nav-link:hover {
+        background-color: var(--home-color);
+        color: var(--light-color);
+        font-weight: 500;
+    }
+
 }
 
 .container-register {
@@ -1023,3 +1043,19 @@ thead.table-head {
 }
 
 /* END SCHEDULE PAGE */
+
+
+/* Subject Page */
+.container-subject-page {
+    .col-subject {
+        background-color: #cfd1d4;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .col-rooms {
+        background-color: #cfd1d4;
+        margin: 10px;
+        padding: 10px;
+    }
+}
