@@ -7,6 +7,7 @@
     --blue-color: #397bab;
     --dark-color: #352b3b;
     --box-shadow-style: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    --box-shadow-style2: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     --borderRadius: 0.5rem;
     --home-color: #3C5B72;
     --home-color-dark: #39566D;
@@ -288,13 +289,12 @@ i {
         border-radius: 1rem;
         margin-bottom: 15px;
         background: var(--bg-linear);
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     .col-login-side {
         padding: 40px 100px 50px 100px;
         border-radius: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        box-shadow: var(--box-shadow-style2);
     }
 
     .btn-login {
@@ -1048,14 +1048,32 @@ thead.table-head {
 /* Subject Page */
 .container-subject-page {
     .col-subject {
-        background-color: #cfd1d4;
+        background-color: #e7ecf3;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: var(--box-shadow-style2);
+
+        .col-course {
+            background-color: var(--home-color-light);
+            padding: 10px;
+            margin: 10px;
+            color: var(--light-color);
+            border-radius: 1rem;
+        }
+    }
+
+    .table-responsive {
+        .table-head {
+            background-color: #026992 !important;
+        }
+    }
+
+    .col-rooms {
+        background-color: #e7ecf3;
+        box-shadow: var(--box-shadow-style2);
         margin: 10px;
         padding: 10px;
     }
 
-    .col-rooms {
-        background-color: #cfd1d4;
-        margin: 10px;
-        padding: 10px;
-    }
+
 }
