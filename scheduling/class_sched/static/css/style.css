@@ -927,14 +927,36 @@ thead.table-head {
 }
 
 .container-register {
-    margin-top: 10px;
-    padding: 10px;
-    border: 2px solid var(--home-color);
+    max-width: 70%;
+    margin-top: 20px;
+    padding: 40px;
+    box-shadow: var(--box-shadow-style2);
+
+    input {
+        border: 1px solid #d8d8d8c7;
+    }
+
+    .fs-3 {
+        color: var(--home-color);
+        font-weight: 600;
+    }
+
 }
 
 .container-information {
-    border: 2px solid var(--home-color);
-    padding: 10px;
+    max-width: 70%;
+    box-shadow: var(--box-shadow-style2);
+    padding: 40px;
+    margin-bottom: 20px;
+
+    input {
+        border: 1px solid #d8d8d8c7;
+    }
+
+    .fs-5 {
+        color: var(--home-color);
+        font-weight: 500;
+    }
 }
 
 
