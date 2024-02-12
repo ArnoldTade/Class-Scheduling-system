@@ -25,24 +25,24 @@
                 <table class="table caption-top"> 
                     <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i>Add New Subject</button></caption>
                     <thead class="table-success">
-                   
                         <tr>
                           <th scope="col">Course Name</th>
                           <th scope="col">Description</th>
                           <th scope="col">Credits</th>
                           <th scope="col">Prerequisites</th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for course in course %}
+                        {% for course in courses %}
                         <tr>
                           <th scope="row">{{ course.course_name }}</th>
                           <td>{{ course.description }}</td>
                           <td>{{ course.credits }}</td>
                           <td>{{ course.prerequisites }}</td>
+                          <td><a href="{% url 'delete' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></button></td>
                         </tr>
-                       
-                      {% endfor %}
+                        {% endfor %}
                     </tbody>
                   </table>
             </div>
@@ -58,26 +58,39 @@
                       <!--Add Subject Form-->
                     <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                         {% csrf_token %}
-                        <div class="mb-3">
-                          <label for="id_course_name">Course Name:</label>
-                          {{ subjectform.course_name }}
-                          {{ subjectform.course_name.errors }}
+       
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="course_name" id="id_course_name" placeholder="Course name" required>
+                        <label for="id_course_name">Course name</label>
+                        <div class="invalid-feedback">
+                          Please Enter Course Name.
+                        </div>
                       </div>
-                      <div class="mb-3">
-                          <label for="id_description">Description:</label>
-                          {{ subjectform.description }}
-                          {{ subjectform.description.errors }}
+
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="description" id="id_description" placeholder="Description" required>
+                        <label for="id_description">Description</label>
+                        <div class="invalid-feedback">
+                          Please Enter Description.
+                        </div>
                       </div>
-                      <div class="mb-3">
-                        <label for="id_credits">Credits:</label>
-                        {{ subjectform.credits }}
-                        {{ subjectform.credits.errors }}
+
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="credits" id="id_credits" placeholder="Description" required>
+                        <label for="id_credits">Credits</label>
+                        <div class="invalid-feedback">
+                          Please Enter Credits.
+                        </div>
                       </div>
-                      <div class="mb-3">
-                        <label for="id_prerequisites">Credits:</label>
-                        {{ subjectform.prerequisites }}
-                        {{ subjectform.prerequisites.errors }}
+
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" placeholder="Description" required>
+                        <label for="id_prerequisites">Prerequisites</label>
+                        <div class="invalid-feedback">
+                          Please Enter Prerequisites.
+                        </div>
                       </div>
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

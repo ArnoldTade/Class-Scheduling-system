@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -114,13 +115,20 @@ def subject(request):
             return redirect("subject")
     else:
         subjectform = SubjectForm()
-    course = {}
-    course["course"] = Course.objects.all()
+
+    courses = Course.objects.all()
     return render(
         request,
         "subject.html",
         {
             "subjectform": subjectform,
-            "course": course,
+            "courses": courses,
         },
     )
+
+
+def delete_subject(request, id=None):
+    course = Course.objects.get(id=id)
+    course.delete()
+    messages.success(request, "Deleted!")
+    return redirect("subject")
