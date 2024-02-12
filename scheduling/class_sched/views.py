@@ -137,10 +137,12 @@ def delete_subject(request, id=None):
 def update_subject(request, id=None):
     courses = {}
     course = get_object_or_404(Course, id=id)
-    courseform = SubjectForm(request.POST or None, instance=course)
+    courseform = SubjectForm(request.POST, instance=course)
     if courseform.is_valid():
         courseform.save()
         messages.success(request, "Update!")
         return HttpResponseRedirect("subject")
+
+    courseform = SubjectForm(instance=course)
     courses["courseform"] = courseform
-    return render(request, courses)
+    return render(request, "subject.html", courses)

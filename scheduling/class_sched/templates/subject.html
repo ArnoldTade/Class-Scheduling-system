@@ -40,14 +40,14 @@
                           <td>{{ course.description }}</td>
                           <td>{{ course.credits }}</td>
                           <td>{{ course.prerequisites }}</td>
-                          <td><a href="{% url 'delete' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></button>
-                          <a href="{% url 'edit' id=course.id %}" type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#staticBackdropEdit"><i class="bi bi-pen-fill" style="color:#fff;"></i></button></td>
+                          <td><a href="{% url 'delete' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                            <a href="{% url 'edit' id=course.id %}" type="button" class="btn btn-info" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
                         </tr>
                         {% endfor %}
                     </tbody>
                   </table>
             </div>
-              <!-- Modal -->
+              <!-- Modal Add Subject-->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -102,61 +102,8 @@
               </div>
             </div>
 
-             <!-- Modal Edit-->
-             <div class="modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Subject</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <!--Edit Subject Form-->
-                    <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-                        {% csrf_token %}
-                        {{ courseform.as_p }}
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.course_name }}" placeholder="Course name" required>
-                        <label for="id_course_name">Course name</label>
-                        <div class="invalid-feedback">
-                          Please Enter Course Name.
-                        </div>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.description }}" placeholder="Description" required>
-                        <label for="id_description">Description</label>
-                        <div class="invalid-feedback">
-                          Please Enter Description.
-                        </div>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.credits }}" placeholder="Description" required>
-                        <label for="id_credits">Credits</label>
-                        <div class="invalid-feedback">
-                          Please Enter Credits.
-                        </div>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.prerequisites }}" placeholder="Description" required>
-                        <label for="id_prerequisites">Prerequisites</label>
-                        <div class="invalid-feedback">
-                          Please Enter Prerequisites.
-                        </div>
-                      </div>
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </form>
-                </div>
-              </div>
-            </div>
         </div>
-
+            
         <!--Room Table-->
         <div class="col col-rooms">
             <p class="fs-5 text-start user-page-title">Rooms</p>
@@ -188,7 +135,91 @@
             </div>
         </div>
     </div>    
+
+    <!--Update Container-->
+    <div class="container-sm ">
+      <div class="row">
+        <div class="col-sm">
+          <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
+              <label for="id_course_name">Course name</label>
+              <div class="invalid-feedback">
+                Please Enter Course Name.
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
+              <label for="id_description">Description</label>
+              <div class="invalid-feedback">
+                Please Enter Description.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
+              <label for="id_credits">Credits</label>
+              <div class="invalid-feedback">
+                Please Enter Credits.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
+              <label for="id_prerequisites">Prerequisites</label>
+              <div class="invalid-feedback">
+                Please Enter Prerequisites.
+              </div>
+            </div>
+          
+            <button type="submit" class="btn btn-warning">Save changes</button>
+          
+          </form>
+        </div>
+        <div class="col-sm">
+          <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
+              <label for="id_course_name">Course name</label>
+              <div class="invalid-feedback">
+                Please Enter Course Name.
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
+              <label for="id_description">Description</label>
+              <div class="invalid-feedback">
+                Please Enter Description.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
+              <label for="id_credits">Credits</label>
+              <div class="invalid-feedback">
+                Please Enter Credits.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
+              <label for="id_prerequisites">Prerequisites</label>
+              <div class="invalid-feedback">
+                Please Enter Prerequisites.
+              </div>
+            </div>
+          
+            <button type="submit" class="btn btn-warning">Save changes</button>
+          
+          </form>
+        </div>
+      </div>
+    </div>
 </div>
+<script>
+ 
 
 {% endblock %}
 {% include "_footer.html" %}
