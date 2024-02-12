@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from .forms import *
 from .models import *
 
@@ -27,6 +28,7 @@ def user_signup(request):
                 instructor = instructor_form.save(commit=False)
                 instructor.user_profile = user
                 instructor.save()
+                messages.success(request, "Successfully Registered!")
             return redirect("instructors")
     else:
         userform = UserCreationForm()
@@ -40,6 +42,9 @@ def user_signup(request):
             "instructor_form": instructor_form,
         },
     )
+
+
+# Add Subjects
 
 
 # login page
@@ -101,4 +106,21 @@ def schedule(request):
 
 @login_required
 def subject(request):
-    return render(request, "subject.html")
+    if request.method == "POST":
+        subjectform = SubjectForm(request.POST)
+        if subjectform.is_valid():
+            subjectform.save()
+            messages.success(request, "Subject Added!")
+            return redirect("subject")
+    else:
+        subjectform = SubjectForm()
+    course = {}
+    course["course"] = Course.objects.all()
+    return render(
+        request,
+        "subject.html",
+        {
+            "subjectform": subjectform,
+            "course": course,
+        },
+    )
