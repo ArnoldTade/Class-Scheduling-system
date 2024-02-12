@@ -1106,3 +1106,15 @@ thead.table-head {
 
 
 }
+
+.messages {
+    padding: 20px;
+    transition: 0.4s;
+
+    .alert {
+        padding: 20px;
+        text-align: center;
+        align-items: center;
+        transition: 1s;
+    }
+}

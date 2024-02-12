@@ -16,4 +16,6 @@ urlpatterns = [
     path("logout/", views.user_logout, name="logout"),
     # Delete
     path("delete/<int:id>", views.delete_subject, name="delete"),
+    # Update
+    path("edit/<int:id>", views.update_subject, name="edit"),
 ]

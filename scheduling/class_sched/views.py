@@ -45,9 +45,6 @@ def user_signup(request):
     )
 
 
-# Add Subjects
-
-
 # login page
 def user_login(request):
     if request.method == "POST":
@@ -105,6 +102,7 @@ def schedule(request):
     return render(request, "schedule.html")
 
 
+# Add Subjects
 @login_required
 def subject(request):
     if request.method == "POST":
@@ -127,8 +125,22 @@ def subject(request):
     )
 
 
+# Delete Subjects
 def delete_subject(request, id=None):
     course = Course.objects.get(id=id)
     course.delete()
     messages.success(request, "Deleted!")
     return redirect("subject")
+
+
+# Edit Subjects
+def update_subject(request, id=None):
+    courses = {}
+    course = get_object_or_404(Course, id=id)
+    courseform = SubjectForm(request.POST or None, instance=course)
+    if courseform.is_valid():
+        courseform.save()
+        messages.success(request, "Update!")
+        return HttpResponseRedirect("subject")
+    courses["courseform"] = courseform
+    return render(request, courses)
