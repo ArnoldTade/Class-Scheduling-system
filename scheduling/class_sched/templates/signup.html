@@ -6,7 +6,7 @@
   <p class="fs-3 text-center">Register an Account</p>
 
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="row g-3">
     <div class="form-floating mb-3">
@@ -30,7 +30,14 @@
   <div class="container-sm container-information">
     <p class="fs-5 text-start">Personal Information</p>
     <div class="row g-3 ">
-     
+    
+      <!--
+          {{ instructor_form.as_p }} -->
+        <div class="mb-3">
+          <label for="id_profile_picture" class="form-label">Upload profile picture</label>
+          <input class="form-control" type="file" name="profile_picture" required id="id_profile_picture">
+        </div>
+        
         <div class="form-floating col-md-6">
           <input type="text" class="form-control" name="firstName" required id="id_firstName" placeholder="Enter Username">
           <label for="id_firstName">First name</label>
@@ -96,7 +103,7 @@
               <option>Admin</option>
           </select>
         </div>
- 
+
     </div>
     <hr>
     <div class="d-grid col-3 mx-auto ">

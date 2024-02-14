@@ -7,13 +7,13 @@
 <div class="container-lg shadow-sm container-profile">
     <div class="row">
         <div class="col-6 card-profile" style="">
-            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-              <h5 class="card-title"> {{ request.user.username }}</h5>
+            <img src="{{ request.user.instructor.profile_picture.url }}" class="card-img-top" alt="Profile Picture">
+              <h5 class="card-title"> {{ request.user.instructor.firstName }}, {{ request.user.instructor.lastName }}, </h5>
               <p class="card-text">Instructor</p>
           </div>
         <div class="col profile-info">
             <div class="row row-first">
-                <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }} " aria-label="default input example" readonly></div>
                 <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
                 <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
             </div>
@@ -159,7 +159,7 @@
         
         <div class="container-fluid container-nav-calendar" id="scrollspyHeading2">
             <h4 class="text-start">Calendar</h4>
-           
+            <div id='calendar'></div>
         </div>
         <hr>
         <div class="container-fluid container-nav-feedback" id="scrollspyHeading3">

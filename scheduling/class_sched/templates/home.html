@@ -71,7 +71,16 @@
      
      
           <div class="container-fluid owl-carousel owl-theme">
-
+            {% for instructor in instructors %}
+            <div class="card" style="width: 15rem">
+              <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">{{ instructor.firstName }}, {{ instructor.lastName }}</h5>
+              </div>
+              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
+            </div>
+            {% endfor %}
+           <!--
             <div class="card" style="width: 15rem">
               <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="..."/>
               <div class="card-body">
@@ -111,15 +120,7 @@
               </div>
               <a href="#table-schedule" class="btn btn-primary d-block">View</a>
             </div>
-
-            <div class="card" style="width: 15rem">
-              <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="..."/>
-              <div class="card-body">
-                <h5 class="card-title">Name</h5>
-              </div>
-              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
-            </div>
-            
+            -->
           </div>
      
     

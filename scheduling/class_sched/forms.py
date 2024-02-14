@@ -14,6 +14,7 @@ class InstructorForm(forms.ModelForm):
     class Meta:
         model = Instructor
         fields = [
+            "profile_picture",
             "firstName",
             "lastName",
             "suffix",

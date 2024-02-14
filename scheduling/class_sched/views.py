@@ -21,7 +21,7 @@ from django.db import transaction
 def user_signup(request):
     if request.method == "POST":
         userform = UserCreationForm(request.POST)
-        instructor_form = InstructorForm(request.POST)
+        instructor_form = InstructorForm(request.POST, request.FILES)
 
         if userform.is_valid() and instructor_form.is_valid():
             with transaction.atomic():
@@ -79,7 +79,14 @@ def user_logout(request):
 
 
 def home(request):
-    return render(request, "home.html")
+    instructors = Instructor.objects.all()
+    return render(
+        request,
+        "home.html",
+        {
+            "instructors": instructors,
+        },
+    )
 
 
 @login_required
@@ -142,6 +149,7 @@ def delete_subject(request, id=None):
     return redirect("subject")
 
 
+# Delete Rooms
 def delete_room(request, id=None):
     room = Room.objects.get(id=id)
     room.delete()

@@ -1,6 +1,7 @@
 from django.urls import path
 from class_sched import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -19,4 +20,4 @@ urlpatterns = [
     path("deleteroom/<int:id>", views.delete_room, name="deleteroom"),
     # Update
     path("edit/<int:id>", views.update_subject, name="edit"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
