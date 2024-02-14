@@ -1,6 +1,16 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
 
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
 <div class="container text-center container-instructor-nav">
   <div class="row">
     <div class="col-sm-3">
@@ -27,12 +37,16 @@
 <div class="row row-select">
   <div class="col">
     <select class="form-select" aria-label="Default select example">
-      <option selected>Select Department</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option selected>Select College</option>
+      <option>College of Arts and Sciences</option>
+      <option>College of Business Administration</option>
+      <option>College of Insdustrial Technology</option>
+      <option>College of Teacher Education</option>
+      <option>College of Criminal Justice Education</option>
+      <option>College of Agriculture and Forestry</option>
     </select>
-    <select class="form-select" aria-label="Default select example">
+   <!-- 
+      <select class="form-select" aria-label="Default select example">
       <option selected>Select Semester</option>
       <option value="1">One</option>
       <option value="2">Two</option>
@@ -43,7 +57,7 @@
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
-    </select>
+    </select>-->
   </div>
   
 </div>
@@ -57,6 +71,7 @@
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
+    <!--User Table-->
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
       <div class="container-fluid table-responsive instructor-table">
         <table class="table table-hover table-striped">
@@ -74,68 +89,35 @@
             </tr>
           </thead>
           <tbody>
+            {% for instructor in instructors  %}
+              {% if instructor.role == "User" %}
             <tr>
               <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+                <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
               <td>
-                Arnold Saldivar
-              </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
+                {{ instructor.firstName }} {{ instructor.lastName }}
+              </td> 
+              <td>{{ instructor.gender }} </td>
+              <td>{{ instructor.birthday }}</td>
+              <td>{{ instructor.contact }}</td>
+              <td>{{ instructor.address }}</td>
+              <td>{{ instructor.department }}</td>
               <td>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
               </td>
               <td>
                   <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
               </td>
             </tr>
-
-            <tr>
-              <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
-              <td>
-                Arnold Saldivar
-              </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
-              <td>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-              </td>
-              <td>
-                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
-              <td>
-                Arnold Saldivar
-              </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
-              <td>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-              </td>
-              <td>
-                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
-              </td>
-            </tr>
+              {% endif %}
+            {% endfor %}
+      
 
           </tbody>
         </table>
       </div>
     </div>
-
+    <!--Admin Table-->
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
       <div class="container-fluid table-responsive instructor-table">
         <table class="table table-hover table-striped">
@@ -153,66 +135,29 @@
             </tr>
           </thead>
           <tbody>
+            {% for instructor in instructors  %}
+              {% if instructor.role == "Admin" %}
             <tr>
               <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+                <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
               <td>
-                Arnold Saldivar
+                {{ instructor.firstName }} {{ instructor.lastName }}
               </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
+              <td>{{ instructor.gender }} </td>
+              <td>{{ instructor.birthday }}</td>
+              <td>{{ instructor.contact }}</td>
+              <td>{{ instructor.address }}</td>
+              <td>{{ instructor.department }}</td>
               <td>
-                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
               </td>
               <td>
                   <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
               </td>
             </tr>
-
-            <tr>
-              <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
-              <td>
-                Arnold Saldivar
-              </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
-              <td>
-                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-              </td>
-              <td>
-                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
-              <td>
-                Arnold Saldivar
-              </td>
-              <td>Male</td>
-              <td>May 24, 2001</td>
-              <td>09657850032</td>
-              <td>Bayawan</td>
-              <td>College of Arts and Sciences</td>
-              <td>
-                  <button type="button" class="btn btn-secondary"><i class="bi bi-pen-fill"></i></button>
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-              </td>
-              <td>
-                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
-              </td>
-            </tr>
-
+              {% endif %}
+            {% endfor %}
+      
           </tbody>
         </table>
       </div>
@@ -226,16 +171,13 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">View User</button>
   </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">User Schedule</button>
-  </li>
+ 
   
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
     <h4 class="text-start">User Profile</h4>
     <div class="container-lg shadow-sm container-profile">
-      
       <div class="row">
           <div class="col profile-info">
             <div class="row">
@@ -272,108 +214,6 @@
   </div>
 
 
-  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-    <div class="container-fluid container-instructor-schedule">
-      <h4 class="text-start">Schedules</h4>
-          <table class="table table-hover table-striped">
-              <thead class="table-success">
-                <tr>
-                  <th scope="col">Course</th>
-                  <th scope="col">Instructor</th>
-                  <th scope="col">Room</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Days of Week</th>
-                  <th scope="col">Semester</th>
-                  <th scope="col">Year</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  <td>1st Semester</td>
-                  <td>2023-2024</td>
-                  
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  <td>1st Semester</td>
-                  <td>2023-2024</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  <td>1st Semester</td>
-                  <td>2023-2024</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  <td>1st Semester</td>
-                  <td>2023-2024</td>
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  <td>1st Semester</td>
-                  <td>2023-2024</td>
-                </tr>
-              </tbody>
-          </table> 
-          <div class="d-grid gap-2 d-md-flex justify-content-end">
-            <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
-        </div>
-  </div>
   </div>
 </div>
 

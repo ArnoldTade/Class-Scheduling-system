@@ -101,7 +101,22 @@ def dashboard(request):
 
 @login_required
 def instructors(request):
-    return render(request, "instructors.html")
+    instructors = Instructor.objects.all()
+    return render(
+        request,
+        "instructors.html",
+        {
+            "instructors": instructors,
+        },
+    )
+
+
+# Delete Instructor
+def delete_instructor(request, id=None):
+    instructor = Instructor.objects.get(id=id)
+    instructor.delete()
+    messages.success(request, "Instructor Deleted!")
+    return redirect("instructors")
 
 
 @login_required
@@ -145,7 +160,7 @@ def subject(request):
 def delete_subject(request, id=None):
     course = Course.objects.get(id=id)
     course.delete()
-    messages.success(request, "Deleted!")
+    messages.success(request, "Subject Deleted!")
     return redirect("subject")
 
 
@@ -153,7 +168,7 @@ def delete_subject(request, id=None):
 def delete_room(request, id=None):
     room = Room.objects.get(id=id)
     room.delete()
-    messages.success(request, "Deleted!")
+    messages.success(request, "Room Deleted!")
     return redirect("subject")
 
 

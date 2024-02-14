@@ -18,6 +18,7 @@ urlpatterns = [
     # Delete
     path("deletesubject/<int:id>", views.delete_subject, name="deletesubject"),
     path("deleteroom/<int:id>", views.delete_room, name="deleteroom"),
+    path("deleteinstructor/<int:id>", views.delete_instructor, name="deleteinstructor"),
     # Update
     path("edit/<int:id>", views.update_subject, name="edit"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

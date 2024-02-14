@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 
 class Instructor(models.Model):
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to="img/", default="img/placeholder.png")
+    profile_picture = models.ImageField(
+        upload_to="img/", null=True, default="img/placeholder.png"
+    )
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
     suffix = models.CharField(max_length=100)
