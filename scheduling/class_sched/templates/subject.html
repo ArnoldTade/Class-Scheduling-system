@@ -14,7 +14,6 @@
 
 <p class="fs-5 text-start user-page-title">Subject Page</p>
 <hr>
-
 <div class="container-fluid container-subject-page">
     <div class="row">
         <!--Course Table-->
@@ -40,8 +39,8 @@
                           <td>{{ course.description }}</td>
                           <td>{{ course.credits }}</td>
                           <td>{{ course.prerequisites }}</td>
-                          <td><a href="{% url 'delete' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                            <a href="{% url 'edit' id=course.id %}" type="button" class="btn btn-info" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                          <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                            <a href="{% url 'edit' id=course.id %}" type="button" class="btn btn-info" id="buttonEdit" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit"><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -59,34 +58,33 @@
                       <!--Add Subject Form-->
                     <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                         {% csrf_token %}
-       
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="course_name" id="id_course_name" placeholder="Course name" required>
-                        <label for="id_course_name">Course name</label>
+                        <input type="text" class="form-control" name="subject-course_name" id="id_subject-course_name" placeholder="Course name" required>
+                        <label for="id_subject-course_name">Course name</label>
                         <div class="invalid-feedback">
                           Please Enter Course Name.
                         </div>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="description" id="id_description" placeholder="Description" required>
-                        <label for="id_description">Description</label>
+                        <input type="text" class="form-control" name="subject-description" id="id_subject-description" placeholder="Description" required>
+                        <label for="id_subject-description">Description</label>
                         <div class="invalid-feedback">
                           Please Enter Description.
                         </div>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="credits" id="id_credits" placeholder="Description" required>
-                        <label for="id_credits">Credits</label>
+                        <input type="text" class="form-control" name="subject-credits" id="id_subject-credits" placeholder="Description" required>
+                        <label for="id_subject-credits">Credits</label>
                         <div class="invalid-feedback">
                           Please Enter Credits.
                         </div>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" placeholder="Description" required>
-                        <label for="id_prerequisites">Prerequisites</label>
+                        <input type="text" class="form-control" name="subject-prerequisites" id="id_subject-prerequisites" placeholder="Description" required>
+                        <label for="id_subject-prerequisites">Prerequisites</label>
                         <div class="invalid-feedback">
                           Please Enter Prerequisites.
                         </div>
@@ -95,7 +93,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success" name="add_subject">Save</button>
                   </div>
                 </form>
                 </div>
@@ -110,36 +108,165 @@
             <hr>
             <div class="table-responsive">
                 <table class="table caption-top">
-                    <caption><button class="btn btn-default" type="button"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
+                    <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
                     <thead class="table-info">
                       <tr>
                         <th scope="col">Room Name</th>
-                        <th scope="col">Department</th>
+                        <th scope="col">College</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {% for room in rooms %}
                       <tr>
-                        <th scope="row">Data</th>
-                        <td>Data</td>
+                        <th scope="row">{{ room.room_name }}</th>
+                        <td>{{ room.department }}</td>
+                        <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                          <a href="{% url 'edit' id=room.id %}" type="button" class="btn btn-info" id="buttonEdit" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit"><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                       </tr>
-                      <tr>
-                        <th scope="row">Data</th>
-                        <td>Data</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Data</th>
-                        <td>Data</td>
-                      </tr>
+                    
+                      {% endfor %}
                     </tbody>
                   </table>
             </div>
+              <!-- Modal Add Room-->
+              <div class="modal fade" id="staticBackdropRoom" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Room</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Add Room Form-->
+                      <form id="room-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                          {% csrf_token %}
+
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="room-room_name" required id="id_room-room_name" placeholder="Room name" >
+                            <label for="id_room-room_name">Room name</label>
+                            <div class="invalid-feedback">
+                              Please Enter Room Name.
+                            </div>
+                          </div>
+    
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="room-department" id="id_room-department" placeholder="College" required>
+                            <label for="id_room-department">College</label>
+                            <div class="invalid-feedback">
+                              Please Enter College.
+                            </div>
+                          </div>
+  
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success" name="add_room">Save</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>    
 
+
+      <!--Modal Update Subject-->
+      <div class="modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Subject</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Update Subject Form-->
+                <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                  {% csrf_token %}
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
+                    <label for="id_course_name">Course name</label>
+                    <div class="invalid-feedback">
+                      Please Enter Course Name.
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
+                    <label for="id_description">Description</label>
+                    <div class="invalid-feedback">
+                      Please Enter Description.
+                    </div>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
+                    <label for="id_credits">Credits</label>
+                    <div class="invalid-feedback">
+                      Please Enter Credits.
+                    </div>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
+                    <label for="id_prerequisites">Prerequisites</label>
+                    <div class="invalid-feedback">
+                      Please Enter Prerequisites.
+                    </div>
+                  </div>
+                
+                  <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+                
+                </form>
+          </div>
+        </div>
+      </div>
+
     <!--Update Container-->
-    <div class="container-sm ">
-      <div class="row">
-        <div class="col-sm">
+     <!--
+            <div class="container-fluid container-update-page" id="container-subject-edit">
+              <div class="row">
+                <div class="col-sm col-subject-edit" id="col-subject-edit">
+                  <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
+                      <label for="id_course_name">Course name</label>
+                      <div class="invalid-feedback">
+                        Please Enter Course Name.
+                      </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
+                      <label for="id_description">Description</label>
+                      <div class="invalid-feedback">
+                        Please Enter Description.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
+                      <label for="id_credits">Credits</label>
+                      <div class="invalid-feedback">
+                        Please Enter Credits.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
+                      <label for="id_prerequisites">Prerequisites</label>
+                      <div class="invalid-feedback">
+                        Please Enter Prerequisites.
+                      </div>
+                    </div>
+                  
+                    <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+                  
+                  </form>
+                </div>
+              
+              
+       
+        <div class="col-sm col-rooms-edit">
           <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
             {% csrf_token %}
             <div class="form-floating mb-3">
@@ -177,49 +304,11 @@
           
           </form>
         </div>
-        <div class="col-sm">
-          <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-            {% csrf_token %}
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
-              <label for="id_course_name">Course name</label>
-              <div class="invalid-feedback">
-                Please Enter Course Name.
-              </div>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
-              <label for="id_description">Description</label>
-              <div class="invalid-feedback">
-                Please Enter Description.
-              </div>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
-              <label for="id_credits">Credits</label>
-              <div class="invalid-feedback">
-                Please Enter Credits.
-              </div>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
-              <label for="id_prerequisites">Prerequisites</label>
-              <div class="invalid-feedback">
-                Please Enter Prerequisites.
-              </div>
-            </div>
-          
-            <button type="submit" class="btn btn-warning">Save changes</button>
-          
-          </form>
-        </div>
+        -->
       </div>
     </div>
 </div>
-<script>
- 
+
 
 {% endblock %}
 {% include "_footer.html" %}

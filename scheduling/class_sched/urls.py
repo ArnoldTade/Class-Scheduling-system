@@ -15,7 +15,8 @@ urlpatterns = [
     path("signup/", views.user_signup, name="signup"),
     path("logout/", views.user_logout, name="logout"),
     # Delete
-    path("delete/<int:id>", views.delete_subject, name="delete"),
+    path("deletesubject/<int:id>", views.delete_subject, name="deletesubject"),
+    path("deleteroom/<int:id>", views.delete_room, name="deleteroom"),
     # Update
     path("edit/<int:id>", views.update_subject, name="edit"),
 ]

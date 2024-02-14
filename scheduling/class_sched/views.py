@@ -106,21 +106,30 @@ def schedule(request):
 @login_required
 def subject(request):
     if request.method == "POST":
-        subjectform = SubjectForm(request.POST)
-        if subjectform.is_valid():
+        subjectform = SubjectForm(request.POST, prefix="subject")
+        roomform = RoomForm(request.POST, prefix="room")
+        if "add_subject" in request.POST and subjectform.is_valid():
             subjectform.save()
             messages.success(request, "Subject Added!")
             return redirect("subject")
+        elif "add_room" in request.POST and roomform.is_valid():
+            roomform.save()
+            messages.success(request, "Room Added!")
+            return redirect("subject")
     else:
-        subjectform = SubjectForm()
+        subjectform = SubjectForm(prefix="subject")
+        roomform = RoomForm(prefix="room")
 
     courses = Course.objects.all()
+    rooms = Room.objects.all()
     return render(
         request,
         "subject.html",
         {
             "subjectform": subjectform,
+            "roomform": roomform,
             "courses": courses,
+            "rooms": rooms,
         },
     )
 
@@ -133,6 +142,13 @@ def delete_subject(request, id=None):
     return redirect("subject")
 
 
+def delete_room(request, id=None):
+    room = Room.objects.get(id=id)
+    room.delete()
+    messages.success(request, "Deleted!")
+    return redirect("subject")
+
+
 # Edit Subjects
 def update_subject(request, id=None):
     courses = {}
@@ -140,8 +156,8 @@ def update_subject(request, id=None):
     courseform = SubjectForm(request.POST, instance=course)
     if courseform.is_valid():
         courseform.save()
-        messages.success(request, "Update!")
-        return HttpResponseRedirect("subject")
+        messages.success(request, "Subject Updated!")
+        return redirect("subject")
 
     courseform = SubjectForm(instance=course)
     courses["courseform"] = courseform

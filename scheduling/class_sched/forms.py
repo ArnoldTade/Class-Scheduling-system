@@ -42,3 +42,12 @@ class SubjectForm(forms.ModelForm):
             "credits",
             "prerequisites",
         ]
+
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = [
+            "room_name",
+            "department",
+        ]

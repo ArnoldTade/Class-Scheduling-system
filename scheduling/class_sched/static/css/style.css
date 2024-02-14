@@ -293,7 +293,7 @@ i {
         font-size: 30px;
         font-weight: 500;
         border: 1px solid var(--home-color);
-        border-radius: 1rem;
+        border-radius: .5rem;
         margin-bottom: 15px;
         background: var(--bg-linear);
     }
@@ -331,12 +331,12 @@ i {
     }
 
     .input-username {
-        border: solid 2px var(--home-color);
+        border: solid 1px var(--home-color);
         border-radius: 1rem;
     }
 
     .input-password {
-        border: solid 2px var(--home-color);
+        border: solid 1px var(--home-color);
         border-radius: 1rem;
     }
 
@@ -1116,5 +1116,22 @@ thead.table-head {
         text-align: center;
         align-items: center;
         transition: 1s;
+    }
+}
+
+.container-update-page {
+
+    .col-subject-edit {
+        background-color: #e7ecf3;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: var(--box-shadow-style2);
+    }
+
+    .col-rooms-edit {
+        background-color: #e7ecf3;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: var(--box-shadow-style2);
     }
 }
