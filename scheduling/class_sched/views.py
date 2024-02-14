@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.http import JsonResponse
 from .forms import *
 from .models import *
 
@@ -87,6 +88,23 @@ def home(request):
             "instructors": instructors,
         },
     )
+
+
+def profile_edit(request):
+    instructor = get_object_or_404(Instructor, id=id)
+    instructorform = InstructorForm(request.POST, instance=instructor)
+    if instructorform.is_valid():
+        instructor = instructorform.save(commit=False)
+        instructor.save()
+        messages.success(request, "Profile Updated!")
+        instructors = {"instructorform": instructorform}
+        return redirect("profile")
+    else:
+        instructors = {
+            "instructorform": instructorform,
+            "error": "The Form was not updated",
+        }
+        return render(request, "profile.html", instructors)
 
 
 @login_required
@@ -185,3 +203,18 @@ def update_subject(request, id=None):
     courseform = SubjectForm(instance=course)
     courses["courseform"] = courseform
     return render(request, "subject.html", courses)
+
+
+# Edit Instructors
+def update_instructor(request, id=None):
+    instructors = {}
+    instructor = get_object_or_404(Instructor, id=id)
+    instructorform = InstructorForm(request.POST, instance=instructor)
+    if instructorform.is_valid():
+        instructorform.save()
+        messages.success(request, "Instructor Updated!")
+        return redirect("instructors")
+
+    instructorform = InstructorForm(instance=instructor)
+    instructors["instructorform"] = instructorform
+    return render(request, "instructors.html", instructors)

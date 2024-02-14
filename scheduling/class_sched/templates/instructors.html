@@ -45,19 +45,6 @@
       <option>College of Criminal Justice Education</option>
       <option>College of Agriculture and Forestry</option>
     </select>
-   <!-- 
-      <select class="form-select" aria-label="Default select example">
-      <option selected>Select Semester</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Select School Year</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>-->
   </div>
   
 </div>
@@ -106,13 +93,12 @@
                 <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
               </td>
               <td>
-                  <button type="button" class="btn btn-default"><i class="bi bi-eye-fill"></i></button>
+                <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
               </td>
             </tr>
               {% endif %}
             {% endfor %}
       
-
           </tbody>
         </table>
       </div>
@@ -180,34 +166,39 @@
     <div class="container-lg shadow-sm container-profile">
       <div class="row">
           <div class="col profile-info">
-            <div class="row">
-              <div class="col text-center">
-                <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="..." style="width:6rem; border-radius: 50%;">
-              </div>
-              <div class="col">
-                <div class="col col-label">Name: <input class="form-control " type="text" value="{{ request.user.instructor.firstName}}, {{ request.user.instructor.lastName}}" aria-label="default input example" readonly></div>
-              </div>
-            </div>
-              <div class="row row-first">
-                  <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }}" aria-label="default input example" readonly></div>
-                  <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
-                  <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
-              </div>
-              <div class="row">
-                  <div class="col col-label">Email: <input class="form-control" type="email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
-                  <div class="col col-label">Address: <input class="form-control" type="text" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
-                  <div class="col col-label">Department: <input class="form-control" type="text" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
-              </div>
-              <div class="row">
-                  <div class="col-6 col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div>
-                  <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
-                </div>
-             
-              <div class="row">
-                  <div class="d-grid gap-2 d-md-flex justify-content-end">
-                      <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
+
+              <form id="instructors-update-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col text-center">
+                    <img src="{{ instructorform.instance.profile_picture.url }}" class="card-img-top" alt="..." style="width:6rem; border-radius: 50%;">
                   </div>
-              </div>
+                  <div class="col">
+                    <div class="col col-label">Name: <input class="form-control " type="text" value="{{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}" aria-label="default input example" readonly></div>
+                  </div>
+                </div>
+                  <div class="row row-first">
+                      <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ instructorform.instance.gender }} " aria-label="default input example" readonly></div>
+                      <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ instructorform.instance.birthday }}" aria-label="default input example" readonly></div>
+                      <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ instructorform.instance.contact }}" aria-label="default input example" readonly></div>
+                  </div>
+                  <div class="row">
+                      <div class="col col-label">Email: <input class="form-control" type="email" value="{{ instructorform.instance.email }}" aria-label="default input example" readonly></div>
+                      <div class="col col-label">Address: <input class="form-control" type="text" value="{{ instructorform.instance.address }}" aria-label="default input example" readonly></div>
+                      <div class="col col-label">Department: <input class="form-control" type="text" value="{{ instructorform.instance.department }}" aria-label="default input example" readonly></div>
+                  </div>
+                  <div class="row">
+                      <div class="col-6 col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div>
+                      <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="{{ instructorform.instance.time_availability }}" aria-label="default input example" readonly></div>
+                    </div>
+                
+                  <div class="row">
+                      <div class="d-grid gap-2 d-md-flex justify-content-end">
+                          <button class="btn btn-default btn-edit-profile" type="submit">Save</button>
+                      </div>
+                  </div>
+              </form>
+
           </div>
       </div>
     </div>
@@ -216,7 +207,6 @@
 
   </div>
 </div>
-
 
 {% endblock %}
 

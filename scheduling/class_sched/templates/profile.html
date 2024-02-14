@@ -8,30 +8,37 @@
     <div class="row">
         <div class="col-6 card-profile" style="">
             <img src="{{ request.user.instructor.profile_picture.url }}" class="card-img-top" alt="Profile Picture">
-              <h5 class="card-title"> {{ request.user.instructor.firstName }}, {{ request.user.instructor.lastName }}, </h5>
+              <h5 class="card-title"> {{ request.user.instructor.firstName }}, {{ request.user.instructor.lastName }} </h5>
               <p class="card-text">Instructor</p>
           </div>
         <div class="col profile-info">
+          {% csrf_token %}
+          <form id="profile-update-form" method="POST" action="{% url 'editprofile' id=request.user.instructor.id %}" enctype="multipart/form-data" >
             <div class="row row-first">
-                <div class="col col-label">Gender: <input class="form-control " type="text" value="{{ request.user.instructor.gender }} " aria-label="default input example" readonly></div>
-                <div class="col col-label">Date of Birth: <input class="form-control" type="text" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
-                <div class="col col-label">Contact Number: <input class="form-control" type="text" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">First Name: <input class="form-control" type="text" id="id_firstName" name="firstName" value="{{ request.user.instructor.firstName }} " aria-label="default input example" readonly></div>
+                <div class="col col-label">Last Name: <input class="form-control" type="text" id="id_lastName" name="lastName" value="{{ request.user.instructor.lastName }} " aria-label="default input example" readonly></div>
+                <div class="col col-label">Suffix: <input class="form-control" type="text" id="id_suffix" name="suffix" value="{{ request.user.instructor.suffix }} " aria-label="default input example" readonly></div>
+                <div class="col col-label">Gender: <input class="form-control" type="text" id="id_gender" name="gender" value="{{ request.user.instructor.gender }} " aria-label="default input example" readonly></div>
             </div>
             <div class="row">
-                <div class="col col-label">Email: <input class="form-control" type="email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
-                <div class="col col-label">Address: <input class="form-control" type="text" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
-                <div class="col col-label">Department: <input class="form-control" type="text" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
+              <div class="col col-label">Date of Birth: <input class="form-control" type="text" name="birthday" id="id_birthday" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Contact Number: <input class="form-control" type="text" name="contact" id="id_contact" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">Email: <input class="form-control" type="email" name="email" id="id_email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
             </div>
             <div class="row">
-                <div class="col-6 col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div>
-                <div class="col-6 col-label">Time Availability: <input class="form-control" type="text" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
+              <div class="col col-label">Address: <input class="form-control" type="text" name="address" id="id_address" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
+                <div class="col col-label">College: <input class="form-control" type="text" id="id_department" name="department" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
+                <!--<div class="col col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div> -->
+                <div class="col col-label">Time Availability: <input class="form-control" type="text" name="time_availability" id="id_time_availability" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
               </div>
            
             <div class="row">
                 <div class="d-grid gap-2 d-md-flex justify-content-end">
-                    <button class="btn btn-default btn-edit-profile" type="button">Edit Profile</button>
+                    <button class="btn btn-default btn-edit-profile" id="btnEditProfile" type="button">Edit Profile</button>
+                    <button class="btn btn-success btn-edit-profile" id="btnSaveProfile" type="submit" disabled>Save</button>
                 </div>
             </div>
+          </form>
         </div>
         
     </div>
@@ -196,6 +203,24 @@
         </div>
     </div>
 </section>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    $('#btnEditProfile').click(function() {
+      $('input').prop('readonly', false);
+      $('#btnSaveProfile').prop('disabled', false);
+      $(this).prop('disabled', true);
+    });
+  
+    $('#btnSaveProfile').click(function() {
+      $('input').prop('readonly', true);
+      $('#btnEditProfile').prop('disabled', false);
+      $(this).prop('disabled', true);
+    });
+  });
+</script>
 
 <!--END Profile PAGE-->
 {% include "_footer.html" %}
