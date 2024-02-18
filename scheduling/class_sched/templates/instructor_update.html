@@ -1,0 +1,21 @@
+{% include "_header.html" %}{% load static %} 
+{% block content %}
+
+<div class="container-sm container-instructor-update" id="container-instructor-edit">
+    <div class="row">
+        <div class="col-sm col-subject-edit" id="col-subject-edit">
+            <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                {% csrf_token %}
+                {{ instructorform.as_p }}   
+                <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+                    
+            </form>
+        </div>
+    </div>
+</div>
+ 
+{% endblock %}
+{% include "_footer.html" %}
+
+
+

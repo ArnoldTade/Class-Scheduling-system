@@ -11,7 +11,7 @@ urlpatterns = [
     path("schedule/", views.schedule, name="schedule"),
     path("subject/", views.subject, name="subject"),
     path("home/", views.home, name="home"),
-    # For user Login
+    # For user Auth
     path("login/", views.user_login, name="login"),
     path("signup/", views.user_signup, name="signup"),
     path("logout/", views.user_logout, name="logout"),
@@ -20,7 +20,8 @@ urlpatterns = [
     path("deleteroom/<int:id>", views.delete_room, name="deleteroom"),
     path("deleteinstructor/<int:id>", views.delete_instructor, name="deleteinstructor"),
     # Update
-    path("edit/<int:id>", views.update_subject, name="edit"),
+    path("editsubject/<int:id>", views.update_subject, name="editsubject"),
+    path("editroom/<int:id>", views.update_room, name="editroom"),
     path("editinstructor/<int:id>", views.update_instructor, name="editinstructor"),
     path("editprofile/<int:id>", views.profile_edit, name="editprofile"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

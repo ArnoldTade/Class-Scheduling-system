@@ -23,72 +23,76 @@
                 <div class="row">
                     <div class="col-5"> 
                         <select class="form-select schedule-department-select" aria-label="Default select example">
-                            <option selected>Select Department</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option selected>Select College</option>
+                            <option>College of Arts and Sciences</option>
+                            <option>College of Business Administration</option>
+                            <option>College of Insdustrial Technology</option>
+                            <option>College of Teacher Education</option>
+                            <option>College of Criminal Justice Education</option>
+                            <option>College of Agriculture and Forestry</option>
                         </select>
                     </div>
                 </div>
                 <!--Instructor Carousel-->
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
-                        <div class="item">
-                            <img src="{% static 'img/user1.jpg' %}" class="card-img-top" alt="...">
-                            <p class="fs-5 text-center">Name</p>
-                        </div>
+                    <div class="owl-carousel owl-theme"> 
+                        {% for instructor in instructors %}
+                        <a href="#instructor-info" class="schedule-link">
+                            <div class="item">
+                                <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="...">
+                                <p class="fs-5 text-center">{{ instructor.firstName }}, {{ instructor.lastName }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
                     </div>
                 <hr>
             </div> 
 
         <!--User Schedule Tab-->
             <div class="row row-user-info">
-                <div class="container-fluid container-user-info">
+                <div class="container-fluid container-user-info" id="instructor-info">
                     <h4>User Schedule</h4>
                     <h5>Instructor Name</h5>
+                        <!--Table View Tab-->
+                        <div class="container-fluid container-instructor-schedule" id="ViewSchedules">
+                                <table class="table table-hover table-striped caption-top">
+                               <caption><button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal"><i class="bi bi-plus-circle"></i>Add New Schedule</button></caption>
+                                    <thead class="table-light">
+                                      <tr>
+                                        <th scope="col">Course</th>
+                                        <th scope="col">Instructor</th>
+                                        <th scope="col">Room</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Days of Week</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead> 
+                                    <tbody>
+                                      {% for schedule in instructorSchedule %}
+                                      <tr>
+                                        <td>{{ schedule.course }}</td>
+                                        <td>
+                                          <img
+                                            src="{{ request.user.instructor.profile_picture.url }}"
+                                            style="width: 50px; height: 50px; border-radius: 50%"
+                                          />
+                                          {{ request.user.instructor.firstName }}
+                                        </td>
+                                        <td>{{ schedule.room }}</td>
+                                        <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                                        <td>{{ schedule.days_of_week }}</td>
+                                        <td>{{ schedule.semester }}</td>
+                                        <td>{{ schedule.year }}</td>
+                                        <td>
+                                          <button type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></button>
+                                          <button type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></button>
+                                        </td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table> 
+                        </div>
                         <!--Calendar View Tab-->
                         <div class="container-fluid container-schedule-calendar">
                             <div id='calendar'></div>
@@ -108,6 +112,92 @@
     </div>
 </div>
 
+  <!-- Modal Add Schedule-->
+  <div class="modal fade" id="addScheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <!--Add Schedule Form-->
+          <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+              {% csrf_token %}
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="course" id="id_course" placeholder="Course name" required>
+              <label for="id_course">Course name</label>
+              <div class="invalid-feedback">
+                Please Enter Course Name.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="instructor" id="id_instructor" placeholder="Instructor" required>
+              <label for="id_instructor">Instructor</label>
+              <div class="invalid-feedback">
+                Please Enter Instructor.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="room" id="id_room" placeholder="Room" required>
+              <label for="id_room">Room</label>
+              <div class="invalid-feedback">
+                Please Enter Room location.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
+              <label for="id_start_time">Start Time</label>
+              <div class="invalid-feedback">
+                Please Enter Start Time.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
+              <label for="id_end_time">End Time</label>
+              <div class="invalid-feedback">
+                Please Enter End Time.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
+              <label for="id_days_of_week">Days of Week</label>
+              <div class="invalid-feedback">
+                Please Enter Days of Week.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
+              <label for="id_semester">Semester</label>
+              <div class="invalid-feedback">
+                Please Enter Semester.
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
+              <label for="id_year">Year</label>
+              <div class="invalid-feedback">
+                Please Enter Year.
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" name="add_schedule">Save</button>
+        </div>
+      </form>
+      </div>
+    </div>
+</div>
 {% endblock %}
 {% include "_footer.html" %}
 

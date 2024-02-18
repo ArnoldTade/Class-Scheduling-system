@@ -17,7 +17,7 @@ class InstructorForm(forms.ModelForm):
             "profile_picture",
             "firstName",
             "lastName",
-            "suffix",
+            "middleName",
             "gender",
             "email",
             "contact",
@@ -51,4 +51,19 @@ class RoomForm(forms.ModelForm):
         fields = [
             "room_name",
             "department",
+        ]
+
+
+class ClassScheduleForm(forms.ModelForm):
+    class Meta:
+        model = ClassSchedule
+        fields = [
+            "course",
+            "instructor",
+            "room",
+            "start_time",
+            "end_time",
+            "days_of_week",
+            "semester",
+            "year",
         ]

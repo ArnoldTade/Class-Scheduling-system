@@ -1,6 +1,16 @@
 {% include "home_header.html" %} {% load static %}
-
 {% block content %}
+
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
   <!--Login container-->
   <div class="container-sm text-center container-login">
     <div class="row row-login">

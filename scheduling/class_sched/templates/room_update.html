@@ -1,0 +1,32 @@
+{% include "home_header.html" %}{% load static %} 
+{% block content %}
+<br>
+
+<form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+    <div class="container-sm container-update-page" id="container-room-edit">
+        <div class="row">
+        <div class="col-sm col-subject-edit" id="col-subject-edit">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="room_name" id="id_room_name" value="{{ roomform.instance.room_name }}" placeholder="Room name" required>
+                <label for="id_room_name">Room name</label>
+                <div class="invalid-feedback">
+                Please Enter Room Name.
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="department" id="id_department" value="{{ roomform.instance.department }}" placeholder="College" required>
+                <label for="id_department">College</label>
+                <div class="invalid-feedback">
+                Please Enter College.
+                </div>
+            </div>
+
+            <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+    </div>
+
+</form>
+    
+{% endblock %}
+{% include "_footer.html" %}

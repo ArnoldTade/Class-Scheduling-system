@@ -107,22 +107,21 @@
           <th scope="col">Department</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Handle</th>
           <th scope="col">Quick Action</th>
         </tr>
       </thead>
       <tbody>
+        {% for instructor in instructors %}
         <tr>
-          <th scope="row">College of Arts and Sciences</th>
+          <th scope="row">{{ instructor.department }}</th>
           <td>
             <img
-              src="{% static 'img/user1.jpg' %}"
+              src="{{ instructor.profile_picture.url }}"
               style="width: 50px; height: 50px; border-radius: 50%"
             />
-            Mark
+            {{ instructor.firstName }}
           </td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{ instructor.lastName }}</td>
           <td>
             <div
               class="btn-group"
@@ -131,90 +130,11 @@
             >
               <button type="button" class="btn btn-default">View</button>
             </div>
+            
           </td>
         </tr>
-        <tr>
-          <th scope="row">College of Arts and Sciences</th>
-          <td>
-            <img
-              src="{% static 'img/user1.jpg' %}"
-              style="width: 50px; height: 50px; border-radius: 50%"
-            />Jacob
-          </td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>
-            <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic mixed styles example"
-            >
-              <button type="button" class="btn btn-default">View</button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">College of Business Administration</th>
-          <td>
-            <img
-              src="{% static 'img/user1.jpg' %}"
-              style="width: 50px; height: 50px; border-radius: 50%"
-            />
-            Mark
-          </td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>
-            <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic mixed styles example"
-            >
-              <button type="button" class="btn btn-default">View</button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">College of Business Administration</th>
-          <td>
-            <img
-              src="{% static 'img/user1.jpg' %}"
-              style="width: 50px; height: 50px; border-radius: 50%"
-            />Jacob
-          </td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>
-            <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic mixed styles example"
-            >
-              <button type="button" class="btn btn-default">View</button>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">College of Teacher Education</th>
-          <td>
-            <img
-              src="{% static 'img/user1.jpg' %}"
-              style="width: 50px; height: 50px; border-radius: 50%"
-            />Jacob
-          </td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>
-            <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic mixed styles example"
-            >
-              <button type="button" class="btn btn-default">View</button>
-            </div>
-          </td>
-        </tr>
+        {% endfor %}
+        
       </tbody>
     </table>
   </div>

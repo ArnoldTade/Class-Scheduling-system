@@ -11,7 +11,7 @@ class Instructor(models.Model):
     )
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
-    suffix = models.CharField(max_length=100)
+    middleName = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
     email = models.EmailField()
     contact = models.CharField(max_length=100)
@@ -38,16 +38,18 @@ class ClassSchedule(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     days_of_week = models.CharField(max_length=50)
     semester = models.CharField(max_length=50)
-    year = models.PositiveSmallIntegerField()
+    year = models.TextField()
 
 
+"""
 class InstructorSchedule(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
+"""
 
 
 class Conflict(models.Model):

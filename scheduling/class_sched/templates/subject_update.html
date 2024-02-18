@@ -1,0 +1,48 @@
+{% include "home_header.html" %}{% load static %} 
+{% block content %}
+<br>
+
+<div class="container-fluid container-update-page" id="container-subject-edit">
+    <div class="row">
+      <div class="col-sm col-subject-edit" id="col-subject-edit">
+        <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="course_name" id="id_course_name" value="{{ courseform.instance.course_name }}" placeholder="Course name" required>
+            <label for="id_course_name">Course name</label>
+            <div class="invalid-feedback">
+              Please Enter Course Name.
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="description" id="id_description" value="{{ courseform.instance.description }}" placeholder="Description" required>
+            <label for="id_description">Description</label>
+            <div class="invalid-feedback">
+              Please Enter Description.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
+            <label for="id_credits">Credits</label>
+            <div class="invalid-feedback">
+              Please Enter Credits.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>
+            <label for="id_prerequisites">Prerequisites</label>
+            <div class="invalid-feedback">
+              Please Enter Prerequisites.
+            </div>
+          </div>
+        
+          <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+        
+        </form>
+</div>
+    
+    
+{% endblock %}
+{% include "_footer.html" %}
