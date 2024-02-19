@@ -246,7 +246,7 @@ def profile_edit(request, id=None):
     instructor = get_object_or_404(Instructor, id=id)
     instructorform = InstructorForm(request.POST, request.FILES, instance=instructor)
     if instructorform.is_valid():
-        instructor.save()
+        instructorform.save()
         messages.success(request, "Profile Updated!")
         return redirect("profile")
 

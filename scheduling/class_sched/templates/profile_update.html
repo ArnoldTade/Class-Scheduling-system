@@ -1,10 +1,12 @@
 {% include "home_header.html" %}
 {% block content %}
 
-  <!-- 
+ 
+    
+<!-- 
     <div class="row g-3">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="username" autocomplete="username" required id="id_username" placeholder="Enter Username">
+        <input type="text" class="form-control" name="username" autocomplete="username" value="{{ username }} " required id="id_username" placeholder="Enter Username">
         <label for="id_username">Username</label>
       </div>
       <div class="form-floating mb-3">
@@ -20,15 +22,17 @@
      <hr>
   
     </div>
-  --> 
+--> 
   
 <div class="container-sm container-profile-edit">
   <a href="{% url 'profile'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-profile"><i class="bi bi-arrow-left"></i>Back to Profile page</a>
   <p class="fs-5 text-start">Personal Information</p>
+  
     <div class="row g-3 ">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ instructorform.as_p }}   
+        
         <div class="d-grid col-3 mx-auto ">
           <button type="submit" class="btn btn-success">Save</button>
         </div>

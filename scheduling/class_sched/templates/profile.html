@@ -6,28 +6,28 @@
 <hr>
 <div class="container-lg container-profile">
     <div class="row">
-        <div class="col-6 card-profile" style="">
+        <div class="col-sm-4 card-profile" style="">
             <img src="{{ request.user.instructor.profile_picture.url }}" class="card-img-top" alt="Profile Picture">
               <h5 class="card-title"> {{ request.user.instructor.firstName }}, {{ request.user.instructor.lastName }} </h5>
               <p class="card-text">Instructor</p>
           </div>
-        <div class="col profile-info">
+        <div class="col-sm-8 profile-info">
           {% csrf_token %}
           <!--STILL NOT WORKING-->
           <form id="profile-update-form" method="POST" enctype="multipart/form-data" >
             <div class="row row-first">
-                <div class="col col-label">First Name: <input class="form-control" type="text" id="id_firstName" name="firstName" value="{{ request.user.instructor.firstName }} " aria-label="default input example" readonly></div>
-                <div class="col col-label">Last Name: <input class="form-control" type="text" id="id_lastName" name="lastName" value="{{ request.user.instructor.lastName }} " aria-label="default input example" readonly></div>
-                <div class="col col-label">Middle Name: <input class="form-control" type="text" id="id_middleName" name="middleName" value="{{ request.user.instructor.middleName }} " aria-label="default input example" readonly></div>
-                <div class="col col-label">Gender: <input class="form-control" type="text" id="id_gender" name="gender" value="{{ request.user.instructor.gender }} " aria-label="default input example" readonly></div>
+                <div class="col-sm col-label">First Name: <input class="form-control" type="text" id="id_firstName" name="firstName" value="{{ request.user.instructor.firstName }} " aria-label="default input example" readonly></div>
+                <div class="col-sm col-label">Last Name: <input class="form-control" type="text" id="id_lastName" name="lastName" value="{{ request.user.instructor.lastName }} " aria-label="default input example" readonly></div>
+                <div class="col-sm col-label">Middle Name: <input class="form-control" type="text" id="id_middleName" name="middleName" value="{{ request.user.instructor.middleName }} " aria-label="default input example" readonly></div>
+                <div class="col-sm col-label">Gender: <input class="form-control" type="text" id="id_gender" name="gender" value="{{ request.user.instructor.gender }} " aria-label="default input example" readonly></div>
             </div>
             <div class="row">
-              <div class="col col-label">Date of Birth: <input class="form-control" type="text" name="birthday" id="id_birthday" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
+              <div class="col-sm col-label">Date of Birth: <input class="form-control" type="text" name="birthday" id="id_birthday" value="{{ request.user.instructor.birthday }}" aria-label="default input example" readonly></div>
                 <div class="col col-label">Contact Number: <input class="form-control" type="text" name="contact" id="id_contact" value="{{ request.user.instructor.contact }}" aria-label="default input example" readonly></div>
                 <div class="col col-label">Email: <input class="form-control" type="email" name="email" id="id_email" value="{{ request.user.instructor.email }}" aria-label="default input example" readonly></div>
             </div>
             <div class="row">
-              <div class="col col-label">Address: <input class="form-control" type="text" name="address" id="id_address" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
+              <div class="col-sm col-label">Address: <input class="form-control" type="text" name="address" id="id_address" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
                 <div class="col col-label">College: <input class="form-control" type="text" id="id_department" name="department" value="{{ request.user.instructor.department }}" aria-label="default input example" readonly></div>
                 <!--<div class="col col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div> -->
                 <div class="col col-label">Time Availability: <input class="form-control" type="text" name="time_availability" id="id_time_availability" value="{{ request.user.instructor.time_availability }}" aria-label="default input example" readonly></div>
@@ -62,10 +62,9 @@
         </ul>
       </nav>
       <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -10%" data-bs-smooth-scroll="true" class="scrollspy-example p-3 rounded-2" tabindex="0">
-        <div class="container-fluid container-nav-schedule" id="ViewSchedules">
+        <div class="container-fluid table-responsive container-nav-schedule" id="ViewSchedules">
             <h4 class="text-start">Schedules</h4>
                 <table class="table table-hover table-striped caption-top">
-                <!--<caption><button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal"><i class="bi bi-plus-circle"></i>Add New Schedule</button></caption>-->
                     <thead class="table-light">
                       <tr>
                         <th scope="col">Course</th>
