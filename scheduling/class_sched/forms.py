@@ -67,3 +67,16 @@ class ClassScheduleForm(forms.ModelForm):
             "semester",
             "year",
         ]
+        """
+        widgets = {
+            "course": forms.Select(
+                choices=Course.objects.all().values_list("id", "course_name")
+            ),
+            "instructor": forms.Select(
+                choices=Instructor.objects.all().values_list("id", "firstName")
+            ),
+            "room": forms.Select(
+                choices=Room.objects.all().values_list("id", "room_name")
+            ),
+        }
+        """

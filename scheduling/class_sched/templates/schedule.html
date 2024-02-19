@@ -125,27 +125,29 @@
             <!--Add Schedule Form-->
           <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
               {% csrf_token %}
-              {{ scheduleform.as_p }} 
-            <!--
+              <!-- {{ scheduleform.as_p }} --> 
               
+
             <select class="form-select mb-4" name="course" id="id_course" aria-label="Default select example">
               <option selected>Select Course name</option>
               {% for course in courses %}
-              <option>{{ course.course_name }}</option>
+              <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
               {% endfor %}
             </select>
 
             <select class="form-select mb-4" name="instructor" id="id_instructor" aria-label="Default select example">
               <option selected>Select Instructor</option>
               {% for instructor in instructors %}
-              <option> {{ instructor.id }}</option>
+              <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
+                {{ instructor.firstName }} {{ instructor.lastName }}
+              </option>
               {% endfor %}
             </select>
 
               <select class="form-select mb-4" name="room" id="id_room" aria-label="Default select example">
                 <option selected>Select Room</option>
                 {% for room in rooms %}
-                <option>{{ room.room_name }}</option>
+                <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %} selected {% endif %}>{{room.room_name}}</option>
                 {% endfor %}
               </select>
 
@@ -189,12 +191,12 @@
                 Please Enter Year.
               </div>
             </div>
-               --> 
+               
         </div>
      
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" name="add_schedule">Save</button>
+          <button type="submit" class="btn btn-success" >Save</button>
         </div>
       </form>
       </div>
