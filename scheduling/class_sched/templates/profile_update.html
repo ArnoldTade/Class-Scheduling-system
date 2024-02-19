@@ -22,90 +22,20 @@
     </div>
   --> 
   
-    <div class="container-sm container-profile-edit">
-      <p class="fs-5 text-start">Personal Information</p>
-      <div class="row g-3 ">
-        <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-         
+<div class="container-sm container-profile-edit">
+  <a href="{% url 'profile'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-profile"><i class="bi bi-arrow-left"></i>Back to Profile page</a>
+  <p class="fs-5 text-start">Personal Information</p>
+    <div class="row g-3 ">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         {{ instructorform.as_p }}   
-       
-      <!--
-          <div class="form col-md-6">
-            <label for="id_profile_picture">Profile picture:</label>
-            Currently: <a href="{{ instructorform.instance.profile_picture.url }}">img/alexa.jpg</a><br>
-            Change:
-             <input type="file" name="profile_picture" accept="image/*" id="id_profile_picture">
-          </div>
-             
+        <div class="d-grid col-3 mx-auto ">
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
 
-          <div class="form-floating col-md-6">
-            <input type="text" class="form-control" name="firstName" value="{{ instructorform.instance.firstName }}" required id="id_firstName" placeholder="First Name">
-            <label for="id_firstName">First name</label>
-          </div>
-        
-          <div class="form-floating col-md-6">
-            <input type="text" class="form-control" name="lastName" value="{{ instructorform.instance.lastName }}" required id="id_lastName" placeholder="Last Name">
-            <label for="id_lastName">Last name</label>
-          </div>
-  
-          <div class="form-floating col-md-4">
-            <input type="text" class="form-control" name="middleName" value="{{ instructorform.instance.middleName }}" required id="id_middleName" placeholder="Middle Name">
-            <label for="id_middleName">Middle Name</label>
-          </div>
-  
-          <div class="form-floating col-md-4">
-            <input type="text" class="form-control" name="gender" value="{{ instructorform.instance.gender }}" required id="id_gender" placeholder="Gender">
-            <label for="id_gender">Gender</label>
-          </div>
-  
-          <div class="form-floating col-md-6">
-            <input type="email" class="form-control" autocomplete="email" name="email" value="{{ instructorform.instance.email }}"  required id="id_email" placeholder="Email">
-            <label for="id_email">Email</label>
-          </div>
-  
-          <div class="form-floating col-md-6">
-            <input type="number" class="form-control" name="contact" value="{{ instructorform.instance.contact }}" required id="id_contact" placeholder="Contact">
-            <label for="id_contact">Contact Number</label>
-          </div>
-  
-          <div class="form-floating col-md-4">
-            <input type="text" class="form-control" name="birthday" value="{{ instructorform.instance.birthday }}" required id="id_birthday" placeholder="Birthday">
-            <label for="id_birthday">Birthdate</label>
-          </div>
-  
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="address" value="{{ instructorform.instance.address }}"  autocomplete="address"  required id="id_address" placeholder="Address">
-            <label for="id_address">Address</label>
-          </div>
-          <hr>
-          <p class="fs-5 text-start">Other Information</p>
-  
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="department" value="{{ instructorform.instance.department }}" required id="id_department" placeholder="College">
-            <label for="id_department">College</label>
-          </div>
-        
-          <div class="form-floating col-md-5">
-            <input type="text" class="form-control" name="time_availability" value="{{ instructorform.instance.time_availability }}" required id="id_time_availability" placeholder="Enter Time Availability">
-            <label for="id_time_availability">Time Availability</label>
-          </div>
-
-          <div class="form-floating col-md-5">
-            <input type="text" class="form-control" name="role" value="{{ instructorform.instance.role }}" required id="id_role" placeholder="Enter Role" disabled>
-            <label for="id_role">Role</label>
-          </div>
-          <hr>
-        -->
-    
-      <div class="d-grid col-3 mx-auto ">
-        <button type="submit" class="btn btn-warning">Save</button>
-      </div>
-    </div>
-
-</form>
-      
-    </div>
+      </form>
+  </div>
+</div>
    
    
 {% endblock %}

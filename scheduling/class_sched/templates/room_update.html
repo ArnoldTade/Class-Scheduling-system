@@ -1,12 +1,15 @@
-{% include "home_header.html" %}{% load static %} 
+{% include "_header.html" %}{% load static %} 
 {% block content %}
 <br>
 
-<form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
     <div class="container-sm container-update-page" id="container-room-edit">
+        <a href="{% url 'subject'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i>Back to Subject</a>
+ 
         <div class="row">
         <div class="col-sm col-subject-edit" id="col-subject-edit">
+            <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
             {% csrf_token %}
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="room_name" id="id_room_name" value="{{ roomform.instance.room_name }}" placeholder="Room name" required>
@@ -23,10 +26,11 @@
                 </div>
             </div>
 
-            <button type="submit" id="save-subject-btn" class="btn btn-warning">Save changes</button>
+            <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
+        </form>
     </div>
 
-</form>
+
     
 {% endblock %}
 {% include "_footer.html" %}

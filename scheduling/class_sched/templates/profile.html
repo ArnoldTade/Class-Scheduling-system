@@ -61,7 +61,7 @@
           </li>
         </ul>
       </nav>
-      <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -10%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -10%" data-bs-smooth-scroll="true" class="scrollspy-example p-3 rounded-2" tabindex="0">
         <div class="container-fluid container-nav-schedule" id="ViewSchedules">
             <h4 class="text-start">Schedules</h4>
                 <table class="table table-hover table-striped caption-top">
@@ -75,29 +75,24 @@
                         <th scope="col">Days of Week</th>
                         <th scope="col">Semester</th>
                         <th scope="col">Year</th>
-                        <th scope="col">Action</th>
                       </tr>
                     </thead> 
                     <tbody>
                       {% for schedule in instructorSchedule %}
                       <tr>
-                        <td>{{ schedule.course }}</td>
+                        <td>{{ schedule.course.course_name }}</td>
                         <td>
                           <img
                             src="{{ request.user.instructor.profile_picture.url }}"
                             style="width: 50px; height: 50px; border-radius: 50%"
                           />
-                          {{ request.user.instructor.firstName }}
+                          {{ request.user.instructor.firstName }},  {{ request.user.instructor.lastName }}
                         </td>
-                        <td>{{ schedule.room }}</td>
+                        <td>{{ schedule.room.room_name }}</td>
                         <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
                         <td>{{ schedule.days_of_week }}</td>
                         <td>{{ schedule.semester }}</td>
                         <td>{{ schedule.year }}</td>
-                        <td>
-                          <button type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></button>
-                          <button type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></button>
-                        </td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -108,9 +103,7 @@
             <h4 class="text-start">Calendar</h4>
             <div id='calendar'></div>
         </div>
-        <hr>
         <div class="container-fluid container-nav-feedback" id="ViewFeedback">
-            <h4 class="text-start">Feedback</h4>
             <div class="container-sm container-feedback">
               <p class="fs-4 text-center">Feedback Time!</p>
               <p class="fs-5 text-center">How satisfied were you when using the system?</p>

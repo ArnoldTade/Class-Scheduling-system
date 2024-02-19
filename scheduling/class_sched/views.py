@@ -92,7 +92,8 @@ def home(request):
 # To be modified, Add schedule moved to instructor_update
 @login_required
 def profile(request):
-    instructorSchedule = ClassSchedule.objects.all()
+    instructor = request.user.instructor
+    instructorSchedule = ClassSchedule.objects.filter(instructor=instructor)
     return render(
         request,
         "profile.html",
