@@ -915,6 +915,7 @@ thead.table-head {
     box-shadow: var(--box-shadow-style);
     padding: 10px;
     margin-top: 10px;
+    background-color: #fff;
 
     .nav-link {
         color: var(--home-color);
@@ -1001,6 +1002,11 @@ thead.table-head {
         font-weight: 500;
     }
 
+    .nav-link.active {
+        color: var(--home-color);
+        font-weight: 500;
+    }
+
     .nav-link:hover {
         color: var(--light-color);
         background-color: var(--home-color-dark);
@@ -1020,12 +1026,17 @@ thead.table-head {
         margin: 10px 0 10px 0;
     }
 
+    .row-schedule-panel {
+        padding: 15px;
+    }
+
 }
 
 .container-instructor-schedule {
     max-height: 100%;
     box-shadow: var(--box-shadow-style);
     padding: 20px;
+    background-color: #fff;
 }
 
 
@@ -1035,18 +1046,17 @@ thead.table-head {
 
 .owl-carousel .item {
     margin: 0 15px;
-    border: 2px solid var(--light-color);
-    background-color: #F2F2F2;
+    background-color: #fff;
     padding: 10px;
     border-radius: 1rem;
     justify-content: center;
     transition: .3s;
-    box-shadow: var(--box-shadow-style);
+    box-shadow: var(--box-shadow-style2);
+    margin-bottom: 10px;
 }
 
 .owl-carousel .item:hover {
-    border: 2px solid var(--light-home);
-    background-color: var(--home-color);
+    background: var(--bg-linear);
     color: var(--light-color);
 
     .btn-default {
@@ -1075,6 +1085,7 @@ thead.table-head {
             box-shadow: var(--box-shadow-style2);
             margin-top: 10px;
             margin-bottom: 10px;
+            background-color: #fff;
 
             #calendar {
                 color: var(--home-color);
@@ -1097,9 +1108,9 @@ thead.table-head {
 
         .container-schedule-loadslip {
             height: 500px;
-
+            background-color: #fff;
             margin: 10px;
-            box-shadow: var(--box-shadow-style);
+            box-shadow: var(--box-shadow-style2);
         }
     }
 }
@@ -1116,7 +1127,7 @@ thead.table-head {
 /* Subject Page */
 .container-subject-page {
     .col-subject {
-        background-color: #e7ecf3;
+        background-color: #fff;
         margin: 10px;
         padding: 10px;
         box-shadow: var(--box-shadow-style2);
@@ -1137,7 +1148,7 @@ thead.table-head {
     }
 
     .col-rooms {
-        background-color: #e7ecf3;
+        background-color: #fff;
         box-shadow: var(--box-shadow-style2);
         margin: 10px;
         padding: 10px;

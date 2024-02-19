@@ -3,7 +3,7 @@
  
 
 
-<h4 class="text-start text-schedule">Schedule</h4>
+<h4 class="text-start text-schedule">Schedule Page</h4>
 <hr>
 <div class="container-fluid container-schedule-page">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -18,7 +18,7 @@
         <!--View Schedule Tab-->
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-            <div class="row">
+            <div class="row row-schedule-panel">
                 <!--Select Department-->
                 <div class="row">
                     <div class="col-5"> 
@@ -31,7 +31,7 @@
                             <option>College of Criminal Justice Education</option>
                             <option>College of Agriculture and Forestry</option>
                         </select>
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal"><i class="bi bi-plus-circle"></i>Manually Add New Schedule</button>
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Manually Add New Schedule</button>
 
                     </div>
                 </div>
@@ -41,12 +41,11 @@
                         <a href="{% url 'instructorschedule' id=instructor.id %}" class="schedule-link">
                             <div class="item">
                                 <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="...">
-                                <p class="fs-5 text-center">{{ instructor.firstName }}, {{ instructor.lastName }}</p>
+                                <p class="fs-6 text-center">{{ instructor.firstName }}, {{ instructor.lastName }}</p>
                             </div>
                         </a>
                         {% endfor %}
                     </div>
-                <hr>
             </div> 
  
         <!--User Schedule Tab-->
@@ -54,7 +53,7 @@
                 <div class="container-fluid container-user-info" id="instructor-info">
                     <h4>User Schedule</h4>
                         <!--Table View Tab-->
-                        <div class="container-fluid container-instructor-schedule" id="ViewSchedules">
+                        <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
                                 <table class="table table-hover table-striped caption-top">
                                     <thead class="table-info">
                                       <tr>

@@ -107,9 +107,7 @@ def instructors_schedule_page(request, id=None):
     if request.method == "POST":
         scheduleform = ClassScheduleForm(request.POST)
         if scheduleform.is_valid():
-            schedule = scheduleform.save(commit=False)
-            schedule.instructor = schedules
-            schedule.save()
+            scheduleform.save()
             return redirect("schedule")
     else:
         scheduleform = ClassScheduleForm()
