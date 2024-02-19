@@ -70,24 +70,25 @@
           </div>
         </div>
       </div>
-
+ 
           <div class="container-fluid owl-carousel owl-theme">
             {% for instructor in instructors %}
-            <div class="card" style="width: 15rem">
-              <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="..."/>
-              <div class="card-body">
-                <h6 class="card-title">{{ instructor.firstName }}, {{ instructor.lastName }}</h6>
+              <div class="card" style="width: 15rem">
+                <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="..."/>
+                <div class="card-body">
+                  <h6 class="card-title">{{ instructor.firstName }}, {{ instructor.lastName }}</h6>
+                </div>
+                <a href="{% url 'viewschedule' id=instructor.id %}" class="btn btn-primary d-block" onclick="scrollToTable()">View</a>
               </div>
-              <a href="#table-schedule" class="btn btn-primary d-block">View</a>
-            </div>
+           
             {% endfor %}
           </div>
-     
+      
       <hr>
       <div class="container-fluid home-table" id="table-schedule">
         <div class="row">
           <div class="container-fluid">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped caption-top">
               <thead class="table-success">
                 <tr>
                   <th scope="col">Course</th>
@@ -98,74 +99,16 @@
                 </tr>
               </thead>
               <tbody>
+                {% for schedule in instructorSchedule %}
                 <tr>
-                  <th scope="row">CAS</th>
-                  <td><img src="{% static 'img/user1.jpg' %}" style="width: 50px; height: 50px; border-radius: 50%"/>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-                  
+                  <th scope="row">{{ schedule.course.course_name }}</th>
+                  <td><img src="{{ schedule.instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/>  {{ schedule.instructor.firstName }},  {{ schedule.instructor.lastName }}</td>
+                  <td>{{ schedule.room.room_name }}</td>
+                  <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                  <td>{{ schedule.days_of_week }}</td>
+                   
                 </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-
-                </tr>
-
-                <tr>
-                  <th scope="row">CAS</th>
-                  <td>
-                    <img
-                      src="{% static 'img/user1.jpg' %}"
-                      style="width: 50px; height: 50px; border-radius: 50%"
-                    />
-                    Mark
-                  </td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>T-TH</td>
-
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -173,8 +116,14 @@
       </div>
     </section>
   
-
-  
+ 
+<script>
+  function scrollToTable(){
+    document.getElementById("table-schedule").scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
+</script>
 {% endblock %}
 {% include "_footer.html" %}
   

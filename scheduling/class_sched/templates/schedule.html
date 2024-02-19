@@ -31,12 +31,14 @@
                             <option>College of Criminal Justice Education</option>
                             <option>College of Agriculture and Forestry</option>
                         </select>
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal"><i class="bi bi-plus-circle"></i>Manually Add New Schedule</button>
+
                     </div>
                 </div>
                 <!--Instructor Carousel-->
                     <div class="owl-carousel owl-theme"> 
                         {% for instructor in instructors %}
-                        <a href="#instructor-info" class="schedule-link">
+                        <a href="{% url 'instructorschedule' id=instructor.id %}" class="schedule-link">
                             <div class="item">
                                 <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="...">
                                 <p class="fs-5 text-center">{{ instructor.firstName }}, {{ instructor.lastName }}</p>
@@ -46,17 +48,15 @@
                     </div>
                 <hr>
             </div> 
-
+ 
         <!--User Schedule Tab-->
             <div class="row row-user-info">
                 <div class="container-fluid container-user-info" id="instructor-info">
                     <h4>User Schedule</h4>
-                    <h5>Instructor Name</h5>
                         <!--Table View Tab-->
                         <div class="container-fluid container-instructor-schedule" id="ViewSchedules">
                                 <table class="table table-hover table-striped caption-top">
-                               <caption><button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal"><i class="bi bi-plus-circle"></i>Add New Schedule</button></caption>
-                                    <thead class="table-light">
+                                    <thead class="table-info">
                                       <tr>
                                         <th scope="col">Course</th>
                                         <th scope="col">Instructor</th>
@@ -71,15 +71,15 @@
                                     <tbody>
                                       {% for schedule in instructorSchedule %}
                                       <tr>
-                                        <td>{{ schedule.course }}</td>
+                                        <td>{{ schedule.course.course_name }}</td>
                                         <td>
                                           <img
-                                            src="{{ request.user.instructor.profile_picture.url }}"
+                                            src="{{ schedule.instructor.profile_picture.url }}"
                                             style="width: 50px; height: 50px; border-radius: 50%"
-                                          />
-                                          {{ request.user.instructor.firstName }}
+                                          /> 
+                                          {{ schedule.instructor.firstName }}, {{ schedule.instructor.lastName }}
                                         </td>
-                                        <td>{{ schedule.room }}</td>
+                                        <td>{{ schedule.room.room_name }}</td>
                                         <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
                                         <td>{{ schedule.days_of_week }}</td>
                                         <td>{{ schedule.semester }}</td>
@@ -117,7 +117,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule for this Instructor</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -125,32 +125,33 @@
             <!--Add Schedule Form-->
           <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
               {% csrf_token %}
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="course" id="id_course" placeholder="Course name" required>
-              <label for="id_course">Course name</label>
-              <div class="invalid-feedback">
-                Please Enter Course Name.
-              </div>
-            </div>
+              {{ scheduleform.as_p }} 
+            <!--
+              
+            <select class="form-select mb-4" name="course" id="id_course" aria-label="Default select example">
+              <option selected>Select Course name</option>
+              {% for course in courses %}
+              <option>{{ course.course_name }}</option>
+              {% endfor %}
+            </select>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="instructor" id="id_instructor" placeholder="Instructor" required>
-              <label for="id_instructor">Instructor</label>
-              <div class="invalid-feedback">
-                Please Enter Instructor.
-              </div>
-            </div>
+            <select class="form-select mb-4" name="instructor" id="id_instructor" aria-label="Default select example">
+              <option selected>Select Instructor</option>
+              {% for instructor in instructors %}
+              <option> {{ instructor.id }}</option>
+              {% endfor %}
+            </select>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="room" id="id_room" placeholder="Room" required>
-              <label for="id_room">Room</label>
-              <div class="invalid-feedback">
-                Please Enter Room location.
-              </div>
-            </div>
+              <select class="form-select mb-4" name="room" id="id_room" aria-label="Default select example">
+                <option selected>Select Room</option>
+                {% for room in rooms %}
+                <option>{{ room.room_name }}</option>
+                {% endfor %}
+              </select>
 
+            
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
+              <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
               <label for="id_start_time">Start Time</label>
               <div class="invalid-feedback">
                 Please Enter Start Time.
@@ -158,7 +159,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
+              <input type="time" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
               <label for="id_end_time">End Time</label>
               <div class="invalid-feedback">
                 Please Enter End Time.
@@ -188,8 +189,9 @@
                 Please Enter Year.
               </div>
             </div>
-
+               --> 
         </div>
+     
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" name="add_schedule">Save</button>

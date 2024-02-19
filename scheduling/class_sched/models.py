@@ -38,11 +38,11 @@ class ClassSchedule(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    start_time = models.CharField(max_length=100)
+    end_time = models.CharField(max_length=100)
     days_of_week = models.CharField(max_length=50)
     semester = models.CharField(max_length=50)
-    year = models.TextField()
+    year = models.CharField(max_length=100)
 
 
 """

@@ -24,4 +24,11 @@ urlpatterns = [
     path("editroom/<int:id>", views.update_room, name="editroom"),
     path("editinstructor/<int:id>", views.update_instructor, name="editinstructor"),
     path("editprofile/<int:id>", views.profile_edit, name="editprofile"),
+    # Get Schedules home
+    path("viewschedule/<int:id>", views.home_schedule, name="viewschedule"),
+    path(
+        "instructorschedule/<int:id>",
+        views.instructors_schedule_page,
+        name="instructorschedule",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,9 +14,6 @@ from django.db import transaction
 # Create your views here.
 
 
-# For User Registration
-
-
 # signup page
 @login_required
 def user_signup(request):
@@ -78,6 +75,7 @@ def user_logout(request):
     return redirect("login")
 
 
+# Home page
 def home(request):
     instructors = Instructor.objects.all()
     return render(
@@ -89,7 +87,65 @@ def home(request):
     )
 
 
-# To be modified, Add schedule moved to instructor_update
+def home_schedule(request, id=None):
+    schedules = get_object_or_404(Instructor, id=id)
+    instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
+    return render(
+        request,
+        "home.html",
+        {
+            "instructorSchedule": instructorSchedule,
+            "instructors": Instructor.objects.all(),
+        },
+    )
+
+
+# Schedule Table
+def instructors_schedule_page(request, id=None):
+    schedules = get_object_or_404(Instructor, id=id)
+    instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
+    if request.method == "POST":
+        scheduleform = ClassScheduleForm(request.POST)
+        if scheduleform.is_valid():
+            scheduleform.save()
+            return redirect("schedule")
+    else:
+        scheduleform = ClassScheduleForm()
+    return render(
+        request,
+        "schedule.html",
+        {
+            "scheduleform": scheduleform,
+            "instructorSchedule": instructorSchedule,
+            "instructors": Instructor.objects.all(),
+            "rooms": Room.objects.all(),
+            "courses": Course.objects.all(),
+        },
+    )
+
+
+"""
+
+# Manually Add Schedule For instructors
+     def new_schedule(request):
+        if request.method == "POST":
+            scheduleform = ClassScheduleForm(request.POST)
+            if scheduleform.is_valid():
+            schedule = scheduleform.save(commit = False)
+            schedule.
+                messages.success(request, "Schedule Added!")
+                redirect("schedule")
+        else:
+            scheduleform = ClassScheduleForm()
+    return render(
+        "schedule.html",
+        {
+            "scheduleform": scheduleform,
+        },
+   )
+"""
+
+
 @login_required
 def profile(request):
     instructor = request.user.instructor
@@ -125,14 +181,6 @@ def instructors(request):
             "instructors": instructors,
         },
     )
-
-
-# Delete Instructor
-def delete_instructor(request, id=None):
-    instructor = Instructor.objects.get(id=id)
-    instructor.delete()
-    messages.success(request, "Instructor Deleted!")
-    return redirect("instructors")
 
 
 @login_required
@@ -179,6 +227,7 @@ def subject(request):
     )
 
 
+# /// DELETE VIEWS ///
 # Delete Subjects
 def delete_subject(request, id=None):
     course = Course.objects.get(id=id)
@@ -187,7 +236,6 @@ def delete_subject(request, id=None):
     return redirect("subject")
 
 
-# Delete Rooms
 def delete_room(request, id=None):
     room = Room.objects.get(id=id)
     room.delete()
@@ -195,7 +243,14 @@ def delete_room(request, id=None):
     return redirect("subject")
 
 
-# Edit Subjects
+def delete_instructor(request, id=None):
+    instructor = Instructor.objects.get(id=id)
+    instructor.delete()
+    messages.success(request, "Instructor Deleted!")
+    return redirect("instructors")
+
+
+# /// EDIT VIEWS ///
 def update_subject(request, id=None):
     courses = {}
     course = get_object_or_404(Course, id=id)
@@ -210,7 +265,6 @@ def update_subject(request, id=None):
     return render(request, "subject_update.html", courses)
 
 
-# Edit Room
 def update_room(request, id=None):
     rooms = {}
     room = get_object_or_404(Room, id=id)
@@ -225,7 +279,6 @@ def update_room(request, id=None):
     return render(request, "room_update.html", rooms)
 
 
-# Edit Instructors
 def update_instructor(request, id=None):
     instructors = {}
     instructor = get_object_or_404(Instructor, id=id)
@@ -240,7 +293,6 @@ def update_instructor(request, id=None):
     return render(request, "instructor_update.html", instructors)
 
 
-# Edit Profile
 def profile_edit(request, id=None):
     profile = {}
     instructor = get_object_or_404(Instructor, id=id)
