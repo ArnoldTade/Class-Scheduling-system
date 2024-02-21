@@ -42,6 +42,9 @@ class SubjectForm(forms.ModelForm):
             "description",
             "credits",
             "prerequisites",
+            "college",
+            "semester",
+            "year_level",
         ]
 
 

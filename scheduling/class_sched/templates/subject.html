@@ -15,162 +15,227 @@
 <p class="fs-5 text-start user-page-title">Subject Page</p>
 <hr>
 <div class="container-fluid container-subject-page">
+  <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <div class="row">
+
+          <div class="col-sm">
+            <select class="form-select" style="width:auto;" aria-label="Default select example">
+              <option selected>All Colleges</option>
+              <option>College of Arts and Sciences</option>
+              <option>College of Business Administration</option>
+              <option>College of Insdustrial Technology</option>
+              <option>College of Teacher Education</option>
+              <option>College of Criminal Justice Education</option>
+              <option>College of Agriculture and Forestry</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <select class="form-select" style="width:auto;" aria-label="Default select example" placeholder="Select College">
+              <option selected>All Year Level</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="3">4th Year</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <select class="form-select" style="width:auto;" aria-label="Default select example">
+              <option selected>Select Semester</option>
+              <option value="1">First Semester</option>
+              <option value="2">Second Semester</option>
+            </select>
+          </div>
+      </div>
+    </div>
+  </nav>
+    <!--CAS-->
+      
     <div class="row">
-        <!--Course Table-->
-        <div class="col col-subject">
-            <p class="fs-5 text-start user-page-title">Subjects</p>
-            <hr>
-            <div class="table-responsive">
-                <table class="table caption-top"> 
-                    <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i>Add New Subject</button></caption>
-                    <thead class="table-success">
-                        <tr>
-                          <th scope="col">Course Name</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Credits</th>
-                          <th scope="col">Prerequisites</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for course in courses %}
-                        <tr>
-                          <th scope="row">{{ course.course_name }}</th>
-                          <td>{{ course.description }}</td>
-                          <td>{{ course.credits }}</td>
-                          <td>{{ course.prerequisites }}</td>
-                          <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                            <a href="{% url 'editsubject' id=course.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                  </table>
+      <!--Course Table-->
+      <div class="col col-subject">
+          <p class="fs-6 text-start user-page-title">College of Arts and Sciences</p>
+          <hr>
+          <div class="table-responsive">
+              <table class="table caption-top"> 
+                  <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i>Add New Subject</button></caption>
+                  <thead class="table-success">
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Descriptive Title</th>
+                        <th scope="col">Credits</th>
+                        <th scope="col">Prerequisites</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for course in courses %}
+                        {% if course.college == "College of Arts and Sciences" %}
+                      <tr>
+                        <th scope="row">{{ course.course_name }}</th>
+                        <td>{{ course.description }}</td>
+                        <td>{{ course.credits }}</td>
+                        <td>{{ course.prerequisites }}</td>
+                        <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                          <a href="{% url 'editsubject' id=course.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
+                      </tr>
+                        {% endif %}
+                      {% endfor %}
+                  </tbody>
+                </table>
+          </div>
+            <!-- Modal Add Subject-->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Subject</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--Add Subject Form-->
+                  <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      {% csrf_token %}
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-course_name" id="id_subject-course_name" placeholder="Course name" required>
+                      <label for="id_subject-course_name">Subject name</label>
+                      <div class="invalid-feedback">
+                        Please Enter Course Name.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-description" id="id_subject-description" placeholder="Description" required>
+                      <label for="id_subject-description">Descriptive Title</label>
+                      <div class="invalid-feedback">
+                        Please Enter Descriptive Title.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-credits" id="id_subject-credits" placeholder="Description" required>
+                      <label for="id_subject-credits">Credits</label>
+                      <div class="invalid-feedback">
+                        Please Enter Credits.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-prerequisites" id="id_subject-prerequisites" placeholder="Description" required>
+                      <label for="id_subject-prerequisites">Prerequisites</label>
+                      <div class="invalid-feedback">
+                        Please Enter Prerequisites.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-college" id="id_subject-college" placeholder="College" required>
+                      <label for="id_subject-college">College</label>
+                      <div class="invalid-feedback">
+                        Please Enter College.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-semester" id="id_subject-semester" placeholder="Semester" required>
+                      <label for="id_subject-semester">Semester</label>
+                      <div class="invalid-feedback">
+                        Please Enter Semester.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-year_level" id="id_subject-year_level" placeholder="Year Level" required>
+                      <label for="id_subject-year_level">Year Level</label>
+                      <div class="invalid-feedback">
+                        Please Enter Year Level.
+                      </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success" name="add_subject">Save</button>
+                </div>
+              </form>
+              </div>
             </div>
-              <!-- Modal Add Subject-->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          </div>
+
+      </div>
+
+      <!--Room Table-->
+      <div class="col col-rooms">
+          <p class="fs-5 text-start user-page-title">Rooms</p>
+          <hr>
+          <div class="table-responsive">
+              <table class="table caption-top">
+                  <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
+                  <thead class="table-info">
+                    <tr>
+                      <th scope="col">Room Name</th>
+                      <th scope="col">College</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for room in rooms %}
+                    <tr>
+                      <th scope="row">{{ room.room_name }}</th>
+                      <td>{{ room.department }}</td>
+                      <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                        <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
+                    </tr>
+                  
+                    {% endfor %}
+                  </tbody>
+                </table>
+          </div>
+            <!-- Modal Add Room-->
+            <div class="modal fade" id="staticBackdropRoom" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Subject</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Room</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                      <!--Add Subject Form-->
-                    <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      <!--Add Room Form-->
+                    <form id="room-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                         {% csrf_token %}
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="subject-course_name" id="id_subject-course_name" placeholder="Course name" required>
-                        <label for="id_subject-course_name">Course name</label>
-                        <div class="invalid-feedback">
-                          Please Enter Course Name.
-                        </div>
-                      </div>
 
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="subject-description" id="id_subject-description" placeholder="Description" required>
-                        <label for="id_subject-description">Description</label>
-                        <div class="invalid-feedback">
-                          Please Enter Description.
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" name="room-room_name" required id="id_room-room_name" placeholder="Room name" >
+                          <label for="id_room-room_name">Room name</label>
+                          <div class="invalid-feedback">
+                            Please Enter Room Name.
+                          </div>
                         </div>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="subject-credits" id="id_subject-credits" placeholder="Description" required>
-                        <label for="id_subject-credits">Credits</label>
-                        <div class="invalid-feedback">
-                          Please Enter Credits.
+  
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" name="room-department" id="id_room-department" placeholder="College" required>
+                          <label for="id_room-department">College</label>
+                          <div class="invalid-feedback">
+                            Please Enter College.
+                          </div>
                         </div>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="subject-prerequisites" id="id_subject-prerequisites" placeholder="Description" required>
-                        <label for="id_subject-prerequisites">Prerequisites</label>
-                        <div class="invalid-feedback">
-                          Please Enter Prerequisites.
-                        </div>
-                      </div>
 
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" name="add_subject">Save</button>
+                    <button type="submit" class="btn btn-success" name="add_room">Save</button>
                   </div>
                 </form>
                 </div>
               </div>
             </div>
+      </div>
 
-        </div>
-            
-        <!--Room Table-->
-        <div class="col col-rooms">
-            <p class="fs-5 text-start user-page-title">Rooms</p>
-            <hr>
-            <div class="table-responsive">
-                <table class="table caption-top">
-                    <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
-                    <thead class="table-info">
-                      <tr>
-                        <th scope="col">Room Name</th>
-                        <th scope="col">College</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for room in rooms %}
-                      <tr>
-                        <th scope="row">{{ room.room_name }}</th>
-                        <td>{{ room.department }}</td>
-                        <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                          <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
-                      </tr>
-                    
-                      {% endfor %}
-                    </tbody>
-                  </table>
-            </div>
-              <!-- Modal Add Room-->
-              <div class="modal fade" id="staticBackdropRoom" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Room</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!--Add Room Form-->
-                      <form id="room-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-                          {% csrf_token %}
 
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="room-room_name" required id="id_room-room_name" placeholder="Room name" >
-                            <label for="id_room-room_name">Room name</label>
-                            <div class="invalid-feedback">
-                              Please Enter Room Name.
-                            </div>
-                          </div>
+</div>
+
     
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="room-department" id="id_room-department" placeholder="College" required>
-                            <label for="id_room-department">College</label>
-                            <div class="invalid-feedback">
-                              Please Enter College.
-                            </div>
-                          </div>
-  
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-success" name="add_room">Save</button>
-                    </div>
-                  </form>
-                  </div>
-                </div>
-              </div>
-        </div>
-    
-    
-    </div>
+
 </div>
 
 

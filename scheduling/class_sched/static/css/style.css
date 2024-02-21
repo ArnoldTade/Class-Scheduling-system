@@ -1126,6 +1126,26 @@ thead.table-head {
 
 /* Subject Page */
 .container-subject-page {
+    .tab-pane {
+        background-color: #fff;
+    }
+
+    .nav-link {
+        color: var(--home-color);
+        font-weight: 500;
+    }
+
+    .nav-link.active {
+        color: var(--home-color);
+        font-weight: 500;
+    }
+
+    .nav-link:hover {
+        color: var(--light-color);
+        background-color: var(--home-color-dark);
+        font-weight: 500;
+    }
+
     .col-subject {
         background-color: #fff;
         margin: 10px;

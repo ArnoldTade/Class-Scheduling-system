@@ -124,28 +124,6 @@ def instructors_schedule_page(request, id=None):
     )
 
 
-"""
-
-# Manually Add Schedule For instructors
-     def new_schedule(request):
-        if request.method == "POST":
-            scheduleform = ClassScheduleForm(request.POST)
-            if scheduleform.is_valid():
-            schedule = scheduleform.save(commit = False)
-            schedule.
-                messages.success(request, "Schedule Added!")
-                redirect("schedule")
-        else:
-            scheduleform = ClassScheduleForm()
-    return render(
-        "schedule.html",
-        {
-            "scheduleform": scheduleform,
-        },
-   )
-"""
-
-
 @login_required
 def profile(request):
     instructor = request.user.instructor
@@ -245,6 +223,8 @@ def delete_room(request, id=None):
 
 def delete_instructor(request, id=None):
     instructor = Instructor.objects.get(id=id)
+    user = instructor.user_profile
+    user.delete()
     instructor.delete()
     messages.success(request, "Instructor Deleted!")
     return redirect("instructors")

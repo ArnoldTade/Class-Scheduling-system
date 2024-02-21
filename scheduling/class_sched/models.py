@@ -31,7 +31,10 @@ class Course(models.Model):
     course_name = models.CharField(max_length=100)
     description = models.TextField()
     credits = models.CharField(max_length=100)
-    prerequisites = models.CharField(max_length=100)
+    prerequisites = models.CharField(max_length=100, null=True)
+    college = models.CharField(max_length=100)
+    semester = models.CharField(max_length=100)
+    year_level = models.CharField(max_length=100)
 
 
 class ClassSchedule(models.Model):
