@@ -49,7 +49,6 @@
       </div>
     </div>
   </nav>
-    <!--CAS-->
       
     <div class="row">
       <!--Course Table-->
@@ -70,16 +69,14 @@
                     </thead>
                     <tbody>
                       {% for course in courses %}
-                        {% if course.college == "College of Arts and Sciences" %}
                       <tr>
                         <th scope="row">{{ course.course_name }}</th>
                         <td>{{ course.description }}</td>
                         <td>{{ course.credits }}</td>
                         <td>{{ course.prerequisites }}</td>
-                        <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                          <a href="{% url 'editsubject' id=course.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
+                        <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                          <a href="{% url 'editsubject' id=course.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                       </tr>
-                        {% endif %}
                       {% endfor %}
                   </tbody>
                 </table>
@@ -183,8 +180,8 @@
                     <tr>
                       <th scope="row">{{ room.room_name }}</th>
                       <td>{{ room.department }}</td>
-                      <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                        <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
+                      <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                        <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                     </tr>
                   
                     {% endfor %}
@@ -232,7 +229,7 @@
       </div>
 
 
-</div>
+    </div>
 
     
 

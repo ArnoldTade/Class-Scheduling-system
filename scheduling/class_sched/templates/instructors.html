@@ -11,6 +11,7 @@
   </div>
 {% endif %}
 
+
 <div class="container text-center container-instructor-nav">
   <div class="row">
     <div class="col-sm-3">
@@ -90,10 +91,10 @@
               <td>{{ instructor.address }}</td>
               <td>{{ instructor.department }}</td>
               <td>
-                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
               </td>
               <td>
-                <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
+                <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
               </td>
             </tr>
               {% endif %}
@@ -135,10 +136,10 @@
               <td>{{ instructor.address }}</td>
               <td>{{ instructor.department }}</td>
               <td>
-                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
               </td>
               <td>
-                  <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
+                  <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
               </td>
             </tr>
               {% endif %}
