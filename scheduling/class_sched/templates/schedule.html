@@ -116,40 +116,48 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule for this Instructor</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <br>
 
             <!--Add Schedule Form-->
           <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
               {% csrf_token %}
               <!-- {{ scheduleform.as_p }} --> 
+              <div class="row">
+                <div class="col-sm">
+                  <select class="form-select mb-4" name="course" id="id_course" style="width:auto;" aria-label="Default select example">
+                    <option selected>Select Subject Name</option>
+                    {% for course in courses %}
+                    <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
               
-
-            <select class="form-select mb-4" name="course" id="id_course" aria-label="Default select example">
-              <option selected>Select Course name</option>
-              {% for course in courses %}
-              <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
-              {% endfor %}
-            </select>
-
-            <select class="form-select mb-4" name="instructor" id="id_instructor" aria-label="Default select example">
-              <option selected>Select Instructor</option>
-              {% for instructor in instructors %}
-              <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
-                {{ instructor.firstName }} {{ instructor.lastName }}
-              </option>
-              {% endfor %}
-            </select>
-
-              <select class="form-select mb-4" name="room" id="id_room" aria-label="Default select example">
-                <option selected>Select Room</option>
-                {% for room in rooms %}
-                <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %} selected {% endif %}>{{room.room_name}}</option>
-                {% endfor %}
-              </select>
-
+                <div class="col-sm">
+                  <select class="form-select mb-4" name="instructor" id="id_instructor" style="width:auto;" aria-label="Default select example">
+                    <option selected>Select Instructor</option>
+                    {% for instructor in instructors %}
+                    <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
+                      {{ instructor.firstName }} {{ instructor.lastName }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>  
+              </div>  
+              <div class="row">
+                <div class="col-sm">
+                  <select class="form-select mb-4" name="room" id="id_room" aria-label="Default select example">
+                    <option selected>Select Room</option>
+                    {% for room in rooms %}
+                    <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %} selected {% endif %}>{{room.room_name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>  
+              </div>  
+            
             
             <div class="form-floating mb-3">
               <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
