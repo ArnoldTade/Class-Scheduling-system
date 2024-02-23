@@ -1,18 +1,19 @@
 :root {
-    --bg-color: #3884b9;
     --white-color: #ffe2e9;
     --pink-color: #e89bb0;
     --light-color: #f8fcff;
-    --brown-color: #8a5765;
+    --brown-color: #3f4f53;
     --blue-color: #397bab;
     --dark-color: #352b3b;
     --box-shadow-style: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     --box-shadow-style2: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     --borderRadius: 0.5rem;
-    --home-color: #3C5B72;
-    --home-color-dark: #39566D;
+    --home-color: #284257;
+    --home-color-dark: #253339;
     --home-color-light: #566c7d;
     --light-home: #F2F2F2;
+
+
     --new-color: #284257;
     --theme-color: #253339;
     --red-color: #eb4949;
@@ -77,12 +78,12 @@ i {
 /* BUTTON DEFAULT */
 
 .btn-default {
-    background-color: var(--home-color);
+    background-color: var(--theme-color);
     color: var(--light-home);
 }
 
 .btn-default:hover {
-    border: solid 1px var(--home-color);
+    border: solid 1px var(--theme-color);
     background-color: var(--light-home);
     color: var(--home-color);
 }
@@ -91,6 +92,10 @@ i {
 
 #home-nav {
     background-color: var(--theme-color);
+
+    .container-home-nav {
+        background-color: var(--theme-color);
+    }
 
     #home-logo {
         color: var(--light-home);
@@ -128,7 +133,7 @@ i {
 }
 
 .navbar-collapse {
-    background: transparent;
+    background: var(--theme-color);
 }
 
 /* HOME PAGE */
@@ -194,10 +199,6 @@ i {
     background-color: var(--theme-color);
     height: 100vh;
 
-    .text-detail {
-        color: #fff;
-
-    }
 
     .col-image {
         background-color: var(--theme-color);
@@ -207,6 +208,12 @@ i {
             padding-top: 40px;
         }
     }
+
+    .text-detail {
+        color: #fff;
+
+    }
+
 }
 
 .text-detail {
@@ -235,11 +242,6 @@ i {
         margin-top: 5px;
     }
 
-    .btn {
-        background-color: var(--home-color);
-        color: var(--light-home);
-        border: solid 2px;
-    }
 
     h3 {
         color: var(--home-color);
@@ -249,7 +251,6 @@ i {
     .home-table {
         margin-top: 20px;
         box-shadow: var(--box-shadow-style);
-
     }
 
     .table-bg {
@@ -261,25 +262,27 @@ i {
         display: inline-block;
     }
 
+    .btn {
+        background-color: transparent;
+        color: var(--light-home);
+        border: solid 2px;
+    }
+
     .card {
         margin: 10px;
         box-shadow: var(--box-shadow-style2);
         display: inline-block;
         padding: 10px;
         transition: .5s;
-        background-color: #ebebeb;
-        border: 0.4px solid #ebebeb;
+        background: var(--brown-color);
+        border: 1px solid #ebebeb;
+        color: #fff;
     }
 
     .card:hover {
-        background: var(--bg-linear);
+        background: var(--home-color-light);
         color: var(--light-color);
 
-        .btn {
-            background-color: transparent;
-            border-color: var(--light-color);
-            color: var(--light-color);
-        }
 
         img {
             transform: scale(1.2);
@@ -287,13 +290,19 @@ i {
         }
     }
 
+    .btn:hover {
+        background-color: #fff;
+        border-color: var(--home-color-dark);
+        color: var(--home-color-dark);
+    }
+
+
     .owl-carousel img {
         border-radius: 50%;
-        margin: auto;
         padding: 20px;
+        margin: auto;
         align-items: center;
         transition: .3s;
-
     }
 
 }
@@ -392,7 +401,7 @@ hr {
         width: 18rem;
         padding: 20px;
         align-items: center;
-        background: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
+        background: var(--theme-color);
         border: solid 1px var(--home-color-light);
         max-height: 100%;
 
@@ -572,7 +581,7 @@ hr {
 /* DASHBOARD NAVBAR */
 .navbar {
     height: 3.5rem;
-    background-color: var(--home-color);
+    background-color: var(--theme-color);
 
     .nav-logout {
         align-items: flex-end;
@@ -621,7 +630,7 @@ h2 {
 
 
 .offcanvas-header {
-    background: var(--bg-linear);
+    background: var(--bg-linear-test8);
     color: #ffffff;
     border-top-right-radius: 1rem;
 }
@@ -725,7 +734,7 @@ section.section_summary .section_contents .content_instructor {
     border-left: 10px solid;
     border-left-color: #24568B;
     color: var(--home-color);
-    background-color: #CAF3FF;
+    background: #CAF3FF;
 
     .bi-people-fill {
         color: #24568B;
@@ -837,8 +846,8 @@ section.section_summary .section_contents .content {
         padding: 10px;
 
         .quickInfo-class {
-            border-left: 10px solid #204C60;
-            background-color: #4F7692;
+            border-left: 10px solid #747474;
+            background-color: var(--brown-color);
             padding: 10px;
             margin: 5px;
             color: white;
@@ -860,7 +869,7 @@ section.section_summary .section_contents .content {
         }
 
         .quickInfo-class:hover {
-            background-color: #7ab9e6;
+            background-color: #a7a7a7;
         }
     }
 
