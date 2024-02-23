@@ -13,7 +13,19 @@
     --home-color-dark: #39566D;
     --home-color-light: #566c7d;
     --light-home: #F2F2F2;
+    --new-color: #284257;
+    --theme-color: #253339;
+    --red-color: #eb4949;
     --bg-linear: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
+
+    --bg-linear-test1: linear-gradient(39deg, rgba(40, 66, 87, 1) 0%, rgba(38, 96, 129, 1) 44%, rgba(63, 145, 162, 1) 75%, rgba(29, 163, 181, 1) 100%);
+    --bg-linear-test2: linear-gradient(39deg, rgba(87, 40, 65, 1) 6%, rgba(142, 53, 92, 1) 36%, rgba(215, 105, 165, 1) 64%, rgba(255, 153, 184, 1) 100%);
+    --bg-linear-test3: linear-gradient(39deg, rgba(53, 40, 87, 1) 6%, rgba(75, 53, 142, 1) 36%, rgba(158, 105, 215, 1) 64%, rgba(189, 153, 255, 1) 100%);
+    --bg-linear-test4: linear-gradient(39deg, rgba(40, 61, 87, 1) 6%, rgba(53, 70, 142, 1) 36%, rgba(105, 126, 215, 1) 64%, rgba(189, 153, 255, 1) 100%);
+    --bg-linear-test5: linear-gradient(39deg, rgba(53, 58, 95, 1) 0%, rgba(86, 92, 134, 1) 44%, rgba(130, 136, 179, 1) 70%, rgba(167, 171, 201, 1) 100%);
+    --bg-linear-test6: linear-gradient(39deg, rgba(95, 53, 53, 1) 0%, rgba(134, 86, 86, 1) 44%, rgba(179, 130, 130, 1) 70%, rgba(201, 167, 167, 1) 100%);
+    --bg-linear-test7: linear-gradient(39deg, rgba(15, 40, 65, 1) 0%, rgba(67, 127, 152, 1) 44%, rgba(130, 161, 179, 1) 70%, rgba(167, 185, 201, 1) 100%);
+    --bg-linear-test8: linear-gradient(93deg, rgba(37, 51, 57, 1) 0%, rgba(64, 83, 91, 1) 38%, rgba(106, 130, 141, 1) 69%, rgba(174, 187, 195, 1) 100%);
 }
 
 * {
@@ -21,6 +33,10 @@
     padding: 0;
 }
 
+html,
+body {
+    height: 100%;
+}
 
 
 i {
@@ -74,7 +90,7 @@ i {
 /* END BUTTON DEFAULT */
 
 #home-nav {
-    background-color: var(--home-color);
+    background-color: var(--theme-color);
 
     #home-logo {
         color: var(--light-home);
@@ -112,55 +128,85 @@ i {
 }
 
 .navbar-collapse {
-    background-color: var(--home-color);
+    background: transparent;
 }
 
 /* HOME PAGE */
-.home-page {
-    background-color: var(--home-color);
-    padding-bottom: 15px;
-    padding-top: 15px;
+.schedule-section {
+    .home-page {
+        background: var(--bg-linear-test8);
+        padding-bottom: 150px;
+        height: 85vh;
 
-    h1 {
-        color: var(--light-color);
-    }
 
-    p {
-        color: var(--light-color);
-    }
+        .e-clasched {
+            font-size: 50px;
+            font-weight: 700;
+        }
 
-    h5 {
-        color: var(--light-color);
+        h1 {
+            color: var(--light-color);
+        }
 
-    }
+        p {
+            color: var(--light-color);
+        }
 
-    .btn-viewSchedules {
-        border-color: var(--light-home);
-        color: var(--light-home);
-        border: solid 2px;
-
-    }
-
-    .btn-viewSchedules:hover {
-        background-color: var(--light-home);
-        color: var(--home-color);
-    }
-
-    .title-part {
-        padding-left: 50px;
-        padding-top: 20px;
-
-    }
-
-    .logo-part {
-        padding-right: 50px;
-
-        img {
-            border: solid 10px var(--home-color-dark);
+        h5 {
+            color: var(--light-color);
 
         }
+
+        .btn-viewSchedules {
+            color: var(--light-home);
+            border: solid 2px var(--red-color);
+
+        }
+
+        .btn-viewSchedules:hover {
+            background-color: var(--light-home);
+            color: var(--red-color);
+        }
+
+        .title-part {
+            padding-left: 50px;
+            padding-top: 20px;
+
+            .fs-1 {
+                font-weight: 600;
+            }
+
+        }
+
+        .logo-part {
+            background-color: var(--theme-color);
+
+            img {
+                opacity: 0.5;
+            }
+        }
+
     }
 
+}
+
+.section-slide2 {
+    background-color: var(--theme-color);
+    height: 100vh;
+
+    .text-detail {
+        color: #fff;
+
+    }
+
+    .col-image {
+        background-color: var(--theme-color);
+
+        img {
+            opacity: 0.5;
+            padding-top: 40px;
+        }
+    }
 }
 
 .text-detail {
@@ -173,7 +219,8 @@ i {
 
 /*SCHEDULE PAGE */
 .section-schedule {
-    height: 630px;
+    height: 100vh;
+    padding-top: 20px;
 
     .heading {
         margin-bottom: -15px;

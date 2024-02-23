@@ -6,39 +6,44 @@
       <div class="row align-items-center home-page">
         <div class="col-sm title-part">
           <h1 class="fs-1 text-start">
-            Scheduling Management System for Negros Oriental State University
+            
+            <span class="e-clasched">
+              e-ClaSched:</span> <br>A Scheduling Management System for Negros Oriental State University
           </h1>
           <br />
-          <p class="fs-5 text-start">
+          <p class="fs-4 text-start">
             Only NORSU instructors can logged in. Students can view the
             instructors respective schedule
           </p>
           <a href="#home-schedule" class="btn btn-viewSchedules">
-            <i class="bi bi-calendar-range"></i>View Instructor Schedules
+            <i class="bi bi-calendar-range"></i> View Instructor Schedules
           </a>
         </div>
 
         <div class="col-sm logo-part">
-          <img
-            class="img-fluid rounded mx-auto d-block rounded-circle"
-            src="{% static 'img/logo.png' %} "
-          />
-          <p class="text-center">Bayawan Santa Catalina Campus</p>
+        <!--  <img class="img-fluid rounded mx-auto float-end " src="{% static 'img/norsu.png' %}" /> -->
+         
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6 offset-md-3 text-center">
-          <p class="fs-3 text-detail">
-            Effortlessly organize your academic journey with our intuitive class
-            scheduling system. Take control of your time, streamline your
-            courses, and embrace a stress-free academic experience.
-          </p>
-        </div>
+        
       </div>
     </section>
-   
 
+    <section class="container-fluid section-slide2">
+      <div class="row align-items-center">
+        <div class="col-sm col-image">
+          <img src="{% static 'img/guy.jpg' %}" class="img-fluid mx-auto float-end" alt="...">
+        </div>
+        <div class="col-sm"> 
+          <p class="fs-3 text-detail">
+          Effortlessly organize your academic journey with our intuitive class
+          scheduling system. Take control of your time, streamline your
+          courses, and embrace a stress-free academic experience.
+          </p>
+        </div>
+       
+      </div>
+    </section>
+    
     <hr />
     <!--SECTION SCHEDULE-->
     <section class="section-schedule" id="home-schedule">
