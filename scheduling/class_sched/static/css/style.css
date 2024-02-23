@@ -1085,7 +1085,13 @@ thead.table-head {
     .row-schedule-panel {
         padding: 15px;
     }
+}
 
+.select-subject-name,
+.select-subject-instructor,
+.select-subject-room {
+    width: 450px;
+    height: 50px;
 }
 
 .container-instructor-schedule {
@@ -1102,17 +1108,19 @@ thead.table-head {
 
 .owl-carousel .item {
     margin: 0 15px;
-    background-color: #fff;
+    background-color: var(--brown-color);
     padding: 10px;
     border-radius: 1rem;
     justify-content: center;
     transition: .3s;
     box-shadow: var(--box-shadow-style2);
     margin-bottom: 10px;
+    color: #fff;
+
 }
 
 .owl-carousel .item:hover {
-    background: var(--bg-linear);
+    background: var(--home-color-light);
     color: var(--light-color);
 
     .btn-default {
@@ -1126,7 +1134,6 @@ thead.table-head {
     border-radius: 50%;
     width: 4rem;
     height: auto;
-    border: 2px solid var(--light-home);
     justify-content: center;
     align-items: center;
 
@@ -1230,6 +1237,17 @@ thead.table-head {
         padding: 10px;
     }
 
+    .form-select-room,
+    .form-select-college,
+    .form-select-year_level,
+    .form-select-semester,
+    .form-select-course,
+    .form-select-type {
+        width: 475px;
+        height: 50px;
+        margin: 10px 5px 5px 5px;
+
+    }
 
 }
 

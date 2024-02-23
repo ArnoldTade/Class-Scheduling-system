@@ -104,7 +104,7 @@
       <caption><a href="{% url "signup" %}" class="btn btn-success" type="button"><i class="bi bi-plus-circle"></i>Add New User</a></caption>
       <thead class="table-info">
         <tr>
-          <th scope="col">Department</th>
+          <th scope="col">College</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Quick Action</th>
@@ -113,7 +113,7 @@
       <tbody>
         {% for instructor in instructors %}
         <tr>
-          <th scope="row">{{ instructor.department }}</th>
+          <th scope="row">{{ instructor.college }}</th>
           <td>
             <img
               src="{{ instructor.profile_picture.url }}"

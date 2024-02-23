@@ -30,6 +30,37 @@
               <option>College of Agriculture and Forestry</option>
             </select>
           </div>
+          <!--
+          <div class="col-sm">
+            <select class="form-select" style="width:auto;" aria-label="Default select example">
+              <option selected>All Course and Major</option>
+              <option>Bachelor of Agricultural Technology major in Animal Husbandry</option>
+                      <option>BS Agricultural major in Agronomy</option>
+                      <option>BS Agriculture major in Animal Science</option>
+                      <option>BS Forestry</option>
+                      <option>BS Computer Science</option>
+                      <option>BS Information Technology</option>
+                      <option>Associate in Hospitality Management</option>
+                      <option>BS in Hospitality Management</option>
+                      <option>BS in Business Administration major in Human Resource Management</option>
+                      <option>BS Office Administration</option>
+                      <option>BS Criminology</option>
+                      <option>BEED General Curriculum</option>
+                      <option>BEED Special Education</option>
+                      <option>BSED English</option>
+                      <option>BSED Mathematics</option>
+                      <option>BSED Sciences</option>
+                      <option>Associate in Indusctrial Technology major in Automotive Technology</option>
+                      <option>Associate in Indusctrial Technology major in Computer Technology</option>
+                      <option>Associate in Indusctrial Technology major in Electrical Technology</option>
+                      <option>BS Industrial Technology major in Automotive Technology</option>
+                      <option>BS Industrial Technology major in Computer Technology</option>
+                      <option>BS Industrial Technology major in Electrical Technology</option>
+                      <option>BS Industrial Technology major in Electronics Technology</option>
+                      <option>Associate in Industrial Technology major in Electronics Technology</option>
+            </select>
+          </div>
+          -->
           <div class="col-sm">
             <select class="form-select" style="width:auto;" aria-label="Default select example" placeholder="Select College">
               <option selected>All Year Level</option>
@@ -52,7 +83,7 @@
       
     <div class="row">
       <!--Course Table-->
-      <div class="col col-subject">
+      <div class="col-sm-7 col-subject">
           <p class="fs-6 text-start user-page-title">Subjects</p>
           <hr>
           <div class="table-responsive">
@@ -95,7 +126,7 @@
                       {% csrf_token %}
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" name="subject-course_name" id="id_subject-course_name" placeholder="Course name" required>
-                      <label for="id_subject-course_name">Subject name</label>
+                      <label for="id_subject-course_name">Course Code</label>
                       <div class="invalid-feedback">
                         Please Enter Course Name.
                       </div>
@@ -118,36 +149,72 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="subject-prerequisites" id="id_subject-prerequisites" placeholder="Description" required>
+                      <input type="text" class="form-control" name="subject-prerequisites" id="id_subject-prerequisites" value="." placeholder="Description" required>
                       <label for="id_subject-prerequisites">Prerequisites</label>
                       <div class="invalid-feedback">
                         Please Enter Prerequisites.
                       </div>
                     </div>
 
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="subject-college" id="id_subject-college" placeholder="College" required>
-                      <label for="id_subject-college">College</label>
-                      <div class="invalid-feedback">
-                        Please Enter College.
-                      </div>
-                    </div>
+                    <select id="id_subject-type" class="form-select form-select-type" name="subject-type" placeholder="Type" required>
+                      <option selected>Choose Type</option>
+                      <option value="Lec">Lecture</option>
+                      <option value="Lab and Lec">Lab and Lecture</option>
+                    </select>
 
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="subject-semester" id="id_subject-semester" placeholder="Semester" required>
-                      <label for="id_subject-semester">Semester</label>
-                      <div class="invalid-feedback">
-                        Please Enter Semester.
-                      </div>
-                    </div>
+                    <select id="id_subject-college" class="form-select form-select-college" name="subject-college" placeholder="College" required>
+                      <option selected>Choose College</option>
+                      <option value="CAS">College of Arts and Sciences</option>
+                      <option value="CBA">College of Business Administration</option>
+                      <option value="CIT">College of Insdustrial Technology</option>
+                      <option value="CTED">College of Teacher Education</option>
+                      <option value="CCJE">College of Criminal Justice Education</option>
+                      <option value="CAF">College of Agriculture and Forestry</option>
+                    </select>
+                  
+                    <select id="id_subject-course" class="form-select form-select-course" name="subject-course" placeholder="Course" required>
+                      <option selected>Choose Major or Course</option>
+                      <option>Bachelor of Agricultural Technology major in Animal Husbandry</option>
+                      <option>BS Agricultural major in Agronomy</option>
+                      <option>BS Agriculture major in Animal Science</option>
+                      <option>BS Forestry</option>
+                      <option>BS Computer Science</option>
+                      <option>BS Information Technology</option>
+                      <option>Associate in Hospitality Management</option>
+                      <option>BS in Hospitality Management</option>
+                      <option>BS in Business Administration major in Human Resource Management</option>
+                      <option>BS Office Administration</option>
+                      <option>BS Criminology</option>
+                      <option>BEED General Curriculum</option>
+                      <option>BEED Special Education</option>
+                      <option>BSED English</option>
+                      <option>BSED Mathematics</option>
+                      <option>BSED Sciences</option>
+                      <option>Associate in Indusctrial Technology major in Automotive Technology</option>
+                      <option>Associate in Indusctrial Technology major in Computer Technology</option>
+                      <option>Associate in Indusctrial Technology major in Electrical Technology</option>
+                      <option>BS Industrial Technology major in Automotive Technology</option>
+                      <option>BS Industrial Technology major in Computer Technology</option>
+                      <option>BS Industrial Technology major in Electrical Technology</option>
+                      <option>BS Industrial Technology major in Electronics Technology</option>
+                      <option>Associate in Industrial Technology major in Electronics Technology</option>
+                    </select>
 
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="subject-year_level" id="id_subject-year_level" placeholder="Year Level" required>
-                      <label for="id_subject-year_level">Year Level</label>
-                      <div class="invalid-feedback">
-                        Please Enter Year Level.
-                      </div>
-                    </div>
+
+                    <select id="id_subject-semester" class="form-select form-select-semester" name="subject-semester" placeholder="Semester" required>
+                      <option selected>Choose Semester</option>
+                      <option value="1st Year">1st Semester</option>
+                      <option value="2nd Year">2nd Semester</option>
+                    </select>
+
+                    <select id="id_subject-year_level" class="form-select form-select-year_level" name="subject-year_level" placeholder="College" required>
+                      <option selected>Choose Year Level</option>
+                      <option value="1st Year">1st Year</option>
+                      <option value="2nd Year">2nd Year</option>
+                      <option value="3rd Year">3rd Year</option>
+                      <option value="4th Year">4th Year</option>
+                    </select>
+
 
                 </div>
                 <div class="modal-footer">
@@ -162,7 +229,7 @@
       </div>
 
       <!--Room Table-->
-      <div class="col col-rooms">
+      <div class="col-sm-4 col-rooms">
           <p class="fs-5 text-start user-page-title">Rooms</p>
           <hr>
           <div class="table-responsive">
@@ -179,7 +246,7 @@
                     {% for room in rooms %}
                     <tr>
                       <th scope="row">{{ room.room_name }}</th>
-                      <td>{{ room.department }}</td>
+                      <td>{{ room.college }}</td>
                       <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
                         <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                     </tr>
@@ -202,20 +269,25 @@
                         {% csrf_token %}
 
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control" name="room-room_name" required id="id_room-room_name" placeholder="Room name" >
+                          <input type="text" class="form-control" name="room-room_name" required id="id_room-room_name" placeholder="Room name" required>
                           <label for="id_room-room_name">Room name</label>
                           <div class="invalid-feedback">
                             Please Enter Room Name.
                           </div>
                         </div>
   
-                        <div class="form-floating mb-3">
-                          <input type="text" class="form-control" name="room-department" id="id_room-department" placeholder="College" required>
-                          <label for="id_room-department">College</label>
-                          <div class="invalid-feedback">
-                            Please Enter College.
-                          </div>
-                        </div>
+                       
+                          <select id="id_room-college" class="form-select form-select-room" name="room-college" placeholder="College" required>
+                            <option selected>Choose College</option>
+                            <option value="CAS">College of Arts and Sciences</option>
+                            <option value="CBA">College of Business Administration</option>
+                            <option value="CIT">College of Insdustrial Technology</option>
+                            <option value="CTED">College of Teacher Education</option>
+                            <option value="CCJE">College of Criminal Justice Education</option>
+                            <option value="CAF">College of Agriculture and Forestry</option>
+                          </select>
+                        
+                      
 
                   </div>
                   <div class="modal-footer">

@@ -17,14 +17,14 @@ class Instructor(models.Model):
     contact = models.CharField(max_length=100)
     birthday = models.DateField()
     address = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    time_availability = models.CharField(max_length=100)
+    college = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
 
 
 class Room(models.Model):
     room_name = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
+    college = models.CharField(max_length=100)
 
 
 class Course(models.Model):
@@ -32,7 +32,9 @@ class Course(models.Model):
     description = models.TextField()
     credits = models.CharField(max_length=100)
     prerequisites = models.CharField(max_length=100, null=True)
+    type = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
+    course = models.CharField(max_length=100)
     semester = models.CharField(max_length=100)
     year_level = models.CharField(max_length=100)
 
@@ -48,13 +50,6 @@ class ClassSchedule(models.Model):
     year = models.CharField(max_length=100)
 
 
-"""
-class InstructorSchedule(models.Model):
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
-"""
-
-
 class Conflict(models.Model):
     schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
     details = models.TextField()
@@ -63,3 +58,10 @@ class Conflict(models.Model):
 class Feedback(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     content = models.TextField()
+
+
+"""
+class InstructorSchedule(models.Model):
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
+"""

@@ -37,7 +37,7 @@
           {{ instructor_form.as_p }} -->
         <div class="mb-3">
           <label for="id_profile_picture" class="form-label">Upload profile picture</label>
-          <input class="form-control" type="file" name="profile_picture" required id="id_profile_picture">
+          <input class="form-control" type="file" name="profile_picture" id="id_profile_picture" required>
         </div>
         
         <div class="form-floating col-md-6">
@@ -112,23 +112,28 @@
         </div>
         <hr>
         <p class="fs-5 text-start">Other Information</p>
-
+ 
         <div class="col-md-8">
-          <select id="id_department" class="form-select form-select-lg" name="department" required>
+          <select id="id_college" class="form-select form-select-lg" name="college" required>
             <option selected>Choose College</option>
-            <option>College of Arts and Sciences</option>
-            <option>College of Business Administration</option>
-            <option>College of Insdustrial Technology</option>
-            <option>College of Teacher Education</option>
-            <option>College of Criminal Justice Education</option>
-            <option>College of Agriculture and Forestry</option>
+            <option value="CAS">College of Arts and Sciences</option>
+            <option value="CBA">College of Business Administration</option>
+            <option value="CIT">College of Insdustrial Technology</option>
+            <option value="CTED">College of Teacher Education</option>
+            <option value="CCJE">College of Criminal Justice Education</option>
+            <option value="CAF">College of Agriculture and Forestry</option>
           </select>
         </div>
       
-        <div class="form-floating col-md-5">
-          <input type="text" class="form-control" name="time_availability" required id="id_time_availability" placeholder="Enter Time Availability">
-          <label for="id_time_availability">Time Availability</label>
+        <div class="col-md-8">
+          <select id="id_status" class="form-select form-select-lg" name="status" required >
+            <option selected>Choose Status</option>
+            <option value="Full time">Full Time</option>
+            <option value="Part time">Part Time</option>
+          </select>
         </div>
+
+
         <hr>
         <div class="col-md-8">
           <select name="role" required id="id_role"  class="form-select form-select-lg">
@@ -140,7 +145,7 @@
 
     </div>
     <hr>
-    <div class="d-grid col-3 mx-auto ">
+    <div class="d-grid col-3 mx-auto">
       <button type="submit" class="btn btn-default">Register</button>
     </div>
   </div>

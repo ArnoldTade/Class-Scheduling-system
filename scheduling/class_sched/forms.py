@@ -23,8 +23,8 @@ class InstructorForm(forms.ModelForm):
             "contact",
             "birthday",
             "address",
-            "department",
-            "time_availability",
+            "college",
+            "status",
             "role",
         ]
 
@@ -42,7 +42,9 @@ class SubjectForm(forms.ModelForm):
             "description",
             "credits",
             "prerequisites",
+            "type",
             "college",
+            "course",
             "semester",
             "year_level",
         ]
@@ -53,7 +55,7 @@ class RoomForm(forms.ModelForm):
         model = Room
         fields = [
             "room_name",
-            "department",
+            "college",
         ]
 
 
