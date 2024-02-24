@@ -38,6 +38,47 @@
               Please Enter Prerequisites.
             </div>
           </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="type" id="id_type" value="{{ courseform.instance.type }}" placeholder="Type" required>
+            <label for="id_type">Type</label>
+            <div class="invalid-feedback">
+              Please Enter Type.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="college" id="id_college" value="{{ courseform.instance.college }}" placeholder="College" required>
+            <label for="id_college">College</label>
+            <div class="invalid-feedback">
+              Please Enter College.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="course" id="id_course" value="{{ courseform.instance.course }}" placeholder="Course" required>
+            <label for="id_course">Course</label>
+            <div class="invalid-feedback">
+              Please Enter Course.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="semester" id="id_semester" value="{{ courseform.instance.semester }}" placeholder="Semester" required>
+            <label for="id_semester">Semester</label>
+            <div class="invalid-feedback">
+              Please Enter Semester.
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="year_level" id="id_year_level" value="{{ courseform.instance.year_level }}" placeholder="Year Level" required>
+            <label for="id_year_level">Year Level</label>
+            <div class="invalid-feedback">
+              Please Enter Year Level.
+            </div>
+          </div>
+        
         
           <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
         

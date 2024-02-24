@@ -173,6 +173,14 @@ def schedule(request):
     )
 
 
+@login_required
+def room_allocation(request):
+    return render(
+        request,
+        "room.html",
+    )
+
+
 # Add Subjects
 @login_required
 def subject(request):
