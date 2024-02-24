@@ -106,7 +106,7 @@
                     </thead>
                     <tbody id="course-table-body"> 
                       {% for course in courses %}
-                      <tr data-college="{{ course.college }}" data-year-level="{{course.year_level}}">
+                      <tr data-college="{{ course.college }}" data-course-major="{{course.course}}" data-year-level="{{course.year_level}}" data-semester="{{course.semester}}">
                         <th scope="row">{{ course.course_name }}</th>
                         <td>{{ course.description }}</td>
                         <td>{{ course.credits }}</td>
@@ -239,6 +239,8 @@
           </div>
 
       </div>
+    </div>
+    <div class="row">
 
       <!--Room Table-->
       <div class="col-sm col-rooms">
@@ -321,6 +323,7 @@
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 
+<!--Dropdown Selection-->
 <script>
   document.querySelectorAll('.form-select').forEach(function(select) {
       select.addEventListener('change', function() {
@@ -332,16 +335,22 @@
       var selectedCollege = document.getElementById('category-college').value;
       var selectedYearLevel = document.getElementById('category-year-level').value;
       var selectedCourseMajor = document.getElementById('category-course-major').value;
+      var selectedSemester = document.getElementById('category-semester').value;
       var rows = document.querySelectorAll('#course-table-body tr');
 
       rows.forEach(function(row) {
           var college = row.getAttribute('data-college');
           var yearLevel = row.getAttribute('data-year-level');
+          var CourseMajor = row.getAttribute('data-course-major');
+          var semester = row.getAttribute('data-semester');
+
 
           var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
           var yearLevelMatch = (selectedYearLevel === 'all' || yearLevel === selectedYearLevel);
+          var courseMajorMatch = (selectedCourseMajor === 'all' || CourseMajor === selectedCourseMajor);
+          var courseSemester = (selectedSemester === 'all' || semester === selectedSemester);
 
-          if (collegeMatch && yearLevelMatch) {
+          if (collegeMatch && yearLevelMatch && courseMajorMatch && courseSemester) {
               row.style.display = '';
           } else {
               row.style.display = 'none';

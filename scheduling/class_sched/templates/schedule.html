@@ -48,7 +48,7 @@
                     </div>
             </div> 
  
-        <!--User Schedule Tab-->
+            <!--User Schedule Tab-->
             <div class="row row-user-info">
                 <div class="container-fluid container-user-info" id="instructor-info">
                     <h4>User Schedule</h4>
@@ -106,8 +106,9 @@
 
         <!--Generate Schedule Tab-->
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-            <h1>Generate Schedule</h>
+            <a href="{% url 'generateschedules' %}" type="button" class="btn btn-success">Generate Schedules</a>
         </div>
+
     </div>
 </div>
 

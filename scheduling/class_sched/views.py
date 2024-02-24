@@ -10,6 +10,9 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
+from .genetic_algorithm import genetic_algorithm
+
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -293,3 +296,17 @@ def profile_edit(request, id=None):
     instructorform = InstructorForm(instance=instructor)
     profile["instructorform"] = instructorform
     return render(request, "profile_update.html", profile)
+
+
+# GENETIC ALGORITHM
+
+
+def generate_schedules_view(request):
+    if request.method == "POST":
+        # Run the genetic algorithm and generate schedules
+        generated_schedules = genetic_algorithm()
+        return render(
+            request, "classSchedules.html", {"schedules": generated_schedules}
+        )
+    else:
+        return render(request, "classSchedules.html")

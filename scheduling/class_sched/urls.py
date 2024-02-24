@@ -32,4 +32,6 @@ urlpatterns = [
         views.instructors_schedule_page,
         name="instructorschedule",
     ),
+    # Genetic Algorithm
+    path("generateschedules/", views.generate_schedules_view, name="generateschedules"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
