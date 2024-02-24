@@ -20,61 +20,63 @@
         <div class="row">
 
           <div class="col-sm">
-            <select class="form-select" style="width:auto;" aria-label="Default select example">
-              <option selected>All Colleges</option>
-              <option>College of Arts and Sciences</option>
-              <option>College of Business Administration</option>
-              <option>College of Insdustrial Technology</option>
-              <option>College of Teacher Education</option>
-              <option>College of Criminal Justice Education</option>
-              <option>College of Agriculture and Forestry</option>
+            <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+              <option value="all" selected>All Colleges</option>
+              <option value="CAS">College of Arts and Sciences</option>
+              <option value="CBA">College of Business Administration</option>
+              <option value="CIT">College of Industrial Technology</option>
+              <option value="CTED">College of Teacher Education</option>
+              <option value="CCJE">College of Criminal Justice Education</option>
+              <option value="CAF">College of Agriculture and Forestry</option>
             </select>
           </div>
-          <!--
+         
           <div class="col-sm">
-            <select class="form-select" style="width:auto;" aria-label="Default select example">
-              <option selected>All Course and Major</option>
-              <option>Bachelor of Agricultural Technology major in Animal Husbandry</option>
-                      <option>BS Agricultural major in Agronomy</option>
-                      <option>BS Agriculture major in Animal Science</option>
-                      <option>BS Forestry</option>
-                      <option>BS Computer Science</option>
-                      <option>BS Information Technology</option>
-                      <option>Associate in Hospitality Management</option>
-                      <option>BS in Hospitality Management</option>
-                      <option>BS in Business Administration major in Human Resource Management</option>
-                      <option>BS Office Administration</option>
-                      <option>BS Criminology</option>
-                      <option>BEED General Curriculum</option>
-                      <option>BEED Special Education</option>
-                      <option>BSED English</option>
-                      <option>BSED Mathematics</option>
-                      <option>BSED Sciences</option>
-                      <option>Associate in Indusctrial Technology major in Automotive Technology</option>
-                      <option>Associate in Indusctrial Technology major in Computer Technology</option>
-                      <option>Associate in Indusctrial Technology major in Electrical Technology</option>
-                      <option>BS Industrial Technology major in Automotive Technology</option>
-                      <option>BS Industrial Technology major in Computer Technology</option>
-                      <option>BS Industrial Technology major in Electrical Technology</option>
-                      <option>BS Industrial Technology major in Electronics Technology</option>
-                      <option>Associate in Industrial Technology major in Electronics Technology</option>
+            <select class="form-select" id="category-course-major" style="width:auto;" aria-label="Default select example">
+              <option value="all" selected>All Course and Major</option>
+              <option value="Bachelor of Agricultural Technology major in Animal Husbandry">Bachelor of Agricultural Technology major in Animal Husbandry</option>
+              <option value="BS Agricultural major in Agronomy">BS Agricultural major in Agronomy</option>
+              <option value="BS Agriculture major in Animal Science">BS Agriculture major in Animal Science</option>
+              <option value="BS Forestry">BS Forestry</option>
+              <option value="BS Computer Science">BS Computer Science</option>
+              <option value="BS Information Technology">BS Information Technology</option>
+              <option value="Associate in Hospitality Management">Associate in Hospitality Management</option>
+              <option value="BS in Hospitality Management">BS in Hospitality Management</option>
+              <option value="BS in Business Administration major in Human Resource Management">BS in Business Administration major in Human Resource Management</option>
+              <option value="BS Office Administration">BS Office Administration</option>
+              <option value="BS Criminology">BS Criminology</option>
+              <option value="BEED General Curriculum">BEED General Curriculum</option>
+              <option value="BEED Special Education">BEED Special Education</option>
+              <option value="BSED English">BSED English</option>
+              <option value="BSED Mathematics">BSED Mathematics</option>
+              <option value="BSED Sciences">BSED Sciences</option>
+              <option value="Associate in Indusctrial Technology major in Automotive Technology">Associate in Indusctrial Technology major in Automotive Technology</option>
+              <option value="Associate in Indusctrial Technology major in Computer Technology">Associate in Indusctrial Technology major in Computer Technology</option>
+              <option value="Associate in Indusctrial Technology major in Electrical Technology">Associate in Indusctrial Technology major in Electrical Technology</option>
+              <option value="BS Industrial Technology major in Automotive Technology">BS Industrial Technology major in Automotive Technology</option>
+              <option value="BS Industrial Technology major in Computer Technology">BS Industrial Technology major in Computer Technology</option>
+              <option value="BS Industrial Technology major in Electrical Technology">BS Industrial Technology major in Electrical Technology</option>
+              <option value="BS Industrial Technology major in Electronics Technology">BS Industrial Technology major in Electronics Technology</option>
+              <option value="Associate in Industrial Technology major in Electronics Technology">Associate in Industrial Technology major in Electronics Technology</option>
             </select>
           </div>
-          -->
+          
           <div class="col-sm">
-            <select class="form-select" style="width:auto;" aria-label="Default select example" placeholder="Select College">
-              <option selected>All Year Level</option>
-              <option value="1">1st Year</option>
-              <option value="2">2nd Year</option>
-              <option value="3">3rd Year</option>
-              <option value="3">4th Year</option>
+            <select class="form-select" id="category-year-level" style="width:auto;" aria-label="Default select example" placeholder="Select College">
+              <option value="all" selected>All Year Level</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
             </select>
           </div>
           <div class="col-sm">
-            <select class="form-select" style="width:auto;" aria-label="Default select example">
-              <option selected>All Semester</option>
-              <option value="1">First Semester</option>
-              <option value="2">Second Semester</option>
+            <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
+              <option value="all" selected>All Semester</option>
+              <option value="1st Semester">1st Semester</option>
+              <option value="2nd Semester">2nd Semester</option>
+              <option value="Summer">Summer</option>
+
             </select>
           </div>
       </div>
@@ -83,11 +85,11 @@
       
     <div class="row">
       <!--Course Table-->
-      <div class="col-sm-7 col-subject">
+      <div class="col-sm col-subject">
           <p class="fs-6 text-start user-page-title">Subjects</p>
           <hr>
           <div class="table-responsive">
-              <table class="table caption-top"> 
+              <table class="table table-hover caption-top"> 
                   <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i>Add New Subject</button></caption>
                   <thead class="table-success">
                       <tr>
@@ -95,16 +97,24 @@
                         <th scope="col">Descriptive Title</th>
                         <th scope="col">Credits</th>
                         <th scope="col">Prerequisites</th>
+                        <th scope="col">College</th>
+                        <th scope="col">Course and Major</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Year Level</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="course-table-body"> 
                       {% for course in courses %}
-                      <tr>
+                      <tr data-college="{{ course.college }}" data-year-level="{{course.year_level}}">
                         <th scope="row">{{ course.course_name }}</th>
                         <td>{{ course.description }}</td>
                         <td>{{ course.credits }}</td>
                         <td>{{ course.prerequisites }}</td>
+                        <td>{{ course.college }}</td>
+                        <td>{{ course.course }}</td>
+                        <td>{{ course.semester }}</td>
+                        <td >{{ course.year_level }}</td>
                         <td><a href="{% url 'deletesubject' id=course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
                           <a href="{% url 'editsubject' id=course.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                       </tr>
@@ -203,8 +213,10 @@
 
                     <select id="id_subject-semester" class="form-select form-select-semester" name="subject-semester" placeholder="Semester" required>
                       <option selected>Choose Semester</option>
-                      <option value="1st Year">1st Semester</option>
-                      <option value="2nd Year">2nd Semester</option>
+                      <option value="1st Semester">1st Semester</option>
+                      <option value="2nd Semester">2nd Semester</option>
+                      <option value="Summer">Summer</option>
+
                     </select>
 
                     <select id="id_subject-year_level" class="form-select form-select-year_level" name="subject-year_level" placeholder="College" required>
@@ -213,7 +225,6 @@
                       <option value="2nd Year">2nd Year</option>
                       <option value="3rd Year">3rd Year</option>
                       <option value="4th Year">4th Year</option>
-                      <option value="Summer">Summer</option>
                     </select>
 
 
@@ -230,7 +241,7 @@
       </div>
 
       <!--Room Table-->
-      <div class="col-sm-4 col-rooms">
+      <div class="col-sm col-rooms">
           <p class="fs-5 text-start user-page-title">Rooms</p>
           <hr>
           <div class="table-responsive">
@@ -308,7 +319,36 @@
 
 </div>
 
+<script src="{% static 'js/jquery.min.js' %}"></script>
 
+<script>
+  document.querySelectorAll('.form-select').forEach(function(select) {
+      select.addEventListener('change', function() {
+          filterTable();
+      });
+  });
+
+  function filterTable() {
+      var selectedCollege = document.getElementById('category-college').value;
+      var selectedYearLevel = document.getElementById('category-year-level').value;
+      var selectedCourseMajor = document.getElementById('category-course-major').value;
+      var rows = document.querySelectorAll('#course-table-body tr');
+
+      rows.forEach(function(row) {
+          var college = row.getAttribute('data-college');
+          var yearLevel = row.getAttribute('data-year-level');
+
+          var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
+          var yearLevelMatch = (selectedYearLevel === 'all' || yearLevel === selectedYearLevel);
+
+          if (collegeMatch && yearLevelMatch) {
+              row.style.display = '';
+          } else {
+              row.style.display = 'none';
+          }
+      });
+  }
+</script>
 {% endblock %}
 {% include "_footer.html" %}
  
