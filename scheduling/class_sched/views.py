@@ -177,10 +177,24 @@ def schedule(request):
 
 
 @login_required
-def room_allocation(request):
+def room(request):
+    if request.method == "POST":
+        roomform = RoomForm(request.POST, prefix="room")
+        if roomform.is_valid():
+            roomform.save()
+            messages.success(request, "Room Added!")
+            return redirect("room")
+    else:
+        roomform = RoomForm(prefix="room")
+
+    rooms = Room.objects.all()
     return render(
         request,
         "room.html",
+        {
+            "roomform": roomform,
+            "rooms": rooms,
+        },
     )
 
 
@@ -189,29 +203,19 @@ def room_allocation(request):
 def subject(request):
     if request.method == "POST":
         subjectform = SubjectForm(request.POST, prefix="subject")
-        roomform = RoomForm(request.POST, prefix="room")
-        if "add_subject" in request.POST and subjectform.is_valid():
+        if subjectform.is_valid():
             subjectform.save()
             messages.success(request, "Subject Added!")
             return redirect("subject")
-        elif "add_room" in request.POST and roomform.is_valid():
-            roomform.save()
-            messages.success(request, "Room Added!")
-            return redirect("subject")
     else:
         subjectform = SubjectForm(prefix="subject")
-        roomform = RoomForm(prefix="room")
-
     courses = Course.objects.all()
-    rooms = Room.objects.all()
     return render(
         request,
         "subject.html",
         {
             "subjectform": subjectform,
-            "roomform": roomform,
             "courses": courses,
-            "rooms": rooms,
         },
     )
 
@@ -229,7 +233,7 @@ def delete_room(request, id=None):
     room = Room.objects.get(id=id)
     room.delete()
     messages.success(request, "Room Deleted!")
-    return redirect("subject")
+    return redirect("room")
 
 
 def delete_instructor(request, id=None):
@@ -263,7 +267,7 @@ def update_room(request, id=None):
     if roomform.is_valid():
         roomform.save()
         messages.success(request, "Room Updated!")
-        return redirect("subject")
+        return redirect("room")
 
     roomform = RoomForm(instance=room)
     rooms["roomform"] = roomform
@@ -314,4 +318,4 @@ def generate_schedules(request):
 
     # Render the templates with the class schedules
     context = {"class_schedules": class_schedules}
-    return render(request, "classSchedules.html", context)
+    return render(request, "schedule.html", context)
