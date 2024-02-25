@@ -253,6 +253,7 @@
                     <tr>
                       <th scope="col">Room Name</th>
                       <th scope="col">College</th>
+                      <th scope="col">Room Type</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -261,6 +262,7 @@
                     <tr>
                       <th scope="row">{{ room.room_name }}</th>
                       <td>{{ room.college }}</td>
+                      <td>{{ room.room_type }}</td>
                       <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
                         <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                     </tr>
@@ -301,6 +303,11 @@
                             <option value="CAF">College of Agriculture and Forestry</option>
                           </select>
                         
+                          <select id="id_room-room_type" class="form-select form-select-room_type" name="room-room_type" placeholder="Room Type" required>
+                            <option selected>Choose Room Type</option>
+                            <option value="Lecture">Lecture</option>
+                            <option value="Lab and Lecture">Lab and Lecture</option>
+                          </select>
                       
 
                   </div>

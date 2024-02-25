@@ -25,6 +25,7 @@ class Instructor(models.Model):
 class Room(models.Model):
     room_name = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
+    room_type = models.CharField(max_length=100)
 
 
 class Course(models.Model):

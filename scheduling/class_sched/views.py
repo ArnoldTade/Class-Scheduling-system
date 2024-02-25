@@ -10,9 +10,9 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
-from .genetic_algorithm import genetic_algorithm
 
 from datetime import datetime, timedelta
+from .genetic_algorithm import generate_population, evolve
 
 # Create your views here.
 
@@ -301,12 +301,17 @@ def profile_edit(request, id=None):
 # GENETIC ALGORITHM
 
 
-def generate_schedules_view(request):
-    if request.method == "POST":
-        # Run the genetic algorithm and generate schedules
-        generated_schedules = genetic_algorithm()
-        return render(
-            request, "classSchedules.html", {"schedules": generated_schedules}
-        )
-    else:
-        return render(request, "classSchedules.html")
+def generate_schedules(request):
+
+    # Create an initial population of random individuals population = generate_pop(100)
+    population = generate_population(100)
+
+    # Evolve the population 100 generations
+    best_individual = evolve(population, 100)
+
+    # Extract the class schedules from the best-performing individual
+    class_schedules = best_individual.class_schedules
+
+    # Render the templates with the class schedules
+    context = {"class_schedules": class_schedules}
+    return render(request, "classSchedules.html", context)

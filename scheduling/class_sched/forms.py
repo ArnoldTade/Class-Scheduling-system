@@ -56,6 +56,7 @@ class RoomForm(forms.ModelForm):
         fields = [
             "room_name",
             "college",
+            "room_type",
         ]
 
 

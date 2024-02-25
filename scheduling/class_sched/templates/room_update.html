@@ -26,6 +26,12 @@
                 </div>
             </div>
 
+            <select id="id_room_type" class="form-select form-select-room_type"  name="room_type" placeholder="Room Type" required>
+                <option value="{{ roomform.instance.room_type }}" selected>{{ roomform.instance.room_type }}</option>
+                <option value="Lecture">Lecture</option>
+                <option value="Lab and Lecture">Lab and Lecture</option>
+              </select>
+
             <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
         </form>
     </div>
