@@ -1,7 +1,6 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
  
-<h2>Room Allocation</h2>
 <div class="container-fluid">
     <div class="row">
 
@@ -54,9 +53,8 @@
                             Please Enter Room Name.
                             </div>
                         </div>
-
                         
-                            <select id="id_room-college" class="form-select form-select-room" name="room-college" placeholder="College" required>
+                        <select id="id_room-college" class="form-select form-select-room" name="room-college" placeholder="College" required>
                             <option selected>Choose College</option>
                             <option value="CAS">College of Arts and Sciences</option>
                             <option value="CBA">College of Business Administration</option>
@@ -64,13 +62,13 @@
                             <option value="CTED">College of Teacher Education</option>
                             <option value="CCJE">College of Criminal Justice Education</option>
                             <option value="CAF">College of Agriculture and Forestry</option>
-                            </select>
-                        
-                            <select id="id_room-room_type" class="form-select form-select-room_type" name="room-room_type" placeholder="Room Type" required>
+                        </select>
+                    
+                        <select id="id_room-room_type" class="form-select form-select-room_type" name="room-room_type" placeholder="Room Type" required>
                             <option selected>Choose Room Type</option>
                             <option value="Lecture">Lecture</option>
                             <option value="Lab and Lecture">Lab and Lecture</option>
-                            </select>
+                        </select>
                         
 
                     </div>
@@ -84,8 +82,44 @@
             </div>
         </div>
 
-
     </div>
 </div>
+
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-sm">
+                {% for room in rooms %}
+                <div class="table-responsive">
+                    <table class="table caption-top">
+                        <caption>{{ room.room_name }}</caption>
+                        <thead class="table-success">
+                        <tr>
+                            <th scope="col">Room</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Instructor</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for schedule in schedules %}
+                                {% if schedule.room == room %}
+                            <tr>
+                                <td >{{ schedule.room.room_name }}</td>
+                                <th scope="row">{{ schedule.course.course_name }}</th>
+                                <td >Mr/Mrs. {{ schedule.instructor.lastName }}</td>
+                                <td>{{ schedule.start_time }}</td>
+                                <td>{{ schedule.end_time }}</td>
+                            </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+</div>
+
 {% endblock %}
 {% include "_footer.html" %}

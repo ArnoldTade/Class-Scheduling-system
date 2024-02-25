@@ -188,12 +188,14 @@ def room(request):
         roomform = RoomForm(prefix="room")
 
     rooms = Room.objects.all()
+    schedules = ClassSchedule.objects.all()
     return render(
         request,
         "room.html",
         {
             "roomform": roomform,
             "rooms": rooms,
+            "schedules": schedules,
         },
     )
 
