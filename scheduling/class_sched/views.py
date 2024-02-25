@@ -14,6 +14,10 @@ from django.db import transaction
 from datetime import datetime, timedelta
 from .genetic_algorithm import generate_population, evolve
 
+from django.utils import timezone
+from datetime import datetime
+import pytz
+
 # Create your views here.
 
 
@@ -131,11 +135,41 @@ def instructors_schedule_page(request, id=None):
 def profile(request):
     instructor = request.user.instructor
     instructorSchedule = ClassSchedule.objects.filter(instructor=instructor)
+
+    events = []
+
+    for schedule in instructorSchedule:
+        start_time = datetime.strptime(schedule.start_time, "%H:%M").strftime(
+            "%H:%M:%S"
+        )
+        end_time = datetime.strptime(schedule.end_time, "%H:%M").strftime("%H:%M:%S")
+
+        # Convert days_of_week to FullCalendar format (0 for Sunday, 1 for Monday, etc.)
+        days_of_week = {
+            "Monday": 1,
+            "Tuesday": 2,
+            "Wednesday": 3,
+            "Thursday": 4,
+            "Friday": 5,
+            "Saturday": 6,
+            "Sunday": 7,
+        }.get(schedule.days_of_week)
+
+        if days_of_week is not None:
+            event = {
+                "title": f"{schedule.course.course_name} - Mr.Mrs {schedule.instructor.lastName} ({schedule.room.room_name})",
+                "daysOfWeek": [days_of_week],
+                "startTime": start_time,
+                "endTime": end_time,
+            }
+            events.append(event)
+
     return render(
         request,
         "profile.html",
         {
             "instructorSchedule": instructorSchedule,
+            "events": events,
         },
     )
 
@@ -320,4 +354,12 @@ def generate_schedules(request):
 
     # Render the templates with the class schedules
     context = {"class_schedules": class_schedules}
-    return render(request, "schedule.html", context)
+    instructors = Instructor.objects.all()
+    return render(
+        request,
+        "schedule.html",
+        {
+            "instructors": instructors,
+        },
+        context,
+    )

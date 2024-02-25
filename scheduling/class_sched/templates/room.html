@@ -91,7 +91,7 @@
                 {% for room in rooms %}
                 <div class="table-responsive">
                     <table class="table caption-top">
-                        <caption>{{ room.room_name }}</caption>
+                        <caption style="font-weight: 800;">Room Name: {{ room.room_name }}</caption>
                         <thead class="table-success">
                         <tr>
                             <th scope="col">Room</th>
@@ -99,6 +99,7 @@
                             <th scope="col">Instructor</th>
                             <th scope="col">Start Time</th>
                             <th scope="col">End Time</th>
+                            <th scope="col">Days of Week</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -110,6 +111,7 @@
                                 <td >Mr/Mrs. {{ schedule.instructor.lastName }}</td>
                                 <td>{{ schedule.start_time }}</td>
                                 <td>{{ schedule.end_time }}</td>
+                                <td>{{ schedule.days_of_week }}</td>
                             </tr>
                                 {% endif %}
                             {% endfor %}

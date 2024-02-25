@@ -1284,3 +1284,5 @@ thead.table-head {
         box-shadow: var(--box-shadow-style2);
     }
 }
+
+.fc-v-event .fc-event-main {}

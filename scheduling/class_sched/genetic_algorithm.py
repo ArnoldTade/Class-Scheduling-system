@@ -4,6 +4,7 @@ from collections import defaultdict
 # Import your Django models
 from class_sched.models import Instructor, Room, Course, ClassSchedule, Conflict
 from .models import ClassSchedule
+from datetime import datetime, date, timedelta
 
 
 class Individual:
@@ -104,15 +105,18 @@ def generate_population(population_size):
             if not available_rooms:
                 continue
             room = random.choice(available_rooms)
-            start_time = random.choice(
-                ["08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00"]
-            )
-            end_time = start_time.replace("0", "3")
+            hour = random.choice([8, 9, 10, 11, 13, 14, 15])
+            minute = random.choice([0, 30])
+
+            start_time = f"{hour}:{minute:02d}"
+            end_hour = hour + 3 if minute == 30 else hour + 2
+            end_time = f"{end_hour}:{minute:02d}"
+
             days_of_week = random.choice(
                 ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             )
-            semester = random.choice(["First Semester", "Second Semester"])
-            year = random.choice(range(2022, 2026))
+            semester = "First Semester"
+            year = 2024
             class_schedule = ClassSchedule(
                 course=course,
                 instructor=instructor,

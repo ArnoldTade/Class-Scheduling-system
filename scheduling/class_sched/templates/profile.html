@@ -1,6 +1,7 @@
 
 {% include "home_header.html" %} {% load static %} 
 {% block content %}
+
 <!--Profile PAGE-->.
 <p class="fs-5 text-start user-page-title">User Profile</p>
 <hr>
@@ -139,6 +140,27 @@
 
 
 
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+  
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      timeZone: 'UTC',
+      initialView: 'timeGridWeek',
+      headerToolbar: {
+       
+        right: 'timeGridWeek,timeGridDay'
+      },
+      dayHeaderFormat: { weekday: 'short' },
+      events: {{ events | safe }}
+    });
+  
+    calendar.render();
+  });
+</script>
 <!--END Profile PAGE-->
 {% endblock %}
 {% include "_footer.html" %}
