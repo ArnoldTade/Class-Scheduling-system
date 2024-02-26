@@ -1286,3 +1286,13 @@ thead.table-head {
 }
 
 .fc-v-event .fc-event-main {}
+
+
+/* Calendars */
+#calendarSchedulePage,
+#calendarProfilePage {
+    .fc-col-header-cell-cushion {
+        color: var(--home-color-dark);
+        text-decoration: none;
+    }
+}

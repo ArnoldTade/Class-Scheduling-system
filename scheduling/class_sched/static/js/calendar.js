@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
+    var calendarEl = document.getElementById('calendarSchedulePage');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         timeZone: 'UTC',
-        initialView: 'dayGridMonth',
-        events: '/api/demo-feeds/events.json',
-        editable: true,
-        selectable: true
+        initialView: 'timeGridWeek',
+        headerToolbar: {
+            right: 'timeGridWeek,timeGridDay'
+        },
+        dayHeaderFormat: { weekday: 'short' },
+        events: eventSchedules
     });
 
     calendar.render();

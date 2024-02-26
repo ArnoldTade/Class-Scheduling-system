@@ -94,7 +94,7 @@
                         </div>
                         <!--Calendar View Tab-->
                         <div class="container-fluid container-schedule-calendar">
-                            <div id='calendar'></div>
+                            <div id='calendarSchedulePage'></div>
                         </div>
                         <!--Loadslip View Tab-->
                         <div class="container-fluid container-schedule-loadslip">
@@ -210,6 +210,16 @@
       </div>
     </div>
 </div>
+
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+<script>
+  var eventSchedules = {{ eventSchedules | safe }};
+</script>
 {% endblock %}
 {% include "_footer.html" %}
 

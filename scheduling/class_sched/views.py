@@ -111,6 +111,7 @@ def home_schedule(request, id=None):
 def instructors_schedule_page(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
+    eventSchedules = []
     if request.method == "POST":
         scheduleform = ClassScheduleForm(request.POST)
         if scheduleform.is_valid():
@@ -118,6 +119,33 @@ def instructors_schedule_page(request, id=None):
             return redirect("schedule")
     else:
         scheduleform = ClassScheduleForm()
+
+    for schedule in instructorSchedule:
+        start_time = datetime.strptime(schedule.start_time, "%H:%M").strftime(
+            "%H:%M:%S"
+        )
+        end_time = datetime.strptime(schedule.end_time, "%H:%M").strftime("%H:%M:%S")
+
+        # Convert days_of_week to FullCalendar format (0 for Sunday, 1 for Monday, etc.)
+        days_of_week = {
+            "Monday": 1,
+            "Tuesday": 2,
+            "Wednesday": 3,
+            "Thursday": 4,
+            "Friday": 5,
+            "Saturday": 6,
+            "Sunday": 7,
+        }.get(schedule.days_of_week)
+
+        if days_of_week is not None:
+            eventSchedule = {
+                "title": f"{schedule.course.course_name} - Mr.Mrs {schedule.instructor.lastName} ({schedule.room.room_name})",
+                "daysOfWeek": [days_of_week],
+                "startTime": start_time,
+                "endTime": end_time,
+            }
+            eventSchedules.append(eventSchedule)
+
     return render(
         request,
         "schedule.html",
@@ -127,6 +155,7 @@ def instructors_schedule_page(request, id=None):
             "instructors": Instructor.objects.all(),
             "rooms": Room.objects.all(),
             "courses": Course.objects.all(),
+            "eventSchedules": eventSchedules,
         },
     )
 

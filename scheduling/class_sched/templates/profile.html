@@ -101,7 +101,7 @@
         
         <div class="container-fluid container-nav-calendar" id="ViewCalendar">
             <h4 class="text-start">Calendar</h4>
-            <div id='calendar'></div>
+            <div id='calendarProfilePage'></div>
         </div>
         <div class="container-fluid container-nav-feedback" id="ViewFeedback">
             <div class="container-sm container-feedback">
@@ -144,23 +144,26 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-  
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendarProfilePage');
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      timeZone: 'UTC',
-      initialView: 'timeGridWeek',
-      headerToolbar: {
-       
-        right: 'timeGridWeek,timeGridDay'
-      },
-      dayHeaderFormat: { weekday: 'short' },
-      events: {{ events | safe }}
+        timeZone: 'UTC',
+        initialView: 'timeGridWeek',
+        headerToolbar: {
+
+            right: 'timeGridWeek,timeGridDay'
+        },
+        dayHeaderFormat: { weekday: 'short' },
+        events:  {{ events | safe }}
     });
-  
+
     calendar.render();
-  });
-</script>
+});
+ 
+ 
+</script> 
 <!--END Profile PAGE-->
 {% endblock %}
 {% include "_footer.html" %}
