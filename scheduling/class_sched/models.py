@@ -50,6 +50,18 @@ class ClassSchedule(models.Model):
     semester = models.CharField(max_length=50)
     year = models.CharField(max_length=100)
 
+    def has_conflict(self):
+        conflicts = ClassSchedule.objects.filter(
+            days_of_week=self.days_of_week,
+            start_time__lt=self.end_time,
+            end_time__gt=self.start_time,
+            room=self.room,
+            semester=self.semester,
+            year=self.year,
+        ).exclude(pk=self.pk)
+
+        return conflicts.count()
+
 
 class Conflict(models.Model):
     schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)

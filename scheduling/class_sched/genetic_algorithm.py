@@ -1,5 +1,4 @@
 import random
-from collections import defaultdict
 
 # Import your Django models
 from class_sched.models import Instructor, Room, Course, ClassSchedule, Conflict

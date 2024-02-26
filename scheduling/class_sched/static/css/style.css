@@ -141,7 +141,7 @@ i {
     .home-page {
         background: var(--bg-linear-test8);
         padding-bottom: 150px;
-        height: 85vh;
+        height: 90vh;
 
 
         .e-clasched {
@@ -732,12 +732,12 @@ section.section_summary .section_contents .content_instructor {
     /* background: linear-gradient(90deg, rgb(219, 253, 255) 0%, rgb(189, 229, 241) 100%);
    background-color: rgba(181, 227, 241, 0.589); */
     border-left: 10px solid;
-    border-left-color: #24568B;
+    border-left-color: #253339;
     color: var(--home-color);
-    background: #CAF3FF;
+    background: #3c46492e;
 
     .bi-people-fill {
-        color: #24568B;
+        color: #253339;
     }
 
 }
@@ -1285,7 +1285,9 @@ thead.table-head {
     }
 }
 
-.fc-v-event .fc-event-main {}
+.fc-v-event .fc-event-main {
+    background-color: #478576;
+}
 
 
 /* Calendars */

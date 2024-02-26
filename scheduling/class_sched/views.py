@@ -139,7 +139,7 @@ def instructors_schedule_page(request, id=None):
 
         if days_of_week is not None:
             eventSchedule = {
-                "title": f"{schedule.course.course_name} - Mr.Mrs {schedule.instructor.lastName} ({schedule.room.room_name})",
+                "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name})",
                 "daysOfWeek": [days_of_week],
                 "startTime": start_time,
                 "endTime": end_time,
@@ -186,7 +186,7 @@ def profile(request):
 
         if days_of_week is not None:
             event = {
-                "title": f"{schedule.course.course_name} - Mr.Mrs {schedule.instructor.lastName} ({schedule.room.room_name})",
+                "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name})",
                 "daysOfWeek": [days_of_week],
                 "startTime": start_time,
                 "endTime": end_time,
@@ -206,11 +206,22 @@ def profile(request):
 @login_required
 def dashboard(request):
     instructors = Instructor.objects.all()
+    total_instructors = instructors.count()
+    class_schedules = ClassSchedule.objects.all()
+
+    rooms = Room.objects.all()
+    total_rooms = rooms.count()
+
+    total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
     return render(
         request,
         "dashboard.html",
         {
             "instructors": instructors,
+            "class_schedules": class_schedules,
+            "total_conflicts": total_conflicts,
+            "total_rooms": total_rooms,
+            "total_instructors": total_instructors,
         },
     )
 
@@ -372,23 +383,10 @@ def profile_edit(request, id=None):
 
 def generate_schedules(request):
 
-    # Create an initial population of random individuals population = generate_pop(100)
     population = generate_population(100)
-
-    # Evolve the population 100 generations
     best_individual = evolve(population, 100)
 
-    # Extract the class schedules from the best-performing individual
     class_schedules = best_individual.class_schedules
 
-    # Render the templates with the class schedules
-    context = {"class_schedules": class_schedules}
-    instructors = Instructor.objects.all()
-    return render(
-        request,
-        "schedule.html",
-        {
-            "instructors": instructors,
-        },
-        context,
-    )
+    context = {"class_schedules": class_schedules, "instructors": instructors}
+    return render(request, "schedule.html", context)
