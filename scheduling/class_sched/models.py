@@ -71,10 +71,3 @@ class Conflict(models.Model):
 class Feedback(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     content = models.TextField()
-
-
-"""
-class InstructorSchedule(models.Model):
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
-"""

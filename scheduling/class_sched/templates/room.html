@@ -85,43 +85,41 @@
     </div>
 </div>
 
+{% for room in rooms %}
 <div class="container-fluid">
-    <div class="row">
-            <div class="col-sm">
-                {% for room in rooms %}
-                <div class="table-responsive">
-                    <table class="table caption-top">
-                        <caption style="font-weight: 800;">Room Name: {{ room.room_name }}</caption>
-                        <thead class="table-success">
-                        <tr>
-                            <th scope="col">Room</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Instructor</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col">End Time</th>
-                            <th scope="col">Days of Week</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {% for schedule in schedules %}
-                                {% if schedule.room == room %}
-                            <tr>
-                                <td >{{ schedule.room.room_name }}</td>
-                                <th scope="row">{{ schedule.course.course_name }}</th>
-                                <td >Mr/Mrs. {{ schedule.instructor.lastName }}</td>
-                                <td>{{ schedule.start_time }}</td>
-                                <td>{{ schedule.end_time }}</td>
-                                <td>{{ schedule.days_of_week }}</td>
-                            </tr>
-                                {% endif %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <p class="text-start" style="font-weight: 800;">Room Name: {{ room.room_name }}</p>
+        <div class="container-fluid">
+            <div class="row">
+            
+                <div class="col-sm">
+                            <div class="calendarRoomAllocation"></div>
                 </div>
-                {% endfor %}
+            
             </div>
-    </div>
+        </div>
 </div>
+{% endfor %}
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendars = document.querySelectorAll('.calendarRoomAllocation');
+        
+        calendars.forEach(function(calendarEl) {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC',
+                initialView: 'timeGridWeek',
+                headerToolbar: {
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                dayHeaderFormat: { weekday: 'short' },
+                events: []
+            });
+
+            calendar.render();
+        });
+    });
+  
+  </script>
 {% endblock %}
 {% include "_footer.html" %}

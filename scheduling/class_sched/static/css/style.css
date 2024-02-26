@@ -270,11 +270,10 @@ i {
 
     .card {
         margin: 10px;
-        box-shadow: var(--box-shadow-style2);
         display: inline-block;
         padding: 10px;
         transition: .5s;
-        background: var(--brown-color);
+        background: linear-gradient(9deg, rgba(37, 51, 57, 1) 0%, rgba(63, 74, 79, 1) 49%, rgba(106, 130, 141, 1) 100%);
         border: 1px solid #ebebeb;
         color: #fff;
     }
@@ -1292,7 +1291,8 @@ thead.table-head {
 
 /* Calendars */
 #calendarSchedulePage,
-#calendarProfilePage {
+#calendarProfilePage,
+.calendarRoomAllocation {
     .fc-col-header-cell-cushion {
         color: var(--home-color-dark);
         text-decoration: none;
