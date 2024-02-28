@@ -34,4 +34,5 @@ urlpatterns = [
     ),
     # Genetic Algorithm
     path("generateschedules/", views.generate_schedules, name="generateschedules"),
+    # Genetic Algorithm 2
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

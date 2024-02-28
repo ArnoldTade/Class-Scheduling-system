@@ -381,14 +381,22 @@ def profile_edit(request, id=None):
 
 
 # GENETIC ALGORITHM
-
-
 def generate_schedules(request):
-
-    population = generate_population(100)
-    best_individual = evolve(population, 100)
+    population = generate_population(50)
+    best_individual = evolve(population, 50)
 
     class_schedules = best_individual.class_schedules
 
-    context = {"class_schedules": class_schedules, "instructors": instructors}
-    return render(request, "schedule.html", context)
+    context = {"class_schedules": class_schedules}
+    instructors = Instructor.objects.all()
+    return render(
+        request,
+        "schedule.html",
+        {
+            "instructors": instructors,
+        },
+        context,
+    )
+
+
+# GENETIC ALGORITHM 2

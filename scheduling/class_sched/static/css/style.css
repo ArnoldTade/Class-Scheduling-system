@@ -1298,3 +1298,24 @@ thead.table-head {
         text-decoration: none;
     }
 }
+
+/* Room Allocation */
+.cotainer-room-list {
+    overflow-x: auto;
+
+    .table-responsive {
+        position: sticky;
+    }
+}
+
+.container-room-allocation {
+    background-color: #fff;
+    box-shadow: var(--box-shadow-style2);
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .fc-toolbar-chunk {
+        display: none;
+    }
+}

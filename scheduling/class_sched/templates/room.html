@@ -1,17 +1,62 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
  
-<div class="container-fluid">
+<div class="container-fluid cotainer-room-list">
     <div class="row">
 
         <!--Room Table-->
         <div class="col-sm col-rooms">
             <p class="fs-5 text-start user-page-title">Rooms</p>
             <hr>
+            
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="row">
+                <div class="col-sm">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+                <div class="col-sm">
+                <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Colleges</option>
+                    <option value="CAS">College of Arts and Sciences</option>
+                    <option value="CBA">College of Business Administration</option>
+                    <option value="CIT">College of Industrial Technology</option>
+                    <option value="CTED">College of Teacher Education</option>
+                    <option value="CCJE">College of Criminal Justice Education</option>
+                    <option value="CAF">College of Agriculture and Forestry</option>
+                </select>
+                </div>
+            
+                <div class="col-sm">
+                <select class="form-select" id="category-year-level" style="width:auto;" aria-label="Default select example" placeholder="Select College">
+                    <option value="all" selected>School Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+                </div>
+
+                <div class="col-sm">
+                <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Semester</option>
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="Summer">Summer</option>
+
+                </select>
+                </div>
+            </div>
+        </div>
+        </nav>
+
+
             <div class="table-responsive">
                 <table class="table caption-top">
                     <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
-                    <thead class="table-info">
+                    <thead class="table-dark">
                     <tr>
                         <th scope="col">Room Name</th>
                         <th scope="col">College</th>
@@ -84,9 +129,11 @@
 
     </div>
 </div>
+<hr>
+<p class="fs-5 text-start user-page-title">Schedule for Each Room</p>
 
 {% for room in rooms %}
-<div class="container-fluid">
+<div class="container-fluid container-room-allocation">
     <p class="text-start" style="font-weight: 800;">Room Name: {{ room.room_name }}</p>
         <div class="container-fluid">
             <div class="row">

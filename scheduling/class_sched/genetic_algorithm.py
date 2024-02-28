@@ -35,7 +35,7 @@ class Individual:
                 fitness -= 1
             if room.room_type == "Lecture" and class_schedule.course.type in [
                 "Lab",
-                "Lab and Lecture",
+                "Lab and Lec",
             ]:
                 fitness -= 1
             conflicts = Conflict.objects.filter(

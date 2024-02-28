@@ -122,14 +122,16 @@
               <input type="number" id="schoolYear2" name="schoolYear2" min="2020" max="2100" step="1" onchange="handleYearChange()">
             </div>
             -->
-            <!--<a href="{% url 'generateschedules' %}" type="button" class="btn btn-success">Generate Schedules</a>-->
-            
+           
+          
+              <!--
+            <a href="{% url 'generateschedules' %}" type="button" class="btn btn-success">Final Generate Schedules</a> 
+            -->
             <a href="{% url 'generateschedules' %}" id="generateScheduleBtn" class="btn btn-primary" type="button">
               <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
               <span id="buttonText">Generate Schedule</span>
             </a>
 
-         
 
         </div>
 
