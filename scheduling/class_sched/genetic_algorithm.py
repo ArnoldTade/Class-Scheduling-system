@@ -1,7 +1,7 @@
 import random
 
 # Import your Django models
-from class_sched.models import Instructor, Room, Course, ClassSchedule, Conflict
+from class_sched.models import Instructor, Room, Course, ClassSchedule
 from .models import ClassSchedule
 from datetime import datetime, date, timedelta
 

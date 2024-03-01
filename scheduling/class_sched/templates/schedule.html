@@ -5,35 +5,56 @@
 
 <h4 class="text-start text-schedule">Schedule Page</h4>
 <hr>
+
+<div class="container-fluid container-subject-page">
+  <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="row">
+                <div class="col-sm">
+                    <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Colleges</option>
+                    <option value="CAS">College of Arts and Sciences</option>
+                    <option value="CBA">College of Business Administration</option>
+                    <option value="CIT">College of Industrial Technology</option>
+                    <option value="CTED">College of Teacher Education</option>
+                    <option value="CCJE">College of Criminal Justice Education</option>
+                    <option value="CAF">College of Agriculture and Forestry</option>
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <select class="form-select" id="category-year-level" style="width:auto;" aria-label="Default select example" placeholder="Select College">
+                    <option value="all" selected>All Year Level</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Semester</option>
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="Summer">Summer</option>
+
+                    </select>
+                </div>
+                
+                <div class="col-sm">
+                  <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
+              </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
 <div class="container-fluid container-schedule-page">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><i class="bi bi-calendar-week"></i>View Schedules</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i class="bi bi-calendar3"></i>Generate Schedule</button>
-        </li>
-    </ul>
+  
         <!--View Schedule Tab-->
-    <div class="tab-content" id="myTabContent">
+  <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
             <div class="row row-schedule-panel">
-                <!--Select College-->
-                <div class="row">
-                    <div class="col-5"> 
-                        <select class="form-select schedule-department-select" aria-label="Default select example">
-                            <option selected>Select College</option>
-                            <option value="CAS">College of Arts and Sciences</option>
-                            <option value="CBA">College of Business Administration</option>
-                            <option value="CIT">College of Insdustrial Technology</option>
-                            <option value="CTED">College of Teacher Education</option>
-                            <option value="CCJE">College of Criminal Justice Education</option>
-                            <option value="CAF">College of Agriculture and Forestry</option>
-                        </select>
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Manually Add New Schedule</button>
-
-                    </div>
-                </div>
+               
                 <!--Instructor Carousel-->
                     <div class="owl-carousel owl-theme"> 
                         {% for instructor in instructors %}
@@ -104,39 +125,7 @@
             </div>
         </div>
 
-        <!--Generate Schedule Tab-->
-
-        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-          <div class="container-fluid">
-            <div class="col-sm">
-              <!--
-              <select class="form-select generate-select-semester" id="generate-schedule-semester" aria-label="Default select example">
-                <option selected>Select Semester</option>
-                <option value="First Semester">First Semester</option>
-                <option value="Second Semester">Second Semester</option>
-                <option value="Summer">Summer</option>
-              </select>
-
-              <label for="schoolYear">Select School Year:</label>
-              <input type="number" id="schoolYear1" name="schoolYear1" min="2020" max="2100" step="1" onchange="handleYearChange()"> - 
-              <input type="number" id="schoolYear2" name="schoolYear2" min="2020" max="2100" step="1" onchange="handleYearChange()">
-            </div>
-            -->
-           
-          
-              <!--
-            <a href="{% url 'generateschedules' %}" type="button" class="btn btn-success">Final Generate Schedules</a> 
-            -->
-            <a href="{% url 'generateschedules' %}" id="generateScheduleBtn" class="btn btn-primary" type="button">
-              <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
-              <span id="buttonText">Generate Schedule</span>
-            </a>
-
-
-        </div>
-
-    </div>
-</div>
+    
 
   <!-- Modal Add Schedule-->
   <div class="modal fade" id="addScheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -186,53 +175,53 @@
               </div>  
             
             
-            <div class="form-floating mb-3">
-              <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
-              <label for="id_start_time">Start Time</label>
-              <div class="invalid-feedback">
-                Please Enter Start Time.
+              <div class="form-floating mb-3">
+                <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
+                <label for="id_start_time">Start Time</label>
+                <div class="invalid-feedback">
+                  Please Enter Start Time.
+                </div>
               </div>
-            </div>
 
-            <div class="form-floating mb-3">
-              <input type="time" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
-              <label for="id_end_time">End Time</label>
-              <div class="invalid-feedback">
-                Please Enter End Time.
+              <div class="form-floating mb-3">
+                <input type="time" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
+                <label for="id_end_time">End Time</label>
+                <div class="invalid-feedback">
+                  Please Enter End Time.
+                </div>
               </div>
-            </div>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
-              <label for="id_days_of_week">Days of Week</label>
-              <div class="invalid-feedback">
-                Please Enter Days of Week.
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
+                <label for="id_days_of_week">Days of Week</label>
+                <div class="invalid-feedback">
+                  Please Enter Days of Week.
+                </div>
               </div>
-            </div>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
-              <label for="id_semester">Semester</label>
-              <div class="invalid-feedback">
-                Please Enter Semester.
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
+                <label for="id_semester">Semester</label>
+                <div class="invalid-feedback">
+                  Please Enter Semester.
+                </div>
               </div>
-            </div>
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
-              <label for="id_year">Year</label>
-              <div class="invalid-feedback">
-                Please Enter Year.
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
+                <label for="id_year">Year</label>
+                <div class="invalid-feedback">
+                  Please Enter Year.
+                </div>
               </div>
-            </div>
                
-        </div>
+              </div>
      
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" >Save</button>
-        </div>
-      </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success" >Save</button>
+            </div>
+          </form>
       </div>
     </div>
 </div>
@@ -242,6 +231,7 @@
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
 
 <script>
   var eventSchedules = {{ eventSchedules | safe }};

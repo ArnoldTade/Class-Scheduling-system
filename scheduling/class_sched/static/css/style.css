@@ -17,6 +17,8 @@
     --new-color: #284257;
     --theme-color: #253339;
     --red-color: #eb4949;
+    --bg-linear-card: linear-gradient(180deg, rgba(78, 78, 78, 1) 0%, rgba(92, 105, 108, 1) 37%, rgba(255, 255, 255, 1) 37%);
+
     --bg-linear: linear-gradient(39deg, rgba(86, 108, 125, 1) 0%, rgba(42, 107, 130, 1) 100%);
 
     --bg-linear-test1: linear-gradient(39deg, rgba(40, 66, 87, 1) 0%, rgba(38, 96, 129, 1) 44%, rgba(63, 145, 162, 1) 75%, rgba(29, 163, 181, 1) 100%);
@@ -263,9 +265,9 @@ i {
     }
 
     .btn {
-        background-color: transparent;
-        color: var(--light-home);
-        border: solid 2px;
+        background-color: rgb(107, 107, 107);
+        color: #fff;
+        border: none !important;
     }
 
     .card {
@@ -273,14 +275,16 @@ i {
         display: inline-block;
         padding: 10px;
         transition: .5s;
-        background: linear-gradient(9deg, rgba(37, 51, 57, 1) 0%, rgba(63, 74, 79, 1) 49%, rgba(106, 130, 141, 1) 100%);
+        background: var(--bg-linear-card);
         border: 1px solid #ebebeb;
-        color: #fff;
+        color: var(--theme-color);
+        box-shadow: var(--box-shadow-style1);
     }
 
     .card:hover {
-        background: var(--home-color-light);
-        color: var(--light-color);
+        background: linear-gradient(180deg, rgba(161, 161, 161, 1) 0%, rgba(186, 186, 186, 1) 37%, rgba(255, 255, 255, 1) 37%);
+        color: var(--theme-color);
+
 
 
         img {
@@ -302,6 +306,7 @@ i {
         margin: auto;
         align-items: center;
         transition: .3s;
+
     }
 
 }
@@ -629,7 +634,7 @@ h2 {
 
 
 .offcanvas-header {
-    background: var(--bg-linear-test8);
+    background-color: var(--brown-color);
     color: #ffffff;
     border-top-right-radius: 1rem;
 }
@@ -1107,35 +1112,40 @@ thead.table-head {
 
 .owl-carousel .item {
     margin: 0 15px;
-    background-color: var(--brown-color);
+    background: var(--bg-linear-card);
     padding: 10px;
-    border-radius: 1rem;
+    border-radius: 0.3rem;
     justify-content: center;
     transition: .3s;
     box-shadow: var(--box-shadow-style2);
     margin-bottom: 10px;
-    color: #fff;
-
+    color: var(--theme-color);
+    font-weight: 500;
 }
 
+
 .owl-carousel .item:hover {
-    background: var(--home-color-light);
-    color: var(--light-color);
+    background: linear-gradient(180deg, rgba(161, 161, 161, 1) 0%, rgba(186, 186, 186, 1) 37%, rgba(255, 255, 255, 1) 37%);
+    color: var(--theme-color);
 
     .btn-default {
         background-color: var(--light-home);
         border: 2px solid var(--home-color);
         color: var(--home-color-dark);
     }
+
+    img {
+        transition: 0.3s;
+        transform: scale(1.1)
+    }
 }
 
 .owl-carousel .item img {
     border-radius: 50%;
-    width: 4rem;
     height: auto;
     justify-content: center;
     align-items: center;
-
+    padding: 25px;
 }
 
 .row-user-info {

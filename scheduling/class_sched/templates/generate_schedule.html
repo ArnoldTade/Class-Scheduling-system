@@ -1,0 +1,58 @@
+
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+
+<h4 class="text-start text-schedule">Generate Schedule</h4>
+<hr>
+<div class="container-fluid">
+            <!--
+            <a href="{% url 'generateschedules' %}" type="button" class="btn btn-success">Final Generate Schedules</a> 
+            -->
+            <a href="{% url 'generateschedules' %}" id="generateScheduleBtn" class="btn btn-primary" type="button">
+                <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
+                <span id="buttonText">Generate Schedule</span>
+              </a>
+</div>
+<hr>
+
+<div class="container-fluid container-subject-page">
+  <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="row">
+                <div class="col-sm">
+                    <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Colleges</option>
+                    <option value="CAS">College of Arts and Sciences</option>
+                    <option value="CBA">College of Business Administration</option>
+                    <option value="CIT">College of Industrial Technology</option>
+                    <option value="CTED">College of Teacher Education</option>
+                    <option value="CCJE">College of Criminal Justice Education</option>
+                    <option value="CAF">College of Agriculture and Forestry</option>
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <select class="form-select" id="category-year-level" style="width:auto;" aria-label="Default select example" placeholder="Select College">
+                    <option value="all" selected>All Year Level</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Semester</option>
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="Summer">Summer</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+{% endblock %}
+{% include "_footer.html" %}

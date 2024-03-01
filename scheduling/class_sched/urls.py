@@ -12,6 +12,7 @@ urlpatterns = [
     path("subject/", views.subject, name="subject"),
     path("home/", views.home, name="home"),
     path("room/", views.room, name="room"),
+    path("generate-schedule/", views.generate_schedule, name="generate-schedule"),
     # For user Auth
     path("login/", views.user_login, name="login"),
     path("signup/", views.user_signup, name="signup"),

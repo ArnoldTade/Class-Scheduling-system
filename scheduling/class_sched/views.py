@@ -96,6 +96,13 @@ def home(request):
     )
 
 
+def generate_schedule(request):
+    return render(
+        request,
+        "generate_schedule.html",
+    )
+
+
 def home_schedule(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)

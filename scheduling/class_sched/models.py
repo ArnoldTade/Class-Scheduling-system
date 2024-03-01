@@ -63,11 +63,6 @@ class ClassSchedule(models.Model):
         return conflicts.count()
 
 
-class Conflict(models.Model):
-    schedule = models.ForeignKey(ClassSchedule, on_delete=models.CASCADE)
-    details = models.TextField()
-
-
 class Feedback(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     content = models.TextField()
