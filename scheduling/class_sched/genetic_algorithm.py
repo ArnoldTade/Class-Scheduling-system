@@ -16,6 +16,28 @@ class Individual:
         for class_schedule in self.class_schedules:
             instructor = class_schedule.instructor
             room = class_schedule.room
+            for other_class_schedule in self.class_schedules:
+                if class_schedule == other_class_schedule:
+                    continue
+                if (
+                    instructor == other_class_schedule.instructor
+                    and room == other_class_schedule.room
+                    and class_schedule.days_of_week == other_class_schedule.days_of_week
+                    and (
+                        (
+                            class_schedule.start_time <= other_class_schedule.start_time
+                            and class_schedule.end_time
+                            >= other_class_schedule.start_time
+                        )
+                        or (
+                            class_schedule.start_time >= other_class_schedule.start_time
+                            and class_schedule.start_time
+                            <= other_class_schedule.end_time
+                        )
+                    )
+                ):
+                    fitness -= 1
+                    break
             if instructor.status == "Full time" and (
                 class_schedule.start_time < "08:00" or class_schedule.end_time > "17:00"
             ):
@@ -38,15 +60,6 @@ class Individual:
                 "Lab and Lec",
             ]:
                 fitness -= 1
-            conflicts = Conflict.objects.filter(
-                schedule__instructor=instructor,
-                schedule__room=room,
-                schedule__days_of_week=class_schedule.days_of_week,
-                schedule__semester=class_schedule.semester,
-                schedule__year=class_schedule.year,
-            )
-            if conflicts:
-                fitness -= len(conflicts)
         return fitness
 
     @staticmethod
@@ -68,11 +81,13 @@ class Individual:
         return child
 
     def mutate(self):
-        # Choose a random class schedule to mutate
-        class_schedule_index = random.randint(0, len(self.class_schedules))
+        class_schedule_index = random.randint(0, len(self.class_schedules) - 1)
+        try:
+            class_schedule = self.class_schedules[class_schedule_index]
+        except IndexError:
+            print(f"IndexError in mutate: {class_schedule_index}")
+            return
 
-        # Randomly modify the class schedule
-        class_schedule = self.class_schedules[class_schedule_index]
         class_schedule.instructor = random.choice(
             [
                 instructor
@@ -109,7 +124,11 @@ def generate_population(population_size):
 
             start_time = f"{hour}:{minute:02d}"
             end_hour = hour + 3 if minute == 30 else hour + 2
-            end_time = f"{end_hour}:{minute:02d}"
+            if end_hour == 12:
+                end_hour += 1
+                end_time = f"{end_hour}:{minute:02d}"
+            else:
+                end_time = f"{end_hour}:{minute:02d}"
 
             days_of_week = random.choice(
                 ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -127,11 +146,10 @@ def generate_population(population_size):
                 year=year,
             )
             class_schedules.append(class_schedule)
-        # Ensure that each Individual has at least one ClassSchedule
         if not class_schedules:
             class_schedule = ClassSchedule(
                 course=course,
-                instructor=instructor,
+                instructor=None,
                 room=room,
                 start_time=start_time,
                 end_time=end_time,
@@ -146,34 +164,26 @@ def generate_population(population_size):
 
 
 def select_parent(population):
-    # Select the parent with the highest fitness score
     parent = max(population, key=lambda individual: individual.fitness)
     return parent
 
 
 def evolve(population, num_generations):
-    # Evolve the population over multiple generations
     for generation in range(num_generations):
-        # Select two parent individuals
         parent1 = select_parent(population)
         parent2 = select_parent(population)
 
-        # Create one or more child individuals using crossover
         child1 = Individual.crossover(parent1, parent2)
         child2 = Individual.crossover(parent1, parent2)
 
-        # Mutate the child individuals
         child1.mutate()
         child2.mutate()
 
-        # Add the child individuals to the population
         population.append(child1)
         population.append(child2)
 
-        # Remove the two worst-performing individuals from the population
         population.sort(key=lambda individual: individual.fitness, reverse=True)
         population.pop()
         population.pop()
 
-    # Return the best-performing individual
     return max(population, key=lambda individual: individual.fitness)

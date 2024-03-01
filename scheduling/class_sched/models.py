@@ -41,7 +41,7 @@ class Course(models.Model):
 
 
 class ClassSchedule(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_time = models.CharField(max_length=100)

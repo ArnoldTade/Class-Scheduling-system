@@ -13,9 +13,10 @@ from django.db import transaction
 
 from datetime import datetime, timedelta
 from .genetic_algorithm import generate_population, evolve
+from .scheduling_algorithm import run_genetic_algorithm
 
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, time
 import pytz
 
 from collections import defaultdict
@@ -23,7 +24,7 @@ from collections import defaultdict
 # Create your views here.
 
 
-# signup page
+### signup page ###
 @login_required
 def user_signup(request):
     if request.method == "POST":
@@ -52,7 +53,7 @@ def user_signup(request):
     )
 
 
-# login page
+### login page ###
 def user_login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -77,14 +78,14 @@ def user_login(request):
     return render(request, "login.html", {"form": form})
 
 
-# logout page
+#### logout page ###
 @login_required
 def user_logout(request):
     logout(request)
     return redirect("login")
 
 
-# Home page
+### Home page ##
 def home(request):
     instructors = Instructor.objects.all()
     return render(
@@ -116,7 +117,7 @@ def home_schedule(request, id=None):
     )
 
 
-# Schedule Table
+### Schedule Table ###
 def instructors_schedule_page(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
@@ -264,8 +265,12 @@ def room(request):
     if request.method == "POST":
         roomform = RoomForm(request.POST, prefix="room")
         if roomform.is_valid():
-            roomform.save()
-            messages.success(request, "Room Added!")
+            room_name = roomform.cleaned_data["room_name"]
+            if Room.objects.filter(room_name=room_name).exists():
+                messages.warning(request, "Room with this name already exists!")
+            else:
+                roomform.save()
+                messages.success(request, "Room Added!")
             return redirect("room")
     else:
         roomform = RoomForm(prefix="room")
@@ -283,7 +288,7 @@ def room(request):
     )
 
 
-# Add Subjects
+### Add Subjects ###
 @login_required
 def subject(request):
     if request.method == "POST":
@@ -305,7 +310,7 @@ def subject(request):
     )
 
 
-# /// DELETE VIEWS ///
+################# /// DELETE VIEWS /// ######################
 # Delete Subjects
 def delete_subject(request, id=None):
     course = Course.objects.get(id=id)
@@ -330,7 +335,7 @@ def delete_instructor(request, id=None):
     return redirect("instructors")
 
 
-# /// EDIT VIEWS ///
+################# /// EDIT VIEWS ///######################
 def update_subject(request, id=None):
     courses = {}
     course = get_object_or_404(Course, id=id)
@@ -387,23 +392,37 @@ def profile_edit(request, id=None):
     return render(request, "profile_update.html", profile)
 
 
-# GENETIC ALGORITHM
+############## GENETIC ALGORITHM ########################
 def generate_schedules(request):
-    population = generate_population(50)
-    best_individual = evolve(population, 50)
+    population = generate_population(150)
+    best_individual = evolve(population, 150)
 
     class_schedules = best_individual.class_schedules
 
     context = {"class_schedules": class_schedules}
     instructors = Instructor.objects.all()
+    classSchedules = ClassSchedule.objects.all()
     return render(
         request,
         "schedule.html",
         {
             "instructors": instructors,
+            **context,
+            "classSchedules": classSchedules,
         },
-        context,
     )
 
 
 # GENETIC ALGORITHM 2
+def genetic_algorithm(request):
+    population_size = 100
+    generations = 100
+    population = run_genetic_algorithm(population_size, generations)
+    for schedule in population:
+        for class_schedule in schedule:
+            class_schedule.save()
+    schedules = ClassSchedule.objects.all()
+    context = {
+        "schedules": schedules,
+    }
+    return render(request, "generate_schedule.html", context)

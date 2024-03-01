@@ -237,22 +237,7 @@
   var eventSchedules = {{ eventSchedules | safe }};
 
 </script>
-<script>
-  document.getElementById("generateScheduleBtn").addEventListener("click", function() {
-      var spinner = document.getElementById("spinner");
-      var buttonText = document.getElementById("buttonText");
-      var button = document.getElementById("generateScheduleBtn");
 
-      spinner.classList.toggle("d-none");
-      
-      if (spinner.classList.contains("d-none")) {
-          buttonText.textContent = "Generate Schedule";
-      } else {
-          buttonText.textContent = "Loading...";
-      }
-      button.disabled = true;
-  });
-</script>
 
 {% endblock %}
 {% include "_footer.html" %}

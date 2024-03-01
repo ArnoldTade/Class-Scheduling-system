@@ -995,6 +995,7 @@ thead.table-head {
     margin-top: 20px;
     padding: 40px;
     box-shadow: var(--box-shadow-style2);
+    background-color: #fff;
 
     input {
         border: 1px solid #d8d8d8c7;
@@ -1012,6 +1013,7 @@ thead.table-head {
     box-shadow: var(--box-shadow-style2);
     padding: 40px;
     margin-bottom: 20px;
+    background-color: #fff;
 
     input {
         border: 1px solid #d8d8d8c7;
@@ -1311,10 +1313,23 @@ thead.table-head {
 
 /* Room Allocation */
 .cotainer-room-list {
-    overflow-x: auto;
-
     .table-responsive {
-        position: sticky;
+        overflow-x: auto;
+
+        .table {
+            position: sticky;
+            top: 0;
+        }
+    }
+
+
+
+    .form-select-room,
+    .form-select-room_type {
+        width: 475px;
+        height: 50px;
+        margin: 10px 5px 5px 5px;
+
     }
 }
 
@@ -1327,5 +1342,13 @@ thead.table-head {
 
     .fc-toolbar-chunk {
         display: none;
+    }
+}
+
+.container-update-page {
+    .form-select-room_type {
+        width: 510px;
+        height: 50px;
+        margin: 10px 5px 5px 5px;
     }
 }
