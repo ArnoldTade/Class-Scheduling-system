@@ -251,6 +251,7 @@ def instructors(request):
 @login_required
 def schedule(request):
     instructors = Instructor.objects.all()
+
     return render(
         request,
         "schedule.html",
