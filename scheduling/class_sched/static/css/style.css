@@ -1352,3 +1352,8 @@ thead.table-head {
         margin: 10px 5px 5px 5px;
     }
 }
+
+#id_course_handled {
+    width: 140px;
+    font-size: 20px;
+}

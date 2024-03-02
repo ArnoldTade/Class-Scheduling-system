@@ -26,6 +26,7 @@ class InstructorForm(forms.ModelForm):
             "college",
             "status",
             "role",
+            "course_handled",
         ]
 
 

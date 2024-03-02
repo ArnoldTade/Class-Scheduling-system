@@ -37,6 +37,8 @@ def user_signup(request):
                 instructor = instructor_form.save(commit=False)
                 instructor.user_profile = user
                 instructor.save()
+                selected_courses = request.POST.getlist("course_handled")
+                instructor.course_handled.set(selected_courses)
                 messages.success(request, "Successfully Registered!")
             return redirect("instructors")
     else:
@@ -49,6 +51,7 @@ def user_signup(request):
         {
             "userform": userform,
             "instructor_form": instructor_form,
+            "courses": Course.objects.all(),
         },
     )
 
@@ -209,6 +212,7 @@ def profile(request):
         {
             "instructorSchedule": instructorSchedule,
             "events": events,
+            "instructors": Instructor.objects.all(),
         },
     )
 

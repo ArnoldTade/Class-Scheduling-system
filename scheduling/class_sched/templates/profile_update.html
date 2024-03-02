@@ -1,41 +1,95 @@
 {% include "home_header.html" %}
 {% block content %}
 
- 
-    
-<!-- 
-    <div class="row g-3">
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="username" autocomplete="username" value="{{ username }} " required id="id_username" placeholder="Enter Username">
-        <label for="id_username">Username</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" name="password1" autocomplete="new-password" required id="id_password1" placeholder="Enter Password">
-        <label for="id_password1">Password</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" name="password2" autocomplete="new-password" required  id="id_password2" placeholder="Confirm Password">
-        <label for="id_password2">Confirm Password</label>
-      </div>
-      
-    </div>
-     <hr>
-  
-    </div>
---> 
+
   
 <div class="container-sm container-profile-edit">
   <a href="{% url 'profile'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-profile"><i class="bi bi-arrow-left"></i>Back to Profile page</a>
   <p class="fs-5 text-start">Personal Information</p>
-  
+  <hr>
     <div class="row g-3 ">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ instructorform.as_p }}   
-        
+
+        {{ instructorform.as_p }} 
+        <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
+  
+        <div class="row">
+          <div class="col col-label">Handled Courses: 
+              {% for course in instructorform.instance.course_handled.all %}
+              <li>{{ course.course_name }}</li>
+              {% endfor %}
+          </div>
+        </div>
+
+<!--
+        <div class="col-sm">
+          {{ instructorform.profile_picture }} 
+        </div>  
+  <hr>
+
+        <div class="row">
+          <div class="col-sm col-label">First Name:
+            {{ instructorform.firstName }}   
+          </div>  
+          <div class="col-sm col-label">Last Name:
+            {{ instructorform.lastName }}
+          </div>  
+          <div class="col-sm col-label">Middle Name:
+            {{ instructorform.middleName }} 
+          </div>  
+          <div class="col-sm col-label">Gender:
+            {{ instructorform.gender }}   
+          </div>  
+        </div>
+  <hr>
+
+        <div class="row">
+          <div class="col-sm col-label">Email:
+            {{ instructorform.email }}   
+          </div>  
+          <div class="col-sm col-label">Contact:
+            {{ instructorform.contact }}  
+          </div>  
+          <div class="col-sm col-label">Birthdate:
+            {{ instructorform.birthday }} 
+          </div>  
+          <div class="col-sm col-label">Address: 
+            {{ instructorform.address }}  
+          </div>  
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm col-label">College:
+            {{ instructorform.college }}  
+          </div>  
+          <div class="col-sm col-label">Status:
+            {{ instructorform.status }}  
+          </div>  
+          <div class="col-sm col-label">Role: 
+            {{ instructorform.role }}   
+          </div>  
+        </div>
+          <hr>
+
+          <div class="row">
+            <div class="col col-label">Handled Courses: 
+              <select id="id_course_handled" class="form-select" name="course_handled" readonly >
+                {% for course in request.user.instructor.course_handled.all %}
+                  <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+            <hr>
+-->
         <div class="d-grid col-3 mx-auto ">
           <button type="submit" class="btn btn-success">Save</button>
         </div>
+
+
+      
 
       </form>
   </div>

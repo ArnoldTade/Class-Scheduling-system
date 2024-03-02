@@ -60,34 +60,6 @@
             <option selected>Choose gender</option>
             <option>Male</option>
             <option>Female</option>
-            <option>Transexual Male</option>
-            <option>Transexual Female</option>
-            <option>Metrosexual Male</option>
-            <option>Metrosexual Female</option>
-            <option>Male, But Curious What Being a Female is Like</option>
-            <option>Female, But Curious What Being a Male is Like</option>
-            <option>Male, But Overweight So Has Boobs</option>
-            <option>Female, But have an Adam's Apple</option>
-            <option>Hermaphrodite with predominant Male Leanings</option>
-            <option>Hermaphrodite with Predominant Female Leaning</option>
-            <option>Hermaphrodite with No Strong Gender Leanings</option>
-            <option>Conjoined Twin - Male</option>
-            <option>Conjoined Twin - Female</option>
-            <option>Born Without Genitals - Identify as a Male</option>
-            <option>Born Without Genitals - Identify as a Female</option>
-            <option>Born Without Genitals - Proud of it</option>
-            <option>Born as a Male, Bad Circumcision, Raised Female</option>
-            <option>Sentient Artificial Intelligence With No Gender</option>
-            <option>Sentient Artificial Intelligence - Identifies as Male</option>
-            <option>Sentient Artificial Intelligence - Identifies as Female</option>
-            <option>Household Pet That Walked Across the Keyboard - Male</option>
-            <option>Household Pet That Walked Across the Keyboard - Female</option>
-            <option>Household Pet That Walked Across the Keyboard - Other</option>
-            <option>Attack Helicopter</option>
-            <option>Other</option>
-            <option>None</option>
-            <option>Prefer Not to Say</option>
-
           </select>
         </div>
 
@@ -112,36 +84,47 @@
         </div>
         <hr>
         <p class="fs-5 text-start">Other Information</p>
- 
-        <div class="col-md-8">
-          <select id="id_college" class="form-select form-select-lg" name="college" required>
-            <option selected>Choose College</option>
-            <option value="CAS">College of Arts and Sciences</option>
-            <option value="CBA">College of Business Administration</option>
-            <option value="CIT">College of Insdustrial Technology</option>
-            <option value="CTED">College of Teacher Education</option>
-            <option value="CCJE">College of Criminal Justice Education</option>
-            <option value="CAF">College of Agriculture and Forestry</option>
-          </select>
-        </div>
-      
-        <div class="col-md-8">
-          <select id="id_status" class="form-select form-select-lg" name="status" required >
-            <option selected>Choose Status</option>
-            <option value="Full time">Full Time</option>
-            <option value="Part time">Part Time</option>
-          </select>
-        </div>
+          <div class="col-mb-8">
+            <select id="id_college" class="form-select form-select-lg" name="college" required>
+              <option selected>Choose College</option>
+              <option value="CAS">College of Arts and Sciences</option>
+              <option value="CBA">College of Business Administration</option>
+              <option value="CIT">College of Insdustrial Technology</option>
+              <option value="CTED">College of Teacher Education</option>
+              <option value="CCJE">College of Criminal Justice Education</option>
+              <option value="CAF">College of Agriculture and Forestry</option>
+            </select>
+          </div>
+        
+          <div class="col-mb-8">
+            <select id="id_status" class="form-select form-select-lg" name="status" required >
+              <option selected>Choose Status</option>
+              <option value="Permanent">Permanent</option>
+              <option value="Temporary">Temporary</option>
+              <option value="Part time">Part Time</option>
+            </select>
+          </div>
+          <div class="col-mb-8">
+            <select name="role" required id="id_role"  class="form-select form-select-lg">
+                <option selected>Choose Role...</option>
+                <option>User</option>
+                <option>Admin</option>
+            </select>
+          </div>
+          <hr>
+       
 
+          <div class="col-mb-8">
+            <p class="fs-5 text-start">Courses Handled:</p>
+            <select name="course_handled" required id="id_course_handled"  class="form-select form-select-lg" multiple>
+                {% for course in courses %}
+                <option value="{{ course.id }}" {% if course in instructor_form.instance.course_handled.all %} selected {% endif %}>{{ course.course_name }}</option>
+                {% endfor %}
+            </select>
+            <p class="fs-6 text-start">Hold down “Control” to select more than one.</p>
+          </div>
 
-        <hr>
-        <div class="col-md-8">
-          <select name="role" required id="id_role"  class="form-select form-select-lg">
-              <option selected>Choose Role...</option>
-              <option>User</option>
-              <option>Admin</option>
-          </select>
-        </div>
+          <!--{{ instructor_form.course_handled }} -->
 
     </div>
     <hr>

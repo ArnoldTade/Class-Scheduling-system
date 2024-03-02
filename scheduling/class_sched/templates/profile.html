@@ -14,7 +14,6 @@
           </div>
         <div class="col-sm-8 profile-info">
           {% csrf_token %}
-          <!--STILL NOT WORKING-->
           <form id="profile-update-form" method="POST" enctype="multipart/form-data" >
             <div class="row row-first">
                 <div class="col-sm col-label">First Name: <input class="form-control" type="text" id="id_firstName" name="firstName" value="{{ request.user.instructor.firstName }} " aria-label="default input example" readonly></div>
@@ -30,10 +29,21 @@
             <div class="row">
               <div class="col-sm col-label">Address: <input class="form-control" type="text" name="address" id="id_address" value="{{ request.user.instructor.address }}" aria-label="default input example" readonly></div>
                 <div class="col col-label">College: <input class="form-control" type="text" id="id_college" name="college" value="{{ request.user.instructor.college }}" aria-label="default input example" readonly></div>
-                <!--<div class="col col-label">Handled Subjects: <input class="form-control" type="text" value="ITS 102, ITS202, GE12" aria-label="default input example" readonly></div> -->
                 <div class="col col-label">Time Availability: <input class="form-control" type="text" name="status" id="id_status" value="{{ request.user.instructor.status }}" aria-label="default input example" readonly></div>
               </div>
-           
+
+
+              <div class="row">
+                <div class="col col-label">Handled Courses: 
+                  <select id="id_course_handled" class="form-select" name="course_handled" readonly >
+                    {% for course in request.user.instructor.course_handled.all %}
+                      <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+
             <div class="row">
                 <div class="d-grid gap-2 d-md-flex justify-content-end">
                     <a href="{% url 'editprofile' id=request.user.instructor.id %}" class="btn btn-default btn-edit-profile" id="btnEditProfile" type="button">Edit Profile</a>
@@ -47,6 +57,8 @@
 
 
 <p class="fs-5 text-start user-page-title">Schedules</p>
+
+
 <hr>
 <section class="section-profile-content">
     <nav id="navbar-example2" class="navbar sticky-top bg-body-tertiary px-3 mb-3">
@@ -65,6 +77,7 @@
       <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -10%" data-bs-smooth-scroll="true" class="scrollspy-example p-3 rounded-2" tabindex="0">
         <div class="container-fluid table-responsive container-nav-schedule" id="ViewSchedules">
             <h4 class="text-start">Schedules</h4>
+
                 <table class="table table-hover table-striped caption-top">
                     <thead class="table-dark">
                       <tr>

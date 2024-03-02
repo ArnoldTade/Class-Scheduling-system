@@ -20,6 +20,7 @@ class Instructor(models.Model):
     college = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
+    course_handled = models.ManyToManyField("Course")
 
 
 class Room(models.Model):
@@ -38,6 +39,9 @@ class Course(models.Model):
     course = models.CharField(max_length=100)
     semester = models.CharField(max_length=100)
     year_level = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.course_name
 
 
 class ClassSchedule(models.Model):
