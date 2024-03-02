@@ -22,11 +22,17 @@ class Instructor(models.Model):
     role = models.CharField(max_length=100)
     course_handled = models.ManyToManyField("Course")
 
+    def __str__(self):
+        return self.firstName
+
 
 class Room(models.Model):
     room_name = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
     room_type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.room_name
 
 
 class Course(models.Model):
@@ -50,9 +56,10 @@ class ClassSchedule(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_time = models.CharField(max_length=100)
     end_time = models.CharField(max_length=100)
-    days_of_week = models.CharField(max_length=50)
+    days_of_week = models.ManyToManyField("Week")
     semester = models.CharField(max_length=50)
     year = models.CharField(max_length=100)
+    section = models.ManyToManyField("Section")
 
     def has_conflict(self):
         conflicts = ClassSchedule.objects.filter(
@@ -65,6 +72,22 @@ class ClassSchedule(models.Model):
         ).exclude(pk=self.pk)
 
         return conflicts.count()
+
+
+class Week(models.Model):
+    day = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.day
+
+
+class Section(models.Model):
+    program = models.CharField(max_length=100)
+    yr_level = models.CharField(max_length=100)
+    section = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.program
 
 
 class Feedback(models.Model):
