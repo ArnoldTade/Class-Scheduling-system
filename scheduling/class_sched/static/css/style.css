@@ -1357,3 +1357,35 @@ thead.table-head {
     width: 140px;
     font-size: 20px;
 }
+
+.form-handle-subject-page {
+    font-size: 15px !important;
+}
+
+.section-generate {
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    overflow: auto;
+    max-height: 500px;
+
+    .container-generate-schedule {
+        overflow-x: auto;
+
+        table {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+
+        }
+
+    }
+}
+
+.section-sections {
+    background-color: #fff;
+    margin-top: 30px;
+
+}

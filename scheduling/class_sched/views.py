@@ -101,9 +101,15 @@ def home(request):
 
 
 def generate_schedule(request):
+    instructors = Instructor.objects.all()
+    sections = Section.objects.all()
     return render(
         request,
         "generate_schedule.html",
+        {
+            "instructors": instructors,
+            "sections": sections,
+        },
     )
 
 

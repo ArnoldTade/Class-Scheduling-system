@@ -5,17 +5,11 @@
 <h4 class="text-start text-schedule">Generate Schedule</h4>
 <hr>
 
-<div class="container-fluid">
-            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-primary" type="button">
-                <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
-                <span id="buttonText">Generate Schedule</span>
-              </a>
-</div>
-<hr>
 
 <div class="container-fluid container-subject-page">
-  <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <p class="text-center fs-5">Select College, school year and Semester to generate schedule </p>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <div class="row">
                 <div class="col-sm">
                     <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
@@ -29,13 +23,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <select class="form-select" id="category-year-level" style="width:auto;" aria-label="Default select example" placeholder="Select College">
-                    <option value="all" selected>All Year Level</option>
-                    <option value="1st Year">1st Year</option>
-                    <option value="2nd Year">2nd Year</option>
-                    <option value="3rd Year">3rd Year</option>
-                    <option value="4th Year">4th Year</option>
-                    </select>
+                    <input class="form-control" type="text" name="year" id="id_year" aria-label="default input example" placeholder="Enter School Year">
                 </div>
                 <div class="col-sm">
                     <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
@@ -49,7 +37,93 @@
             </div>
         </div>
     </nav>
-</div>
+</div> 
+  
+<section class="section-generate">
+    <div class="container-fluid table-responsive container-generate-schedule">
+        <table class="table table-hover table-striped caption-top">
+            <caption><p class="text-start">Change Handled Subjects for each Faculty </p></caption>
+                <thead class="table-warning sticky-sm-top">
+                <tr>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">College</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Handled Subjects</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody id="course-table-body">
+                {% for instructor in instructors  %}
+                    <tr data-college="{{ instructor.college }}">
+                        <th scope="row">
+                        <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+                        <td>
+                        {{ instructor.firstName }} {{ instructor.lastName }}
+                        </td> 
+                        <td>{{ instructor.college }}</td>
+                        <td>{{ instructor.status }}</td>
+                        <td>
+                            <select id="id_course_handled" class="form-select form-handle-subject-page" name="course_handled" readonly >
+                                {% for course in instructor.course_handled.all %}
+                                <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                        <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                        <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section-sections">
+    <div class="container-fluid table-responsive container-generate-schedule">
+        <table class="table table-hover table-striped caption-top">
+            <caption><p class="text-start">Sections </p></caption>
+                <thead class="table-warning sticky-sm-top">
+                <tr>
+                    <th scope="col">Program</th>
+                    <th scope="col">Year Level</th>
+                    <th scope="col">Section</th>
+                </tr>
+                </thead>
+                <tbody id="course-table-body">
+                {% for section in sections  %}
+                    <tr data-college="{{ section.program }}">
+                        <th scope="row">{{ section.yr_level }}</th>
+                        <td>{{ section.section }}</td>
+                        <td>
+                            <select id="id_course_handled" class="form-select form-handle-subject-page" name="course_handled" readonly >
+                                {% for course in instructor.course_handled.all %}
+                                <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                        <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                        <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</section>
+<hr>
+    <div class="container-fluid">
+        <p class="text-start">Generate  Schedule:</p>
+        <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-warning" type="button">
+            <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
+            <span id="buttonText">Generate Schedule</span>
+          </a>
+    </div>
+<br>
+
 <!--
     <div class="container-fluid">
         <h1>Genetic Algorithm Schedules</h1>
@@ -104,8 +178,29 @@
         }
         button.disabled = true;
     });
-  </script>
+</script>
+
+  <script>
+    document.querySelectorAll('.form-select').forEach(function(select) {
+        select.addEventListener('change', function() {
+            filterTable();
+        });
+    });
   
+    function filterTable() {
+        var selectedCollege = document.getElementById('category-college').value;
+        var rows = document.querySelectorAll('#course-table-body tr');
+        rows.forEach(function(row) {
+            var college = row.getAttribute('data-college');
+            var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
+            if (collegeMatch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+  </script>
 
 {% endblock %}
 {% include "_footer.html" %}

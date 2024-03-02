@@ -83,8 +83,9 @@ class Week(models.Model):
 
 class Section(models.Model):
     program = models.CharField(max_length=100)
-    yr_level = models.CharField(max_length=100)
+    yr_level = models.IntegerField(max_length=100)
     section = models.CharField(max_length=100)
+    section_college = models.CharField(max_length=100)
 
     def __str__(self):
         return self.program
