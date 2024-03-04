@@ -114,6 +114,17 @@ def generate_schedule(request):
     )
 
 
+def section(request):
+    sections = Section.objects.all()
+    return render(
+        request,
+        "section.html",
+        {
+            "sections": sections,
+        },
+    )
+
+
 def home_schedule(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)

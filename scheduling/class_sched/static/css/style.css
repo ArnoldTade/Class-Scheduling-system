@@ -1404,7 +1404,7 @@ thead.table-head {
 }
 
 
-.section-sections {
+.section-create-schedules {
     background-color: #fff;
     margin-top: 50px;
     margin-bottom: 10px;
@@ -1412,6 +1412,21 @@ thead.table-head {
     overflow: auto;
     max-height: 80vh;
     box-shadow: var(--box-shadow-style2);
+    padding: 20px;
+}
+
+/* Section Page */
+
+
+.section-sections {
+    background-color: #fff;
+    margin-bottom: 10px;
+    max-width: 100%;
+    /* overflow: auto;
+    max-height: 80vh;
+    */
+    box-shadow: var(--box-shadow-style2);
+    padding-top: 10px;
 
     .container-section-schedule {
         overflow-x: auto;
@@ -1425,15 +1440,4 @@ thead.table-head {
         }
 
     }
-}
-
-.section-create-schedules {
-    background-color: #fff;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    max-width: 100%;
-    overflow: auto;
-    max-height: 80vh;
-    box-shadow: var(--box-shadow-style2);
-    padding: 20px;
 }

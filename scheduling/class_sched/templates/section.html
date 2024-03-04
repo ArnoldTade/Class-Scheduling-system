@@ -1,0 +1,86 @@
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+ 
+
+<div class="container-fluid container-subject-page">
+    <p class="text-start fs-5">Section </p>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="row">
+                <div class="col-sm">
+                    <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+                    <option value="all" selected>All Colleges</option>
+                    <option value="CAS">College of Arts and Sciences</option>
+                    <option value="CBA">College of Business Administration</option>
+                    <option value="CIT">College of Industrial Technology</option>
+                    <option value="CTED">College of Teacher Education</option>
+                    <option value="CCJE">College of Criminal Justice Education</option>
+                    <option value="CAF">College of Agriculture and Forestry</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div> 
+
+
+<!-- Section Info -->
+<section class="section-sections">
+    <div class="col-sm">
+        <div class="container-fluid table-responsive container-section-schedule">
+            <table class="table table-hover table-striped caption-top">
+                <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Section</button></caption>
+                    <thead class="table-info sticky-sm-top">
+                    <tr >
+                        <th scope="col">College</th>
+                        <th scope="col">Sections</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="course-table-body">
+                        {% for section in sections  %}
+                        <tr data-college="{{ section.section_college }}">
+                            <th scope="row">{{ section.section_college }}</th>
+                            <th scope="row">{{ section.program_section }}</th>
+                            <td>
+                                <a href="#" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                                <a href="#" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                                </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm">
+    </div>
+
+</section>
+
+
+
+<script>
+    document.querySelectorAll('.form-select').forEach(function(select) {
+        select.addEventListener('change', function() {
+            filterTable();
+        });
+    });
+
+    function filterTable() {
+        var selectedCollege = document.getElementById('category-college').value;
+        var rows = document.querySelectorAll('#course-table-body tr');
+        rows.forEach(function(row) {
+            var college = row.getAttribute('data-college');
+            var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
+            if (collegeMatch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+{% endblock %}
+{% include "_footer.html" %}
+
