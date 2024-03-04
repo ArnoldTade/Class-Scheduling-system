@@ -35,9 +35,17 @@
 
               <div class="row">
                 <div class="col col-label">Handled Courses: 
-                  <select id="id_course_handled" class="form-select" name="course_handled" readonly >
+                  <select id="id_course_handled_profile" class="form-select form-profile-course" name="course_handled" readonly >
                     {% for course in request.user.instructor.course_handled.all %}
                       <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <div class="col col-label">Handled Sections: 
+                  <select id="id_section_handled_profile" class="form-select form-profile-section" name="section_handled" readonly >
+                    {% for section in request.user.instructor.section_handled.all %}
+                      <option value="{{ section.program_section }}">{{ section.program_section }}</option>
                     {% endfor %}
                   </select>
                 </div>

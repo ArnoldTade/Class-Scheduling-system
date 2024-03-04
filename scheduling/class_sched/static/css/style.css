@@ -397,6 +397,7 @@ hr {
     color: var(--home-color) !important;
 }
 
+
 .container-profile {
     border: solid 1px #e2e2e2;
     box-shadow: var(--box-shadow-style2);
@@ -458,6 +459,10 @@ hr {
 
 }
 
+.form-profile-course {
+    width: 140px !important;
+    font-size: 20px;
+}
 
 
 .section-profile-content {
@@ -1360,9 +1365,20 @@ thead.table-head {
     font-size: 20px;
 }
 
+
+
 .form-handle-subject-page {
     font-size: 15px !important;
 }
+
+
+/* Generate schedule Page */
+#id_course_handled_page,
+#id_section_handled_page {
+    width: 140px !important;
+    font-size: 15px !important;
+}
+
 
 .section-generate {
     background-color: #fff;
@@ -1371,6 +1387,7 @@ thead.table-head {
     max-width: 100%;
     overflow: auto;
     max-height: 500px;
+    box-shadow: var(--box-shadow-style2);
 
     .container-generate-schedule {
         overflow-x: auto;
@@ -1386,8 +1403,26 @@ thead.table-head {
     }
 }
 
+
 .section-sections {
     background-color: #fff;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    overflow: auto;
+    max-height: 400px;
+    box-shadow: var(--box-shadow-style2);
 
+    .container-section-schedule {
+        overflow-x: auto;
+
+        table {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+
+        }
+
+    }
 }

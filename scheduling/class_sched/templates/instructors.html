@@ -37,14 +37,14 @@
 <!--Header-->
 <div class="row row-select">
   <div class="col">
-    <select class="form-select instructor-college-select" aria-label="Default select example">
-      <option selected>All College</option>
-      <option>College of Arts and Sciences</option>
-      <option>College of Business Administration</option>
-      <option>College of Insdustrial Technology</option>
-      <option>College of Teacher Education</option>
-      <option>College of Criminal Justice Education</option>
-      <option>College of Agriculture and Forestry</option>
+    <select class="form-select instructor-college-select" id="category-college"  aria-label="Default select example">
+      <option value="all" selected>All Colleges</option>
+      <option value="CAS">College of Arts and Sciences</option>
+      <option value="CBA">College of Business Administration</option>
+      <option value="CIT">College of Industrial Technology</option>
+      <option value="CTED">College of Teacher Education</option>
+      <option value="CCJE">College of Criminal Justice Education</option>
+      <option value="CAF">College of Agriculture and Forestry</option>
     </select>
   </div>
   
@@ -76,10 +76,10 @@
               <th scope="col">View</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="instructor-table-body">
             {% for instructor in instructors  %}
               {% if instructor.role == "User" %}
-            <tr>
+            <tr data-college="{{ instructor.college }}">
               <th scope="row">
                 <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
               <td>
@@ -104,6 +104,7 @@
         </table>
       </div>
     </div>
+
     <!--Admin Table-->
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
       <div class="container-fluid table-responsive instructor-table">
@@ -121,10 +122,10 @@
               <th scope="col">View</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="instructor-table-body">
             {% for instructor in instructors  %}
               {% if instructor.role == "Admin" %}
-            <tr>
+            <tr data-college="{{ instructor.college }}">
               <th scope="row">
                 <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
               <td>
@@ -153,9 +154,28 @@
 </div>
 
 
+<script>
+  document.querySelectorAll('.form-select').forEach(function(select) {
+      select.addEventListener('change', function() {
+          filterTable();
+      });
+  });
+
+  function filterTable() {
+      var selectedCollege = document.getElementById('category-college').value;
+      var rows = document.querySelectorAll('#instructor-table-body tr');
+      rows.forEach(function(row) {
+          var college = row.getAttribute('data-college');
+          var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
+          if (collegeMatch) {
+              row.style.display = '';
+          } else {
+              row.style.display = 'none';
+          }
+      });
+  }
+</script>
 
 {% endblock %}
-
-  
 {% include "_footer.html" %}
  
