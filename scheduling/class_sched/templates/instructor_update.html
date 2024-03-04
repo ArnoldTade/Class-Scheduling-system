@@ -12,12 +12,23 @@
                 <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
   
                 <div class="row">
-                <div class="col col-label">Handled Courses: 
-                    {% for course in instructorform.instance.course_handled.all %}
-                    <li>{{ course.course_name }}</li>
-                    {% endfor %}
+                    <div class="col col-label">Handled Courses: 
+                        {% for course in instructorform.instance.course_handled.all %}
+                        <li>{{ course.course_name }}</li>
+                        {% endfor %}
+                    </div>
                 </div>
+                <br>
+
+                <div class="row">
+                    <div class="col col-label">Handled Sections: 
+
+                        {% for section in instructorform.instance.section_handled.all %}
+                            <li>{{ section.program_section }}</li>
+                        {% endfor %}
+                    </div>
                 </div>
+                    <hr>
                 <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
                     
             </form>

@@ -21,6 +21,7 @@ class Instructor(models.Model):
     status = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
     course_handled = models.ManyToManyField("Course")
+    section_handled = models.ManyToManyField("Section", blank=True)
 
     def __str__(self):
         return self.firstName
@@ -59,7 +60,7 @@ class ClassSchedule(models.Model):
     days_of_week = models.ManyToManyField("Week")
     semester = models.CharField(max_length=50)
     year = models.CharField(max_length=100)
-    section = models.ManyToManyField("Section")
+    section = models.CharField(max_length=100)
 
     def has_conflict(self):
         conflicts = ClassSchedule.objects.filter(
@@ -82,13 +83,11 @@ class Week(models.Model):
 
 
 class Section(models.Model):
-    program = models.CharField(max_length=100)
-    yr_level = models.IntegerField(max_length=100)
-    section = models.CharField(max_length=100)
+    program_section = models.CharField(max_length=100)
     section_college = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.program
+        return self.program_section
 
 
 class Feedback(models.Model):

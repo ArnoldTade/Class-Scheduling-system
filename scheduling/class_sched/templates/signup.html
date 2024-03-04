@@ -113,12 +113,32 @@
           </div>
           <hr>
        
-
+          <div class="col-sm">
+            <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
+              <option value="all" selected>All Colleges</option>
+              <option value="CAS">College of Arts and Sciences</option>
+              <option value="CBA">College of Business Administration</option>
+              <option value="CIT">College of Industrial Technology</option>
+              <option value="CTED">College of Teacher Education</option>
+              <option value="CCJE">College of Criminal Justice Education</option>
+              <option value="CAF">College of Agriculture and Forestry</option>
+            </select>
+        </div>
           <div class="col-mb-8">
             <p class="fs-5 text-start">Courses Handled:</p>
             <select name="course_handled" required id="id_course_handled"  class="form-select form-select-lg" multiple>
                 {% for course in courses %}
-                <option value="{{ course.id }}" {% if course in instructor_form.instance.course_handled.all %} selected {% endif %}>{{ course.course_name }}</option>
+                <option value="{{ course.id }}" data-college="{{ course.college }}">{{ course.course_name }}</option>
+                {% endfor %}
+            </select>
+            <p class="fs-6 text-start">Hold down “Control” to select more than one.</p>
+          </div>
+
+          <div class="col-mb-8">
+            <p class="fs-5 text-start">Sections Handled:</p>
+            <select name="section_handled" required id="id_section_handled" class="form-select form-select-lg" multiple>
+                {% for section in sections %}
+                <option value="{{ section.id }}" data-college="{{ section.section_college }}">{{ section.program_section }}</option>
                 {% endfor %}
             </select>
             <p class="fs-6 text-start">Hold down “Control” to select more than one.</p>
@@ -136,6 +156,48 @@
  
 </form>
 
+</script>
+
+  <script>
+    document.getElementById('category-college').addEventListener('change', function() {
+      filterCourses();
+    });
+  
+    function filterCourses() {
+      var selectedCollege = document.getElementById('category-college').value;
+      var courseSelect = document.getElementById('id_course_handled');
+      var courseSection = document.getElementById('id_section_handled');
+      var courses = courseSelect.options;
+      var sections = courseSection.options;
+      
+      // Reset selected options
+      for (var i = 0; i < courses.length; i++) {
+        courses[i].selected = false;
+      }
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].selected = false;
+      }
+      
+      // Hide options not matching the selected college
+      for (var i = 0; i < courses.length; i++) {
+        var college = courses[i].getAttribute('data-college');
+        if (selectedCollege === 'all' || college === selectedCollege) {
+          courses[i].style.display = '';
+        } else {
+          courses[i].style.display = 'none';
+        }
+      }
+
+      for (var i = 0; i < sections.length; i++) {
+        var college = sections[i].getAttribute('data-college');
+        if (selectedCollege === 'all' || college === selectedCollege) {
+          sections[i].style.display = '';
+        } else {
+          sections[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
 
 {% endblock %}
 {% include "_footer.html" %}

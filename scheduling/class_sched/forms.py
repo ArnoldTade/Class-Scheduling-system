@@ -27,6 +27,7 @@ class InstructorForm(forms.ModelForm):
             "status",
             "role",
             "course_handled",
+            "section_handled",
         ]
 
 
@@ -81,4 +82,13 @@ class WeekForm(forms.ModelForm):
         model = Week
         fields = [
             "day",
+        ]
+
+
+class SectionForm(forms.ModelForm):
+    class Meta:
+        model = Section
+        fields = [
+            "program_section",
+            "section_college",
         ]

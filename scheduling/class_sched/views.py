@@ -52,6 +52,7 @@ def user_signup(request):
             "userform": userform,
             "instructor_form": instructor_form,
             "courses": Course.objects.all(),
+            "sections": Section.objects.all(),
         },
     )
 

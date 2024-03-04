@@ -1353,8 +1353,10 @@ thead.table-head {
     }
 }
 
-#id_course_handled {
+#id_course_handled,
+#id_section_handled {
     width: 140px;
+    height: 200px;
     font-size: 20px;
 }
 
