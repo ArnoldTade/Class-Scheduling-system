@@ -1386,7 +1386,7 @@ thead.table-head {
     margin-bottom: 10px;
     max-width: 100%;
     overflow: auto;
-    max-height: 500px;
+    max-height: 100vh;
     box-shadow: var(--box-shadow-style2);
 
     .container-generate-schedule {
@@ -1410,7 +1410,7 @@ thead.table-head {
     margin-bottom: 10px;
     max-width: 100%;
     overflow: auto;
-    max-height: 400px;
+    max-height: 80vh;
     box-shadow: var(--box-shadow-style2);
 
     .container-section-schedule {
@@ -1425,4 +1425,15 @@ thead.table-head {
         }
 
     }
+}
+
+.section-create-schedules {
+    background-color: #fff;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    overflow: auto;
+    max-height: 80vh;
+    box-shadow: var(--box-shadow-style2);
+    padding: 20px;
 }

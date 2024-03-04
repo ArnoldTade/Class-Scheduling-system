@@ -133,17 +133,17 @@
             </select>
             <p class="fs-6 text-start">Hold down “Control” to select more than one.</p>
           </div>
-
+        <!--
           <div class="col-mb-8">
             <p class="fs-5 text-start">Sections Handled:</p>
             <select name="section_handled" required id="id_section_handled" class="form-select form-select-lg" multiple>
                 {% for section in sections %}
-                <option value="{{ section.id }}" data-college="{{ section.section_college }}">{{ section.program_section }}</option>
+                <option value="{{ section.id }}" data-section="{{ section.section_college }}">{{ section.program_section }}</option>
                 {% endfor %}
             </select>
             <p class="fs-6 text-start">Hold down “Control” to select more than one.</p>
           </div>
-
+          -->
           <!--{{ instructor_form.course_handled }} -->
 
     </div>
@@ -166,19 +166,19 @@
     function filterCourses() {
       var selectedCollege = document.getElementById('category-college').value;
       var courseSelect = document.getElementById('id_course_handled');
-      var courseSection = document.getElementById('id_section_handled');
+     // var courseSection = document.getElementById('id_section_handled');
       var courses = courseSelect.options;
-      var sections = courseSection.options;
+     // var sections = courseSection.options;
       
-      // Reset selected options
       for (var i = 0; i < courses.length; i++) {
         courses[i].selected = false;
       }
+      /*
       for (var i = 0; i < sections.length; i++) {
         sections[i].selected = false;
       }
+      */
       
-      // Hide options not matching the selected college
       for (var i = 0; i < courses.length; i++) {
         var college = courses[i].getAttribute('data-college');
         if (selectedCollege === 'all' || college === selectedCollege) {
@@ -187,16 +187,18 @@
           courses[i].style.display = 'none';
         }
       }
-
+      /*
       for (var i = 0; i < sections.length; i++) {
-        var college = sections[i].getAttribute('data-college');
+        var college = sections[i].getAttribute('data-section');
         if (selectedCollege === 'all' || college === selectedCollege) {
           sections[i].style.display = '';
         } else {
           sections[i].style.display = 'none';
         }
       }
-    }
+       */
+    } 
+   
   </script>
 
 {% endblock %}
