@@ -89,7 +89,7 @@ def user_logout(request):
     return redirect("login")
 
 
-### Home page ##
+### Home page ###
 def home(request):
     instructors = Instructor.objects.all()
     return render(
@@ -416,15 +416,45 @@ def update_section(request, id=None):
 def update_instructor(request, id=None):
     instructors = {}
     instructor = get_object_or_404(Instructor, id=id)
+    instructor_courses = InstructorCourse.objects.filter(instructor=instructor)
+
     instructorform = InstructorForm(request.POST, request.FILES, instance=instructor)
     if instructorform.is_valid():
         instructorform.save()
         messages.success(request, "Instructor Updated!")
         return redirect("instructors")
+    else:
+        instructorform = InstructorForm(instance=instructor)
 
-    instructorform = InstructorForm(instance=instructor)
     instructors["instructorform"] = instructorform
-    return render(request, "instructor_update.html", instructors)
+    instructors["instructor_courses"] = instructor_courses
+    return render(
+        request,
+        "instructor_update.html",
+        instructors,
+    )
+
+
+def update_instructor_sections_courses(request, id=None):
+    instructors = {}
+    instructor = get_object_or_404(Instructor, id=id)
+    instructor_courses = InstructorCourse.objects.filter(instructor=instructor)
+
+    instructorform = InstructorForm(request.POST, request.FILES, instance=instructor)
+    if instructorform.is_valid():
+        instructorform.save()
+        messages.success(request, "Instructor Updated!")
+        return redirect("generate-schedule")
+    else:
+        instructorform = InstructorForm(instance=instructor)
+
+    instructors["instructorform"] = instructorform
+    instructors["instructor_courses"] = instructor_courses
+    return render(
+        request,
+        "generate_update.html",
+        instructors,
+    )
 
 
 def profile_edit(request, id=None):

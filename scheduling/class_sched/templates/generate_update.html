@@ -2,8 +2,9 @@
 {% block content %}
 
 
+
 <div class="container-sm container-instructor-update" id="container-instructor-edit">
-    <a href="{% url 'instructors'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back to Instructor page</a>
+    <a href="{% url 'generate-schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back </a>
     <div class="row">
         <div class="col-sm col-subject-edit" id="col-subject-edit">
             <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
@@ -11,24 +12,9 @@
                 {{ instructorform.as_p }}   
                 <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
   
-                <div class="row">
-                    <div class="col col-label">Handled Courses: 
-                        {% for course in instructorform.instance.course_handled.all %}
-                        <li>{{ course.course_name }}</li>
-                        {% endfor %}
-                    </div>
-                </div>
+              
                 <br>
-                <!--
-                <div class="row">
-                    <div class="col col-label">Handled Sections: 
-
-                        {% for section in instructorform.instance.section_handled.all %}
-                            <li>{{ section.program_section }}</li>
-                        {% endfor %}
-                    </div>
-                </div>
-                -->
+              
                 <h4>Instructor Courses:</h4>
                     <ul>
                     {% for instructor_course in instructor_courses %}
@@ -48,8 +34,6 @@
     </div>
 </div>
   
+
 {% endblock %}
 {% include "_footer.html" %}
-
-
-

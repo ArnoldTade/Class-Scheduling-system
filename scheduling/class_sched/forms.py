@@ -27,7 +27,6 @@ class InstructorForm(forms.ModelForm):
             "status",
             "role",
             "course_handled",
-            "section_handled",
         ]
 
 
@@ -92,4 +91,14 @@ class SectionForm(forms.ModelForm):
             "program_section",
             "section_college",
             "number_students",
+        ]
+
+
+class InstructorCourseForm(forms.ModelForm):
+    class Meta:
+        model = InstructorCourse
+        fields = [
+            "instructor",
+            "course",
+            "sections",
         ]

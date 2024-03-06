@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- {% load bootstrap5 %} -->
+
+    <!--FULLCALENDAR-->
+    <script src="{% static 'js/index.global.min.js' %}"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Class Scheduling</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <!--HOME NAV-->
+    <nav class="navbar navbar-expand-lg" id="home-nav">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" id="home-logo" href="#">e-ClasSched</a>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="home-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#home-schedule">Schedules</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-login"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!--END HOME NAV-->
+  </body>
+</html>

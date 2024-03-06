@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 
 # Create your models here.
 
@@ -20,8 +21,7 @@ class Instructor(models.Model):
     college = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
-    course_handled = models.ManyToManyField("Course")
-    section_handled = models.ManyToManyField("Section", blank=True)
+    course_handled = models.ManyToManyField("Course", through="InstructorCourse")
 
     def __str__(self):
         return self.firstName
@@ -89,6 +89,12 @@ class Section(models.Model):
 
     def __str__(self):
         return self.program_section
+
+
+class InstructorCourse(models.Model):
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    sections = models.ManyToManyField(Section, blank=True)
 
 
 class Feedback(models.Model):
