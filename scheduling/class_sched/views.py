@@ -372,6 +372,35 @@ def delete_instructor(request, id=None):
     return redirect("instructors")
 
 
+def delete_schedule_section(request, id=None):
+    instructor_course = InstructorCourse.objects.get(pk=id)
+
+    section_to_delete_id = request.POST.get("section_id")
+    if section_to_delete_id:
+        try:
+            section_to_delete = Section.objects.get(pk=section_to_delete_id)
+            instructor_course.sections.remove(section_to_delete)
+            messages.success(request, "Section Deleted!")
+            if not instructor_course.sections.exists():
+                instructor_course.delete()
+                messages.success(
+                    request, "Instructor course has no sections and is now removed."
+                )
+        except Section.DoesNotExist:
+            messages.error(request, "Section not found.")
+    else:
+        messages.error(request, "Section not specified.")
+
+    return redirect("generate-schedule")
+
+
+def delete_schedule_course(request, id=None):
+    instructor_course = InstructorCourse.objects.get(id=id)
+    instructor_course.delete()
+    messages.success(request, "Successfully Deleted Course and its Section!")
+    return redirect("generate-schedule")
+
+
 ################# /// EDIT VIEWS ///######################
 def update_subject(request, id=None):
     courses = {}

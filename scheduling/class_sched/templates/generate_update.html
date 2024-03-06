@@ -24,22 +24,28 @@
                                 <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i>Add New Course and Assign Sections</button></caption>
                                 <p class="text start fs-5">Name: {{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}</p>
                                 
-                                {% for instructor_course in instructor_courses %}
-                                    <thead class="table-warning">
-                                    <tr>
-                                        <th scope="col">{{ instructor_course.course }}  </th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for section in instructor_course.sections.all %}
-                                    <tr>
-                                            <td>{{ section.program_section }}</td>
-                                            <td style="text-align: right;"><a href="#" type="button" class="btn btn-danger btn-sm "  onclick="return confirm('Are you sure you want to delete this account?');">Remove</a></td>
-                                    </tr>
+                               
+                                        {% for instructor_course in instructor_courses %}
+                                            <thead class="table-warning">
+                                            <tr>
+                                                <th scope="col">{{ instructor_course.course }}  </th>
+                                                <th scope="col" style="text-align: right;"><a href="{% url 'delete-course-section' instructor_course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this entire course and sections?');">Remove Course</a></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for section in instructor_course.sections.all %}
+                                            <tr>
+                                                    <td>{{ section.program_section }}</td>
+                                                    <td style="text-align: right;">
+                                                        <form action="{% url 'deletesection' instructor_course.id %}" method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="section_id" value="{{ section.id }}">
+                                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this section?');">Remove Section</button>
+                                                          </form>
+                                                    </td>
+                                            </tr>
+                                                {% endfor %}     
                                         {% endfor %}    
-                                {% endfor %}    
-                                
                                 </tbody>
                             </table>
                         </div> 

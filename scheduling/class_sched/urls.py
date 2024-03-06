@@ -22,6 +22,12 @@ urlpatterns = [
     path("deletesubject/<int:id>", views.delete_subject, name="deletesubject"),
     path("deleteroom/<int:id>", views.delete_room, name="deleteroom"),
     path("deleteinstructor/<int:id>", views.delete_instructor, name="deleteinstructor"),
+    path("deletesection/<int:id>", views.delete_schedule_section, name="deletesection"),
+    path(
+        "delete-course-section/<int:id>",
+        views.delete_schedule_course,
+        name="delete-course-section",
+    ),
     # Update
     path("editsubject/<int:id>", views.update_subject, name="editsubject"),
     path("editroom/<int:id>", views.update_room, name="editroom"),
