@@ -42,7 +42,7 @@
 <!-- Faculty Info -->
 <section class="section-generate">
     <div class="container-fluid table-responsive container-generate-schedule">
-        <table class="table table-hover table-striped caption-top">
+        <table class="table table-hover table-striped caption-top align-middle">
             <caption><p class="text-start">Set Handled Subjects for each Faculty</p></caption>
                 <thead class="table-warning sticky-sm-top">
                 <tr>
@@ -60,7 +60,8 @@
                 {% for instructor in instructors  %}
                     <tr data-college="{{ instructor.college }}">
                         <th scope="row">
-                        <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+                        <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/>
+                        </th>
                         <td>
                         {{ instructor.firstName }} {{ instructor.lastName }}
                         </td> 
@@ -83,8 +84,8 @@
                         <td>.</td>
                         
                         <td>
-                        <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
-                        <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                        <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');">Remove</a>
+                        <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab" style="color:#fff;">Modify</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -98,13 +99,16 @@
     <p class="text-center fs-5">Generate Schedule </p>
 
         <div class="container-fluid">
-            <a href="#" id="generateScheduleBtn" class="btn btn-warning" type="button">
+            <a href="#" id="generateScheduleBtn" class="btn btn-success" type="button">
                 <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                 <span id="buttonText">Generate Schedule</span>
             </a>
         </div>
 </section>
 <br>
+
+
+
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 

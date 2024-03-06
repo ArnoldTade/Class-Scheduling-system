@@ -22,68 +22,14 @@
           </div>
         </div>
 
-<!--
-        <div class="col-sm">
-          {{ instructorform.profile_picture }} 
-        </div>  
-  <hr>
-
         <div class="row">
-          <div class="col-sm col-label">First Name:
-            {{ instructorform.firstName }}   
-          </div>  
-          <div class="col-sm col-label">Last Name:
-            {{ instructorform.lastName }}
-          </div>  
-          <div class="col-sm col-label">Middle Name:
-            {{ instructorform.middleName }} 
-          </div>  
-          <div class="col-sm col-label">Gender:
-            {{ instructorform.gender }}   
-          </div>  
-        </div>
-  <hr>
+          <div class="col col-label">Handled Sections: 
 
-        <div class="row">
-          <div class="col-sm col-label">Email:
-            {{ instructorform.email }}   
-          </div>  
-          <div class="col-sm col-label">Contact:
-            {{ instructorform.contact }}  
-          </div>  
-          <div class="col-sm col-label">Birthdate:
-            {{ instructorform.birthday }} 
-          </div>  
-          <div class="col-sm col-label">Address: 
-            {{ instructorform.address }}  
-          </div>  
-        </div>
-        <hr>
-
-        <div class="row">
-          <div class="col-sm col-label">College:
-            {{ instructorform.college }}  
-          </div>  
-          <div class="col-sm col-label">Status:
-            {{ instructorform.status }}  
-          </div>  
-          <div class="col-sm col-label">Role: 
-            {{ instructorform.role }}   
-          </div>  
-        </div>
-          <hr>
-
-          <div class="row">
-            <div class="col col-label">Handled Courses: 
-              <select id="id_course_handled" class="form-select" name="course_handled" readonly >
-                {% for course in request.user.instructor.course_handled.all %}
-                  <option value="{{ course.course_name }}">{{ course.course_name }}</option>
-                {% endfor %}
-              </select>
-            </div>
+              {% for section in instructorform.instance.section_handled.all %}
+                  <li>{{ section.program_section }}</li>
+              {% endfor %}
           </div>
-            <hr>
--->
+      </div>
         <div class="d-grid col-3 mx-auto ">
           <button type="submit" class="btn btn-success">Save</button>
         </div>

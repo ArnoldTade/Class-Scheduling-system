@@ -91,4 +91,5 @@ class SectionForm(forms.ModelForm):
         fields = [
             "program_section",
             "section_college",
+            "number_students",
         ]

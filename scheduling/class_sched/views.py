@@ -114,17 +114,6 @@ def generate_schedule(request):
     )
 
 
-def section(request):
-    sections = Section.objects.all()
-    return render(
-        request,
-        "section.html",
-        {
-            "sections": sections,
-        },
-    )
-
-
 def home_schedule(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
@@ -283,6 +272,29 @@ def schedule(request):
     )
 
 
+def section(request):
+    if request.method == "POST":
+        sectionform = SectionForm(request.POST, prefix="section")
+        if sectionform.is_valid():
+            program_section = sectionform.cleaned_data["program_section"]
+            if Section.objects.filter(program_section=program_section).exists():
+                messages.warning(request, "This section already exists")
+            else:
+                sectionform.save()
+                messages.success(request, "Section Added")
+            return redirect("section")
+    else:
+        sectionform = SectionForm(prefix="section")
+    sections = Section.objects.all()
+    return render(
+        request,
+        "section.html",
+        {
+            "sections": sections,
+        },
+    )
+
+
 @login_required
 def room(request):
     if request.method == "POST":
@@ -385,6 +397,20 @@ def update_room(request, id=None):
     roomform = RoomForm(instance=room)
     rooms["roomform"] = roomform
     return render(request, "room_update.html", rooms)
+
+
+def update_section(request, id=None):
+    sections = {}
+    section = get_object_or_404(Section, id=id)
+    sectionform = SectionForm(request.POST, instance=section)
+    if sectionform.is_valid():
+        sectionform.save()
+        messages.success(request, "Section Updated!")
+        return redirect("section")
+
+    sectionform = SectionForm(instance=section)
+    sections["sectionform"] = sectionform
+    return render(request, "section_update.html", sections)
 
 
 def update_instructor(request, id=None):

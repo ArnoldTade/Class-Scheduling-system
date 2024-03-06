@@ -27,6 +27,7 @@ urlpatterns = [
     path("editroom/<int:id>", views.update_room, name="editroom"),
     path("editinstructor/<int:id>", views.update_instructor, name="editinstructor"),
     path("editprofile/<int:id>", views.profile_edit, name="editprofile"),
+    path("editsection/<int:id>", views.update_section, name="editsection"),
     # Get Schedules home
     path("viewschedule/<int:id>", views.home_schedule, name="viewschedule"),
     path(

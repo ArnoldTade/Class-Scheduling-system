@@ -1,0 +1,42 @@
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+ 
+
+<div class="container-sm container-section-update-page" id="container-section-edit">
+    <a href="{% url 'section'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i>Back to Section</a>
+ 
+    <div class="row">
+    <div class="col-sm col-section-edit" id="col-section-edit">
+        <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="program_section" id="id_program_section" value="{{ sectionform.instance.program_section }}" placeholder="Section name" required>
+                <label for="id_program_section">Section name</label>
+                <div class="invalid-feedback">
+                Please Enter Section Name.
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="section_college" id="id_section_college" value="{{ sectionform.instance.section_college }}" placeholder="College" required>
+                <label for="id_section_college">College</label>
+                <div class="invalid-feedback">
+                Please Enter College.
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="number_students" required id="id_number_students" value="{{ sectionform.instance.number_students }}" placeholder="Number of Students" required>
+                <label for="id_number_students">Number of Students</label>
+                <div class="invalid-feedback">
+                Please Enter Number of Students.
+                </div>
+            </div>
+
+            <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
+    </form>
+</div>
+
+
+{% endblock %}
+{% include "_footer.html" %}

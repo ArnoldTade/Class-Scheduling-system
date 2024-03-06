@@ -1410,7 +1410,7 @@ thead.table-head {
     margin-bottom: 10px;
     max-width: 100%;
     overflow: auto;
-    max-height: 80vh;
+    height: 80vh;
     box-shadow: var(--box-shadow-style2);
     padding: 20px;
 }
@@ -1439,5 +1439,27 @@ thead.table-head {
 
         }
 
+    }
+
+    #id_section-college {
+        width: 470px;
+        height: 50px;
+        margin: 10px 5px 5px 5px;
+    }
+
+    .text-start {
+        margin-bottom: -12px;
+    }
+}
+
+.container-section-update-page {
+    max-width: 40%;
+    margin-top: 40px;
+
+    .col-section-edit {
+        background-color: #e7ecf3;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: var(--box-shadow-style2);
     }
 }

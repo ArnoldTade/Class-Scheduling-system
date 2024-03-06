@@ -2,22 +2,69 @@
 {% block content %}
  
 
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
 <div class="container-fluid container-subject-page">
     <p class="text-start fs-5">Section </p>
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <div class="row">
                 <div class="col-sm">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+                <div class="col-sm">
                     <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
-                    <option value="all" selected>All Colleges</option>
-                    <option value="CAS">College of Arts and Sciences</option>
-                    <option value="CBA">College of Business Administration</option>
-                    <option value="CIT">College of Industrial Technology</option>
-                    <option value="CTED">College of Teacher Education</option>
-                    <option value="CCJE">College of Criminal Justice Education</option>
-                    <option value="CAF">College of Agriculture and Forestry</option>
+                        <option value="all" selected>All Colleges</option>
+                        <option value="CAS">College of Arts and Sciences</option>
+                        <option value="CBA">College of Business Administration</option>
+                        <option value="CIT">College of Industrial Technology</option>
+                        <option value="CTED">College of Teacher Education</option>
+                        <option value="CCJE">College of Criminal Justice Education</option>
+                        <option value="CAF">College of Agriculture and Forestry</option>
                     </select>
                 </div>
+
+                <div class="col-sm">
+                    <select class="form-select" id="category-course-major" style="width:auto;" aria-label="Default select example">
+                      <option value="all" selected>All Course and Major</option>
+                      <option value="Bachelor of Agricultural Technology major in Animal Husbandry">Bachelor of Agricultural Technology major in Animal Husbandry</option>
+                      <option value="BS Agricultural major in Agronomy">BS Agricultural major in Agronomy</option>
+                      <option value="BS Agriculture major in Animal Science">BS Agriculture major in Animal Science</option>
+                      <option value="BS Forestry">BS Forestry</option>
+                      <option value="BS Computer Science">BS Computer Science</option>
+                      <option value="BS Information Technology">BS Information Technology</option>
+                      <option value="Associate in Hospitality Management">Associate in Hospitality Management</option>
+                      <option value="BS in Hospitality Management">BS in Hospitality Management</option>
+                      <option value="BS in Business Administration major in Human Resource Management">BS in Business Administration major in Human Resource Management</option>
+                      <option value="BS Office Administration">BS Office Administration</option>
+                      <option value="BS Criminology">BS Criminology</option>
+                      <option value="BEED General Curriculum">BEED General Curriculum</option>
+                      <option value="BEED Special Education">BEED Special Education</option>
+                      <option value="BSED English">BSED English</option>
+                      <option value="BSED Mathematics">BSED Mathematics</option>
+                      <option value="BSED Sciences">BSED Sciences</option>
+                      <option value="Associate in Indusctrial Technology major in Automotive Technology">Associate in Indusctrial Technology major in Automotive Technology</option>
+                      <option value="Associate in Indusctrial Technology major in Computer Technology">Associate in Indusctrial Technology major in Computer Technology</option>
+                      <option value="Associate in Indusctrial Technology major in Electrical Technology">Associate in Indusctrial Technology major in Electrical Technology</option>
+                      <option value="BS Industrial Technology major in Automotive Technology">BS Industrial Technology major in Automotive Technology</option>
+                      <option value="BS Industrial Technology major in Computer Technology">BS Industrial Technology major in Computer Technology</option>
+                      <option value="BS Industrial Technology major in Electrical Technology">BS Industrial Technology major in Electrical Technology</option>
+                      <option value="BS Industrial Technology major in Electronics Technology">BS Industrial Technology major in Electronics Technology</option>
+                      <option value="Associate in Industrial Technology major in Electronics Technology">Associate in Industrial Technology major in Electronics Technology</option>
+                    </select>
+                  </div>
+
             </div>
         </div>
     </nav>
@@ -29,11 +76,12 @@
     <div class="col-sm">
         <div class="container-fluid table-responsive container-section-schedule">
             <table class="table table-hover table-striped caption-top">
-                <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Section</button></caption>
+                <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticRoomAdd"><i class="bi bi-plus-circle"></i>Add New Section</button></caption>
                     <thead class="table-info sticky-sm-top">
                     <tr >
                         <th scope="col">College</th>
                         <th scope="col">Sections</th>
+                        <th scope="col">No. Students</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -42,9 +90,10 @@
                         <tr data-college="{{ section.section_college }}">
                             <th scope="row">{{ section.section_college }}</th>
                             <th scope="row">{{ section.program_section }}</th>
+                            <th scope="row">{{ section.number_students }}</th>
                             <td>
                                 <a href="#" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
-                                <a href="#" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                                <a href="{% url 'editsection' id=section.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
                                 </td>
                         </tr>
                     {% endfor %}
@@ -55,10 +104,58 @@
     <div class="col-sm">
     </div>
 
+ 
+ <!-- Modal Add Room-->
+ <div class="modal fade" id="staticRoomAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Section</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!--Add Room Form-->
+        <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+            {% csrf_token %}
+            <p class="text-start fs-6">Ex. BSINT-1-A</p>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="section-program_section" required id="id_section-program_section" placeholder="Section name" required>
+                <label for="id_section-program_section">Section Name</label>
+                <div class="invalid-feedback">
+                Please Enter Room Name.
+                </div> 
+            </div>
+            <select id="id_section-college" class="form-select form-select-room" name="section-section_college" placeholder="College" required>
+                <option selected>Choose College</option>
+                <option value="CAS">College of Arts and Sciences</option>
+                <option value="CBA">College of Business Administration</option>
+                <option value="CIT">College of Insdustrial Technology</option>
+                <option value="CTED">College of Teacher Education</option>
+                <option value="CCJE">College of Criminal Justice Education</option>
+                <option value="CAF">College of Agriculture and Forestry</option>
+            </select>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="section-number_students" required id="id_section-number_students" placeholder="Number of Students" required>
+                <label for="id_section-number_students">Number of Students</label>
+                <div class="invalid-feedback">
+                Please Enter Number of Students.
+                </div>
+            </div>
+            
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" name="add_room">Save</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>
+ 
+
 </section>
-
-
-
 <script>
     document.querySelectorAll('.form-select').forEach(function(select) {
         select.addEventListener('change', function() {
