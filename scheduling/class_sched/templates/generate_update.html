@@ -2,38 +2,80 @@
 {% block content %}
 
 
+<section class="section-update-generate-schedule">
+    <div class="container-sm container-instructor-update" id="container-instructor-edit">
+        <a href="{% url 'generate-schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back </a>
+        <div class="row">
+            <div class="col-sm col-subject-edit" id="col-subject-edit">
+                <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    {% csrf_token %}
 
-<div class="container-sm container-instructor-update" id="container-instructor-edit">
-    <a href="{% url 'generate-schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back </a>
-    <div class="row">
-        <div class="col-sm col-subject-edit" id="col-subject-edit">
-            <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-                {% csrf_token %}
-                {{ instructorform.as_p }}   
-                <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
-  
-              
-                <br>
-              
-                <h4>Instructor Courses:</h4>
-                    <ul>
-                    {% for instructor_course in instructor_courses %}
-                        <li>{{ instructor_course.course }}</li>
-                        <ul>Sections: 
-                            {% for section in instructor_course.sections.all %}
-                                <li>{{ section.program_section }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
-                    </ul>
-                    <hr>
-                <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
+                    <!--
+                    {{ instructorform.as_p }}   
+                    <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
+                    -->
+                
+                
+                    <p class="text-start fs-5">Instructor Courses and Respective Sections:</p>
                     
-            </form>
+
+                        <div class="table-responsive">
+                            <table class="table caption-top">
+                                <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i>Add New Course and Assign Sections</button></caption>
+                                <p class="text start fs-5">Name: {{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}</p>
+                                
+                                {% for instructor_course in instructor_courses %}
+                                    <thead class="table-warning">
+                                    <tr>
+                                        <th scope="col">{{ instructor_course.course }}  </th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for section in instructor_course.sections.all %}
+                                    <tr>
+                                            <td>{{ section.program_section }}</td>
+                                            <td style="text-align: right;"><a href="#" type="button" class="btn btn-danger btn-sm "  onclick="return confirm('Are you sure you want to delete this account?');">Remove</a></td>
+                                    </tr>
+                                        {% endfor %}    
+                                {% endfor %}    
+                                
+                                </tbody>
+                            </table>
+                        </div> 
+                        <hr>
+                    <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-  
+    
+    <!-- Modal Add Room-->
+    <div class="modal fade" id="staticCourseSectionAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Course and Sections</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Add Room Form-->
+            <p class="text-center fs-5">Name: {{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}</p>
 
+            <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                {% csrf_token %}
+                {{ instructor_course_form.as_p }}
+            <p class="fs-6 text-start">Hold down “Control” to select more than one section.</p>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success" name="add_room">Save</button>
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 {% include "_footer.html" %}

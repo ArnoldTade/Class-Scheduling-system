@@ -24,7 +24,7 @@ class Instructor(models.Model):
     course_handled = models.ManyToManyField("Course", through="InstructorCourse")
 
     def __str__(self):
-        return self.firstName
+        return f"{self.firstName} {self.lastName}"
 
 
 class Room(models.Model):

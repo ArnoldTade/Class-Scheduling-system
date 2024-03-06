@@ -1463,3 +1463,22 @@ thead.table-head {
         box-shadow: var(--box-shadow-style2);
     }
 }
+
+/* Generate SChedule Update page  */
+.section-update-generate-schedule {
+
+    #id_instructor_course-instructor,
+    #id_instructor_course-course {
+        width: 450px;
+        height: 50px;
+        margin: 10px 5px 5px 5px;
+        border-radius: 0.5rem;
+        border: 1px solid #c7c7c7;
+    }
+
+    #id_instructor_course-sections {
+        width: 140px;
+        height: 200px;
+        font-size: 20px;
+    }
+}

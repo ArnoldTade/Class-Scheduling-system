@@ -104,12 +104,14 @@ def home(request):
 def generate_schedule(request):
     instructors = Instructor.objects.all()
     sections = Section.objects.all()
+    instructor_course = InstructorCourse.objects.all()
     return render(
         request,
         "generate_schedule.html",
         {
             "instructors": instructors,
             "sections": sections,
+            "instructor_course": instructor_course,
         },
     )
 
@@ -441,19 +443,25 @@ def update_instructor_sections_courses(request, id=None):
     instructor_courses = InstructorCourse.objects.filter(instructor=instructor)
 
     instructorform = InstructorForm(request.POST, request.FILES, instance=instructor)
-    if instructorform.is_valid():
-        instructorform.save()
-        messages.success(request, "Instructor Updated!")
-        return redirect("generate-schedule")
+
+    if request.method == "POST":
+        instructor_course_form = InstructorCourseForm(
+            request.POST, prefix="instructor_course"
+        )
+        if instructor_course_form.is_valid():
+            instructor_course_form.save()
+            messages.success(request, "Section added to Instructor successfully.")
+            return redirect("generate-schedule")
     else:
-        instructorform = InstructorForm(instance=instructor)
+        instructor_course_form = InstructorCourseForm(prefix="instructor_course")
 
     instructors["instructorform"] = instructorform
     instructors["instructor_courses"] = instructor_courses
+
     return render(
         request,
         "generate_update.html",
-        instructors,
+        {"instructor_course_form": instructor_course_form, **instructors},
     )
 
 
