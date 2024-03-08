@@ -1317,17 +1317,12 @@ thead.table-head {
 }
 
 /* Room Allocation */
+
+
+
+
+
 .cotainer-room-list {
-    .table-responsive {
-        overflow-x: auto;
-
-        .table {
-            position: sticky;
-            top: 0;
-        }
-    }
-
-
 
     .form-select-room,
     .form-select-room_type {

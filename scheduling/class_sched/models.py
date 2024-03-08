@@ -21,7 +21,9 @@ class Instructor(models.Model):
     college = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
-    course_handled = models.ManyToManyField("Course", through="InstructorCourse")
+    course_handled = models.ManyToManyField(
+        "Course", blank=True, through="InstructorCourse"
+    )
 
     def __str__(self):
         return f"{self.firstName} {self.lastName}"
@@ -95,8 +97,3 @@ class InstructorCourse(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sections = models.ManyToManyField(Section, blank=True)
-
-
-class Feedback(models.Model):
-    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    content = models.TextField()

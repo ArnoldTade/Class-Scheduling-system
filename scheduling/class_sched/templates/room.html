@@ -64,7 +64,7 @@
             </div>
         </nav>
 
-
+       
             <div class="table-responsive">
                 <table class="table caption-top">
                     <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropRoom"><i class="bi bi-plus-circle"></i>Add New Room</button></caption>
@@ -74,7 +74,7 @@
                         <th scope="col">College</th>
                         <th scope="col">Room Type</th>
                         <th scope="col">Action</th>
-                    </tr>
+                    </tr> 
                     </thead>
                     <tbody>
                     {% for room in rooms %}
@@ -90,6 +90,7 @@
                     </tbody>
                 </table>
             </div>
+
             <!-- Modal Add Room-->
             <div class="modal fade" id="staticBackdropRoom" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -119,6 +120,7 @@
                             <option value="CTED">College of Teacher Education</option>
                             <option value="CCJE">College of Criminal Justice Education</option>
                             <option value="CAF">College of Agriculture and Forestry</option>
+                            <option value="Other">Other</option>
                         </select>
                     
                         <select id="id_room-room_type" class="form-select form-select-room_type" name="room-room_type" placeholder="Room Type" required>
@@ -157,7 +159,7 @@
 </div>
 {% endfor %}
 
-
+ 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendars = document.querySelectorAll('.calendarRoomAllocation');

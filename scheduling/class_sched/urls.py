@@ -13,6 +13,7 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("room/", views.room, name="room"),
     path("section/", views.section, name="section"),
+    path("summary/", views.summary, name="summary"),
     path("generate-schedule/", views.generate_schedule, name="generate-schedule"),
     # For user Auth
     path("login/", views.user_login, name="login"),

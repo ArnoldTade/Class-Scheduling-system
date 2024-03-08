@@ -2,6 +2,18 @@
 {% block content %}
 
 
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+
 <section class="section-update-generate-schedule">
     <div class="container-sm container-instructor-update" id="container-instructor-edit">
         <a href="{% url 'generate-schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back </a>

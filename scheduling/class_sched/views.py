@@ -101,6 +101,15 @@ def home(request):
     )
 
 
+@login_required
+def summary(request):
+    return render(
+        request,
+        "summary.html",
+    )
+
+
+@login_required
 def generate_schedule(request):
     instructors = Instructor.objects.all()
     sections = Section.objects.all()
@@ -116,6 +125,7 @@ def generate_schedule(request):
     )
 
 
+@login_required
 def home_schedule(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
@@ -130,6 +140,7 @@ def home_schedule(request, id=None):
 
 
 ### Schedule Table ###
+@login_required
 def instructors_schedule_page(request, id=None):
     schedules = get_object_or_404(Instructor, id=id)
     instructorSchedule = ClassSchedule.objects.filter(instructor=schedules)
@@ -228,8 +239,9 @@ def profile(request):
 
 @login_required
 def dashboard(request):
-    instructors = Instructor.objects.all()
-    total_instructors = instructors.count()
+    all_instructors = Instructor.objects.all()
+    instructors = Instructor.objects.all().order_by("-id")[:5]
+    total_instructors = all_instructors.count()
     class_schedules = ClassSchedule.objects.all()
 
     rooms = Room.objects.all()
@@ -251,7 +263,7 @@ def dashboard(request):
 
 @login_required
 def instructors(request):
-    instructors = Instructor.objects.all()
+    instructors = Instructor.objects.all().order_by("-id")
     return render(
         request,
         "instructors.html",
@@ -274,6 +286,7 @@ def schedule(request):
     )
 
 
+@login_required
 def section(request):
     if request.method == "POST":
         sectionform = SectionForm(request.POST, prefix="section")
@@ -312,7 +325,7 @@ def room(request):
     else:
         roomform = RoomForm(prefix="room")
 
-    rooms = Room.objects.all()
+    rooms = Room.objects.all().order_by("-id")
     schedules = ClassSchedule.objects.all()
     return render(
         request,
@@ -391,14 +404,14 @@ def delete_schedule_section(request, id=None):
     else:
         messages.error(request, "Section not specified.")
 
-    return redirect("generate-schedule")
+    return redirect("editgenerate-schedule", id=instructor_course.instructor_id)
 
 
 def delete_schedule_course(request, id=None):
     instructor_course = InstructorCourse.objects.get(id=id)
     instructor_course.delete()
     messages.success(request, "Successfully Deleted Course and its Section!")
-    return redirect("generate-schedule")
+    return redirect("editgenerate-schedule", id=instructor_course.instructor_id)
 
 
 ################# /// EDIT VIEWS ///######################
@@ -467,6 +480,7 @@ def update_instructor(request, id=None):
 
 
 def update_instructor_sections_courses(request, id=None):
+    selected_instructor = Instructor.objects.get(id=id)
     instructors = {}
     instructor = get_object_or_404(Instructor, id=id)
     instructor_courses = InstructorCourse.objects.filter(instructor=instructor)
@@ -480,7 +494,7 @@ def update_instructor_sections_courses(request, id=None):
         if instructor_course_form.is_valid():
             instructor_course_form.save()
             messages.success(request, "Section added to Instructor successfully.")
-            return redirect("generate-schedule")
+            return redirect("editgenerate-schedule", id=selected_instructor.id)
     else:
         instructor_course_form = InstructorCourseForm(prefix="instructor_course")
 
