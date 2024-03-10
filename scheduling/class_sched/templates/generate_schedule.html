@@ -25,13 +25,13 @@
             <div class="row">
                 <div class="col-sm">
                     <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
-                    <option value="all" selected>All Colleges</option>
-                    <option value="CAS">College of Arts and Sciences</option>
-                    <option value="CBA">College of Business Administration</option>
-                    <option value="CIT">College of Industrial Technology</option>
-                    <option value="CTED">College of Teacher Education</option>
-                    <option value="CCJE">College of Criminal Justice Education</option>
-                    <option value="CAF">College of Agriculture and Forestry</option>
+                        <option value="all" selected>All Colleges</option>
+                        <option value="CAS">College of Arts and Sciences</option>
+                        <option value="CBA">College of Business Administration</option>
+                        <option value="CIT">College of Industrial Technology</option>
+                        <option value="CTED">College of Teacher Education</option>
+                        <option value="CCJE">College of Criminal Justice Education</option>
+                        <option value="CAF">College of Agriculture and Forestry</option>
                     </select>
                 </div>
                 <div class="col-sm">
@@ -39,9 +39,9 @@
                 </div>
                 <div class="col-sm">
                     <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
-                    <option value="all" selected>All Semester</option>
-                    <option value="1st Semester">1st Semester</option>
-                    <option value="2nd Semester">2nd Semester</option>
+                        <option value="all" selected>All Semester</option>
+                        <option value="1st Semester">1st Semester</option>
+                        <option value="2nd Semester">2nd Semester</option>
                     <option value="Summer">Summer</option>
 
                     </select>
@@ -58,9 +58,9 @@
             <caption><p class="text-start">Set Handled Subjects for each Faculty</p></caption>
             <caption>
                 <div class="col-sm-3">
-                <input class="form-control" type="text" name="year" id="id_year" aria-label="default input example" placeholder="Search Faculty">
+                    <input class="form-control" type="text"  id="searchFaculty" aria-label="default input example" placeholder="Search Faculty">
                 </div>
-            </caption>
+            </caption> 
                 <thead class="table-warning sticky-sm-top">
                 <tr>
                     <th scope="col">Profile</th>
@@ -80,7 +80,7 @@
                         <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/>
                         </th>
                         <td>
-                        {{ instructor.firstName }} {{ instructor.lastName }}
+                      {{ instructor.lastName }},  {{ instructor.firstName }} 
                         </td> 
                         <td>{{ instructor.college }}</td>
                         <td>{{ instructor.status }}</td>
@@ -121,17 +121,37 @@
 
 <hr>
 <section class="section-create-schedules">
-    <p class="text-center fs-5">Generate Schedule </p>
+    <div class="container-fluid container-generate-schedule">
+            <p class="text-start fs-5">Generate Schedule for:</p>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInputCollege" value="" placeholder="College" readonly>
+                        <label for="floatingInput">College </label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInputSchoolYear" value="" placeholder="College" readonly>
+                        <label for="floatingInput">School Year </label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInputSemester" value="" placeholder="College" readonly>
+                        <label for="floatingInput">Semester </label>
+                    </div>
+                </div>
+            </div>
 
-        <div class="container-fluid">
+        
             <a href="#" id="generateScheduleBtn" class="btn btn-success" type="button">
                 <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                 <span id="buttonText">Generate Schedule</span>
             </a>
-        </div>
+    </div>
 </section>
 <br>
-
 
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -176,6 +196,53 @@
             }
         });
     }
+</script>
+
+<script>
+    const collegeSelect = document.getElementById('category-college');
+    const yearInput = document.getElementById('id_year');
+    const semesterSelect = document.getElementById('category-semester');
+    const collegeInput = document.getElementById('floatingInputCollege');
+    const yearInputField = document.getElementById('floatingInputSchoolYear');
+    const semesterInput = document.getElementById('floatingInputSemester');
+
+    collegeSelect.addEventListener('change', updateCollege);
+    yearInput.addEventListener('input', updateYear);
+    semesterSelect.addEventListener('change', updateSemester);
+
+    function updateCollege() {
+        collegeInput.value = collegeSelect.options[collegeSelect.selectedIndex].text;
+    }
+    function updateYear() {
+        yearInputField.value = yearInput.value;
+    }
+
+    function updateSemester() {
+        semesterInput.value = semesterSelect.options[semesterSelect.selectedIndex].text;
+    }
+
+    updateCollege();
+    updateYear();
+    updateSemester();
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchFaculty');
+        const tableRows = document.querySelectorAll('#course-table-body tr');
+
+        searchInput.addEventListener('input', function() {
+            const searchText = this.value.trim().toLowerCase();
+            tableRows.forEach(row => {
+                const lastName = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+                if (lastName.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
 </script>
 
 {% endblock %}

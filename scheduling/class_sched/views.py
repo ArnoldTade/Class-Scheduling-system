@@ -10,10 +10,8 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
-
 from datetime import datetime, timedelta
 from .genetic_algorithm import generate_population, evolve
-from .scheduling_algorithm import run_genetic_algorithm
 
 from django.utils import timezone
 from datetime import datetime, time
@@ -544,15 +542,4 @@ def generate_schedules(request):
 
 
 # GENETIC ALGORITHM 2
-def genetic_algorithm(request):
-    population_size = 100
-    generations = 100
-    population = run_genetic_algorithm(population_size, generations)
-    for schedule in population:
-        for class_schedule in schedule:
-            class_schedule.save()
-    schedules = ClassSchedule.objects.all()
-    context = {
-        "schedules": schedules,
-    }
-    return render(request, "generate_schedule.html", context)
+# def genetic_algorithm(request):

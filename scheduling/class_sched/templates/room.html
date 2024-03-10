@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control me-2" type="search" id="searchRoom" placeholder="Search Room" aria-label="Search">
                         </form>
                     </div>
                     <div class="col-sm">
@@ -76,7 +76,7 @@
                         <th scope="col">Action</th>
                     </tr> 
                     </thead>
-                    <tbody>
+                    <tbody id="room-table-body">
                     {% for room in rooms %}
                     <tr>
                         <th scope="row">{{ room.room_name }}</th>
@@ -179,6 +179,26 @@
         });
     });
   
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchRoom');
+        const tableRows = document.querySelectorAll('#room-table-body tr');
+  
+        searchInput.addEventListener('input', function() {
+            const searchText = this.value.trim().toLowerCase();
+            tableRows.forEach(row => {
+                const course_name = row.querySelector('th').textContent.trim().toLowerCase();
+                if (course_name.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
   </script>
 {% endblock %}
 {% include "_footer.html" %}

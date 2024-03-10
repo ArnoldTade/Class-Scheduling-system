@@ -25,11 +25,20 @@
 
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="credits" id="id_credits" value="{{ courseform.instance.credits }}" placeholder="Description" required>
-            <label for="id_credits">Credits</label>
+            <label for="id_credits">Units</label>
             <div class="invalid-feedback">
-              Please Enter Credits.
+              Please Enter Units.
             </div>
           </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="hours" id="id_hours" value="{{ courseform.instance.hours }}" placeholder="Description" required>
+            <label for="id_hours">Units</label>
+            <div class="invalid-feedback">
+              Please Enter Hours.
+            </div>
+          </div>
+
 
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="prerequisites" id="id_prerequisites" value="{{ courseform.instance.prerequisites }}" placeholder="Description" required>

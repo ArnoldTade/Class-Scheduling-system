@@ -26,7 +26,7 @@ class Instructor(models.Model):
     )
 
     def __str__(self):
-        return f"{self.firstName} {self.lastName}"
+        return f"{self.lastName}, {self.firstName} "
 
 
 class Room(models.Model):
@@ -42,6 +42,7 @@ class Course(models.Model):
     course_name = models.CharField(max_length=100)
     description = models.TextField()
     credits = models.CharField(max_length=100)
+    hours = models.CharField(max_length=100)
     prerequisites = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
@@ -87,6 +88,7 @@ class Week(models.Model):
 class Section(models.Model):
     program_section = models.CharField(max_length=100)
     section_college = models.CharField(max_length=100)
+    section_major_course = models.CharField(max_length=100)
     number_students = models.IntegerField()
 
     def __str__(self):
@@ -97,3 +99,6 @@ class InstructorCourse(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sections = models.ManyToManyField(Section, blank=True)
+
+    def __str__(self):
+        return f"{self.instructor} - {self.course}"

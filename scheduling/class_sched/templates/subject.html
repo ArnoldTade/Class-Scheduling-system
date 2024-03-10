@@ -89,12 +89,17 @@
           <hr>
           <div class="table-responsive">
               <table class="table table-hover caption-top"> 
+                  <caption>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"  id="searchSubject" aria-label="default input example" placeholder="Search Subject">
+                    </div>
+                  </caption> 
                   <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle"></i>Add New Subject</button></caption>
                   <thead class="table-success">
                       <tr>
                         <th scope="col">Subject</th>
                         <th scope="col">Descriptive Title</th>
-                        <th scope="col">Credits</th>
+                        <th scope="col">Units</th>
                         <th scope="col">Prerequisites</th>
                         <th scope="col">College</th>
                         <th scope="col">Course and Major</th>
@@ -151,9 +156,17 @@
 
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" name="subject-credits" id="id_subject-credits" placeholder="Description" required>
-                      <label for="id_subject-credits">Credits</label>
+                      <label for="id_subject-credits">Units</label>
                       <div class="invalid-feedback">
-                        Please Enter Credits.
+                        Please Enter Units.
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="subject-hours" id="id_subject-hours" placeholder="Hours" required>
+                      <label for="id_subject-hours">Hours</label>
+                      <div class="invalid-feedback">
+                        Please Enter Hours.
                       </div>
                     </div>
 
@@ -281,6 +294,26 @@
           }
       });
   }
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const searchInput = document.getElementById('searchSubject');
+      const tableRows = document.querySelectorAll('#course-table-body tr');
+
+      searchInput.addEventListener('input', function() {
+          const searchText = this.value.trim().toLowerCase();
+          tableRows.forEach(row => {
+              const course_name = row.querySelector('th').textContent.trim().toLowerCase();
+              if (course_name.includes(searchText)) {
+                  row.style.display = '';
+              } else {
+                  row.style.display = 'none';
+              }
+          });
+      });
+  });
 </script>
 {% endblock %}
 {% include "_footer.html" %}

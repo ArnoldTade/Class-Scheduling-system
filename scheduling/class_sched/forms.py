@@ -42,6 +42,7 @@ class SubjectForm(forms.ModelForm):
             "course_name",
             "description",
             "credits",
+            "hours",
             "prerequisites",
             "type",
             "college",
@@ -90,6 +91,7 @@ class SectionForm(forms.ModelForm):
         fields = [
             "program_section",
             "section_college",
+            "section_major_course",
             "number_students",
         ]
 

@@ -34,7 +34,7 @@
                         <div class="table-responsive">
                             <table class="table caption-top">
                                 <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i>Add New Course and Assign Sections</button></caption>
-                                <p class="text start fs-5">Name: {{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}</p>
+                                <p class="text start fs-5">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
                                 
                                
                                         {% for instructor_course in instructor_courses %}
@@ -68,7 +68,7 @@
         </div>
     </div>
     
-    <!-- Modal Add Room-->
+    <!-- Modal Add New Course and Section-->
     <div class="modal fade" id="staticCourseSectionAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -77,12 +77,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!--Add Room Form-->
-            <p class="text-center fs-5">Name: {{ instructorform.instance.firstName }} {{ instructorform.instance.lastName }}</p>
+                <!--Add New Course and Section Form-->
+            <p class="text-center fs-5">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
 
             <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                 {% csrf_token %}
+              
                 {{ instructor_course_form.as_p }}
+
+                
             <p class="fs-6 text-start">Hold down “Control” to select more than one section.</p>
 
             </div>
@@ -95,5 +98,7 @@
         </div>
     </div>
 </section>
+
+
 {% endblock %}
 {% include "_footer.html" %}
