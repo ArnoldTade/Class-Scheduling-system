@@ -79,7 +79,6 @@ class Individual:
 
     @staticmethod
     def check_time_overlap(start1, end1, start2, end2):
-        # Check for overlapping time slots
         start1_time = datetime.strptime(start1, "%H:%M")
         end1_time = datetime.strptime(end1, "%H:%M")
         start2_time = datetime.strptime(start2, "%H:%M")
@@ -125,7 +124,7 @@ class Individual:
         class_schedule.start_time = start_time
         class_schedule.end_time = end_time
 
-        class_schedule.save()  # Remove this line
+        class_schedule.save()
 
         self.fitness = self.calculate_fitness()
 
@@ -139,6 +138,7 @@ def generate_population(population_size, schedule_length=150):
             course = instructor_course.course
             section = instructor_course.section.program_section
 
+            # ROOMS
             available_rooms = Room.objects.filter(
                 college=instructor.college, room_type__in=[course.type, "Lecture"]
             )
@@ -146,6 +146,7 @@ def generate_population(population_size, schedule_length=150):
                 continue
             room = random.choice(available_rooms)
 
+            # TIME
             hour = random.choice([8, 9, 10, 11, 13, 14, 15])
             minute = random.choice([0, 30])
 
@@ -157,9 +158,25 @@ def generate_population(population_size, schedule_length=150):
             else:
                 end_time = f"{end_hour}:{minute:02d}"
 
-            days_of_week = random.choice(
-                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-            )
+            # CHOOSE DAY
+            hours = instructor_course.course.hours
+            # days_of_week = None
+
+            three_five_hour_days = ["M-W-F", "T-TH"]
+            weekday_ranges = {
+                2: None,
+                4: ["M-W", "W-F", "T-TH"],
+            }
+            if hours in (3, 5, 6):
+                days_of_week = random.choice(three_five_hour_days)
+            elif hours in weekday_ranges:
+                days_of_week = random.choice(weekday_ranges[hours])
+            else:
+                days_of_week = random.choice(
+                    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                )
+
+            # SEMESTER AND YEAR
             semester = "First Semester"
             year = 2024
 

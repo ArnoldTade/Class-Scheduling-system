@@ -145,7 +145,7 @@
             </div>
 
         
-            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button">
+            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button" onclick="return confirm('Are you sure you want to Generate Schedules?');">
                 <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                 <span id="buttonText">Generate Schedule</span>
             </a>
