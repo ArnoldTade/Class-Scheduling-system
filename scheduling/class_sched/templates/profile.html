@@ -89,6 +89,7 @@
                       <tr>
                         <th scope="col">Course</th>
                         <th scope="col">Instructor</th>
+                        <th scope="col">Section</th>
                         <th scope="col">Room</th>
                         <th scope="col">Time</th>
                         <th scope="col">Days of Week</th>
@@ -107,12 +108,13 @@
                           />
                           {{ request.user.instructor.firstName }},  {{ request.user.instructor.lastName }}
                         </td>
+                        <td>{{ schedule.section }}</td>
                         <td>{{ schedule.room.room_name }}</td>
                         <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
                         <td>{{ schedule.days_of_week }}</td>
                         <td>{{ schedule.semester }}</td>
                         <td>{{ schedule.year }}</td>
-                      </tr>
+                      </tr> 
                       {% endfor %}
                     </tbody>
                 </table> 

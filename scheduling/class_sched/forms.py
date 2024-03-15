@@ -102,5 +102,5 @@ class InstructorCourseForm(forms.ModelForm):
         fields = [
             "instructor",
             "course",
-            "sections",
+            "section",
         ]

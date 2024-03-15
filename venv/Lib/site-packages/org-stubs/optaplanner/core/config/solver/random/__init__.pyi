@@ -1,0 +1,36 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
+import java.lang
+import typing
+
+
+
+class RandomType(java.lang.Enum['RandomType']):
+    JDK: typing.ClassVar['RandomType'] = ...
+    MERSENNE_TWISTER: typing.ClassVar['RandomType'] = ...
+    WELL512A: typing.ClassVar['RandomType'] = ...
+    WELL1024A: typing.ClassVar['RandomType'] = ...
+    WELL19937A: typing.ClassVar['RandomType'] = ...
+    WELL19937C: typing.ClassVar['RandomType'] = ...
+    WELL44497A: typing.ClassVar['RandomType'] = ...
+    WELL44497B: typing.ClassVar['RandomType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'RandomType': ...
+    @staticmethod
+    def values() -> typing.MutableSequence['RandomType']: ...
+
+
+class __module_protocol__(Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.optaplanner.core.config.solver.random")``.
+
+    RandomType: typing.Type[RandomType]

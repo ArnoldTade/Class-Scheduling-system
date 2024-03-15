@@ -1,0 +1,43 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
+import java.lang.annotation
+import java.util
+import org.optaplanner.core.impl.heuristic.selector.common.decorator
+import typing
+
+
+
+_PinningFilter__Solution_ = typing.TypeVar('_PinningFilter__Solution_')  # <Solution_>
+_PinningFilter__Entity_ = typing.TypeVar('_PinningFilter__Entity_')  # <Entity_>
+class PinningFilter(typing.Generic[_PinningFilter__Solution_, _PinningFilter__Entity_]):
+    def accept(self, solution_: _PinningFilter__Solution_, entity_: _PinningFilter__Entity_) -> bool: ...
+
+class PlanningPin(java.lang.annotation.Annotation):
+    def equals(self, object: typing.Any) -> bool: ...
+    def hashCode(self) -> int: ...
+    def toString(self) -> str: ...
+
+class PlanningEntity(java.lang.annotation.Annotation):
+    def difficultyComparatorClass(self) -> typing.Type[java.util.Comparator]: ...
+    def difficultyWeightFactoryClass(self) -> typing.Type[org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSorterWeightFactory]: ...
+    def equals(self, object: typing.Any) -> bool: ...
+    def hashCode(self) -> int: ...
+    def pinningFilter(self) -> typing.Type[PinningFilter]: ...
+    def toString(self) -> str: ...
+    class NullDifficultyComparator(java.util.Comparator):
+        def equals(self, object: typing.Any) -> bool: ...
+    class NullDifficultyWeightFactory(org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSorterWeightFactory): ...
+    class NullPinningFilter(PinningFilter): ...
+
+
+class __module_protocol__(Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.optaplanner.core.api.domain.entity")``.
+
+    PinningFilter: typing.Type[PinningFilter]
+    PlanningEntity: typing.Type[PlanningEntity]
+    PlanningPin: typing.Type[PlanningPin]

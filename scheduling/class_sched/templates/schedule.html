@@ -2,6 +2,15 @@
 {% block content %}
  
 
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <h4 class="text-start text-schedule">Schedule Page</h4>
 <hr>
@@ -81,6 +90,7 @@
                                         <th scope="col">Course</th>
                                         <th scope="col">Instructor</th>
                                         <th scope="col">Room</th>
+                                        <th scope="col">Section</th>
                                         <th scope="col">Time</th>
                                         <th scope="col">Days of Week</th>
                                         <th scope="col">Semester</th>
@@ -100,6 +110,7 @@
                                           {{ schedule.instructor.firstName }}, {{ schedule.instructor.lastName }}
                                         </td>
                                         <td>{{ schedule.room.room_name }}</td>
+                                        <td>{{ schedule.section }}</td>
                                         <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
                                         <td>{{ schedule.days_of_week }}</td>
                                         <td>{{ schedule.semester }}</td>
@@ -147,18 +158,10 @@
           <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
               {% csrf_token %}
               <!-- {{ scheduleform.as_p }} --> 
-              <div class="row">
+             
+                
                 <div class="col-sm">
-                  <select class="form-select mb-4 select-subject-name" name="course" id="id_course" style="width:auto;" aria-label="Default select example">
-                    <option selected>Select Subject Name</option>
-                    {% for course in courses %}
-                    <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              
-                <div class="col-sm">
-                  <select class="form-select mb-4 select-subject-instructor" name="instructor" id="id_instructor" style="width:auto;" aria-label="Default select example">
+                  <select class="form-select mb-4 select-subject-instructor" name="instructor" id="id_instructor"  aria-label="Default select example">
                     <option selected>Select Instructor</option>
                     {% for instructor in instructors %}
                     <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
@@ -167,8 +170,25 @@
                     {% endfor %}
                   </select>
                 </div>  
-              </div>  
-              <div class="row">
+
+                <div class="col-sm">
+                  <select class="form-select mb-4 select-subject-name" name="course" id="id_course" aria-label="Default select example">
+                    <option selected>Select Subject Name</option>
+                    {% for course in courses %}
+                    <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              
+                <div class="col-sm">
+                  <select class="form-select mb-4 select-section-name" name="section" id="id_section" aria-label="Default select example">
+                    <option selected>Select Section </option>
+                    {% for section in sections %}
+                    <option value="{{ section.id }}" {% if section.id == scheduleform.instance.section.id %} selected {% endif %}>{{ section.program_section }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              
                 <div class="col-sm">
                   <select class="form-select mb-4 select-subject-room" name="room" id="id_room" aria-label="Default select example">
                     <option selected>Select Room</option>
@@ -177,7 +197,7 @@
                     {% endfor %}
                   </select>
                 </div>  
-              </div>  
+              
              
             
               <div class="form-floating mb-3">

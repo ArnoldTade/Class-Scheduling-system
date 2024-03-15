@@ -42,7 +42,7 @@ class Course(models.Model):
     course_name = models.CharField(max_length=100)
     description = models.TextField()
     credits = models.CharField(max_length=100)
-    hours = models.CharField(max_length=100)
+    hours = models.IntegerField()
     prerequisites = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
@@ -60,7 +60,7 @@ class ClassSchedule(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_time = models.CharField(max_length=100)
     end_time = models.CharField(max_length=100)
-    days_of_week = models.ManyToManyField("Week")
+    days_of_week = models.CharField(max_length=100)
     semester = models.CharField(max_length=50)
     year = models.CharField(max_length=100)
     section = models.CharField(max_length=100)
@@ -98,7 +98,7 @@ class Section(models.Model):
 class InstructorCourse(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    sections = models.ManyToManyField(Section, blank=True)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.instructor} - {self.course}"
+        return f"{self.instructor} - {self.course} - {self.section}"

@@ -145,14 +145,14 @@
             </div>
 
         
-            <a href="#" id="generateScheduleBtn" class="btn btn-success" type="button">
+            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button">
                 <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                 <span id="buttonText">Generate Schedule</span>
             </a>
     </div>
 </section>
 <br>
-
+ 
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>

@@ -1,0 +1,42 @@
+The algorithm or code will generate output in ClassSchedule models. I think for simplicity the algorithm will use the InstructorCourse to create the ClassSchedule.
+     In the InstructorCourse, the instructor, course and sections is already set. All there is to do is to assign the room,  start_time, end_time, days of week. 
+
+    In the InstructorCourse.instructor.status
+        Instructor Availability:
+            if the InstructorCourse.instructor.status is
+                Permanent  instructors can teach from 7:00 am to 12:00 pm and 1:00 pm to 5:00 pm Monday to Saturday, with the possibility of teaching until 8:00 pm as overload.
+                Temporary instructors can teach from 7:00 am to 12:00 pm and 1:00 pm to 5:00 pm Monday to Saturday, with the possibility of teaching until 8:00 pm as overload.
+                Full-time part-time instructors can teach the same hours as Permanent and Temporary instructors.
+                Part-time instructors can only teach from 5:00 pm to 8:00 pm Monday to Saturday.
+
+    College Selection:
+        Generate schedules only for instructors and rooms within the same college as specified by the user.
+
+
+InstructorCourse:
+	Instructors have already pre selected their course and sections
+	All there is to do is to assign them to a time slot and rooms
+
+Course Scheduling:
+	Courses with Lab and Lecture format need specific room types.
+	Avoid scheduling classes during lunch break (12:00 pm noon).
+	Avoid scheduling multiple classes in the same room and at the same time.
+	Avoid scheduling conflicts.
+
+Semester and Year:
+	I will set variables named varCollege, varSemester and varYear
+	Generate schedules based on the selected college in value of varCollege, semester in value of varSemester, and year in value of varYear, provided by the user.
+
+Room Assignment:
+	Assign rooms based on the type of course (Lecture, Lab and Lecture) and the availability of rooms within the same college.
+
+Course 
+	If the credits field has a value of 3, it means there can be 3 hours of teaching per week.
+	The hours field specifies how many hours are being taught per week. For example, if hours is 3, then only 3 hours are being taught each week.
+	The type field can be either "Lec" or "Lab and Lec".
+	If the type is "Lec", the course can be assigned to a room with a room_type of 	Lecture.
+	If the type is "Lab and Lec", the course can be assigned to a room with a room_type 	of Lab and Lecture.
+	For example, if a course has credits and hours both set to 3, and its type is "Lab 	and Lec", then the ClassSchedule should create a schedule such as:
+
+	Tuesday 8:30 - 10:00 am: Lecture room_type
+	Thursday 8:30 - 10:00 am: Lab and Lecture room_type

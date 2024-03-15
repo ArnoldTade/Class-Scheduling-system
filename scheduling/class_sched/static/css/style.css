@@ -1100,7 +1100,8 @@ thead.table-head {
 
 .select-subject-name,
 .select-subject-instructor,
-.select-subject-room {
+.select-subject-room,
+.select-section-name {
     width: 450px;
     height: 50px;
 }
@@ -1302,7 +1303,7 @@ thead.table-head {
 }
 
 .fc-v-event .fc-event-main {
-    background-color: #478576;
+    background-color: #477f99;
 }
 
 
@@ -1473,7 +1474,8 @@ thead.table-head {
 .section-update-generate-schedule {
 
     #id_instructor_course-instructor,
-    #id_instructor_course-course {
+    #id_instructor_course-course,
+    #id_instructor_course-section {
         width: 450px;
         height: 50px;
         margin: 10px 5px 5px 5px;

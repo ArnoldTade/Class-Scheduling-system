@@ -18,6 +18,7 @@ from datetime import datetime, time
 import pytz
 
 from collections import defaultdict
+from .class_scheduling import *
 
 # Create your views here.
 
@@ -186,6 +187,7 @@ def instructors_schedule_page(request, id=None):
             "instructors": Instructor.objects.all(),
             "rooms": Room.objects.all(),
             "courses": Course.objects.all(),
+            "sections": Section.objects.all(),
             "eventSchedules": eventSchedules,
         },
     )
@@ -502,7 +504,13 @@ def update_instructor_sections_courses(request, id=None):
     return render(
         request,
         "generate_update.html",
-        {"instructor_course_form": instructor_course_form, **instructors},
+        {
+            "instructor_course_form": instructor_course_form,
+            "sections": Section.objects.all(),
+            "courses": Course.objects.all(),
+            "instructors": Instructor.objects.all(),
+            **instructors,
+        },
     )
 
 
@@ -526,6 +534,7 @@ def generate_schedules(request):
     best_individual = evolve(population, 150)
 
     class_schedules = best_individual.class_schedules
+    messages.success(request, "Schedules Generated Successfully.")
 
     context = {"class_schedules": class_schedules}
     instructors = Instructor.objects.all()

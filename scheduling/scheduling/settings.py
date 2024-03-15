@@ -92,7 +92,7 @@ WSGI_APPLICATION = "scheduling.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "norsu_db",
+        "NAME": "schedule_norsu",
         "USER": "root",
         "PASSWORD": "",
         "HOST": "localhost",

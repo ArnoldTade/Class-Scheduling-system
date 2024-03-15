@@ -5,3 +5,5 @@ pip install mysql-connector-python
 pip install django-bootstrap-v5
 npm install fullcalendar
 npm install jquery
+pip install mysqlclient
+pip install optapy

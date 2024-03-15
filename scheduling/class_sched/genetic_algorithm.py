@@ -2,8 +2,15 @@ import random
 
 # Import your Django models
 from class_sched.models import Instructor, Room, Course, ClassSchedule
-from .models import ClassSchedule
+from .models import *
 from datetime import datetime, date, timedelta
+
+
+instructors = InstructorCourse.objects.values_list("instructor", flat=True)
+courses = InstructorCourse.objects.values_list("course", flat=True)
+sections = InstructorCourse.objects.values_list("section", flat=True)
+rooms = Room.objects.all()
+weeks = Week.objects.all()
 
 
 class Individual:
@@ -19,42 +26,50 @@ class Individual:
             for other_class_schedule in self.class_schedules:
                 if class_schedule == other_class_schedule:
                     continue
+                # Check for instructor and room conflicts
                 if (
                     instructor == other_class_schedule.instructor
                     and room == other_class_schedule.room
                     and class_schedule.days_of_week == other_class_schedule.days_of_week
-                    and (
-                        (
-                            class_schedule.start_time <= other_class_schedule.start_time
-                            and class_schedule.end_time
-                            >= other_class_schedule.start_time
-                        )
-                        or (
-                            class_schedule.start_time >= other_class_schedule.start_time
-                            and class_schedule.start_time
-                            <= other_class_schedule.end_time
-                        )
+                    and self.check_time_overlap(
+                        class_schedule.start_time,
+                        class_schedule.end_time,
+                        other_class_schedule.start_time,
+                        other_class_schedule.end_time,
                     )
                 ):
                     fitness -= 1
                     break
+            # Check instructor availability based on status (optional)
             if instructor.status == "Full time" and (
-                class_schedule.start_time < "08:00" or class_schedule.end_time > "17:00"
+                datetime.strptime(class_schedule.start_time, "%H:%M")
+                < datetime.strptime("08:00", "%H:%M")
+                or datetime.strptime(class_schedule.end_time, "%H:%M")
+                > datetime.strptime("17:00", "%H:%M")
             ):
                 fitness -= 1
             elif instructor.status == "Part time" and (
-                class_schedule.start_time < "17:00" or class_schedule.end_time > "20:00"
+                datetime.strptime(class_schedule.start_time, "%H:%M")
+                < datetime.strptime("17:00", "%H:%M")
+                or datetime.strptime(class_schedule.end_time, "%H:%M")
+                > datetime.strptime("20:00", "%H:%M")
             ):
                 fitness -= 1
+            # Check for time constraints (optional)
             if (
-                class_schedule.start_time < "08:00"
-                or class_schedule.end_time > "12:00"
+                datetime.strptime(class_schedule.start_time, "%H:%M")
+                < datetime.strptime("08:00", "%H:%M")
+                or datetime.strptime(class_schedule.end_time, "%H:%M")
+                > datetime.strptime("12:00", "%H:%M")
                 or (
-                    class_schedule.start_time >= "13:00"
-                    and class_schedule.end_time > "17:00"
+                    datetime.strptime(class_schedule.start_time, "%H:%M")
+                    >= datetime.strptime("13:00", "%H:%M")
+                    and datetime.strptime(class_schedule.end_time, "%H:%M")
+                    > datetime.strptime("17:00", "%H:%M")
                 )
             ):
                 fitness -= 1
+            # Check for room type mismatch (optional)
             if room.room_type == "Lecture" and class_schedule.course.type in [
                 "Lab",
                 "Lab and Lec",
@@ -63,9 +78,17 @@ class Individual:
         return fitness
 
     @staticmethod
+    def check_time_overlap(start1, end1, start2, end2):
+        # Check for overlapping time slots
+        start1_time = datetime.strptime(start1, "%H:%M")
+        end1_time = datetime.strptime(end1, "%H:%M")
+        start2_time = datetime.strptime(start2, "%H:%M")
+        end2_time = datetime.strptime(end2, "%H:%M")
+        return (start1_time <= end2_time) and (start2_time <= end1_time)
+
+    @staticmethod
     def crossover(parent1, parent2):
         child = Individual([])
-
         child_class_schedules = []
         num_class_schedules = min(
             len(parent1.class_schedules), len(parent2.class_schedules)
@@ -88,37 +111,41 @@ class Individual:
             print(f"IndexError in mutate: {class_schedule_index}")
             return
 
-        class_schedule.instructor = random.choice(
-            [
-                instructor
-                for instructor in Instructor.objects.all()
-                if instructor != class_schedule.instructor
-            ]
-        )
+        # Modify only room, start_time, and end_time
         class_schedule.room = random.choice(
             [room for room in Room.objects.all() if room != class_schedule.room]
         )
-        class_schedule.save()
+        hour = random.choice([8, 9, 10, 11, 13, 14, 15])
+        minute = random.choice([0, 30])
+        start_time = f"{hour}:{minute:02d}"
+        end_hour = hour + 3 if minute == 30 else hour + 2
+        if end_hour == 12:
+            end_hour += 1
+        end_time = f"{end_hour}:{minute:02d}"
+        class_schedule.start_time = start_time
+        class_schedule.end_time = end_time
+
+        class_schedule.save()  # Remove this line
+
         self.fitness = self.calculate_fitness()
 
 
-def generate_population(population_size):
+def generate_population(population_size, schedule_length=150):
     population = []
     for i in range(population_size):
         class_schedules = []
-        for course in Course.objects.all():
-            available_instructors = Instructor.objects.filter(
-                status="Full time"
-            ) | Instructor.objects.filter(status="Part time", college=course.college)
-            if not available_instructors:
-                continue
-            instructor = random.choice(available_instructors)
+        for instructor_course in InstructorCourse.objects.all():
+            instructor = instructor_course.instructor
+            course = instructor_course.course
+            section = instructor_course.section.program_section
+
             available_rooms = Room.objects.filter(
                 college=instructor.college, room_type__in=[course.type, "Lecture"]
             )
             if not available_rooms:
                 continue
             room = random.choice(available_rooms)
+
             hour = random.choice([8, 9, 10, 11, 13, 14, 15])
             minute = random.choice([0, 30])
 
@@ -135,9 +162,11 @@ def generate_population(population_size):
             )
             semester = "First Semester"
             year = 2024
+
             class_schedule = ClassSchedule(
                 course=course,
                 instructor=instructor,
+                section=section,
                 room=room,
                 start_time=start_time,
                 end_time=end_time,
@@ -146,18 +175,7 @@ def generate_population(population_size):
                 year=year,
             )
             class_schedules.append(class_schedule)
-        if not class_schedules:
-            class_schedule = ClassSchedule(
-                course=course,
-                instructor=None,
-                room=room,
-                start_time=start_time,
-                end_time=end_time,
-                days_of_week=days_of_week,
-                semester=semester,
-                year=year,
-            )
-            class_schedules.append(class_schedule)
+
         individual = Individual(class_schedules)
         population.append(individual)
     return population
