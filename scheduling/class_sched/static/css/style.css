@@ -1302,8 +1302,21 @@ thead.table-head {
     }
 }
 
-.fc-v-event .fc-event-main {
-    background-color: #477f99;
+#calendarSchedulePage {
+    .fc-v-event .fc-event-main {
+        background-color: #477f99;
+        max-height: 100% !important;
+    }
+
+    tr {
+        height: 40px !important;
+
+    }
+
+    td {
+        max-height: 100% !important;
+    }
+
 }
 
 

@@ -114,6 +114,7 @@ class Individual:
         class_schedule.room = random.choice(
             [room for room in Room.objects.all() if room != class_schedule.room]
         )
+        """
         hour = random.choice([8, 9, 10, 11, 13, 14, 15])
         minute = random.choice([0, 30])
         start_time = f"{hour}:{minute:02d}"
@@ -122,7 +123,7 @@ class Individual:
             end_hour += 1
         end_time = f"{end_hour}:{minute:02d}"
         class_schedule.start_time = start_time
-        class_schedule.end_time = end_time
+        class_schedule.end_time = end_time"""
 
         class_schedule.save()
 
@@ -146,39 +147,54 @@ def generate_population(population_size, schedule_length=150):
                 continue
             room = random.choice(available_rooms)
 
-            # TIME
-            hour = random.choice([8, 9, 10, 11, 13, 14, 15])
-            minute = random.choice([0, 30])
-
-            start_time = f"{hour}:{minute:02d}"
-            end_hour = hour + 3 if minute == 30 else hour + 2
-            if end_hour == 12:
-                end_hour += 1
-                end_time = f"{end_hour}:{minute:02d}"
-            else:
-                end_time = f"{end_hour}:{minute:02d}"
-
             # CHOOSE DAY
             hours = instructor_course.course.hours
-            # days_of_week = None
+            days_of_week = None
+            session_duration_hours = 0
+            session_duration_minutes = 0
 
-            three_five_hour_days = ["M-W-F", "T-TH"]
             weekday_ranges = {
                 2: None,
+                3: ["M-W-F", "T-TH"],
                 4: ["M-W", "W-F", "T-TH"],
+                5: ["M-W-F", "T-TH"],
+                6: ["M-W-F", "T-TH", "TH-F"],
             }
-            if hours in (3, 5, 6):
-                days_of_week = random.choice(three_five_hour_days)
-            elif hours in weekday_ranges:
+            if hours in weekday_ranges:
                 days_of_week = random.choice(weekday_ranges[hours])
+                days_of_week = random.choice(weekday_ranges[hours])
+                num_sessions = len(days_of_week.split("-"))
+                session_duration_hours = hours / num_sessions
+                session_duration_minutes = (
+                    session_duration_hours - int(session_duration_hours)
+                ) * 60
             else:
                 days_of_week = random.choice(
                     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 )
 
+            # TIME
+            hour = random.choice([8, 9, 10, 11, 13, 14, 15])
+            minute = random.choice([0, 30])
+
+            start_time = f"{hour}:{minute:02d}"
+            start_time_datetime = datetime.strptime(start_time, "%H:%M")
+
+            end_time_datetime = start_time_datetime + timedelta(
+                hours=int(session_duration_hours), minutes=int(session_duration_minutes)
+            )
+
+            end_time = end_time_datetime.strftime("%H:%M")
+            """
+            if end_hour == 12:
+                end_hour += 1
+                end_time = f"{end_hour}:{minute:02d}"
+            else:
+                end_time = f"{end_hour}:{minute:02d}"""
+
             # SEMESTER AND YEAR
-            semester = "First Semester"
-            year = 2024
+            semester = "Second Semester"
+            year = "2024 - 2025"
 
             class_schedule = ClassSchedule(
                 course=course,

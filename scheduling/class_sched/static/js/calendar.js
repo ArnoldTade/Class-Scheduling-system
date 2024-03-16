@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
             right: 'timeGridWeek,timeGridDay'
         },
         dayHeaderFormat: { weekday: 'short' },
-        events: eventSchedules
+        slotMinTime: '07:00:00',
+        slotMaxTime: '21:00:00',
+        events: eventSchedules,
+
     });
 
     calendar.render();

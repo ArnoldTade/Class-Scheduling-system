@@ -114,7 +114,7 @@
                                         </td>
                                         <td>{{ schedule.room.room_name }}</td>
                                         <td>{{ schedule.section }}</td>
-                                        <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                                        <td><span class="start-time">{{ schedule.start_time  }}</span>  - <span class="end-time">{{ schedule.end_time }}</span></td>
                                         <td>{{ schedule.days_of_week }}</td>
                                         <td>{{ schedule.semester }}</td>
                                         <td>{{ schedule.year }}</td>
@@ -133,7 +133,7 @@
                         </div>
                         <!--Loadslip View Tab-->
                         <div class="container-fluid container-schedule-loadslip">
-                            <h1>Loadslip</h1>
+                            <h1>Teaching Load</h1>
                         </div>       
                         <!--No Schedule Subject Tab-->
                         <div class="container-fluid container-schedule-loadslip">
@@ -264,6 +264,27 @@
 <script>
   var eventSchedules = {{ eventSchedules | safe }};
 
+</script>
+<!-- TIME FORMAT-->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var startTimeElements = document.querySelectorAll(".start-time");
+      startTimeElements.forEach(function(element) {
+          element.textContent = convertTimeTo12HourFormat(element.textContent);
+      });
+
+      var endTimeElements = document.querySelectorAll(".end-time");
+      endTimeElements.forEach(function(element) {
+          element.textContent = convertTimeTo12HourFormat(element.textContent);
+      });
+  });
+
+  function convertTimeTo12HourFormat(time24) {
+      var [hours, minutes] = time24.split(":");
+      var period = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      return hours + ":" + minutes + " " + period;
+  }
 </script>
 
 
