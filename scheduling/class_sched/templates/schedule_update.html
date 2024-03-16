@@ -1,0 +1,108 @@
+{% include "_header.html" %} {% load static %} 
+{% block content %}
+
+  
+<br>
+<div class="container-sm container-update-page" id="container-room-edit">
+    <a href="{% url 'schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i>Back to Schedule</a>
+
+    <div class="row">
+    <div class="col-sm col-subject-edit" id="col-subject-edit">
+        <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+        {% csrf_token %}
+            <div class="form-floating mb-3">
+                <select id="id_course" class="form-select" name="course" required>
+                    {% for course in course_choices %}
+                        <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %}selected{% endif %}>{{ course }}</option>
+                    {% endfor %}
+                </select>
+                <label for="id_course">Course</label>
+                <div class="invalid-feedback">
+                    Please select a course.
+                </div>
+            </div>
+    
+            <div class="form-floating mb-3">
+                <select id="id_instructor" class="form-select" name="instructor" required>
+                    {% for instructor in instructor_choices %}
+                        <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor.id %}selected{% endif %}>{{ instructor }}</option>
+                    {% endfor %}
+                </select>
+                <label for="id_instructor">Instructor</label>
+                <div class="invalid-feedback">
+                    Please select a Instructor.
+                </div>
+            </div>  
+     
+            <div class="form-floating mb-3">
+                <select id="id_room" class="form-select" name="room" required>
+                    {% for room in room_choices %}
+                        <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %}selected{% endif %}>{{ room }}</option>
+                    {% endfor %}
+                </select>
+                <label for="id_room">Room</label>
+                <div class="invalid-feedback">
+                    Please select a Instructor.
+                </div>
+            </div>  
+
+            
+            <div class="form-floating mb-3">
+                <input type="time" class="form-control" name="start_time" id="id_start_time" value="{{ scheduleform.instance.start_time }}" placeholder="Start Time" >
+                <label for="id_start_time">Start Time</label>
+                <div class="invalid-feedback">
+                Please Enter Start Time.
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="time" class="form-control" name="end_time" id="id_end_time" value="{{ scheduleform.instance.end_time }}" placeholder="End Time" > 
+                <label for="id_end_time">End Time</label>
+                <div class="invalid-feedback">
+                    Please Enter End Time.
+                </div>
+            </div>
+    
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" value="{{ scheduleform.instance.days_of_week }}" placeholder="Days of Week" >
+                <label for="id_days_of_week">Days of Week. Ex. M-W-F</label>
+                <div class="invalid-feedback">
+                    Please Enter Days of Week. Ex. M-W-F
+                </div>
+            </div>
+            
+            <select  class="form-select form-select-room_type" name="semester" id="id_semester" placeholder="Semester" >
+                <option value="{{ scheduleform.instance.semester }}" selected>{{ scheduleform.instance.semester }}</option>
+                <option value="First Semester">First Semester</option>
+                <option value="Second Semester">Second Semester</option>
+                <option value="Summer">Summer</option>
+            </select> 
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="year" id="id_year" value="{{ scheduleform.instance.year }}" placeholder="Year">
+                <label for="id_year">School Year</label>
+                <div class="invalid-feedback">
+                    Please Enter School Year
+                </div>
+            </div>
+             
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="section" id="id_section" value="{{ scheduleform.instance.section }}" placeholder="Section" >
+                <label for="id_section">Section</label>
+                <div class="invalid-feedback">
+                Please Enter Section.
+                </div>
+            </div>  
+
+        <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}
+{% include "_footer.html" %}
+

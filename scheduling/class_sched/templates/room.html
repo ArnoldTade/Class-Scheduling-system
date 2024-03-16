@@ -159,7 +159,7 @@
 </div>
 {% endfor %}
 
- 
+  
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendars = document.querySelectorAll('.calendarRoomAllocation');
@@ -172,6 +172,8 @@
                     right: 'timeGridWeek,timeGridDay'
                 },
                 dayHeaderFormat: { weekday: 'short' },
+                slotMinTime: '07:00:00',
+                slotMaxTime: '21:00:00',
                 events: []
             });
 

@@ -9,7 +9,9 @@
             <form id="subject-form" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                 {% csrf_token %}
                 {{ instructorform.as_p }}   
-                <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
+
+                
+              
   
                  
                 <div class="row">
@@ -21,6 +23,7 @@
                 </div>
                 <br>
                <!--
+                  <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
                 <div class="row">
                     <div class="col col-label">Handled Sections: 
 

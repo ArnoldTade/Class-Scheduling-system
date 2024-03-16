@@ -35,6 +35,7 @@ urlpatterns = [
     path("editinstructor/<int:id>", views.update_instructor, name="editinstructor"),
     path("editprofile/<int:id>", views.profile_edit, name="editprofile"),
     path("editsection/<int:id>", views.update_section, name="editsection"),
+    path("editschedule/<int:id>", views.update_schedule, name="editschedule"),
     path(
         "editgenerate-schedule/<int:id>",
         views.update_instructor_sections_courses,

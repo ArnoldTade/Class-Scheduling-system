@@ -114,18 +114,18 @@
                                         </td>
                                         <td>{{ schedule.room.room_name }}</td>
                                         <td>{{ schedule.section }}</td>
-                                        <td><span class="start-time">{{ schedule.start_time  }}</span>  - <span class="end-time">{{ schedule.end_time }}</span></td>
+                                        <td><span class="start-time">{{ schedule.start_time  }}</span> - <span class="end-time">{{ schedule.end_time }}</span></td>
                                         <td>{{ schedule.days_of_week }}</td>
                                         <td>{{ schedule.semester }}</td>
                                         <td>{{ schedule.year }}</td>
                                         <td>
-                                          <button type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></button>
-                                          <button type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></button>
+                                          <a href="#" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                                          <a href="{% url 'editschedule' id=schedule.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
                                         </td>
-                                      </tr>
+                                      </tr> 
                                       {% endfor %}
                                     </tbody>
-                                </table> 
+                                </table>  
                         </div>
                         <!--Calendar View Tab-->
                         <div class="container-fluid container-schedule-calendar">

@@ -145,6 +145,7 @@ def generate_population(population_size, schedule_length=150):
             )
             if not available_rooms:
                 continue
+
             room = random.choice(available_rooms)
 
             # CHOOSE DAY
@@ -154,8 +155,8 @@ def generate_population(population_size, schedule_length=150):
             session_duration_minutes = 0
 
             weekday_ranges = {
-                2: None,
-                3: ["M-W-F", "T-TH"],
+                2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                3: ["M-W-F", "T-TH", "Saturday"],
                 4: ["M-W", "W-F", "T-TH"],
                 5: ["M-W-F", "T-TH"],
                 6: ["M-W-F", "T-TH", "TH-F"],
@@ -173,8 +174,14 @@ def generate_population(population_size, schedule_length=150):
                     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 )
 
+            max_start_hour = 16
+            if session_duration_hours == 3:
+                max_start_hour -= 2  # Avoid exceeding 5 PM for 3-hour sessions
+            elif session_duration_minutes == 30:
+                max_start_hour -= 1
+
             # TIME
-            hour = random.choice([8, 9, 10, 11, 13, 14, 15])
+            hour = random.choice([8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20])
             minute = random.choice([0, 30])
 
             start_time = f"{hour}:{minute:02d}"

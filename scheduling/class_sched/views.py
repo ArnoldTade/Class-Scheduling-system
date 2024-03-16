@@ -177,7 +177,7 @@ def instructors_schedule_page(request, id=None):
 
         if days_of_week is not None:
             eventSchedule = {
-                "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name}) - Section {schedule.section}",
+                "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name}) - {schedule.section}",
                 "daysOfWeek": [
                     days_of_week_mapping[day]
                     for day in days_of_week
@@ -217,20 +217,30 @@ def profile(request):
         end_time = datetime.strptime(schedule.end_time, "%H:%M").strftime("%H:%M:%S")
 
         # Convert days_of_week to FullCalendar format (0 for Sunday, 1 for Monday, etc.)
-        days_of_week = {
+        days_of_week_mapping = {
+            "M": 1,
+            "T": 2,
+            "W": 3,
+            "H": 4,
+            "F": 5,
+            "S": 6,
+            "Sunday": 7,
             "Monday": 1,
             "Tuesday": 2,
             "Wednesday": 3,
             "Thursday": 4,
             "Friday": 5,
             "Saturday": 6,
-            "Sunday": 7,
-        }.get(schedule.days_of_week)
-
+        }  # .get(schedule.days_of_week)
+        days_of_week = list(schedule.days_of_week)
         if days_of_week is not None:
             event = {
                 "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name})",
-                "daysOfWeek": [days_of_week],
+                "daysOfWeek": [
+                    days_of_week_mapping[day]
+                    for day in days_of_week
+                    if day in days_of_week_mapping
+                ],
                 "startTime": start_time,
                 "endTime": end_time,
             }
@@ -451,6 +461,35 @@ def update_room(request, id=None):
     roomform = RoomForm(instance=room)
     rooms["roomform"] = roomform
     return render(request, "room_update.html", rooms)
+
+
+def update_schedule(request, id=None):
+    schedules = {}
+    schedule = get_object_or_404(ClassSchedule, id=id)
+    course_choices = Course.objects.all()
+    instructor_choices = Instructor.objects.all()
+    room_choices = Room.objects.all()
+
+    scheduleform = ClassScheduleForm(request.POST, instance=schedule)
+    if scheduleform.is_valid():
+        scheduleform.save()
+        messages.success(request, "Schedule Updated!")
+        return redirect("schedule")
+    else:
+        print(scheduleform.errors)
+
+    scheduleform = ClassScheduleForm(instance=schedule)
+    schedules["scheduleform"] = scheduleform
+    return render(
+        request,
+        "schedule_update.html",
+        {
+            "scheduleform": scheduleform,
+            "course_choices": course_choices,
+            "instructor_choices": instructor_choices,
+            "room_choices": room_choices,
+        },
+    )
 
 
 def update_section(request, id=None):

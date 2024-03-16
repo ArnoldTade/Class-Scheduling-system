@@ -74,6 +74,7 @@ class ClassScheduleForm(forms.ModelForm):
             "days_of_week",
             "semester",
             "year",
+            "section",
         ]
 
 
