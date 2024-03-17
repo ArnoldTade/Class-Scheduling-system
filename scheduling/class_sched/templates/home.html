@@ -95,8 +95,9 @@
             <table class="table table-hover table-striped caption-top">
               <thead class="table-dark">
                 <tr>
-                  <th scope="col">Course</th>
                   <th scope="col">Instructor</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Section</th>
                   <th scope="col">Room</th>
                   <th scope="col">Time</th>
                   <th scope="col">Days of Week</th>
@@ -105,10 +106,11 @@
               <tbody>
                 {% for schedule in instructorSchedule %}
                 <tr>
-                  <th scope="row">{{ schedule.course.course_name }}</th>
-                  <td><img src="{{ schedule.instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/>  {{ schedule.instructor.firstName }},  {{ schedule.instructor.lastName }}</td>
+                  <th scope="row"><img src="{{ schedule.instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/>  {{ schedule.instructor.firstName }},  {{ schedule.instructor.lastName }}</th>
+                  <td>{{ schedule.course.course_name }}</td>
+                  <td>{{ schedule.section }}</td>
                   <td>{{ schedule.room.room_name }}</td>
-                  <td>{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                  <td><span class="start-time">{{ schedule.start_time }}</span> - <span class="end-time">{{ schedule.end_time }}</span></td>
                   <td>{{ schedule.days_of_week }}</td>
                    
                 </tr>
@@ -126,6 +128,28 @@
     document.getElementById("table-schedule").scrollIntoView({
       behavior: 'smooth'
     })
+  }
+</script>
+
+<!-- TIME FORMAT-->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var startTimeElements = document.querySelectorAll(".start-time");
+      startTimeElements.forEach(function(element) {
+          element.textContent = convertTimeTo12HourFormat(element.textContent);
+      });
+
+      var endTimeElements = document.querySelectorAll(".end-time");
+      endTimeElements.forEach(function(element) {
+          element.textContent = convertTimeTo12HourFormat(element.textContent);
+      });
+  });
+
+  function convertTimeTo12HourFormat(time24) {
+      var [hours, minutes] = time24.split(":");
+      var period = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      return hours + ":" + minutes + " " + period;
   }
 </script>
 {% endblock %}

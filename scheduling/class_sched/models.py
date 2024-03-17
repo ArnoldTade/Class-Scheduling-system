@@ -77,6 +77,9 @@ class ClassSchedule(models.Model):
 
         return conflicts.count()
 
+    def __str__(self):
+        return f"{self.instructor}, {self.course}, {self.section}, {self.room} "
+
 
 class Week(models.Model):
     day = models.CharField(max_length=100)

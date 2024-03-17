@@ -332,6 +332,9 @@ def section(request):
 
 @login_required
 def room(request):
+    rooms = Room.objects.all().order_by("-id")
+    room_events = []
+
     if request.method == "POST":
         roomform = RoomForm(request.POST, prefix="room")
         if roomform.is_valid():
@@ -345,7 +348,53 @@ def room(request):
     else:
         roomform = RoomForm(prefix="room")
 
-    rooms = Room.objects.all().order_by("-id")
+    for room in rooms:
+        room_schedule = ClassSchedule.objects.filter(room=room)
+        room_events_for_room = []
+
+        for schedule in room_schedule:
+            start_time = datetime.strptime(schedule.start_time, "%H:%M").strftime(
+                "%H:%M:%S"
+            )
+            end_time = datetime.strptime(schedule.end_time, "%H:%M").strftime(
+                "%H:%M:%S"
+            )
+            days_of_week_mapping = {
+                "M": 1,
+                "T": 2,
+                "W": 3,
+                "H": 4,
+                "F": 5,
+                "S": 6,
+                "Sunday": 7,
+                "Monday": 1,
+                "Tuesday": 2,
+                "Wednesday": 3,
+                "Thursday": 4,
+                "Friday": 5,
+                "Saturday": 6,
+            }
+            days_of_week = list(schedule.days_of_week)
+
+            if days_of_week:
+                event = {
+                    "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name}) - {schedule.section}",
+                    "daysOfWeek": [
+                        days_of_week_mapping[day]
+                        for day in days_of_week
+                        if day in days_of_week_mapping
+                    ],
+                    "startTime": start_time,
+                    "endTime": end_time,
+                }
+                room_events_for_room.append(event)
+
+        room_events.append(
+            {
+                "room_name": room.room_name,
+                "events": room_events_for_room,
+            }
+        )
     schedules = ClassSchedule.objects.all()
     return render(
         request,
@@ -354,6 +403,7 @@ def room(request):
             "roomform": roomform,
             "rooms": rooms,
             "schedules": schedules,
+            "room_events": room_events,
         },
     )
 

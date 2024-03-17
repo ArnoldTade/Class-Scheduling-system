@@ -253,6 +253,7 @@ i {
     .home-table {
         margin-top: 20px;
         box-shadow: var(--box-shadow-style);
+        height: 100vh;
     }
 
     .table-bg {
@@ -1332,8 +1333,22 @@ thead.table-head {
 
 /* Room Allocation */
 
+.section-room-list {
+    max-width: 100%;
+    overflow: auto;
+    max-height: 100vh;
 
+    .container-room-list {
+        background-color: #fff;
+        overflow-x: auto;
 
+        table {
+            position: static;
+            top: 0;
+            width: 100%;
+        }
+    }
+}
 
 
 .cotainer-room-list {

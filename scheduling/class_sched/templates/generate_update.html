@@ -116,12 +116,14 @@
                       {% endfor %}
                     </select>
                   </div>
-                -->
+                
 
                 <select class="form-select" name="instructor_course-instructor" id="id_instructor_course-instructor"  aria-label="Default select example">
                     <option selected>Select Instructor</option>
                     <option value="{{ instructorform.instance.id }}" >{{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }}</option>
                 </select>
+                -->
+                
 
                 <p class="fs-6 text-start">Sort Subject</p>
                 <select class="form-select" id="category-college" style="width:auto; margin-top: -10px;" aria-label="Default select example">
@@ -133,7 +135,8 @@
                     <option value="CCJE">CCJE</option>
                     <option value="CAF">CAF</option>
                 </select>
-                   
+                  
+              
                 <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
                     <option selected>Select Course</option>
                     {% for course in courses %}
@@ -141,15 +144,18 @@
                     {% endfor %}
                 </select>
                
-                
+                 
                 <select class="form-select"  name="instructor_course-section" id="id_instructor_course-section" aria-label="Default select example">
                     <option selected>Select Section</option>
                     {% for section in sections %}
                     <option value="{{ section.id }}"  data-section="{{ section.section_college }}">{{ section.program_section }}</option>
                     {% endfor %}
                 </select>
-              
-            
+                
+                <div class="form-floating mb-3">
+                  <input type="hidden" class="form-control" name="instructor_course-instructor" id="id_instructor_course-instructor" value="{{ instructorform.instance.id }}" placeholder="Instructor" required>
+                </div>
+
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -111,9 +111,25 @@ class Individual:
             return
 
         # Modify only room, start_time, and end_time
-        class_schedule.room = random.choice(
+
+        """ class_schedule.room = random.choice(
             [room for room in Room.objects.all() if room != class_schedule.room]
         )
+        """
+
+        available_rooms = Room.objects.filter(
+            college=class_schedule.instructor.college,
+            room_type__in=[class_schedule.course.type, "Lecture"],
+        )
+        if not available_rooms:
+            print("No available rooms for mutation")
+            return
+
+        new_room = random.choice(available_rooms)
+        class_schedule.room = new_room
+
+        # TIME
+
         """
         hour = random.choice([8, 9, 10, 11, 13, 14, 15])
         minute = random.choice([0, 30])
@@ -123,7 +139,8 @@ class Individual:
             end_hour += 1
         end_time = f"{end_hour}:{minute:02d}"
         class_schedule.start_time = start_time
-        class_schedule.end_time = end_time"""
+        class_schedule.end_time = end_time
+        """
 
         class_schedule.save()
 
@@ -141,7 +158,8 @@ def generate_population(population_size, schedule_length=150):
 
             # ROOMS
             available_rooms = Room.objects.filter(
-                college=instructor.college, room_type__in=[course.type, "Lecture"]
+                college=instructor.college,
+                room_type__in=[course.type, "Lecture"],
             )
             if not available_rooms:
                 continue
@@ -181,7 +199,7 @@ def generate_population(population_size, schedule_length=150):
                 max_start_hour -= 1
 
             # TIME
-            hour = random.choice([8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20])
+            hour = random.choice([8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19])
             minute = random.choice([0, 30])
 
             start_time = f"{hour}:{minute:02d}"
@@ -197,7 +215,8 @@ def generate_population(population_size, schedule_length=150):
                 end_hour += 1
                 end_time = f"{end_hour}:{minute:02d}"
             else:
-                end_time = f"{end_hour}:{minute:02d}"""
+                end_time = f"{end_hour}:{minute:02d}
+            """
 
             # SEMESTER AND YEAR
             semester = "Second Semester"
