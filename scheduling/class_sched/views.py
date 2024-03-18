@@ -307,12 +307,14 @@ def instructors(request):
 @login_required
 def schedule(request):
     instructors = Instructor.objects.all()
-
+    class_schedules = ClassSchedule.objects.all()
+    total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
     return render(
         request,
         "schedule.html",
         {
             "instructors": instructors,
+            "total_conflicts": total_conflicts,
         },
     )
 

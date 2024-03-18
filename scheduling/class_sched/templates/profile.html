@@ -1,6 +1,7 @@
 
 {% include "home_header.html" %} {% load static %} 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 
 <!--Profile PAGE-->.
 <p class="fs-5 text-start user-page-title">User Profile</p>
@@ -128,24 +129,25 @@
        
               
 </section>
+
 <div class="container-fluid container-teaching-load" >
   <div class="row row-user-info">
     <div class="container-fluid container-user-info" id="instructor-info">
         <h4>Teaching Load</h4>
             <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
-                    <table class="table table-hover table-striped caption-top">
+                    <table class="table table-hover table-bordered caption-top">
                         <caption>
                           Your teaching assignment in the College of Arts and Sciences (CAS) this semester is as follows. Please report to your
                           assignment as approved by the University President.
                         </caption>
-                        <thead class="table-secondary">
+                        <thead >
                           <tr>
                             <th scope="col">Period</th>
                             <th scope="col">Course Code and Title</th>
                             <th scope="col">Room</th>
                             <th scope="col">No. Student</th>
                           </tr>
-                        </thead> 
+                        </thead>  
                         <tbody>
                           {% for summary in instructorSchedule %}
                           <tr>
@@ -161,7 +163,7 @@
                           </tr>  
                           {% endfor %}
                           
-                          <thead class="table-secondary">
+                          <thead >
                           <tr>
                             <th scope="col">Total No. of Preparation:</th>
                             <td colspan="3"></td>
@@ -190,14 +192,16 @@
             </div>
     </div>
   </div>
-</div>
+</div> 
 
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-success btn-profile-print" type="button" onclick="captureAndPrint()">Print TeachingLoad</button>
+</div>
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 
 <script>
-
   document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendarProfilePage');
 
@@ -214,10 +218,33 @@
     });
 
     calendar.render();
-});
- 
- 
+  });
 </script> 
+
+<script>
+  function captureAndPrint() {
+    // Get the div element to capture
+    var element = document.querySelector('.container-teaching-load');
+
+    // Use html2canvas to capture the screenshot
+    html2canvas(element, {
+      scale:6,
+    }).then(function(canvas) {
+        // Convert canvas to image data URL
+        var imageData = canvas.toDataURL();
+
+        // Create a new image element
+        var img = new Image();
+        img.src = imageData;
+
+        // Create a new window to display the captured image
+        var newWindow = window.open('', '_blank');
+        newWindow.document.write('<img src="' + imageData + '" style="width:100%;">');
+
+        newWindow.print();
+    });
+  }
+</script>
 <!--END Profile PAGE-->
 {% endblock %}
 {% include "_footer.html" %}

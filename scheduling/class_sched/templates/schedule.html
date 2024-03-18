@@ -47,10 +47,17 @@
                     <option value="Summer">Summer</option>
 
                     </select>
-                </div>
+                </div> 
                 
                 <div class="col-sm">
-                  <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
+                  <button class="btn btn-secondary" type="button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
+                </div>
+                <div class="col-sm " >
+                  <a href="{% url "conflict" %}" class="btn btn-warning position-relative" type="button"  >No. of Conflicts  
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {{ total_conflicts }}
+                    <span class="visually-hidden">unread messages</span>
+                  </span></a>
               </div>
             </div>
         </div>

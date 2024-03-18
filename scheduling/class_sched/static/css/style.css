@@ -47,6 +47,7 @@ i {
     margin-right: 10px;
 }
 
+
 /* SCROLLBAR NAVBAR */
 /* SCROLLBAR NAVBAR */
 
@@ -388,6 +389,24 @@ i {
 
 
 /*Profile Page */
+.container-teaching-load {
+
+    .table-bordered {
+        border: 1px solid #979797 !important;
+    }
+
+    caption {
+        color: black;
+    }
+}
+
+.btn-profile-print {
+    margin: 10px;
+    float: right;
+    color: #fff;
+    font-weight: bold;
+}
+
 .user-page-title {
     color: var(--home-color);
     margin: 10px 0px -10px 20px;
@@ -1325,6 +1344,14 @@ thead.table-head {
 #calendarSchedulePage,
 #calendarProfilePage,
 .calendarRoomAllocation {
+    .fc .fc-scrollgrid-liquid {
+        width: 100px;
+    }
+
+    .fc .fc-timegrid-now-indicator-container {
+        width: 50px;
+    }
+
     .fc-col-header-cell-cushion {
         color: var(--home-color-dark);
         text-decoration: none;

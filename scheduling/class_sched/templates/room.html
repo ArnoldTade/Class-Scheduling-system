@@ -1,6 +1,7 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 
 {% if messages %}
   <div class="messages">
@@ -19,7 +20,6 @@
         <div class="col-sm col-rooms">
             <p class="fs-5 text-start user-page-title">Rooms</p>
             <hr>
-             
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <div class="row row-room-allocation">
@@ -159,7 +159,7 @@
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-default" type="button" data-room-name="{{ room_data.room_name }}"  onclick="printRoom(this)">Print<i class="bi bi-printer"></i></button>
+            <button class="btn btn-default" type="button" data-room-name="{{ room_data.room_name }}"  onclick="captureAndPrint(this)">Print<i class="bi bi-printer"></i></button>
         </div>
 </div>
 {% endfor %}
@@ -246,27 +246,60 @@
 </script>
 
 <script>
-    function printRoom(printButton) {
+    //function printRoom(printButton) {
         // Get the room name from the button's data-room-name attribute
-        const roomName = printButton.dataset.roomName;
+       // const roomName = printButton.dataset.roomName;
       
         // Find the container element to print using its ID (constructed with room name)
-        const containerToPrint = document.getElementById(`room-table-${roomName}`);
+      //  const containerToPrint = document.getElementById(`room-table-${roomName}`);
       
         // Create a new window specifically for printing
-        const printWindow = window.open('', 'PrintRoom');
+      //  const printWindow = window.open('', 'PrintRoom');
       
         // Set the document content of the print window to the container's HTML
-        printWindow.document.write(containerToPrint.outerHTML);
+       // printWindow.document.write(containerToPrint.outerHTML);
       
         // Focus the print window and trigger the print dialog
-        printWindow.focus();
-        printWindow.print();
+        //printWindow.focus();
+       // printWindow.print();
       
         // Close the print window after printing (optional)
         // printWindow.close(); // Uncomment if you want to close automatically
-      }
+    //  }
 </script>
+
+<script>
+    function printRoom(roomId) {
+        var printContents = document.getElementById(roomId).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+
+
+<script>
+    function captureAndPrint(button) {
+        var container = button.closest('.container-room-allocation');
+      
+        html2canvas(container, {
+            scale: 2,
+        }).then(function(canvas) {
+            var imageData = canvas.toDataURL();
+    
+            var img = new Image();
+            img.src = imageData;
+    
+            var newWindow = window.open('', '_blank');
+            newWindow.document.write('<img src="' + imageData + '" style="width:100%;">');
+    
+            newWindow.print();
+        });
+    }
+  </script>
+
   
 {% endblock %}
 {% include "_footer.html" %}
