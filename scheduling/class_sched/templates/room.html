@@ -77,7 +77,7 @@
                         </thead>
                         <tbody id="room-table-body">
                         {% for room in rooms %}
-                        <tr>
+                        <tr data-college="{{ room.college }}">
                             <th scope="row">{{ room.room_name }}</th>
                             <td>{{ room.college }}</td>
                             <td>{{ room.room_type }}</td>
@@ -146,22 +146,25 @@
 </div>
 <hr>
 <p class="fs-5 text-start user-page-title">Schedule for Each Room</p>
-
+ 
 
 {% for room_data in room_events %}
-<div class="container-fluid container-room-allocation">
-    <p class="text-start" style="font-weight: 800;">Room Name: {{ room_data.room_name }}</p>
-        <div class="container-fluid">
+<div class="container-fluid container-room-allocation" id="room-table-{{ room_data.room_name }}" data-college="{{ room_data.college }}">
+    <p class="text-start" style="font-weight: 800;" >Room Name: {{ room_data.room_name }}</p>
+        <div class="container-fluid" >
             <div class="row">
                 <div class="col-sm">
                     <div class="calendarRoomAllocation"></div>
                 </div>
             </div>
         </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-default" type="button" data-room-name="{{ room_data.room_name }}"  onclick="printRoom(this)">Print<i class="bi bi-printer"></i></button>
+        </div>
 </div>
 {% endfor %}
 
-  
+   
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendars = document.querySelectorAll('.calendarRoomAllocation');
@@ -206,6 +209,64 @@
             });
         });
     });
-  </script>
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initial filtering
+        filterElements();
+        
+        // Event listeners
+        document.getElementById('category-college').addEventListener('change', function() {
+            filterElements();
+        });
+    
+        document.querySelectorAll('.form-select').forEach(function(select) {
+            select.addEventListener('change', function() {
+                filterElements();
+            });
+        });
+    });
+    
+    function filterElements() {
+        var selectedCollege = document.getElementById('category-college').value;
+        
+        // Filter room containers
+        document.querySelectorAll('.container-room-allocation').forEach(function(roomContainer) {
+            var roomCollege = roomContainer.dataset.college;
+            roomContainer.style.display = (selectedCollege === 'all' || roomCollege === selectedCollege) ? '' : 'none';
+        });
+    
+        // Filter table rows
+        document.querySelectorAll('#room-table-body tr').forEach(function(row) {
+            var college = row.getAttribute('data-college');
+            row.style.display = (selectedCollege === 'all' || college === selectedCollege) ? '' : 'none';
+        });
+    }
+</script>
+
+<script>
+    function printRoom(printButton) {
+        // Get the room name from the button's data-room-name attribute
+        const roomName = printButton.dataset.roomName;
+      
+        // Find the container element to print using its ID (constructed with room name)
+        const containerToPrint = document.getElementById(`room-table-${roomName}`);
+      
+        // Create a new window specifically for printing
+        const printWindow = window.open('', 'PrintRoom');
+      
+        // Set the document content of the print window to the container's HTML
+        printWindow.document.write(containerToPrint.outerHTML);
+      
+        // Focus the print window and trigger the print dialog
+        printWindow.focus();
+        printWindow.print();
+      
+        // Close the print window after printing (optional)
+        // printWindow.close(); // Uncomment if you want to close automatically
+      }
+</script>
+  
 {% endblock %}
 {% include "_footer.html" %}

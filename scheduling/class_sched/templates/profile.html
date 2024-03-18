@@ -124,9 +124,73 @@
             <h4 class="text-start">Calendar</h4>
             <div id='calendarProfilePage'></div>
         </div>
+
        
-    </div>
+              
 </section>
+<div class="container-fluid container-teaching-load" >
+  <div class="row row-user-info">
+    <div class="container-fluid container-user-info" id="instructor-info">
+        <h4>Teaching Load</h4>
+            <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
+                    <table class="table table-hover table-striped caption-top">
+                        <caption>
+                          Your teaching assignment in the College of Arts and Sciences (CAS) this semester is as follows. Please report to your
+                          assignment as approved by the University President.
+                        </caption>
+                        <thead class="table-secondary">
+                          <tr>
+                            <th scope="col">Period</th>
+                            <th scope="col">Course Code and Title</th>
+                            <th scope="col">Room</th>
+                            <th scope="col">No. Student</th>
+                          </tr>
+                        </thead> 
+                        <tbody>
+                          {% for summary in instructorSchedule %}
+                          <tr>
+                            <td>{{ summary.start_time }} - {{ summary.end_time }} ({{ summary.days_of_week }})</td>
+                            <td>
+                              {{ summary.course }} 
+                              ({{ summary.course.credits }} Units/
+                              {{ summary.course.hours }} Hours )
+
+                            </td>
+                            <td>{{ summary.room }}</td>
+                            <td>{{ summary.section}} {{ summary.number_students}}</td>
+                          </tr>  
+                          {% endfor %}
+                          
+                          <thead class="table-secondary">
+                          <tr>
+                            <th scope="col">Total No. of Preparation:</th>
+                            <td colspan="3"></td>
+                          </tr>
+                          <tr>
+                            <th scope="col">Total No. of Units</th>
+                            <td colspan="3"></td>
+                          </tr>
+                          <tr>
+                            <th scope="col">Total No. of Hours Week</th>
+                            <td colspan="3"></td>
+                          </tr>
+                        </thead> 
+ 
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>  
+                          <tr>
+                            <th colspan="4" style="text-align: center;"> {{ instructor_data.status }} </th>
+                          </tr>
+                        </tbody>
+                    </table>  
+            </div>
+    </div>
+  </div>
+</div>
 
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -157,3 +221,4 @@
 <!--END Profile PAGE-->
 {% endblock %}
 {% include "_footer.html" %}
+ 

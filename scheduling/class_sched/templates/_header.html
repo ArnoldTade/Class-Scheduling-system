@@ -70,10 +70,13 @@
                     <a class="nav-link" href="{% url "room" %}"><i class="bi bi-door-closed"></i>ROOM ALLOCATION</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "schedule" %}"><i class="bi bi-calendar-check"></i>SCHEDULE  <span class="badge text-bg-danger">4</span></a>
+                    <a class="nav-link" href="{% url "schedule" %}"><i class="bi bi-calendar-check"></i>SCHEDULE </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "generate-schedule" %}"><i class="bi bi-calendar3-range"></i>GENERATE SCHEDULE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "conflict" %}"><i class="bi bi-exclamation-square"></i>CONFLICT <span class="badge text-bg-danger">4</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "summary" %}"><i class="bi bi-clipboard2-check"></i>SUMMARY</a>

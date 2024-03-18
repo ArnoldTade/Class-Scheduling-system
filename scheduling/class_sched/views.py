@@ -20,6 +20,8 @@ import pytz
 from collections import defaultdict
 from .class_scheduling import *
 
+from django.db.models import Sum
+
 # Create your views here.
 
 
@@ -97,6 +99,13 @@ def home(request):
         {
             "instructors": instructors,
         },
+    )
+
+
+def conflict(request):
+    return render(
+        request,
+        "conflict.html",
     )
 
 
@@ -207,6 +216,7 @@ def instructors_schedule_page(request, id=None):
 def profile(request):
     instructor = request.user.instructor
     instructorSchedule = ClassSchedule.objects.filter(instructor=instructor)
+    instructor_data = instructor
 
     events = []
 
@@ -252,6 +262,7 @@ def profile(request):
         {
             "instructorSchedule": instructorSchedule,
             "events": events,
+            "instructor_data": instructor_data,
             "instructors": Instructor.objects.all(),
         },
     )
@@ -378,7 +389,7 @@ def room(request):
 
             if days_of_week:
                 event = {
-                    "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} ({schedule.room.room_name}) - {schedule.section}",
+                    "title": f"{schedule.course.course_name} - Mr/Mrs. {schedule.instructor.lastName} - {schedule.section}",
                     "daysOfWeek": [
                         days_of_week_mapping[day]
                         for day in days_of_week
@@ -393,6 +404,7 @@ def room(request):
             {
                 "room_name": room.room_name,
                 "events": room_events_for_room,
+                "college": room.college,
             }
         )
     schedules = ClassSchedule.objects.all()

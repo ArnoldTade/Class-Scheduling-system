@@ -1108,10 +1108,10 @@ thead.table-head {
 }
 
 .container-instructor-schedule {
-    max-height: 100%;
+    height: 100vh;
     box-shadow: var(--box-shadow-style);
-    padding: 20px;
     background-color: #fff;
+    padding-top: 10px;
 }
 
 

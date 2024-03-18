@@ -15,6 +15,7 @@ urlpatterns = [
     path("section/", views.section, name="section"),
     path("summary/", views.summary, name="summary"),
     path("generate-schedule/", views.generate_schedule, name="generate-schedule"),
+    path("conflict/", views.conflict, name="conflict"),
     # For user Auth
     path("login/", views.user_login, name="login"),
     path("signup/", views.user_signup, name="signup"),
