@@ -122,10 +122,9 @@
                     <option selected>Select Instructor</option>
                     <option value="{{ instructorform.instance.id }}" >{{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }}</option>
                 </select>
-                -->
+                
                 
 
-                <p class="fs-6 text-start">Sort Courses</p>
                 <select class="form-select" id="category-college" style="width:auto; margin-top: -10px;" aria-label="Default select example">
                     <option value="all" selected>All Colleges</option>
                     <option value="CAS">CAS</option>
@@ -135,22 +134,60 @@
                     <option value="CCJE">CCJE</option>
                     <option value="CAF">CAF</option>
                 </select>
+              -->
+              <div class="col-sm">
+                <select class="form-select" id="schedule-category-course-major" style="width:auto;" aria-label="Default select example">
+                  <option value="all" selected>Filter Course</option>
+                  <option value="Bachelor of Agricultural Technology major in Animal Husbandry">Bachelor of Agricultural Technology major in Animal Husbandry</option>
+                  <option value="BS Agricultural major in Agronomy">BSA major in Agronomy</option>
+                  <option value="BS Agriculture major in Animal Science">BSA major in Animal Science</option>
+                  <option value="BS Forestry">BS Forestry</option>
+                  <option value="BS Computer Science">BS Computer Science</option>
+                  <option value="BS Information Technology">BS Information Technology</option>
+                  <option value="BS in Hospitality Management">BS in Hospitality Management</option>
+                  <option value="BS in Business Administration major in Human Resource Management">BSBA major in Human Resource Management</option>
+                  <option value="BS Office Administration">BS Office Administration</option>
+                  <option value="BS Criminology">BS Criminology</option>
+                  <option value="BEED General Curriculum">BEED General Curriculum</option>
+                  <option value="BEED Special Education">BEED Special Education</option>
+                  <option value="BSED English">BSED English</option>
+                  <option value="BSED Mathematics">BSED Mathematics</option>
+                  <option value="BSED Sciences">BSED Sciences</option>
+                  <option value="BS Industrial Technology major in Automotive Technology">BSIT major in Automotive Technology</option>
+                  <option value="BS Industrial Technology major in Computer Technology">BSIT major in Computer Technology</option>
+                  <option value="BS Industrial Technology major in Electrical Technology">BSIT major in Electrical Technology</option>
+                  <option value="BS Industrial Technology major in Electronics Technology">BSIT major in Electronics Technology</option>
                   
-              
+                </select>
+              </div>
+          
+                  
+              <!--
                 <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
                     <option selected>Select Course</option>
                     {% for course in courses %}
                     <option value="{{ course.id }}"  data-section="{{ course.college }}">{{ course.course_name }}</option>
                     {% endfor %}
                 </select>
-               
-                 
+               -->
+              <div class="col-sm">
+                <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
+                  <option selected>Select Course</option>
+                  {% for course in courses %}
+                  <option value="{{ course.id }}"  data-section="{{ course.course }}">{{ course.course_name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+
+              <div class="col-sm">
                 <select class="form-select"  name="instructor_course-section" id="id_instructor_course-section" aria-label="Default select example">
                     <option selected>Select Section</option>
                     {% for section in sections %}
                     <option value="{{ section.id }}"  data-section="{{ section.section_college }}">{{ section.program_section }}</option>
                     {% endfor %}
                 </select>
+              </div>
+
                 
                 <div class="form-floating mb-3">
                   <input type="hidden" class="form-control" name="instructor_course-instructor" id="id_instructor_course-instructor" value="{{ instructorform.instance.id }}" placeholder="Instructor" required>
@@ -169,12 +206,12 @@
 
 
 <script>
-    document.getElementById('category-college').addEventListener('change', function() {
+    document.getElementById('schedule-category-course-major').addEventListener('change', function() {
       filterCourses();
     });
   
     function filterCourses() {
-      var selectedCollege = document.getElementById('category-college').value;
+      var selectedCollege = document.getElementById('schedule-category-course-major').value;
       var courseSelect = document.getElementById('id_instructor_course-course');
       //var sectionSelect = document.getElementById('id_instructor_course-section');
 

@@ -1530,8 +1530,9 @@ thead.table-head {
 
     #id_instructor_course-instructor,
     #id_instructor_course-course,
-    #id_instructor_course-section {
-        width: 450px;
+    #id_instructor_course-section,
+    #schedule-category-course-major {
+        width: 450px !important;
         height: 50px;
         margin: 10px 5px 5px 5px;
         border-radius: 0.5rem;
@@ -1545,5 +1546,12 @@ thead.table-head {
         padding: 15px;
         border-radius: 0.5rem;
 
+    }
+}
+
+/* SUMMARY PAGE */
+.container-summary-print {
+    .table-bordered {
+        border: solid 1px #9c9c9c !important;
     }
 }
