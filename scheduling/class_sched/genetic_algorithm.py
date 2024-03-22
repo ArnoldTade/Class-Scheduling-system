@@ -13,6 +13,105 @@ rooms = Room.objects.all()
 weeks = Week.objects.all()
 
 
+time_slots = {
+    "Time": [
+        ("07:30", "08:30"),
+        ("07:30", "09:00"),
+        ("07:30", "09:30"),
+        ("07:30", "10:30"),
+        ("08:00", "09:00"),
+        ("08:00", "09:30"),
+        ("08:00", "10:00"),
+        ("08:00", "11:00"),
+        ("08:30", "9:30"),
+        ("08:30", "10:00"),
+        ("08:30", "10:30"),
+        ("08:30", "11:30"),
+        ("09:00", "10:00"),
+        ("09:00", "10:30"),
+        ("09:00", "11:00"),
+        ("09:00", "12:00"),
+        ("09:30", "10:30"),
+        ("09:30", "11:00"),
+        ("09:30", "11:30"),
+        ("10:00", "11:00"),
+        ("10:00", "11:30"),
+        ("10:00", "12:00"),
+        ("10:30", "11:30"),
+        ("10:30", "12:00"),
+        ("11:00", "12:00"),
+        # Afternoon
+        ("13:00", "14:00"),
+        ("13:00", "14:30"),
+        ("13:00", "15:00"),
+        ("13:00", "16:00"),
+        ("13:30", "14:30"),
+        ("13:30", "15:00"),
+        ("13:30", "15:30"),
+        ("13:30", "16:30"),
+        ("14:00", "15:00"),
+        ("14:00", "15:30"),
+        ("14:00", "16:00"),
+        ("14:00", "17:00"),
+        ("14:30", "15:30"),
+        ("14:30", "16:00"),
+        ("14:30", "16:30"),
+        ("14:30", "17:30"),
+        ("15:00", "16:00"),
+        ("15:00", "16:30"),
+        ("15:00", "17:00"),
+        ("15:00", "18:00"),
+        ("15:30", "16:30"),
+        ("15:30", "17:00"),
+        ("15:30", "17:30"),
+        ("15:30", "18:30"),
+        ("16:00", "17:00"),
+        ("16:00", "17:30"),
+        ("16:00", "18:00"),
+        ("16:00", "19:00"),
+        ("16:30", "17:30"),
+        ("16:30", "18:00"),
+        ("16:30", "18:30"),
+        ("16:30", "19:30"),
+        ("17:00", "18:00"),
+        ("17:00", "18:30"),
+        ("17:00", "19:00"),
+        ("17:00", "20:00"),
+        ("17:30", "18:30"),
+        ("17:30", "19:00"),
+        ("17:30", "19:30"),
+        ("17:30", "20:00"),
+        ("18:00", "19:00"),
+        ("18:00", "19:30"),
+        ("18:00", "20:00"),
+        ("18:30", "19:30"),
+        ("18:30", "20:00"),
+        ("19:00", "20:00"),
+    ],
+}
+days_of_week = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "M",
+    "T",
+    "W",
+    "TH",
+    "F",
+    "S",
+    "M-W-F",
+    "T-TH",
+    "W-F",
+    "TH-F",
+    "M-W",
+]
+for day in days_of_week:
+    time_slots[day] = time_slots["Time"]
+
+
 class Individual:
     def __init__(self, class_schedules):
         self.class_schedules = class_schedules
@@ -110,8 +209,6 @@ class Individual:
             print(f"IndexError in mutate: {class_schedule_index}")
             return
 
-        # Modify only room, start_time, and end_time
-
         """ class_schedule.room = random.choice(
             [room for room in Room.objects.all() if room != class_schedule.room]
         )
@@ -162,65 +259,57 @@ def generate_population(population_size, schedule_length=150):
                 room_type__in=[course.type, "Lecture"],
             )
             if not available_rooms:
+                print("No available rooms for: ", instructor_course)
                 continue
 
             room = random.choice(available_rooms)
 
             # CHOOSE DAY
             hours = instructor_course.course.hours
-            days_of_week = None
-            session_duration_hours = 0
-            session_duration_minutes = 0
-
             weekday_ranges = {
                 2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                3: ["M-W-F", "T-TH", "Saturday"],
+                3: [
+                    "M-W-F",
+                    "T-TH",
+                ],
                 4: ["M-W", "W-F", "T-TH"],
                 5: ["M-W-F", "T-TH"],
                 6: ["M-W-F", "T-TH", "TH-F"],
             }
-            if hours in weekday_ranges:
-                days_of_week = random.choice(weekday_ranges[hours])
-                days_of_week = random.choice(weekday_ranges[hours])
+            days_of_week = random.choice(weekday_ranges[hours])
+            if "-" in days_of_week:
                 num_sessions = len(days_of_week.split("-"))
-                session_duration_hours = hours / num_sessions
-                session_duration_minutes = (
-                    session_duration_hours - int(session_duration_hours)
-                ) * 60
             else:
-                days_of_week = random.choice(
-                    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                )
+                num_sessions = 1
 
-            max_start_hour = 16
-            if session_duration_hours == 3:
-                max_start_hour -= 2  # Avoid exceeding 5 PM for 3-hour sessions
-            elif session_duration_minutes == 30:
-                max_start_hour -= 1
+            session_duration_hours = hours / num_sessions
+            session_duration_minutes = int(round(session_duration_hours * 60))
 
-            # TIME
-            hour = random.choice([8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19])
-            minute = random.choice([0, 30])
-
-            start_time = f"{hour}:{minute:02d}"
-            start_time_datetime = datetime.strptime(start_time, "%H:%M")
-
-            end_time_datetime = start_time_datetime + timedelta(
-                hours=int(session_duration_hours), minutes=int(session_duration_minutes)
+            chosen_weekdays = (
+                random.sample(days_of_week.split("-"), 1)[0]
+                if "-" in days_of_week
+                else days_of_week
             )
 
-            end_time = end_time_datetime.strftime("%H:%M")
-            """
-            if end_hour == 12:
-                end_hour += 1
-                end_time = f"{end_hour}:{minute:02d}"
-            else:
-                end_time = f"{end_hour}:{minute:02d}
-            """
+            found_valid_slot = False
+            start_index = random.randint(0, len(time_slots[chosen_weekdays]) - 1)
+            for j in range(start_index, len(time_slots[chosen_weekdays])):
+                start_time, end_time = time_slots[chosen_weekdays][j]
+                slot_duration_in_minutes = (
+                    datetime.strptime(end_time, "%H:%M")
+                    - datetime.strptime(start_time, "%H:%M")
+                ).total_seconds() / 60
+                if slot_duration_in_minutes == session_duration_minutes:
+                    valid_time_slots = [(start_time, end_time)]
+                    found_valid_slot = True
+                    print("Valid time slots for: ", instructor_course, valid_time_slots)
 
-            # SEMESTER AND YEAR
-            semester = "Second Semester"
-            year = "2024 - 2025"
+                    break
+            if not found_valid_slot:
+                print("No valid time slots for: ", instructor_course)
+                continue
+
+            start_time, end_time = random.choice(valid_time_slots)
 
             class_schedule = ClassSchedule(
                 course=course,
@@ -230,8 +319,8 @@ def generate_population(population_size, schedule_length=150):
                 start_time=start_time,
                 end_time=end_time,
                 days_of_week=days_of_week,
-                semester=semester,
-                year=year,
+                semester="Second Semester",
+                year="2024 - 2025",
             )
             class_schedules.append(class_schedule)
 

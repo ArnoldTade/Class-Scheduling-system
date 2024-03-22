@@ -647,14 +647,21 @@ h2 {
 
 .navbar-toggler {
     margin-left: 20px;
-    background-color: #e5e2ff;
     margin-bottom: 15px;
-    border-color: transparent;
+    background-color: #fff;
+    color: #fff !important;
+    border-radius: 0.1rem;
 }
 
 .navbar-toggler:hover {
     margin-left: 20px;
-    background-color: white;
+    color: #fff !important;
+
+}
+
+.navbar-toggler-icon {
+    color: #fff !important;
+
 }
 
 
@@ -693,7 +700,24 @@ h2 {
 .navbar-nav a {
     text-transform: uppercase;
     text-decoration: none;
+    transition: 0.4s;
+
 }
+
+.navbar-nav a:hover {
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: var(--brown-color);
+    transition: 0.3s;
+    color: #fff !important;
+    border-radius: 0.5rem;
+
+    .bi {
+        color: #fff;
+
+    }
+}
+
 
 
 .navbar-nav a:hover:after {
@@ -1144,7 +1168,7 @@ thead.table-head {
     padding: 10px;
     border-radius: 0.3rem;
     justify-content: center;
-    transition: .3s;
+    transition: .03s;
     box-shadow: var(--box-shadow-style2);
     margin-bottom: 10px;
     color: var(--theme-color);
@@ -1155,6 +1179,7 @@ thead.table-head {
 .owl-carousel .item:hover {
     background: linear-gradient(180deg, rgba(161, 161, 161, 1) 0%, rgba(186, 186, 186, 1) 37%, rgba(255, 255, 255, 1) 37%);
     color: var(--theme-color);
+    transition: 0.3s;
 
     .btn-default {
         background-color: var(--light-home);
@@ -1337,6 +1362,12 @@ thead.table-head {
         max-height: 100% !important;
     }
 
+
+    #fc-dom-1 {
+        text-decoration: none;
+        color: #fff;
+    }
+
 }
 
 
@@ -1356,6 +1387,12 @@ thead.table-head {
         color: var(--home-color-dark);
         text-decoration: none;
     }
+
+    #fc-dom-1 {
+        text-decoration: none;
+        color: #fff;
+    }
+
 }
 
 /* Room Allocation */
@@ -1549,9 +1586,45 @@ thead.table-head {
     }
 }
 
+.col-subject-box {
+    box-shadow: var(--box-shadow-style2);
+    padding: 15px;
+    margin: 10px;
+    transition: 0.3s;
+
+}
+
+.col-subject-box:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: #909697;
+    color: #fff;
+}
+
 /* SUMMARY PAGE */
 .container-summary-print {
     .table-bordered {
         border: solid 1px #9c9c9c !important;
+    }
+}
+
+/* PAGINATION */
+.pagination {
+    a {
+        color: var(--home-color);
+    }
+
+    .active>.page-link,
+    .page-link.active {
+        background-color: var(--theme-color);
+        border-color: var(--theme-color);
+    }
+
+    .active>.page-link,
+    .page-link:hover {
+        background-color: var(--theme-color);
+        border-color: var(--theme-color);
+        color: #fff;
+        transition: 0.5s;
     }
 }

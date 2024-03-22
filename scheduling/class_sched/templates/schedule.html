@@ -53,7 +53,7 @@
                   <button class="btn btn-secondary" type="button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
                 </div>
                 <div class="col-sm " >
-                  <a href="{% url "conflict" %}" class="btn btn-warning position-relative" type="button"  >No. of Conflicts  
+                  <button class="btn btn-warning position-relative" type="button" data-bs-toggle="modal" data-bs-target="#viewConflictModal" >No. of Conflicts  
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       {{ total_conflicts }}
                     <span class="visually-hidden">unread messages</span>
@@ -66,201 +66,241 @@
  
 <div class="container-fluid container-schedule-page">
   
-        <!--View Schedule Tab-->
-  <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-            <div class="row row-schedule-panel">
-               
-                <!--Instructor Carousel-->
-                    <div class="owl-carousel owl-theme"> 
-                        {% for instructor in instructors %}
-                        <a href="{% url 'instructorschedule' id=instructor.id %}" class="schedule-link">
-                            <div class="item">
-                                <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="...">
-                                <p class="fs-6 text-center">{{ instructor.firstName }}, {{ instructor.lastName }}</p>
+      <!--View Schedule Tab-->
+      <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div class="row row-schedule-panel">
+                  
+                    <!--Instructor Carousel-->
+                        <div class="owl-carousel owl-theme"> 
+                            {% for instructor in instructors %}
+                            <a href="{% url 'instructorschedule' id=instructor.id %}" class="schedule-link">
+                                <div class="item">
+                                    <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="...">
+                                    <p class="fs-6 text-center">{{ instructor.lastName }}, {{ instructor.firstName }} </p>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                </div> 
+    
+                <!--User Schedule Tab-->
+                <hr>
+                <div class="row row-user-info">
+                    <div class="container-fluid container-user-info" id="instructor-info">
+                        <h4>User Schedule</h4>
+                            <!--Table View Tab-->
+                            <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
+                                    <table class="table table-hover table-striped caption-top">
+                                        <caption>
+                                        </caption>
+    
+                                        <thead class="table-info">
+                                          <tr>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Instructor</th>
+                                            <th scope="col">Room</th>
+                                            <th scope="col">Section</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Days of Week</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">Year</th>
+                                            <th scope="col">Action</th>
+                                          </tr>
+                                        </thead> 
+                                        <tbody>
+                                          {% for schedule in instructorSchedule %}
+                                          <tr>
+                                            <td>{{ schedule.course.course_name }}</td>
+                                            <td>
+                                              <img
+                                                src="{{ schedule.instructor.profile_picture.url }}"
+                                                style="width: 50px; height: 50px; border-radius: 50%"
+                                              /> 
+                                              {{ schedule.instructor.firstName }}, {{ schedule.instructor.lastName }}
+                                            </td>
+                                            <td>{{ schedule.room.room_name }}</td>
+                                            <td>{{ schedule.section }}</td>
+                                            <td><span class="start-time">{{ schedule.start_time  }}</span> - <span class="end-time">{{ schedule.end_time }}</span></td>
+                                            <td>{{ schedule.days_of_week }}</td>
+                                            <td>{{ schedule.semester }}</td>
+                                            <td>{{ schedule.year }}</td>
+                                            <td>
+                                              <a href="#" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
+                                              <a href="{% url 'editschedule' id=schedule.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                                            </td>
+                                          </tr>  
+                                          {% endfor %}
+                                        </tbody>
+                                    </table>  
                             </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-            </div> 
- 
-            <!--User Schedule Tab-->
-            <hr>
-            <div class="row row-user-info">
-                <div class="container-fluid container-user-info" id="instructor-info">
-                    <h4>User Schedule</h4>
-                        <!--Table View Tab-->
-                        <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
-                                <table class="table table-hover table-striped caption-top">
-                                    <caption>
-                                    </caption>
- 
-                                    <thead class="table-info">
-                                      <tr>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Instructor</th>
-                                        <th scope="col">Room</th>
-                                        <th scope="col">Section</th>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Days of Week</th>
-                                        <th scope="col">Semester</th>
-                                        <th scope="col">Year</th>
-                                        <th scope="col">Action</th>
-                                      </tr>
-                                    </thead> 
-                                    <tbody>
-                                      {% for schedule in instructorSchedule %}
-                                      <tr>
-                                        <td>{{ schedule.course.course_name }}</td>
-                                        <td>
-                                          <img
-                                            src="{{ schedule.instructor.profile_picture.url }}"
-                                            style="width: 50px; height: 50px; border-radius: 50%"
-                                          /> 
-                                          {{ schedule.instructor.firstName }}, {{ schedule.instructor.lastName }}
-                                        </td>
-                                        <td>{{ schedule.room.room_name }}</td>
-                                        <td>{{ schedule.section }}</td>
-                                        <td><span class="start-time">{{ schedule.start_time  }}</span> - <span class="end-time">{{ schedule.end_time }}</span></td>
-                                        <td>{{ schedule.days_of_week }}</td>
-                                        <td>{{ schedule.semester }}</td>
-                                        <td>{{ schedule.year }}</td>
-                                        <td>
-                                          <a href="#" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                                          <a href="{% url 'editschedule' id=schedule.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
-                                        </td>
-                                      </tr>  
-                                      {% endfor %}
-                                    </tbody>
-                                </table>  
-                        </div>
-                        <!--Calendar View Tab-->
-                        <div class="container-fluid container-schedule-calendar">
-                            <div id='calendarSchedulePage'></div>
-                        </div>
-                        <!--Loadslip View Tab-->
-                        <div class="container-fluid container-schedule-loadslip">
-                            <h1>Teaching Load</h1>
-                        </div>       
-                        <!--No Schedule Subject Tab
-                        <div class="container-fluid container-schedule-loadslip">
-                          <h4 class="text-start text-schedule">Subject That don't have schedules</h4>
+                            <!--Calendar View Tab-->
+                            <div class="container-fluid container-schedule-calendar">
+                                <div id='calendarSchedulePage'></div>
+                            </div>
+                            <!--Loadslip View Tab-->
+                            <div class="container-fluid container-schedule-loadslip">
+                                <h1>Teaching Load</h1>
+                            </div>       
+                            <!--No Schedule Subject Tab
+                            <div class="container-fluid container-schedule-loadslip">
+                              <h4 class="text-start text-schedule">Subject That don't have schedules</h4>
 
-                      </div>      -->
+                          </div>      -->
+                    </div>
                 </div>
             </div>
-        </div>
- 
     
+        
 
-  <!-- Modal Add Schedule-->
-  <div class="modal fade" id="addScheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <!-- Modal Add Schedule-->
+      <div class="modal fade" id="addScheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <br>
+
+              <!--Add Schedule Form-->
+            <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                {% csrf_token %}
+                <!-- {{ scheduleform.as_p }} --> 
+              
+                  
+                  <div class="col-sm">
+                    <select class="form-select mb-4 select-subject-instructor" name="instructor" id="id_instructor"  aria-label="Default select example">
+                      <option selected>Select Instructor</option>
+                      {% for instructor in instructors %}
+                      <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
+                        {{ instructor.firstName }} {{ instructor.lastName }}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>  
+
+                  <div class="col-sm">
+                    <select class="form-select mb-4 select-subject-name" name="course" id="id_course" aria-label="Default select example">
+                      <option selected>Select Subject Name</option>
+                      {% for course in courses %}
+                      <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                
+                  <div class="col-sm">
+                    <select class="form-select mb-4 select-section-name" name="section" id="id_section" aria-label="Default select example">
+                      <option selected>Select Section </option>
+                      {% for section in sections %}
+                      <option value="{{ section.id }}" {% if section.id == scheduleform.instance.section.id %} selected {% endif %}>{{ section.program_section }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                
+                  <div class="col-sm">
+                    <select class="form-select mb-4 select-subject-room" name="room" id="id_room" aria-label="Default select example">
+                      <option selected>Select Room</option>
+                      {% for room in rooms %}
+                      <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %} selected {% endif %}>{{room.room_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>  
+                
+              
+              
+                <div class="form-floating mb-3">
+                  <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
+                  <label for="id_start_time">Start Time</label>
+                  <div class="invalid-feedback">
+                    Please Enter Start Time.
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="time" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
+                  <label for="id_end_time">End Time</label>
+                  <div class="invalid-feedback">
+                    Please Enter End Time.
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
+                  <label for="id_days_of_week">Days of Week</label>
+                  <div class="invalid-feedback">
+                    Please Enter Days of Week.
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
+                  <label for="id_semester">Semester</label>
+                  <div class="invalid-feedback">
+                    Please Enter Semester.
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
+                  <label for="id_year">Year</label>
+                  <div class="invalid-feedback">
+                    Please Enter Year.
+                  </div>
+                </div>
+                
+                </div>
+      
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" >Save</button>
+              </div>
+            </form>
+        </div>
+      </div>
+</div>
+
+
+  <!-- Modal Conflicts-->
+  <div class="modal fade" id="viewConflictModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Schedule </h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Conflicts </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <br>
 
-            <!--Add Schedule Form-->
-          <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-              {% csrf_token %}
-              <!-- {{ scheduleform.as_p }} --> 
-             
-                
-                <div class="col-sm">
-                  <select class="form-select mb-4 select-subject-instructor" name="instructor" id="id_instructor"  aria-label="Default select example">
-                    <option selected>Select Instructor</option>
-                    {% for instructor in instructors %}
-                    <option value="{{ instructor.id }}" {% if instructor.id == scheduleform.instance.instructor_id %} selected {% endif %}>
-                      {{ instructor.firstName }} {{ instructor.lastName }}
-                    </option>
-                    {% endfor %}
-                  </select>
-                </div>  
-
-                <div class="col-sm">
-                  <select class="form-select mb-4 select-subject-name" name="course" id="id_course" aria-label="Default select example">
-                    <option selected>Select Subject Name</option>
-                    {% for course in courses %}
-                    <option value="{{ course.id }}" {% if course.id == scheduleform.instance.course.id %} selected {% endif %}>{{ course.course_name }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              
-                <div class="col-sm">
-                  <select class="form-select mb-4 select-section-name" name="section" id="id_section" aria-label="Default select example">
-                    <option selected>Select Section </option>
-                    {% for section in sections %}
-                    <option value="{{ section.id }}" {% if section.id == scheduleform.instance.section.id %} selected {% endif %}>{{ section.program_section }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              
-                <div class="col-sm">
-                  <select class="form-select mb-4 select-subject-room" name="room" id="id_room" aria-label="Default select example">
-                    <option selected>Select Room</option>
-                    {% for room in rooms %}
-                    <option value="{{ room.id }}" {% if room.id == scheduleform.instance.room.id %} selected {% endif %}>{{room.room_name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>  
-              
-             
-            
-              <div class="form-floating mb-3">
-                <input type="time" class="form-control" name="start_time" id="id_start_time" placeholder="Start Time" required>
-                <label for="id_start_time">Start Time</label>
-                <div class="invalid-feedback">
-                  Please Enter Start Time.
-                </div>
+            <!--View Conflict-->
+              <table class="table table-hover table-striped caption-top">
+                  <caption>
+                  </caption>
+                  <thead class="table-danger">
+                    <tr>
+                      <th scope="col">Days of Week</th>
+                      <th scope="col">Semester</th>
+                      <th scope="col">Year</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead> 
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                     
+                    </tr>  
+                  </tbody>
+              </table>  
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" >Save</button>
               </div>
-
-              <div class="form-floating mb-3">
-                <input type="time" class="form-control" name="end_time" id="id_end_time" placeholder="End Time" required>
-                <label for="id_end_time">End Time</label>
-                <div class="invalid-feedback">
-                  Please Enter End Time.
-                </div>
-              </div>
-
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
-                <label for="id_days_of_week">Days of Week</label>
-                <div class="invalid-feedback">
-                  Please Enter Days of Week.
-                </div>
-              </div>
-
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
-                <label for="id_semester">Semester</label>
-                <div class="invalid-feedback">
-                  Please Enter Semester.
-                </div>
-              </div>
-
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
-                <label for="id_year">Year</label>
-                <div class="invalid-feedback">
-                  Please Enter Year.
-                </div>
-              </div>
-               
-              </div>
-     
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success" >Save</button>
-            </div>
-          </form>
       </div>
     </div>
 </div>
-
 
 
 

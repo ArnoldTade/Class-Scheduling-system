@@ -72,35 +72,67 @@
               <th scope="col">Address</th>
               <th scope="col">College</th>
               <th scope="col">Action</th>
-              <th scope="col">View</th>
             </tr>
           </thead>
           <tbody id="instructor-table-body">
-            {% for instructor in instructors  %}
+            {% for instructor in page_obj  %}
               {% if instructor.role == "User" %}
-            <tr data-college="{{ instructor.college }}">
-              <th scope="row">
-                <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
-              <td>
-                {{ instructor.firstName }} {{ instructor.lastName }}
-              </td> 
-              <td>{{ instructor.gender }} </td>
-              <td>{{ instructor.birthday }}</td>
-              <td>{{ instructor.contact }}</td>
-              <td>{{ instructor.address }}</td>
-              <td>{{ instructor.college }}</td>
-              <td>
-                <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
-              </td>
-              <td>
-                <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
-              </td>
-            </tr>
+                <tr data-college="{{ instructor.college }}">
+                  <th scope="row">
+                    <img src="{{ instructor.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/></th>
+                  <td>
+                    {{ instructor.firstName }} {{ instructor.lastName }}
+                  </td> 
+                  <td>{{ instructor.gender }} </td>
+                  <td>{{ instructor.birthday }}</td>
+                  <td>{{ instructor.contact }}</td>
+                  <td>{{ instructor.address }}</td>
+                  <td>{{ instructor.college }}</td>
+                  <td>
+                    <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
+                
+                    <a href="{% url 'editinstructor' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-eye-fill" style="color:#fff;"></i></a>
+                  </td>
+                </tr>
               {% endif %}
             {% endfor %}
       
           </tbody>
         </table>
+            <!-- Pagination links -->
+            <div class="d-flex justify-content-center mt-3">
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&rsaquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
       </div>
     </div>
 
@@ -144,7 +176,6 @@
             </tr>
               {% endif %}
             {% endfor %}
-      
           </tbody>
         </table>
       </div>
@@ -152,7 +183,7 @@
   </div>
 </div>
 
-
+ 
 <script>
   document.querySelectorAll('.form-select').forEach(function(select) {
       select.addEventListener('change', function() {

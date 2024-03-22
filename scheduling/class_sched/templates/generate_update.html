@@ -15,7 +15,7 @@
 
 
 <section class="section-update-generate-schedule">
-    <div class="container-sm container-instructor-update" id="container-instructor-edit">
+    <div class="container-sm container-instructor-update " id="container-instructor-edit">
         <a href="{% url 'generate-schedule'%}" type="submit" id="save-subject-btn" class="btn btn-outline-secondary btn-back-instructors"><i class="bi bi-arrow-left"></i>Back </a>
         <div class="row">
             <div class="col-sm col-subject-edit" id="col-subject-edit">
@@ -28,45 +28,53 @@
                     -->
                 
                 
-                    <p class="text-start fs-5">Instructor Courses and Respective Sections:</p>
-                    
-
+                    <p class="text-center fs-5 fw-bold">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
+                    <div class="d-grid d-md-block">
+                    <p class="text-start fs-5">Add New Course and Assign Sections: <button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i></button></p>
+                    </div>
+                    <hr>
+                    <!--
                         <div class="table-responsive">
                             <table class="table caption-top">
                                 <caption><button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i>Add New Course and Assign Sections</button></caption>
                                 <p class="text start fs-5">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
-                                
-                               
-                                        {% for instructor_course in instructor_courses %}
-                                            <thead class="table-warning">
+                                          {% for instructor_course in instructor_courses %}
+                                         
+                                          <thead class="table-warning">
                                             <tr>
                                                 <th scope="col">{{ instructor_course.course }}  </th>
-                                                <td>Hours: {{ instructor_course.course.hours }}hrs  </td>
-                                                <th scope="col" style="text-align: right;"><a href="{% url 'delete-course-section' instructor_course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this entire course and sections?');">Remove Course</a></th>
+                                                <td>Hours:  <span style="font-weight:bold;">{{ instructor_course.course.hours }}hrs   </span></td>
+                                                <th scope="col" style="text-align: right;"><a href="{% url 'delete-course-section' instructor_course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this entire course and sections?');"><i class="bi bi-trash-fill"></i></a></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                               {% if instructor_course.section %}
-
-                                             
-                                            <tr>
+                                            <tr> 
                                                     <td>{{ instructor_course.section }}</td>
-                                                    <td style="text-align: right;">
-                                                        <form action="{% url 'deletesection' instructor_course.id %}" method="post">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" name="section_id" value="{{ section.id }}">
-                                                            <!-- <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this section?');">Remove Section</button> -->   
-                                                          </form>
-                                                    </td>
+                                                    <td>No. of Students: <span style="font-weight:bold;">{{ instructor_course.section.number_students }} </span></td>
                                             </tr>  
-                                                 {% endif %}
+                                              {% endif %}
                                         {% endfor %}    
+                                        
                                 </tbody>
                             </table>
                         </div> 
-                        <hr>
-                    <button type="submit" id="save-subject-btn" class="btn btn-success">Save changes</button>
-                </form>
+                        -->
+                        {% for instructor_course in instructor_courses %}
+                          <div class="col-sm-3 col-subject-box">
+                            <p class="fs-4 text-center fw-bold">{{ instructor_course.course }}</p>      
+                              <h6>Hours: <span style="font-weight:bold;">{{ instructor_course.course.hours }} hrs </span></h6>      
+                              {% if instructor_course.section %}
+                                <h6>Section: <span style="font-weight:bold;">{{ instructor_course.section }} </span></h6>      
+                                <h6>No. of Students: <span style="font-weight:bold;">{{ instructor_course.section.number_students }} </span></h6>      
+                              {% endif %}
+                              <hr>
+                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{% url 'delete-course-section' instructor_course.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this entire course and sections?');"><i class="bi bi-trash-fill"></i></a>
+                              </div>
+                            </div>
+                        {% endfor %}                        
+                  </form>
             </div>
         </div>
     </div>
@@ -135,7 +143,17 @@
                     <option value="CAF">CAF</option>
                 </select>
               -->
-              <div class="col-sm">
+            
+                  
+              <!--
+                <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
+                    <option selected>Select Course</option>
+                    {% for course in courses %}
+                    <option value="{{ course.id }}"  data-section="{{ course.college }}">{{ course.course_name }}</option>
+                    {% endfor %}
+                </select>
+               -->
+               <div class="col-sm">
                 <select class="form-select" id="schedule-category-course-major" style="width:auto;" aria-label="Default select example">
                   <option value="all" selected>Filter Course</option>
                   <option value="Bachelor of Agricultural Technology major in Animal Husbandry">Bachelor of Agricultural Technology major in Animal Husbandry</option>
@@ -161,15 +179,6 @@
                 </select>
               </div>
           
-                  
-              <!--
-                <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
-                    <option selected>Select Course</option>
-                    {% for course in courses %}
-                    <option value="{{ course.id }}"  data-section="{{ course.college }}">{{ course.course_name }}</option>
-                    {% endfor %}
-                </select>
-               -->
               <div class="col-sm">
                 <select class="form-select" name="instructor_course-course" id="id_instructor_course-course" aria-label="Default select example">
                   <option selected>Select Course</option>
@@ -195,9 +204,10 @@
 
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" name="add_room">Save</button>
-            </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" name="add_room">Save</button>
+
+          </div>
         </form>
         </div>
         </div>

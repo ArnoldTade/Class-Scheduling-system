@@ -1,5 +1,6 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 
 {% if messages %}
   <div class="messages">
@@ -12,88 +13,88 @@
 {% endif %}
 
 
-<div class="row row-user-info">
   <div class="container-fluid container-summary-print" id="instructor-info">
-      <h4>Summary</h4>
-          <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
-                  <table class="table table-hover table-bordered  caption-top">
-                      <caption>
-                      </caption>
-                      <thead>
-                        <tr>
-                          <th scope="col">Position of Instructor</th>
-                          <th colspan="10" style="text-align: center;">Schedule of Classes</th>
-                          <th colspan="2">Official Designation</th>
-                          <th colspan="2">EQ</th>
-                        </tr>
-                      </thead> 
-                      <thead>
-                        <tr>
-                          <th scope="col">Permanent</th>
-                          <th scope="col">Day</th>
-                          <th scope="col">Time</th>
-                          <th scope="col">Code</th>
-                          <th scope="col">Description Title</th>
-                          <th scope="col">Section</th>
-                          <th scope="col">Room</th>
-                          <th scope="col">No. units</th>
-                          <th scope="col">Contact per Hour</th>
-                          <th scope="col">No. Student</th>
-                          <th scope="col">No. of Preps</th>
-                          <th scope="col">Title of Designation</th>
-                          <th scope="col">Equivalent Credit</th>
-                          <th scope="col"></th>
-                        </tr>
-                        <!-- LOOP HERE-->
-                        <tr>
-                          <th scope="col">Albert C. Albina</th>
-                          <td scope="col">TH</td>
-                          <td scope="col">8:00am - 9:00am</td>
-                          <td scope="col">BEED20</td>
-                          <td scope="col">Ethics</td>
-                          <td scope="col">BEED-GEN-3-A</td>
-                          <td scope="col">CAS15</td>
-                          <td scope="col">3</td>
-                          <td scope="col">3</td>
-                          <td scope="col">45</td>
-                          <td scope="col"></td>
-                          <td scope="col">Associate Professor</td>
-                          <td scope="col"></td>
-                          <td scope="col">MA in Philosophy</td>
-                        </tr>
-                        <!-- -->
-                        <tr>
-                          <th scope="col"></th>
-                          <th colspan="6" style="text-align: center;">TOTAL:</th>
-                          <th scope="col">0</th>
-                          <th scope="col">0</th>
-                          <th scope="col">0</th>
-                          <th scope="col">0</th>
+        <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
+                <table class="table table-hover table-bordered  caption-top">
+                    <caption>
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Position of Instructor</th>
+                        <th colspan="10" style="text-align: center;" class="align-middle align-top">Schedule of Classes</th>
+                        <th colspan="2" class="align-middle align-top">Official Designation</th>
+                        <th colspan="2" class="align-middle">EQ</th>
+                      </tr>
+                    </thead> 
+                    <thead>
+                      <tr>
+                        <th scope="col" class="align-top">Permanent</th>
+                        <th scope="col" class="align-top">Day</th>
+                        <th scope="col" class="align-top">Time</th>
+                        <th scope="col" class="align-top">Code</th>
+                        <th scope="col" class="align-top">Description Title</th>
+                        <th scope="col" class="align-top">Section</th>
+                        <th scope="col" class="align-top">Room</th>
+                        <th scope="col" class="align-top">No. units</th>
+                        <th scope="col" class="align-top">Contact per Hour</th>
+                        <th scope="col" class="align-top">No. Student</th>
+                        <th scope="col" class="align-top">No. of Preps</th>
+                        <th scope="col" class="align-top">Title of Designation</th>
+                        <th scope="col" class="align-top">Equivalent Credit</th>
+                        <th scope="col"></th>
+                      </tr>
+                      <!-- LOOP HERE-->
+                      <tr>
+                        <th scope="col" rowspan="2" class="align-top">Albert C. Albina</th>
+                        <td scope="col">TH</td>
+                        <td scope="col">8:00am - 9:00am</td>
+                        <td scope="col">BEED20</td>
+                        <td scope="col">Ethics</td>
+                        <td scope="col">BEED-GEN-3-A</td>
+                        <td scope="col">CAS15</td>
+                        <td scope="col">3</td>
+                        <td scope="col">3</td>
+                        <td scope="col">45</td>
+                        <td scope="col"></td>
+                        <td scope="col" rowspan="5" class="align-top" >Associate Professor</td>
+                        <td scope="col" rowspan="5"></td>
+                        <td scope="col" rowspan="5" class="align-top">MA in Philosophy</td>
+                      </tr>
+                      <!-- -->
+                      <tr>
+                        <th scope="col"></th>
+                        <th colspan="6" style="text-align: center;">TOTAL:</th>
+                        <th scope="col">0</th>
+                        <th scope="col">0</th>
+                        <th scope="col">0</th>
+                        
 
+                      </tr>
 
-                        </tr>
-
-                      </thead> 
-                      <tbody>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>  
-                      </tbody>
-                  </table>  
-          </div>
-        
+                    </thead> 
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>  
+                    </tbody>
+                </table>  
+        </div>
   </div>
+
+  
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-success btn-profile-print" type="button" onclick="window.print()">Print TeachingLoad</button>
 </div>
-</div>
+
 
 
 

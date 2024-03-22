@@ -18,7 +18,7 @@
     <div class="row">
         <!--Room Table-->
         <div class="col-sm col-rooms">
-            <p class="fs-5 text-start user-page-title">Rooms</p>
+            <p class="fs-5 text-start user-page-title">Room Page</p>
             <hr>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -213,10 +213,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initial filtering
         filterElements();
         
-        // Event listeners
         document.getElementById('category-college').addEventListener('change', function() {
             filterElements();
         });
@@ -231,13 +229,11 @@
     function filterElements() {
         var selectedCollege = document.getElementById('category-college').value;
         
-        // Filter room containers
         document.querySelectorAll('.container-room-allocation').forEach(function(roomContainer) {
             var roomCollege = roomContainer.dataset.college;
             roomContainer.style.display = (selectedCollege === 'all' || roomCollege === selectedCollege) ? '' : 'none';
         });
     
-        // Filter table rows
         document.querySelectorAll('#room-table-body tr').forEach(function(row) {
             var college = row.getAttribute('data-college');
             row.style.display = (selectedCollege === 'all' || college === selectedCollege) ? '' : 'none';

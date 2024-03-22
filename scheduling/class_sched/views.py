@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from .forms import *
 from .models import *
-
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
@@ -196,7 +196,8 @@ def instructors_schedule_page(request, id=None):
                 "endTime": end_time,
             }
             eventSchedules.append(eventSchedule)
-
+    class_schedules = ClassSchedule.objects.all()
+    total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
     return render(
         request,
         "schedule.html",
@@ -208,6 +209,7 @@ def instructors_schedule_page(request, id=None):
             "courses": Course.objects.all(),
             "sections": Section.objects.all(),
             "eventSchedules": eventSchedules,
+            "total_conflicts": total_conflicts,
         },
     )
 
@@ -295,12 +297,14 @@ def dashboard(request):
 @login_required
 def instructors(request):
     instructors = Instructor.objects.all().order_by("-id")
+    # instructors = Instructor.objects.filter(role="User")
+    paginator = Paginator(instructors, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
         request,
         "instructors.html",
-        {
-            "instructors": instructors,
-        },
+        {"instructors": instructors, "page_obj": page_obj},
     )
 
 
@@ -643,8 +647,8 @@ def profile_edit(request, id=None):
 
 ############## GENETIC ALGORITHM ########################
 def generate_schedules(request):
-    population = generate_population(150)
-    best_individual = evolve(population, 150)
+    population = generate_population(250)
+    best_individual = evolve(population, 250)
 
     class_schedules = best_individual.class_schedules
     messages.success(request, "Schedules Generated Successfully.")
@@ -652,6 +656,7 @@ def generate_schedules(request):
     context = {"class_schedules": class_schedules}
     instructors = Instructor.objects.all()
     classSchedules = ClassSchedule.objects.all()
+    total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
     return render(
         request,
         "schedule.html",
@@ -659,9 +664,6 @@ def generate_schedules(request):
             "instructors": instructors,
             **context,
             "classSchedules": classSchedules,
+            "total_conflicts": total_conflicts,
         },
     )
-
-
-# GENETIC ALGORITHM 2
-# def genetic_algorithm(request):

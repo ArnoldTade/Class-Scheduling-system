@@ -80,7 +80,7 @@
               <div class="card" style="width: 15rem">
                 <img src="{{ instructor.profile_picture.url }}" class="card-img-top" alt="..."/>
                 <div class="card-body">
-                  <h6 class="card-title">{{ instructor.firstName }}, {{ instructor.lastName }}</h6>
+                  <h6 class="card-title">{{ instructor.lastName }}, {{ instructor.firstName }} </h6>
                 </div>
                 <a href="{% url 'viewschedule' id=instructor.id %}" class="btn btn-primary d-block" onclick="scrollToTable()">View</a>
               </div>
