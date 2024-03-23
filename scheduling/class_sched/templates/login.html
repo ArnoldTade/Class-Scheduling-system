@@ -16,7 +16,7 @@
     <div class="row row-login">
       <!--<a class="navbar-brand" id="home-logo" href="{% url 'home' %}">e-ClasSched</a> -->
       <div class="col-sm col-login-side">
-          <h1 id="login-text">Login</h1>
+          <h3 id="login-text">Log in to your account</h3>
           <form method="POST">
             {% csrf_token %}
             <!--{{ form.as_p }}-->
@@ -31,7 +31,7 @@
                 required
                 id="id_username"
               />
-              <label for="floatingInput">Username</label>
+              <label for="floatingInput"><i class="bi bi-person-fill"></i>Username</label>
             </div>
             <div class="form-floating">
               <input
@@ -43,7 +43,7 @@
                 required
                 id="id_password"
               />
-              <label for="floatingPassword">Password</label>
+              <label for="floatingPassword"><i class="bi bi-lock-fill"></i>Password</label>
             </div>
   
             <div class="d-grid gap-2 btn-login">

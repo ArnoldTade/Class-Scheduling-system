@@ -647,8 +647,8 @@ def profile_edit(request, id=None):
 
 ############## GENETIC ALGORITHM ########################
 def generate_schedules(request):
-    population = generate_population(250)
-    best_individual = evolve(population, 250)
+    population = generate_population(300)
+    best_individual = evolve(population, 300)
 
     class_schedules = best_individual.class_schedules
     messages.success(request, "Schedules Generated Successfully.")

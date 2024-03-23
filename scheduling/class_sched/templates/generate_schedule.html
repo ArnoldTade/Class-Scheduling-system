@@ -109,7 +109,7 @@
                            
                         <td>
                         <a href="{% url 'deleteinstructor' id=instructor.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
-                        <a href="{% url 'editgenerate-schedule' id=instructor.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab" style="color:#fff;"><i class="bi bi-pen-fill"></i></a>
+                        <a href="{% url 'editgenerate-schedule' id=instructor.id %}" type="button" class="btn btn-secondary btn-sm" id="buttonEdit" data-bs-target="#myTab" style="color:#fff;"><i class="bi bi-pen-fill"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

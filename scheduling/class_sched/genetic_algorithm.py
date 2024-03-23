@@ -137,14 +137,32 @@ class Individual:
                         other_class_schedule.end_time,
                     )
                 ):
-                    fitness -= 1
-                    break
-            # Check instructor availability based on status (optional)
-            if instructor.status == "Full time" and (
+                    fitness -= 5
+                    print(
+                        f"Conflict: Instructor {instructor.lastName} assigned to both classes at the same time in room {room.room_name}."
+                    )
+                break
+
+            ### Check instructor availability based on status (optional) ###
+            if instructor.status == "Permanent" and (
                 datetime.strptime(class_schedule.start_time, "%H:%M")
                 < datetime.strptime("08:00", "%H:%M")
                 or datetime.strptime(class_schedule.end_time, "%H:%M")
                 > datetime.strptime("17:00", "%H:%M")
+            ):
+                fitness -= 1
+            elif instructor.status == "Temporary" and (
+                datetime.strptime(class_schedule.start_time, "%H:%M")
+                < datetime.strptime("08:00", "%H:%M")
+                or datetime.strptime(class_schedule.end_time, "%H:%M")
+                > datetime.strptime("17:00", "%H:%M")
+            ):
+                fitness -= 1
+            elif instructor.status == "Full time Part time" and (
+                datetime.strptime(class_schedule.start_time, "%H:%M")
+                < datetime.strptime("08:00", "%H:%M")
+                or datetime.strptime(class_schedule.end_time, "%H:%M")
+                > datetime.strptime("20:00", "%H:%M")
             ):
                 fitness -= 1
             elif instructor.status == "Part time" and (
@@ -174,6 +192,7 @@ class Individual:
                 "Lab and Lec",
             ]:
                 fitness -= 1
+
         return fitness
 
     @staticmethod
@@ -194,10 +213,12 @@ class Individual:
         for i in range(num_class_schedules):
             class_schedule_index = random.randint(0, len(parent1.class_schedules) - 1)
             child_class_schedules.append(parent1.class_schedules[class_schedule_index])
+
         for class_schedule in parent2.class_schedules:
             if class_schedule not in child_class_schedules:
                 child_class_schedules.append(class_schedule)
         child.class_schedules = child_class_schedules
+
         child.fitness = child.calculate_fitness()
         return child
 
@@ -209,38 +230,79 @@ class Individual:
             print(f"IndexError in mutate: {class_schedule_index}")
             return
 
-        """ class_schedule.room = random.choice(
-            [room for room in Room.objects.all() if room != class_schedule.room]
+        ### ROOM ###
+        lecture_rooms = Room.objects.filter(
+            college=class_schedule.instructor.college, room_type="Lecture"
         )
-        """
-
-        available_rooms = Room.objects.filter(
-            college=class_schedule.instructor.college,
-            room_type__in=[class_schedule.course.type, "Lecture"],
+        lab_rooms = Room.objects.filter(
+            college=class_schedule.instructor.college, room_type="Lab and Lecture"
         )
-        if not available_rooms:
-            print("No available rooms for mutation")
-            return
+        if class_schedule.course.type == "Lec":
+            available_rooms = lecture_rooms
+        elif class_schedule.course.type == "Lec and Lab":
+            available_rooms = lab_rooms
+        else:
+            available_rooms = []
+        # print(available_rooms)
 
-        new_room = random.choice(available_rooms)
-        class_schedule.room = new_room
+        if available_rooms:
+            class_schedule.room = random.choice(available_rooms)
 
-        # TIME
+        ### TIME ###
+        mutation_probability = 0.3
+        if random.random() < mutation_probability:
+            hours = class_schedule.course.hours
+            weekday_ranges = {
+                2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                3: [
+                    "M-W-F",
+                    "T-TH",
+                    "Saturday",
+                    "M-W-F",
+                    "T-TH",
+                ],
+                4: ["M-W", "W-F", "T-TH"],
+                5: ["M-W-F", "T-TH"],
+                6: ["M-W-F", "T-TH", "TH-F"],
+            }
+            days_of_week = random.choice(weekday_ranges[hours])
+            if "-" in days_of_week:
+                num_sessions = len(days_of_week.split("-"))
+            else:
+                num_sessions = 1
+            session_duration_hours = class_schedule.course.hours / num_sessions
+            session_duration_minutes = int(round(session_duration_hours * 60))
 
-        """
-        hour = random.choice([8, 9, 10, 11, 13, 14, 15])
-        minute = random.choice([0, 30])
-        start_time = f"{hour}:{minute:02d}"
-        end_hour = hour + 3 if minute == 30 else hour + 2
-        if end_hour == 12:
-            end_hour += 1
-        end_time = f"{end_hour}:{minute:02d}"
-        class_schedule.start_time = start_time
-        class_schedule.end_time = end_time
-        """
+            chosen_weekdays = (
+                random.sample(days_of_week.split("-"), 1)[0]
+                if "-" in days_of_week
+                else days_of_week
+            )
+
+            found_valid_slot = False
+            start_index = random.randint(0, len(time_slots[chosen_weekdays]) - 1)
+            for j in range(start_index, len(time_slots[chosen_weekdays])):
+                start_time, end_time = time_slots[chosen_weekdays][j]
+                slot_duration_in_minutes = (
+                    datetime.strptime(end_time, "%H:%M")
+                    - datetime.strptime(start_time, "%H:%M")
+                ).total_seconds() / 60
+                if slot_duration_in_minutes == session_duration_minutes:
+                    valid_time_slots = [(start_time, end_time)]
+                    found_valid_slot = True
+                    # print("Valid time slots for: ", instructor_course, valid_time_slots)
+                    break
+
+            # valid_start_time, valid_end_time = random.choice(valid_time_slots)
+            class_schedule.days_of_week = days_of_week
+            # class_schedule.start_time = valid_start_time
+            # class_schedule.end_time = valid_end_time
+
+            class_schedule.start_time = start_time
+            class_schedule.end_time = end_time
+            print("Final Schedule: ", days_of_week, start_time, end_time)
 
         class_schedule.save()
-
         self.fitness = self.calculate_fitness()
 
 
@@ -253,23 +315,41 @@ def generate_population(population_size, schedule_length=150):
             course = instructor_course.course
             section = instructor_course.section.program_section
 
-            # ROOMS
-            available_rooms = Room.objects.filter(
-                college=instructor.college,
-                room_type__in=[course.type, "Lecture"],
+            #### ROOMS ####
+            lecture_rooms = Room.objects.filter(
+                college=instructor.college, room_type="Lecture"
             )
-            if not available_rooms:
+            lab_rooms = Room.objects.filter(
+                college=instructor.college, room_type="Lab and Lecture"
+            )
+
+            if course.type == "Lec":
+                available_rooms = lecture_rooms
+            elif course.type == "Lab and Lec":
+                available_rooms = lab_rooms
+            else:
+                available_rooms = []
+
+            room = None
+            if available_rooms:
+                room = random.choice(available_rooms)
+            if not room:
                 print("No available rooms for: ", instructor_course)
                 continue
 
-            room = random.choice(available_rooms)
-
-            # CHOOSE DAY
+            #### CHOOSE DAY ####
             hours = instructor_course.course.hours
             weekday_ranges = {
                 2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 3: [
                     "M-W-F",
+                    "T-TH",
+                    "Saturday",
+                    "M-W-F",
+                    "T-TH",
+                    "M-W",
+                    "M-W-F",
+                    "W-F",
                     "T-TH",
                 ],
                 4: ["M-W", "W-F", "T-TH"],

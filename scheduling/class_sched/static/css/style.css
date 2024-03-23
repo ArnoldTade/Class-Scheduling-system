@@ -326,9 +326,10 @@ i {
 
 
 /*LOGIN */
+
 .container-login {
-    margin-top: 50px;
-    max-width: 600px;
+    margin-top: 80px;
+    max-width: 500px;
 
     .navbar-brand {
         color: var(--light-color);
@@ -341,7 +342,7 @@ i {
     }
 
     .col-login-side {
-        padding: 40px 100px 50px 100px;
+        padding: 40px 50px 50px 50px;
         border-radius: 1rem;
         box-shadow: var(--box-shadow-style2);
     }
@@ -354,13 +355,11 @@ i {
         background-color: var(--home-color) !important;
         border: solid 1px var(--light-color);
         font-size: 20px;
-        border-radius: 1rem;
-
     }
 
     .btn-primary:hover {
         background-color: var(--light-color) !important;
-        border: solid 2px var(--home-color-dark);
+        border: solid 1px var(--home-color-dark);
         font-size: 20px;
         color: var(--home-color);
 
@@ -368,20 +367,39 @@ i {
 
     #login-text {
         color: var(--home-color-dark);
-        font-weight: bold;
+        font-weight: 400;
         margin-bottom: 50px;
     }
 
     .input-username {
-        border: solid 1px var(--home-color);
-        border-radius: 1rem;
+        border: solid 1px #afafaf;
+
+        label {
+            background-color: transparent;
+        }
     }
 
     .input-password {
-        border: solid 1px var(--home-color);
-        border-radius: 1rem;
+        border: solid 1px #afafaf;
+
+        label {
+            background-color: transparent;
+        }
     }
 
+    .input-username:hover {
+        border: solid 1px var(--brown-color);
+
+    }
+
+    .input-password:hover {
+        border: solid 1px var(--brown-color);
+    }
+
+
+    .bi {
+        color: var(--brown-color);
+    }
 
 }
 
@@ -1339,6 +1357,7 @@ thead.table-head {
         box-shadow: var(--box-shadow-style2);
     }
 
+
     .col-rooms-edit {
         background-color: #e7ecf3;
         margin: 10px;
@@ -1346,6 +1365,7 @@ thead.table-head {
         box-shadow: var(--box-shadow-style2);
     }
 }
+
 
 #calendarSchedulePage {
     .fc-v-event .fc-event-main {

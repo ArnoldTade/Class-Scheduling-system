@@ -26,13 +26,14 @@
                     {{ instructorform.as_p }}   
                     <p class="fs-6 text-start">Hold down “Control” to select more than one or remove subject.</p>
                     -->
-                
-                
-                    <p class="text-center fs-5 fw-bold">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
+                  </br>
+                      <div class="col-sm-5 col-name-box">
+                        <p class="text-start fs-5 fw-bold"><img src="{{ instructorform.instance.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/> {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
+                      </div>
                     <div class="d-grid d-md-block">
                     <p class="text-start fs-5">Add New Course and Assign Sections: <button class="btn btn-default" type="button" data-bs-toggle="modal" data-bs-target="#staticCourseSectionAdd"><i class="bi bi-plus-circle"></i></button></p>
                     </div>
-                    <hr>
+                    <hr>  
                     <!--
                         <div class="table-responsive">
                             <table class="table caption-top">
@@ -60,6 +61,8 @@
                             </table>
                         </div> 
                         -->
+                        <p class="text-center fs-5 fw-bold">Handled Courses </p>
+
                         {% for instructor_course in instructor_courses %}
                           <div class="col-sm-3 col-subject-box">
                             <p class="fs-4 text-center fw-bold">{{ instructor_course.course }}</p>      
@@ -89,7 +92,7 @@
             </div>
             <div class="modal-body">
                 <!--Add New Course and Section Form-->
-            <p class="text-center fs-5">Name: {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
+            <p class="text-center fs-5"><img src="{{ instructorform.instance.profile_picture.url }}" style="width: 50px; height: 50px; border-radius: 50%"/> {{ instructorform.instance.lastName }}, {{ instructorform.instance.firstName }} </p>
 
             <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                 {% csrf_token %}

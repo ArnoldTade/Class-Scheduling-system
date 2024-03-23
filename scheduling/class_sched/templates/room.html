@@ -82,7 +82,7 @@
                             <td>{{ room.college }}</td>
                             <td>{{ room.room_type }}</td>
                             <td><a href="{% url 'deleteroom' id=room.id %}" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                            <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
+                            <a href="{% url 'editroom' id=room.id %}" type="button" class="btn btn-secondary btn-sm" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a></td>
                         </tr>
                         
                         {% endfor %}

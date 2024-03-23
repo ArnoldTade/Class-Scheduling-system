@@ -93,7 +93,7 @@
                             <td>{{ section.number_students }}</td>
                             <td>
                                 <a href="#" type="button" class="btn btn-danger btn-sm"  onclick="return confirm('Are you sure you want to delete this account?');"><i class="bi bi-trash-fill"></i></a>
-                                <a href="{% url 'editsection' id=section.id %}" type="button" class="btn btn-info btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                                <a href="{% url 'editsection' id=section.id %}" type="button" class="btn btn-secondary btn-sm" id="buttonEdit" data-bs-target="#myTab"><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
                                 </td>
                         </tr>
                     {% endfor %}

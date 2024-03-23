@@ -48,9 +48,9 @@
 
                     </select>
                 </div> 
-                
+                 
                 <div class="col-sm">
-                  <button class="btn btn-secondary" type="button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
+                  <button class="btn btn-dark" type="button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#addScheduleModal">Add Schedule</button>
                 </div>
                 <div class="col-sm " >
                   <button class="btn btn-warning position-relative" type="button" data-bs-toggle="modal" data-bs-target="#viewConflictModal" >No. of Conflicts  
@@ -194,7 +194,7 @@
                     <select class="form-select mb-4 select-section-name" name="section" id="id_section" aria-label="Default select example">
                       <option selected>Select Section </option>
                       {% for section in sections %}
-                      <option value="{{ section.id }}" {% if section.id == scheduleform.instance.section.id %} selected {% endif %}>{{ section.program_section }}</option>
+                      <option value="{{ section.program_section }}" {% if section.id == scheduleform.instance.section.id %} selected {% endif %}>{{ section.program_section }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -228,7 +228,7 @@
 
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" name="days_of_week" id="id_days_of_week" placeholder="Days of Week" required>
-                  <label for="id_days_of_week">Days of Week</label>
+                  <label for="id_days_of_week">Days of Week: Ex. M-W-F or Saturday</label>
                   <div class="invalid-feedback">
                     Please Enter Days of Week.
                   </div>
@@ -236,7 +236,7 @@
 
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" name="semester" id="id_semester" placeholder="Semester" required>
-                  <label for="id_semester">Semester</label>
+                  <label for="id_semester">Semester: Ex. 1st Semester</label>
                   <div class="invalid-feedback">
                     Please Enter Semester.
                   </div>
@@ -244,7 +244,7 @@
 
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" name="year" id="id_year" placeholder="Year" required>
-                  <label for="id_year">Year</label>
+                  <label for="id_year">Year: Ex. 2024-2025</label>
                   <div class="invalid-feedback">
                     Please Enter Year.
                   </div>
