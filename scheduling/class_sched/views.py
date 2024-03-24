@@ -12,15 +12,16 @@ from django.db import transaction
 
 from datetime import datetime, timedelta
 from .genetic_algorithm import generate_population, evolve
-
+from .sampleTest import viewData
 from django.utils import timezone
 from datetime import datetime, time
 import pytz
 
 from collections import defaultdict
 from .class_scheduling import *
-
 from django.db.models import Sum
+from django.urls import reverse
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -647,16 +648,35 @@ def profile_edit(request, id=None):
 
 ############## GENETIC ALGORITHM ########################
 def generate_schedules(request):
-    population = generate_population(300)
-    best_individual = evolve(population, 300)
+    ### THIS WILL BE FIXED LATER ###
+    # college = request.POST.get("college")
+    # school_year = request.POST.get("schoolYear")
+    # semester = request.POST.get("semester")
 
-    class_schedules = best_individual.class_schedules
-    messages.success(request, "Schedules Generated Successfully.")
+    valcollege = "CAS"
+    valschool_year = "2020-2021"
+    valsemester = "1st semester"
+    print("Values are:", valcollege, valschool_year, valsemester)
 
-    context = {"class_schedules": class_schedules}
+    existing_schedule = ClassSchedule.objects.filter(
+        year=valschool_year, semester=valsemester, instructor__college=valcollege
+    ).exists()
+    if existing_schedule:
+        print("There is already an existing schedules")
+        messages.warning(request, "A schedule with the same values already exists.")
+        return redirect("generate-schedule")
+    else:
+        print("No existing schedules, Proceed")
+        population = generate_population(300, valcollege, valschool_year, valsemester)
+        best_individual = evolve(population, 300)
+
+        class_schedules = best_individual.class_schedules
+        context = {"class_schedules": class_schedules}
+
+        messages.success(request, "Schedules Generated Successfully.")
     instructors = Instructor.objects.all()
     classSchedules = ClassSchedule.objects.all()
-    total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
+    total_conflicts = sum(schedule.has_conflict() for schedule in classSchedules)
     return render(
         request,
         "schedule.html",
@@ -667,3 +687,20 @@ def generate_schedules(request):
             "total_conflicts": total_conflicts,
         },
     )
+
+
+def sampleTest(request):
+    if request.method == "POST":
+        college = request.POST.get("college")
+        school_year = request.POST.get("schoolYear")
+        semester = request.POST.get("semester")
+
+        # Write values to a file
+        passValue = viewData(college, school_year, semester)
+        # print(college, school_year, semester)
+
+        return JsonResponse({"message": "Values passed successfully."})
+    else:
+        print("Nothing passed")
+
+    return JsonResponse({"error": "Invalid request."}, status=400)

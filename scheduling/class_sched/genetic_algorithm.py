@@ -293,11 +293,7 @@ class Individual:
                     # print("Valid time slots for: ", instructor_course, valid_time_slots)
                     break
 
-            # valid_start_time, valid_end_time = random.choice(valid_time_slots)
             class_schedule.days_of_week = days_of_week
-            # class_schedule.start_time = valid_start_time
-            # class_schedule.end_time = valid_end_time
-
             class_schedule.start_time = start_time
             class_schedule.end_time = end_time
             print("Final Schedule: ", days_of_week, start_time, end_time)
@@ -306,11 +302,13 @@ class Individual:
         self.fitness = self.calculate_fitness()
 
 
-def generate_population(population_size, schedule_length=150):
+def generate_population(population_size, valcollege, valschool_year, valsemester):
     population = []
     for i in range(population_size):
         class_schedules = []
-        for instructor_course in InstructorCourse.objects.all():
+        for instructor_course in InstructorCourse.objects.filter(
+            instructor__college=valcollege
+        ):
             instructor = instructor_course.instructor
             course = instructor_course.course
             section = instructor_course.section.program_section
@@ -340,6 +338,7 @@ def generate_population(population_size, schedule_length=150):
             #### CHOOSE DAY ####
             hours = instructor_course.course.hours
             weekday_ranges = {
+                1: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 3: [
                     "M-W-F",
@@ -382,15 +381,14 @@ def generate_population(population_size, schedule_length=150):
                 if slot_duration_in_minutes == session_duration_minutes:
                     valid_time_slots = [(start_time, end_time)]
                     found_valid_slot = True
-                    print("Valid time slots for: ", instructor_course, valid_time_slots)
+                    # print("Valid time slots for: ", instructor_course, valid_time_slots)
 
                     break
             if not found_valid_slot:
-                print("No valid time slots for: ", instructor_course)
+                # print("No valid time slots for: ", instructor_course)
                 continue
 
             start_time, end_time = random.choice(valid_time_slots)
-
             class_schedule = ClassSchedule(
                 course=course,
                 instructor=instructor,
@@ -399,8 +397,8 @@ def generate_population(population_size, schedule_length=150):
                 start_time=start_time,
                 end_time=end_time,
                 days_of_week=days_of_week,
-                semester="Second Semester",
-                year="2024 - 2025",
+                semester=valsemester,
+                year=valschool_year,
             )
             class_schedules.append(class_schedule)
 

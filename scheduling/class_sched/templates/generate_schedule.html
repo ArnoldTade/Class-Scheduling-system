@@ -26,12 +26,12 @@
                 <div class="col-sm">
                     <select class="form-select" id="category-college" style="width:auto;" aria-label="Default select example">
                         <option value="all" selected>All Colleges</option>
-                        <option value="CAS">College of Arts and Sciences</option>
-                        <option value="CBA">College of Business Administration</option>
-                        <option value="CIT">College of Industrial Technology</option>
-                        <option value="CTED">College of Teacher Education</option>
-                        <option value="CCJE">College of Criminal Justice Education</option>
-                        <option value="CAF">College of Agriculture and Forestry</option>
+                        <option value="CAS">CAS</option>
+                        <option value="CBA">CBA</option>
+                        <option value="CIT">CIT</option>
+                        <option value="CTED">CTED</option>
+                        <option value="CCJE">CCJE</option>
+                        <option value="CAF">CAF</option>
                     </select>
                 </div>
                 <div class="col-sm">
@@ -123,32 +123,40 @@
 <section class="section-create-schedules">
     <div class="container-fluid container-generate-schedule">
             <p class="text-start fs-5">Generate Schedule for:</p>
-            <div class="row">
-                <div class="col-sm">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputCollege" value="" placeholder="College" readonly>
-                        <label for="floatingInput">College </label>
+            <form method="POST" id="myForm" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="college" id="floatingInputCollege" value="" placeholder="College">
+                            <label for="floatingInput">College </label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputSchoolYear" value="" placeholder="College" readonly>
-                        <label for="floatingInput">School Year </label>
+                    <div class="col-sm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="schoolYear" id="floatingInputSchoolYear" value="" placeholder="College">
+                            <label for="floatingInput">School Year </label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputSemester" value="" placeholder="College" readonly>
-                        <label for="floatingInput">Semester </label>
+                    <div class="col-sm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="semester" id="floatingInputSemester" value="" placeholder="College">
+                            <label for="floatingInput">Semester </label>
+                        </div>
                     </div>
+                    
                 </div>
-            </div>
-
-        
-            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button" onclick="return confirm('Are you sure you want to Generate Schedules?');">
+            </form>
+            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button">
                 <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                 <span id="buttonText">Generate Schedule</span>
             </a>
+                <!--
+                <input type="hidden" id="hiddenCollege" name="college" value="">
+                <input type="hidden" id="hiddenSchoolYear" name="schoolYear" value="">
+                <input type="hidden" id="hiddenSemester" name="semester" value="">
+                -->
+                
     </div>
 </section>
 <br>
@@ -156,9 +164,39 @@
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-
+<!-- PASS SEMESTER AND YEAR LEVEL VALUES 
+<script>
+    function generateSchedules() {
+        const college = document.getElementById('floatingInputCollege').value;
+        const schoolYear = document.getElementById('floatingInputSchoolYear').value;
+        const semester = document.getElementById('floatingInputSemester').value;
+        /*
+        document.getElementById('hiddenCollege').value = college;
+        document.getElementById('hiddenSchoolYear').value = schoolYear;
+        document.getElementById('hiddenSemester').value = semester;
+        */
+        console.log(college, schoolYear, semester)
+         $.ajax({
+            url: "{% url 'generateschedules' %}",
+            type: 'POST',
+            data: $('#myForm').serialize(), 
+            dataType: 'json',
+            success: function(response) {
+                if (response.message) {
+                    console.log(response.message);
+                } else {
+                    console.error(response.error);
+                }
+            },
+            error: function(error) {
+                console.error("Error:", error);
+            }
+        }); 
+    }
+</script>
+-->
 <script>
     document.getElementById("generateScheduleBtn").addEventListener("click", function() {
         var spinner = document.getElementById("spinner");
@@ -245,5 +283,6 @@
     });
 </script>
 
+ 
 {% endblock %}
 {% include "_footer.html" %}
