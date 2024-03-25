@@ -12,9 +12,31 @@
   </div>
 {% endif %}
 
-
+ 
   <div class="container-fluid container-summary-print" id="instructor-info">
-        <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
+    <br>
+      <div class="row">
+        <div class="col-sm img-logo">
+          <a href=""><img class="img-fluid rounded mx-auto d-block rounded-circle float-end" src="{% static 'img/logo.png' %}" style="width: 100px; height: 100px; border-radius: 50%;"/></a>
+        </div>
+        <div class="col-sm">
+          <p class="text-center text-summary">Republic of the Philippines</p>
+          <p class="text-center fw-bold text-summary">NEGROS ORIENTAL STATE UNIVERSITY</p>
+          <p class="text-center text-summary">Bayawan Santa Catalina Campus</p>
+        </div>
+        <div class="col-sm img-college">
+          <a href=""><img class="img-fluid rounded mx-auto d-block rounded-circle float-start" src="{% static 'img/CAS.jpg' %}" style="width: 120px; height: 120px; border-radius: 50%;"/></a>
+        </div>
+      </div>
+      <br>
+      <div class="row row-bottom-shit">
+        <div class="col-sm">
+          <p class="fs-5 text-center fw-bold text-summary">College of Arts and Sciences</p>
+          <p class="text-center text-summary">Semester: Second School Year: 2023-2024</p>
+        </div>
+      </div>
+
+        <div class="container-fluid table-responsive container-college-summary" id="ViewSchedules">
                 <table class="table table-hover table-bordered  caption-top">
                     <caption>
                     </caption>
@@ -44,53 +66,46 @@
                         <th scope="col"></th>
                       </tr>
                       <!-- LOOP HERE-->
-                      <tr>
-                        <th scope="col" rowspan="2" class="align-top">Albert C. Albina</th>
-                        <td scope="col">TH</td>
-                        <td scope="col">8:00am - 9:00am</td>
-                        <td scope="col">BEED20</td>
-                        <td scope="col">Ethics</td>
-                        <td scope="col">BEED-GEN-3-A</td>
-                        <td scope="col">CAS15</td>
-                        <td scope="col">3</td>
-                        <td scope="col">3</td>
-                        <td scope="col">45</td>
-                        <td scope="col"></td>
-                        <td scope="col" rowspan="5" class="align-top" >Associate Professor</td>
-                        <td scope="col" rowspan="5"></td>
-                        <td scope="col" rowspan="5" class="align-top">MA in Philosophy</td>
-                      </tr>
-                      <!-- -->
-                      <tr>
-                        <th scope="col"></th>
-                        <th colspan="6" style="text-align: center;">TOTAL:</th>
-                        <th scope="col">0</th>
-                        <th scope="col">0</th>
-                        <th scope="col">0</th>
-                        
-
-                      </tr>
-
+                      {% regroup class_schedules by instructor.lastName as instructor_schedules %}
+                        {% for instructor_schedule  in instructor_schedules %}
+                        <tr>
+                          <th scope="col" rowspan="{{ instructor_schedule.grouper }}">
+                            {% for schedule in instructor_schedule.list %}
+                        </th>
+                          <th scope="col" rowspan="2" class="align-top">{{schedule.instructor.firstName}} {{schedule.instructor.lastName}}</th>
+                          <td scope="col">{{ schedule.days_of_week }}</td>
+                          <td scope="col">{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                          <td scope="col">{{ schedule.course.course_name }}</td>
+                          <td scope="col">{{ schedule.course.description }}</td>
+                          <td scope="col">{{ schedule.section }}</td>
+                          <td scope="col">{{ schedule.room }}</td>
+                          <td scope="col">{{ schedule.course.credits }}</td>
+                          <td scope="col">{{ schedule.course.hours }}</td>
+                          <td scope="col">{{ schedule.section }}</td>
+                          <td scope="col"></td>
+                          <td scope="col" rowspan="5" class="align-top" >Associate Professor</td>
+                          <td scope="col" rowspan="5"></td>
+                          <td scope="col" rowspan="5" class="align-top">MA in Philosophy</td>
+                        </tr>
+                        <!-- --> 
+                        <tr>
+                          <th colspan="6" style="text-align: center;">TOTAL:</th>
+                          <th scope="col">0</th>
+                          <th scope="col">0</th>
+                          <th scope="col">0</th>
+                          <th scope="col">0</th>
+                        </tr>
+                        {% endfor %} 
+                      {% endfor %}
                     </thead> 
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>  
+                    
                     </tbody>
                 </table>  
         </div>
   </div>
 
-  
+   
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <button class="btn btn-success btn-profile-print" type="button" onclick="window.print()">Print TeachingLoad</button>
 </div>

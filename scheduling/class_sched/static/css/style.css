@@ -643,6 +643,18 @@ hr {
         font-size: 25px !important;
         color: #000000 !important;
 
+        .input-title {
+            border: none;
+            border-radius: 0.5rem !important;
+            padding: 10px;
+            font-weight: bold;
+            width: 400px;
+        }
+
+        .input-title::placeholder {
+            color: #f04848;
+        }
+
         .text-name {
             text-transform: uppercase;
         }
@@ -1235,6 +1247,13 @@ thead.table-head {
     margin-top: 10px;
     color: #000000 !important;
 
+    .input-title {
+        border: none;
+        border-radius: 0.5rem !important;
+        padding: 10px;
+        font-weight: bold;
+    }
+
     .text-name {
         text-transform: uppercase;
     }
@@ -1273,6 +1292,18 @@ thead.table-head {
     margin-top: 10px;
     font-size: 25px !important;
     color: #000000 !important;
+
+    .input-title {
+        border: none;
+        border-radius: 0.5rem !important;
+        padding: 10px;
+        font-weight: bold;
+        width: 400px;
+    }
+
+    .input-title::placeholder {
+        color: #f04848;
+    }
 
     .text-name {
         text-transform: uppercase;
@@ -1811,9 +1842,32 @@ thead.table-head {
 
 /* SUMMARY PAGE */
 .container-summary-print {
-    .table-bordered {
-        border: solid 1px #9c9c9c !important;
+    background-color: #fff;
+    color: #000000;
+
+    .img-logo {
+        margin-left: 200px;
     }
+
+    .img-college {
+        margin-right: 200px;
+    }
+
+    .row-bottom-shit {
+        margin-top: -30px;
+        margin-bottom: -25px;
+    }
+
+    .text-summary {
+        color: #000000;
+        margin-top: -15px;
+    }
+
+    .table-bordered {
+        border: solid 1px #000000 !important;
+    }
+
+    .container-college-summary {}
 }
 
 /* PAGINATION */

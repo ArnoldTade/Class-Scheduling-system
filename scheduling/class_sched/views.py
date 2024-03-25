@@ -112,9 +112,13 @@ def conflict(request):
 
 @login_required
 def summary(request):
+    class_schedules = ClassSchedule.objects.all().order_by("instructor__lastName")
     return render(
         request,
         "summary.html",
+        {
+            "class_schedules": class_schedules,
+        },
     )
 
 
