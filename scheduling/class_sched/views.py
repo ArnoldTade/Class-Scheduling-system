@@ -672,18 +672,21 @@ def profile_edit(request, id=None):
 
 ############## GENETIC ALGORITHM ########################
 def generate_schedules(request):
-    ### THIS WILL BE FIXED LATER ###
-    # college = request.POST.get("college")
-    # school_year = request.POST.get("schoolYear")
-    # semester = request.POST.get("semester")
+    college = request.POST.get("college")
+    school_year = request.POST.get("schoolYear")
+    semester = request.POST.get("semester")
+    print("Sent values are:", college, school_year, semester)
 
-    valcollege = "CAS"
-    valschool_year = "2020-2021"
-    valsemester = "1st semester"
-    print("Values are:", valcollege, valschool_year, valsemester)
+    # valcollege = "CAS"
+    # valschool_year = "2020-2021"
+    # valsemester = "1st semester"
+    # print("Values are:", valcollege, valschool_year, valsemester)
 
     existing_schedule = ClassSchedule.objects.filter(
-        year=valschool_year, semester=valsemester, instructor__college=valcollege
+        # year=valschool_year, semester=valsemester, instructor__college=valcollege
+        year=school_year,
+        semester=semester,
+        instructor__college=college,
     ).exists()
     if existing_schedule:
         print("There is already an existing schedules")
@@ -691,10 +694,11 @@ def generate_schedules(request):
             request,
             "A schedule with the same College, Semester and Year Level already exists.",
         )
+        # return JsonResponse({"warning": "A schedule with the same College, Semester, and Year Level already exists."})
         return redirect("generate-schedule")
     else:
         print("No existing schedules, Proceed")
-        population = generate_population(300, valcollege, valschool_year, valsemester)
+        population = generate_population(300, college, school_year, semester)
         best_individual = evolve(population, 300)
 
         class_schedules = best_individual.class_schedules
@@ -717,17 +721,12 @@ def generate_schedules(request):
 
 
 def sampleTest(request):
-    if request.method == "POST":
-        college = request.POST.get("college")
-        school_year = request.POST.get("schoolYear")
-        semester = request.POST.get("semester")
+    college = request.POST.get("college")
+    school_year = request.POST.get("schoolYear")
+    semester = request.POST.get("semester")
 
-        # Write values to a file
-        passValue = viewData(college, school_year, semester)
-        # print(college, school_year, semester)
+    # Write values to a file
+    # passValue = viewData(college, school_year, semester)
+    print(college, school_year, semester)
 
-        return JsonResponse({"message": "Values passed successfully."})
-    else:
-        print("Nothing passed")
-
-    return JsonResponse({"error": "Invalid request."}, status=400)
+    return JsonResponse({"message": "Values passed successfully."})

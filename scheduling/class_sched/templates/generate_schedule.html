@@ -35,12 +35,11 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" type="text" name="year" id="id_year" aria-label="default input example" placeholder="Enter School Year">
+                    <input class="form-control" type="text" name="year" id="id_year" aria-label="default input example" required placeholder="Enter School Year">
                 </div>
                 <div class="col-sm">
                     <select class="form-select" id="category-semester" style="width:auto;" aria-label="Default select example">
-                        <option value="all" selected>All Semester</option>
-                        <option value="1st Semester">1st Semester</option>
+                        <option value="1st Semester" selected>1st Semester</option>
                         <option value="2nd Semester">2nd Semester</option>
                     <option value="Summer">Summer</option>
 
@@ -61,7 +60,7 @@
                     <input class="form-control" type="text"  id="searchFaculty" aria-label="default input example" placeholder="Search Faculty">
                 </div>
             </caption> 
-                <thead class="table-warning sticky-sm-top">
+                <thead class="table-dark sticky-sm-top">
                 <tr> 
                     <th scope="col">Profile</th>
                     <th scope="col">Name</th>
@@ -123,7 +122,7 @@
 <section class="section-create-schedules">
     <div class="container-fluid container-generate-schedule">
             <p class="text-start fs-5">Generate Schedule for:</p>
-            <form method="POST" id="myForm" enctype="multipart/form-data" >
+            <form method="POST" action="{% url 'generateschedules' %}"  id="myForm" enctype="multipart/form-data" >
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-sm">
@@ -146,16 +145,19 @@
                     </div>
                     
                 </div>
+               
+                <button class="btn btn-success invisible disabled" id="generateScheduleBtn">
+                    <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
+                    <span id="buttonText">Generate Schedule</span>
+                </button>
+
+                <button type="submit" id="generateScheduleBtn" class="btn btn-success" >
+                    <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
+                    <span id="buttonText">Test Generate Schedule</span>
+                </button>
+
+               
             </form>
-            <a href="{% url "generateschedules" %}" id="generateScheduleBtn" class="btn btn-success" type="button">
-                <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
-                <span id="buttonText">Generate Schedule</span>
-            </a>
-                <!--
-                <input type="hidden" id="hiddenCollege" name="college" value="">
-                <input type="hidden" id="hiddenSchoolYear" name="schoolYear" value="">
-                <input type="hidden" id="hiddenSemester" name="semester" value="">
-                -->
                 
     </div>
 </section>
@@ -164,39 +166,7 @@
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- PASS SEMESTER AND YEAR LEVEL VALUES 
-<script>
-    function generateSchedules() {
-        const college = document.getElementById('floatingInputCollege').value;
-        const schoolYear = document.getElementById('floatingInputSchoolYear').value;
-        const semester = document.getElementById('floatingInputSemester').value;
-        /*
-        document.getElementById('hiddenCollege').value = college;
-        document.getElementById('hiddenSchoolYear').value = schoolYear;
-        document.getElementById('hiddenSemester').value = semester;
-        */
-        console.log(college, schoolYear, semester)
-         $.ajax({
-            url: "{% url 'generateschedules' %}",
-            type: 'POST',
-            data: $('#myForm').serialize(), 
-            dataType: 'json',
-            success: function(response) {
-                if (response.message) {
-                    console.log(response.message);
-                } else {
-                    console.error(response.error);
-                }
-            },
-            error: function(error) {
-                console.error("Error:", error);
-            }
-        }); 
-    }
-</script>
--->
 <script>
     document.getElementById("generateScheduleBtn").addEventListener("click", function() {
         var spinner = document.getElementById("spinner");
@@ -224,13 +194,17 @@
     function filterTable() {
         var selectedCollege = document.getElementById('category-college').value;
         var rows = document.querySelectorAll('#course-table-body tr');
+        var generateBtn = document.getElementById('generateScheduleBtn');
         rows.forEach(function(row) {
             var college = row.getAttribute('data-college');
             var collegeMatch = (selectedCollege === 'all' || college === selectedCollege);
             if (collegeMatch) {
                 row.style.display = '';
+                generateBtn.disabled = false;
+
             } else {
                 row.style.display = 'none';
+                generateBtn.disabled = true;
             }
         });
     }
@@ -282,7 +256,7 @@
         });
     });
 </script>
-
+ 
  
 {% endblock %}
 {% include "_footer.html" %}
