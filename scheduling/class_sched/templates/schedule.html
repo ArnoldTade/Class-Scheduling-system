@@ -1,5 +1,6 @@
 {% include "_header.html" %} {% load static %} 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
  
 
 {% if messages %}
@@ -90,12 +91,12 @@
                     <div class="container-fluid container-user-info" id="instructor-info">
                         <h4>User Schedule</h4>
                             <!--Table View Tab-->
-                            <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
+                            <div class="container-fluid table-responsive container-instructor-schedule-page" id="ViewSchedules">
                                     <table class="table table-hover table-striped caption-top">
                                         <caption>
                                         </caption>
     
-                                        <thead class="table-info">
+                                        <thead class="table-dark">
                                           <tr>
                                             <th scope="col">Course</th>
                                             <th scope="col">Instructor</th>
@@ -127,7 +128,7 @@
                                             <td>{{ schedule.year }}</td>
                                             <td>
                                               <a href="#" type="button" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash-fill"></i></a>
-                                              <a href="{% url 'editschedule' id=schedule.id %}" type="button" class="btn btn-info" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
+                                              <a href="{% url 'editschedule' id=schedule.id %}" type="button" class="btn btn-secondary" id="buttonEdit" ><i class="bi bi-pen-fill" style="color:#fff;"></i></a>
                                             </td>
                                           </tr>  
                                           {% endfor %}
@@ -138,20 +139,176 @@
                             <div class="container-fluid container-schedule-calendar">
                                 <div id='calendarSchedulePage'></div>
                             </div>
-                            <!--Loadslip View Tab-->
-                            <div class="container-fluid container-schedule-loadslip">
-                                <h1>Teaching Load</h1>
-                            </div>       
+                            <!--Teaching Load View Tab-->
+                            <div class="container-fluid container-teaching-load-schedule" >
+                              <div class="row row-user-info">
+                                <div class="container-fluid container-user-info" id="instructor-info">
+                                    <h4>Teaching Load</h4>
+                                        <div class="container-fluid table-responsive container-instructor-loadslip" id="ViewSchedules">
+                                                <table class="table table-hover table-bordered caption-top">
+                                                    <caption>
+                                                      Your teaching assignment in the College of Arts and Sciences ({{ schedules.college }}) this semester is as follows. Please report to your
+                                                      assignment as approved by the University President.
+                                                    </caption>
+                                                    <thead >
+                                                      <tr>
+                                                        <th scope="col">Period</th>
+                                                        <th scope="col">Course Code and Title</th>
+                                                        <th scope="col">Room</th>
+                                                        <th scope="col">No. Student</th>
+                                                      </tr>
+                                                    </thead>  
+                                                    <tbody>
+                                                      {% for summary in instructorSchedule %}
+                                                      <tr>
+                                                        <td>{{ summary.start_time }} - {{ summary.end_time }} ({{ summary.days_of_week }})</td>
+                                                        <td>
+                                                          {{ summary.course }} 
+                                                          ({{ summary.course.credits }} Units/
+                                                          {{ summary.course.hours }} Hours )
+                            
+                                                        </td>
+                                                        <td>{{ summary.room }}</td>
+                                                        <td>{{ summary.section}} {{ summary.section.number_students}}</td>
+                                                      </tr>  
+                                                      {% endfor %}
+                                                       
+                                                      <thead >
+                                                      <tr>
+                                                        <td colspan="4"></td>
+                                                      </tr>
+                                                     
+                                                      <tr>
+                                                        <th scope="col">Total No. of Preparation:</th>
+                                                        <td colspan="3" style="text-align: center;">idk</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col" style="text-align: center;">Regular</th>
+                                                        <th colspan="2" scope="col" style="text-align: center;">Overload</th>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="col">Total No. of Units</th>
+                                                        <td scope="col" style="text-align: center;">{{ total_units }} units</td>
+                                                        <td colspan="3" style="text-align: center;">0</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="col">Total No. of Hours Week</th>
+                                                        <td scope="col" style="text-align: center;">{{ total_hours }} hrs</td>
+                                                        <td colspan="3" style="text-align: center;">0</td>
+                                                      </tr>
+                                                    </thead> 
+                             
+                                                     
+                                                      <tr>
+                                                        <th colspan="4" style="text-align: center;">{{ schedules.status }} </th>
+                                                      </tr>
+                                                    </tbody>
+                                                </table>  
+                                                <p class="text-center fw-normal">Please strictly follow the schedule (day and time) and the room
+                                                  assignment in the teaching load. Thank you. </p>
+                                                  <br>
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                      <p class="text-center fw-bold ">Conforme: <span class="text-name">{{ schedules.firstName }} {{ schedules.lastName }}, </span> </p>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                      <p class="text-center"></p>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center text-extra">Prepared by:</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center fw-bold "><span class="text-name">Arnel M. Yurfo, </span> </p>
+                                                    <p class="text-center text-title">Dean, College of Arts and Sciences</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center text-extra">Noted by:</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center fw-bold "><span class="text-name">Liza J. Caballero, </span> Ed.D. </p>
+                                                    <p class="text-center text-title">Asst. Campus Admin for Academics</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center fw-bold "><span class="text-name">Francis M. Galon,</span> Ph.D.  </p>
+                                                    <p class="text-center text-title">Asst. Campus Admin for Administration</p>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center text-extra">Recommending Approval:</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                    <p class="text-center"></p>
+                                                  </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center fw-bold "><span class="text-name">Rosemarie T. Pinili, </span> Ed.D, Ph.D. </p>
+                                                    <p class="text-center text-title">Asst. Campus Admin for Academics</p>
+                                                  </div>
+                                                  <div class="col-sm">
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-sm">
+                                                    <p class="text-center">Approved:</p>
+                                                    <p class="text-center fw-bold "><span class="text-name">Hon. Joel P. Limson, </span> Ph.D. </p>
+                                                    <p class="text-center text-title">University President</p>
+                                                  </div>
+                                                </div>
+                                        </div> 
+                                </div>
+                              </div>
+                            </div>  
+                            
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-success btn-profile-print" type="button" onclick="captureAndPrint()">Print TeachingLoad</button>
+                          </div>
+
+     
                             <!--No Schedule Subject Tab
                             <div class="container-fluid container-schedule-loadslip">
                               <h4 class="text-start text-schedule">Subject That don't have schedules</h4>
-
+ 
                           </div>      -->
                     </div>
                 </div>
             </div>
     
-        
+         
 
       <!-- Modal Add Schedule-->
       <div class="modal fade" id="addScheduleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -333,7 +490,26 @@
       return hours + ":" + minutes + " " + period;
   }
 </script>
+ 
+<script>
+  function captureAndPrint() {
+    var element = document.querySelector('.container-teaching-load-schedule');
+    element.style.fontSize = '22px';
+    html2canvas(element, {
+      scale:6,
+    }).then(function(canvas) {
+        var imageData = canvas.toDataURL();
 
+        var img = new Image();
+        img.src = imageData;
+
+        var newWindow = window.open('', '_blank');
+        newWindow.document.write('<img src="' + imageData + '" style="width:100%;">');
+
+        newWindow.print();
+    });
+  }
+</script>
 
 {% endblock %}
 {% include "_footer.html" %}

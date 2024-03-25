@@ -137,7 +137,7 @@
             <div class="container-fluid table-responsive container-instructor-schedule" id="ViewSchedules">
                     <table class="table table-hover table-bordered caption-top">
                         <caption>
-                          Your teaching assignment in the College of Arts and Sciences (CAS) this semester is as follows. Please report to your
+                          Your teaching assignment in the College of Arts and Sciences ({{ schedules.college }}) this semester is as follows. Please report to your
                           assignment as approved by the University President.
                         </caption>
                         <thead >
@@ -164,31 +164,119 @@
                           {% endfor %}
                           
                           <thead >
-                          <tr>
-                            <th scope="col">Total No. of Preparation:</th>
-                            <td colspan="3"></td>
-                          </tr>
-                          <tr>
-                            <th scope="col">Total No. of Units</th>
-                            <td colspan="3"></td>
-                          </tr>
-                          <tr>
-                            <th scope="col">Total No. of Hours Week</th>
-                            <td colspan="3"></td>
-                          </tr>
-                        </thead> 
- 
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>  
+                            <tr>
+                              <td colspan="4"></td>
+                            </tr>
+                           
+                            <tr>
+                              <th scope="col">Total No. of Preparation:</th>
+                              <td colspan="3" style="text-align: center;">idk</td>
+                            </tr>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col" style="text-align: center;">Regular</th>
+                              <th colspan="2" scope="col" style="text-align: center;">Overload</th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Total No. of Units</th>
+                              <td scope="col" style="text-align: center;">{{ total_units }} units</td>
+                              <td colspan="3" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                              <th scope="col">Total No. of Hours Week</th>
+                              <td scope="col" style="text-align: center;">{{ total_hours }} hrs</td>
+                              <td colspan="3" style="text-align: center;">0</td>
+                            </tr>
+                          </thead> 
                           <tr>
                             <th colspan="4" style="text-align: center;"> {{ instructor_data.status }} </th>
                           </tr>
                         </tbody>
                     </table>  
+                    <p class="text-center fw-normal">Please strictly follow the schedule (day and time) and the room
+                      assignment in the teaching load. Thank you. </p>
+                      <br>
+                    <div class="row">
+                        <div class="col-sm">
+                          <p class="text-center fw-bold ">Conforme: <span class="text-name">{{ instructor_data.firstName }} {{ instructor_data.lastName }}, </span> </p>
+                        </div>
+                        <div class="col-sm">
+                          <p class="text-center"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center text-extra">Prepared by:</p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center fw-bold "><span class="text-name">Arnel M. Yurfo, </span> </p>
+                        <p class="text-center text-title">Dean, College of Arts and Sciences</p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center text-extra">Noted by:</p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center fw-bold "><span class="text-name">Liza J. Caballero, </span> Ed.D. </p>
+                        <p class="text-center text-title">Asst. Campus Admin for Academics</p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center fw-bold "><span class="text-name">Francis M. Galon,</span> Ph.D.  </p>
+                        <p class="text-center text-title">Asst. Campus Admin for Administration</p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center text-extra">Recommending Approval:</p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                      <div class="col-sm">
+                        <p class="text-center"></p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center fw-bold "><span class="text-name">Rosemarie T. Pinili, </span> Ed.D, Ph.D. </p>
+                        <p class="text-center text-title">Asst. Campus Admin for Academics</p>
+                      </div>
+                      <div class="col-sm">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm">
+                        <p class="text-center">Approved:</p>
+                        <p class="text-center fw-bold "><span class="text-name">Hon. Joel P. Limson, </span> Ph.D. </p>
+                        <p class="text-center text-title">University President</p>
+                      </div>
+                    </div>
             </div>
     </div>
   </div>
@@ -223,21 +311,16 @@
 
 <script>
   function captureAndPrint() {
-    // Get the div element to capture
     var element = document.querySelector('.container-teaching-load');
 
-    // Use html2canvas to capture the screenshot
     html2canvas(element, {
       scale:6,
     }).then(function(canvas) {
-        // Convert canvas to image data URL
         var imageData = canvas.toDataURL();
 
-        // Create a new image element
         var img = new Image();
         img.src = imageData;
 
-        // Create a new window to display the captured image
         var newWindow = window.open('', '_blank');
         newWindow.document.write('<img src="' + imageData + '" style="width:100%;">');
 

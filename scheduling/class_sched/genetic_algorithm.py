@@ -143,55 +143,31 @@ class Individual:
                     )
                 break
 
-            ### Check instructor availability based on status (optional) ###
-            if instructor.status == "Permanent" and (
-                datetime.strptime(class_schedule.start_time, "%H:%M")
-                < datetime.strptime("08:00", "%H:%M")
-                or datetime.strptime(class_schedule.end_time, "%H:%M")
-                > datetime.strptime("17:00", "%H:%M")
-            ):
-                fitness -= 1
-            elif instructor.status == "Temporary" and (
-                datetime.strptime(class_schedule.start_time, "%H:%M")
-                < datetime.strptime("08:00", "%H:%M")
-                or datetime.strptime(class_schedule.end_time, "%H:%M")
-                > datetime.strptime("17:00", "%H:%M")
-            ):
-                fitness -= 1
-            elif instructor.status == "Full time Part time" and (
-                datetime.strptime(class_schedule.start_time, "%H:%M")
-                < datetime.strptime("08:00", "%H:%M")
-                or datetime.strptime(class_schedule.end_time, "%H:%M")
-                > datetime.strptime("20:00", "%H:%M")
-            ):
-                fitness -= 1
-            elif instructor.status == "Part time" and (
-                datetime.strptime(class_schedule.start_time, "%H:%M")
-                < datetime.strptime("17:00", "%H:%M")
-                or datetime.strptime(class_schedule.end_time, "%H:%M")
-                > datetime.strptime("20:00", "%H:%M")
-            ):
-                fitness -= 1
-            # Check for time constraints (optional)
-            if (
-                datetime.strptime(class_schedule.start_time, "%H:%M")
-                < datetime.strptime("08:00", "%H:%M")
-                or datetime.strptime(class_schedule.end_time, "%H:%M")
-                > datetime.strptime("12:00", "%H:%M")
-                or (
-                    datetime.strptime(class_schedule.start_time, "%H:%M")
-                    >= datetime.strptime("13:00", "%H:%M")
-                    and datetime.strptime(class_schedule.end_time, "%H:%M")
-                    > datetime.strptime("17:00", "%H:%M")
-                )
-            ):
-                fitness -= 1
             # Check for room type mismatch (optional)
             if room.room_type == "Lecture" and class_schedule.course.type in [
                 "Lab",
                 "Lab and Lec",
             ]:
                 fitness -= 1
+
+            ######### TIME AVALABILITY #########
+            start_time = datetime.strptime(class_schedule.start_time, "%H:%M").time()
+            end_time = datetime.strptime(class_schedule.end_time, "%H:%M").time()
+            class_duration = (end_time.hour - start_time.hour) + (
+                end_time.minute - start_time.minute
+            ) / 60
+
+            if instructor.status == "Permanent":
+                start_time = datetime.strptime(
+                    class_schedule.start_time, "%H:%M"
+                ).time()
+                end_time = datetime.strptime(class_schedule.end_time, "%H:%M").time()
+
+                if end_time.hour > 17:
+                    fitness -= 1
+                    print(
+                        f"Permanent instructor {instructor.lastName} has a class exceeding 5:00 PM: {start_time} - {end_time}"
+                    )
 
         return fitness
 
@@ -253,12 +229,17 @@ class Individual:
         if random.random() < mutation_probability:
             hours = class_schedule.course.hours
             weekday_ranges = {
+                1: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 2: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 3: [
                     "M-W-F",
                     "T-TH",
-                    "Saturday",
+                    # "Saturday",
                     "M-W-F",
+                    "T-TH",
+                    "M-W",
+                    "M-W-F",
+                    "W-F",
                     "T-TH",
                 ],
                 4: ["M-W", "W-F", "T-TH"],
@@ -343,7 +324,7 @@ def generate_population(population_size, valcollege, valschool_year, valsemester
                 3: [
                     "M-W-F",
                     "T-TH",
-                    "Saturday",
+                    # "Saturday",
                     "M-W-F",
                     "T-TH",
                     "M-W",

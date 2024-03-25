@@ -199,6 +199,13 @@ def instructors_schedule_page(request, id=None):
             eventSchedules.append(eventSchedule)
     class_schedules = ClassSchedule.objects.all()
     total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
+    total_hours = instructorSchedule.aggregate(total_hours=Sum("course__hours"))[
+        "total_hours"
+    ]
+    total_units = instructorSchedule.aggregate(total_hours=Sum("course__credits"))[
+        "total_hours"
+    ]
+    total_units = int(total_units) if total_units is not None else 0
     return render(
         request,
         "schedule.html",
@@ -211,6 +218,9 @@ def instructors_schedule_page(request, id=None):
             "sections": Section.objects.all(),
             "eventSchedules": eventSchedules,
             "total_conflicts": total_conflicts,
+            "schedules": schedules,
+            "total_hours": total_hours,
+            "total_units": total_units,
         },
     )
 
@@ -220,7 +230,13 @@ def profile(request):
     instructor = request.user.instructor
     instructorSchedule = ClassSchedule.objects.filter(instructor=instructor)
     instructor_data = instructor
-
+    total_hours = instructorSchedule.aggregate(total_hours=Sum("course__hours"))[
+        "total_hours"
+    ]
+    total_units = instructorSchedule.aggregate(total_hours=Sum("course__credits"))[
+        "total_hours"
+    ]
+    total_units = int(total_units) if total_units is not None else 0
     events = []
 
     for schedule in instructorSchedule:
@@ -267,6 +283,8 @@ def profile(request):
             "events": events,
             "instructor_data": instructor_data,
             "instructors": Instructor.objects.all(),
+            "total_hours": total_hours,
+            "total_units": total_units,
         },
     )
 
@@ -282,6 +300,7 @@ def dashboard(request):
     total_rooms = rooms.count()
 
     total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
+    total_schedules = class_schedules.count()
     return render(
         request,
         "dashboard.html",
@@ -291,6 +310,7 @@ def dashboard(request):
             "total_conflicts": total_conflicts,
             "total_rooms": total_rooms,
             "total_instructors": total_instructors,
+            "total_schedules": total_schedules,
         },
     )
 
@@ -663,7 +683,10 @@ def generate_schedules(request):
     ).exists()
     if existing_schedule:
         print("There is already an existing schedules")
-        messages.warning(request, "A schedule with the same values already exists.")
+        messages.warning(
+            request,
+            "A schedule with the same College, Semester and Year Level already exists.",
+        )
         return redirect("generate-schedule")
     else:
         print("No existing schedules, Proceed")
