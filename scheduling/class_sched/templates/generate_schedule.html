@@ -60,7 +60,7 @@
                     <input class="form-control" type="text"  id="searchFaculty" aria-label="default input example" placeholder="Search Faculty">
                 </div>
             </caption> 
-                <thead class="table-dark sticky-sm-top">
+                <thead class="table-warning sticky-sm-top">
                 <tr> 
                     <th scope="col">Profile</th>
                     <th scope="col">Name</th>
@@ -143,20 +143,21 @@
                             <label for="floatingInput">Semester </label>
                         </div>
                     </div>
-                    
+                   
                 </div>
-               
+
+                <button class="btn btn-success" type="submit" id="generateScheduleBtn">
+                    <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
+                    <span id="buttonText">Test Generate Schedule</span>
+                </button>
+                <!--
                 <button class="btn btn-success invisible disabled" id="generateScheduleBtn">
                     <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
                     <span id="buttonText">Generate Schedule</span>
                 </button>
-
-                <button type="submit" id="generateScheduleBtn" class="btn btn-success" >
-                    <span class="spinner-border spinner-border-sm d-none" id="spinner" aria-hidden="true"></span>
-                    <span id="buttonText">Test Generate Schedule</span>
-                </button>
-
+                -->
                
+
             </form>
                 
     </div>
@@ -167,6 +168,7 @@
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 
+<!-- Button Loading when clicked
 <script>
     document.getElementById("generateScheduleBtn").addEventListener("click", function() {
         var spinner = document.getElementById("spinner");
@@ -183,7 +185,7 @@
         button.disabled = true;
     });
 </script>
-
+-->
 <script>
     document.querySelectorAll('.form-select').forEach(function(select) {
         select.addEventListener('change', function() {
@@ -237,7 +239,7 @@
     updateYear();
     updateSemester();
 </script>
-
+<!-- SEARCH JS -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById('searchFaculty');
