@@ -977,7 +977,7 @@ section.section_summary .section_contents .content {
         background-color: var(--light-color);
         margin: 10px;
         padding: 10px;
-        box-shadow: var(--box-shadow-style);
+        box-shadow: var(--box-shadow-style2);
         max-height: 100%;
     }
 
@@ -1429,6 +1429,7 @@ thead.table-head {
 
 /* Subject Page */
 .container-subject-page {
+
     .tab-pane {
         background-color: #fff;
     }

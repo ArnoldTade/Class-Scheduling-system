@@ -40,7 +40,7 @@ time_slots = {
         ("10:30", "11:30"),
         ("10:30", "12:00"),
         ("11:00", "12:00"),
-        # Afternoon
+        #### NOON ####
         ("13:00", "14:00"),
         ("13:00", "14:30"),
         ("13:00", "15:00"),
@@ -163,10 +163,16 @@ class Individual:
                 ).time()
                 end_time = datetime.strptime(class_schedule.end_time, "%H:%M").time()
 
-                if end_time.hour > 17:
-                    fitness -= 1
+                if start_time.hour >= 17 and end_time.hour >= 17:
+                    fitness -= 2
+                    # print(start_time.hour, end_time.hour)
                     print(
                         f"Permanent instructor {instructor.lastName} has a class exceeding 5:00 PM: {start_time} - {end_time}"
+                    )
+
+                else:
+                    print(
+                        f"Permanent instructor {instructor.lastName} has a valid class: {start_time} - {end_time}"
                     )
 
         return fitness
@@ -199,6 +205,7 @@ class Individual:
         return child
 
     def mutate(self):
+
         class_schedule_index = random.randint(0, len(self.class_schedules) - 1)
         try:
             class_schedule = self.class_schedules[class_schedule_index]
@@ -261,26 +268,56 @@ class Individual:
             )
 
             found_valid_slot = False
-            start_index = random.randint(0, len(time_slots[chosen_weekdays]) - 1)
-            for j in range(start_index, len(time_slots[chosen_weekdays])):
-                start_time, end_time = time_slots[chosen_weekdays][j]
-                slot_duration_in_minutes = (
-                    datetime.strptime(end_time, "%H:%M")
-                    - datetime.strptime(start_time, "%H:%M")
-                ).total_seconds() / 60
-                if slot_duration_in_minutes == session_duration_minutes:
-                    valid_time_slots = [(start_time, end_time)]
-                    found_valid_slot = True
-                    # print("Valid time slots for: ", instructor_course, valid_time_slots)
-                    break
 
-            class_schedule.days_of_week = days_of_week
-            class_schedule.start_time = start_time
-            class_schedule.end_time = end_time
-            print("Final Schedule: ", days_of_week, start_time, end_time)
+            if class_schedule.instructor.status == "Permanent":
+                filtered_time_slots = [
+                    slot
+                    for slot in time_slots[chosen_weekdays]
+                    if datetime.strptime(slot[1], "%H:%M").hour < 17
+                ]
+                start_index = random.randint(0, len(filtered_time_slots) - 1)
+                for j in range(start_index, len(filtered_time_slots)):
+                    start_time, end_time = filtered_time_slots[j]
+
+                    slot_duration_in_minutes = (
+                        datetime.strptime(end_time, "%H:%M")
+                        - datetime.strptime(start_time, "%H:%M")
+                    ).total_seconds() / 60
+
+                    if slot_duration_in_minutes == session_duration_minutes:
+                        valid_time_slots = [(start_time, end_time)]
+                        found_valid_slot = True
+                        break
+
+                class_schedule.days_of_week = days_of_week
+                class_schedule.start_time = start_time
+                class_schedule.end_time = end_time
+                print("Final Schedule: ", days_of_week, start_time, end_time)
+            else:
+                filtered_time_slots = time_slots[chosen_weekdays]
+                start_index = random.randint(0, len(filtered_time_slots) - 1)
+                for j in range(start_index, len(filtered_time_slots)):
+                    start_time, end_time = filtered_time_slots[j]
+
+                    slot_duration_in_minutes = (
+                        datetime.strptime(end_time, "%H:%M")
+                        - datetime.strptime(start_time, "%H:%M")
+                    ).total_seconds() / 60
+
+                    if slot_duration_in_minutes == session_duration_minutes:
+                        valid_time_slots = [(start_time, end_time)]
+                        found_valid_slot = True
+                        break
+
+                class_schedule.days_of_week = days_of_week
+                class_schedule.start_time = start_time
+                class_schedule.end_time = end_time
+                print("Final Schedule: ", days_of_week, start_time, end_time)
 
         class_schedule.save()
         self.fitness = self.calculate_fitness()
+
+        # self.other_time_slot = self.select_other_timeslot(valid_time_slots)
 
 
 def generate_population(population_size, valcollege, valschool_year, valsemester):
@@ -355,10 +392,12 @@ def generate_population(population_size, valcollege, valschool_year, valsemester
             start_index = random.randint(0, len(time_slots[chosen_weekdays]) - 1)
             for j in range(start_index, len(time_slots[chosen_weekdays])):
                 start_time, end_time = time_slots[chosen_weekdays][j]
+
                 slot_duration_in_minutes = (
                     datetime.strptime(end_time, "%H:%M")
                     - datetime.strptime(start_time, "%H:%M")
                 ).total_seconds() / 60
+
                 if slot_duration_in_minutes == session_duration_minutes:
                     valid_time_slots = [(start_time, end_time)]
                     found_valid_slot = True

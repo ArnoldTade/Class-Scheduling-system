@@ -299,12 +299,14 @@ def dashboard(request):
     instructors = Instructor.objects.all().order_by("-id")[:5]
     total_instructors = all_instructors.count()
     class_schedules = ClassSchedule.objects.all()
+    list_schedules = InstructorCourse.objects.all()
 
     rooms = Room.objects.all()
     total_rooms = rooms.count()
 
     total_conflicts = sum(schedule.has_conflict() for schedule in class_schedules)
     total_schedules = class_schedules.count()
+    total_schedules_listed = list_schedules.count()
     return render(
         request,
         "dashboard.html",
@@ -315,6 +317,7 @@ def dashboard(request):
             "total_rooms": total_rooms,
             "total_instructors": total_instructors,
             "total_schedules": total_schedules,
+            "total_schedules_listed": total_schedules_listed,
         },
     )
 
@@ -677,11 +680,6 @@ def generate_schedules(request):
     semester = request.POST.get("semester")
     print("Sent values are:", college, school_year, semester)
 
-    # valcollege = "CAS"
-    # valschool_year = "2020-2021"
-    # valsemester = "1st semester"
-    # print("Values are:", valcollege, valschool_year, valsemester)
-
     existing_schedule = ClassSchedule.objects.filter(
         # year=valschool_year, semester=valsemester, instructor__college=valcollege
         year=school_year,
@@ -698,8 +696,8 @@ def generate_schedules(request):
         return redirect("generate-schedule")
     else:
         print("No existing schedules, Proceed")
-        population = generate_population(300, college, school_year, semester)
-        best_individual = evolve(population, 300)
+        population = generate_population(500, college, school_year, semester)
+        best_individual = evolve(population, 500)
 
         class_schedules = best_individual.class_schedules
         context = {"class_schedules": class_schedules}
