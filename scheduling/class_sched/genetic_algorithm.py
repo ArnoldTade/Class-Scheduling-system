@@ -157,7 +157,7 @@ class Individual:
                 end_time.minute - start_time.minute
             ) / 60
 
-            if instructor.status == "Permanent":
+            if instructor.status == "Permanent" or instructor.status == "Temporary":
                 start_time = datetime.strptime(
                     class_schedule.start_time, "%H:%M"
                 ).time()
@@ -268,8 +268,10 @@ class Individual:
             )
 
             found_valid_slot = False
-
-            if class_schedule.instructor.status == "Permanent":
+            if (
+                class_schedule.instructor.status == "Permanent"
+                or class_schedule.instructor.status == "Temporary"
+            ):
                 filtered_time_slots = [
                     slot
                     for slot in time_slots[chosen_weekdays]
